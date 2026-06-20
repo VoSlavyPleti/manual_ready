@@ -1,0 +1,6 @@
+.env
+/inputs*
+/outputs*
+/runs**
+/tmp*
+/ALL_DATA*

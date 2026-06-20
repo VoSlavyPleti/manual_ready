@@ -1,0 +1,3741 @@
+# Gold Pattern Examples
+
+This file contains anonymized calibration examples extracted from five benchmark gold workbooks. It shows what the gold data treated as a strong analogue, a useful but partial analogue, and a near-miss with no useful legal analogue.
+
+Important: do not use this file as a lookup table of ready answers. IDs and markers are example anchors only. In a new task, always compare the complete matrix requirement against the complete contract package again.
+
+## How To Use
+
+- First apply the main `SKILL.md`: extract mandatory elements, find candidates, compare the coverage package, then assign one row-level status.
+- Use this file as a calibration set: find a similar legal mechanism, then verify protected result, parties, object, trigger, deadline, amount/formula, form/channel, and consequence.
+- `full_match` examples show differences that were not material. `partial_match` examples show useful analogues that remained weaker. `missing` examples show near-misses that should not be included as candidates.
+- If an example conflicts with the current matrix or contract source text, the current source text controls.
+
+## High-Impact Calibration Clusters
+
+These clusters are anonymized patterns distilled from benchmark mismatches. Do
+not copy IDs from them. Use them to decide what is legally good or bad.
+
+### Good: parent + child + framework package
+
+Good pattern:
+- A child clause gives the concrete trigger, amount, deadline, or document.
+- A parent clause gives the operative right, duty, liability regime, payment
+  mechanism, or incorporated procedure.
+- A framework clause (for example procurement, electronic workflow,
+  acceptance, statutory penalty, claim procedure) makes the mechanism
+  enforceable.
+- Together they preserve the matrix result.
+
+Why this is a strong analogue:
+- The child clause alone may look incomplete, but the package answers all
+  mandatory legal questions: who, must/may do what, when, under what trigger,
+  by what document/procedure, with what consequence.
+- Missing the parent/framework clause often lowers recall and can make a full
+  package look like a weak partial.
+
+Anti-pattern:
+- Returning only the child amount/deadline clause when the parent clause is
+  needed to prove the right or duty.
+- Returning only the parent framework clause when the matrix requires a
+  concrete amount, deadline, document, or trigger.
+
+### Good: full despite formal differences
+
+Good pattern:
+- The contract uses a different appendix number, document name, channel label,
+  provider label, or procurement document type.
+- The incorporated document still has the required legal function and is
+  enforceable inside the contract package.
+- The protected party keeps the same practical result.
+
+Why this is full:
+- Legal effect matters more than template vocabulary. If the same right,
+  obligation, trigger, deadline/control point, and consequence survive, the
+  difference is non-material.
+
+Anti-pattern:
+- Downgrading only because the appendix number, form title, or channel label
+  differs.
+- Downgrading only because a public-procurement procedure replaces a bank
+  template, when the procedure preserves the same enforceable result.
+
+### Partial: same mechanism, material gap
+
+Good partial pattern:
+- The contract has a real analogue, but one mandatory element changes:
+  deadline, amount, formula, cap, trigger, payer/payee, protected party,
+  document package, approval mechanism, control point, or strictness.
+
+Why this is partial:
+- There is useful legal coverage, so it is not missing.
+- But the matrix requirement is not fully satisfied because the protected
+  legal/economic result changes.
+
+Anti-pattern:
+- Marking full because "the topic exists" while ignoring changed deadline,
+  payment flow, liability economics, or loss of bank/provider control.
+- Marking missing when the same mechanism exists but is weaker; that is usually
+  partial, not missing.
+
+### Missing: topical near-miss with no useful legal function
+
+Missing pattern:
+- The candidate is in the same section or uses similar words but performs a
+  different legal function.
+- Examples: e-signature form instead of a required communication channel;
+  generic appendix list instead of a required form; generic compliance clause
+  instead of a concrete duty; product capability instead of connection,
+  disconnection, payment, or service procedure; general liability instead of a
+  required penalty formula.
+
+Why this is missing:
+- A candidate must help decide compliance with at least one mandatory element.
+  If it only explains context or proves that the topic exists, it should not be
+  returned even as partial.
+
+Anti-pattern:
+- Returning contextual clauses to avoid an empty result.
+- Treating inactive product/channel/terminal mentions as weak partial coverage.
+
+### Exact ID preservation
+
+Good pattern:
+- Output the contract id exactly as it appears in the source text.
+- Preserve spaces, `№`, `п.`, dots, appendix labels, and visible wording.
+
+Anti-pattern:
+- Replacing spaces with `_`.
+- Converting `Приложение № 1 п. 5` into a normalized alias.
+- "Fixing" odd-looking numbering unless the source map itself uses the fixed
+  id.
+
+## Corpus Coverage
+
+- Pair units: 605
+- Missing-only examples: 252
+- full_match: 507
+- partial_match: 98
+- missing: 252
+
+| Benchmark | full_match | partial_match | missing | total examples |
+|---|---:|---:|---:|---:|
+| Benchmark A | 141 | 62 | 90 | 293 |
+| Benchmark B | 134 | 6 | 52 | 192 |
+| Benchmark C | 107 | 5 | 22 | 134 |
+| Benchmark D | 59 | 17 | 45 | 121 |
+| Benchmark E | 66 | 8 | 43 | 117 |
+
+## Pattern Index
+
+| Pattern tag | Examples |
+|---|---:|
+| `full/document-exchange` | 235 |
+| `full/payment-or-settlement` | 183 |
+| `full/incorporated-document-or-appendix` | 159 |
+| `full/protective-right-or-control` | 142 |
+| `missing/inactive-product-channel-or-terminal` | 134 |
+| `missing/no-operational-rule` | 130 |
+| `full/compound-or-scattered-coverage` | 125 |
+| `full/security-data-or-information` | 123 |
+| `missing/no-express-protective-right` | 114 |
+| `missing/no-required-procedure-or-channel` | 111 |
+| `missing/no-required-security-or-data-duty` | 76 |
+| `partial/payment-mechanics-gap` | 74 |
+| `full/liability` | 73 |
+| `partial/formal-or-procedure-gap` | 56 |
+| `full/direct-legal-function` | 46 |
+| `partial/weaker-protective-right-or-control` | 43 |
+| `partial/deadline-term-or-duration-gap` | 42 |
+| `partial/missing-mandatory-element` | 25 |
+| `partial/liability-economics-gap` | 21 |
+| `missing/no-required-liability-mechanism` | 21 |
+| `missing/no-useful-legal-function` | 14 |
+| `partial/same-mechanism-material-gap` | 2 |
+
+## Pattern Cards
+
+### Full analogue: same legal function
+
+Rule: Use full when the contract clause directly performs the same mandatory legal result, even if wording differs.
+
+- Good full analogue: `Benchmark A` matrix `4.2.7` with contract marker `5.3.9` -> `full_match`.
+  - Matrix signal: topics: Не использовать реквизиты Карты без присутствия или распоряжения По...; Использовать реквизиты Карты только для проведения операций; required_type: mandatory
+  - Contract signal: Не использовать реквизиты карты
+  - Why: Gold treats this candidate as legally relevant for the row conclusion.
+- Good full analogue: `Benchmark A` matrix `4.2.13` with contract marker `5.3.19` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт обязанности Предприятия возмещать все суммы и убытки, которые Банк понёс из-за Предприятия, все возмещения - в полном объе...; topics: возмещение средств, списанных со счета Банка в пользу Банка-эмитен...
+  - Contract signal: Возмещать суммы по спорным операциям
+  - Why: Gold treats this candidate as legally relevant for the row conclusion.
+- Good full analogue: `Benchmark A` matrix `4.2.20.1` with contract marker `5.10` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятие само следит за прохождением инструктажа сотрудниками, размещенного на сайте Банка; topics: обязательство предприятия проводить инструктаж сотрудников самостоя...; ссылка на инструкцию...
+  - Contract signal: Инструктаж сотрудников
+  - Why: Gold treats this candidate as legally relevant for the row conclusion.
+- Good full analogue: `Benchmark A` matrix `11.10` with contract marker `12.2` -> `full_match`.
+  - Matrix signal: topics: При реорганизации одной из Сторон обязательства переходят к правопр...; В случае ликвидации одной из сторон - удовлетворение имущественных...; required_type: optional
+  - Contract signal: Перемена заказчика — полный объём
+  - Why: 44-ФЗ
+
+### Full analogue: scattered coverage package
+
+Rule: A single clause does not need to cover the whole item if several cited clauses together cover every mandatory element.
+
+- Good full analogue: `Benchmark A` matrix `2.4` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.1` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.2` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.3` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+
+### Full analogue: incorporated appendix, tariff, form, or specification
+
+Rule: An appendix counts when it is incorporated and contains a legally operative detail, not just a title.
+
+- Good full analogue: `Benchmark A` matrix `2.4` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.1` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.2` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.3` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+
+### Full analogue: payment and settlement mechanics
+
+Rule: Compare money flow, payer/payee, basis, trigger, currency, and control point.
+
+- Good full analogue: `Benchmark A` matrix `2.4` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.1` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.2` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.3` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+
+### Full analogue: document exchange and notices
+
+Rule: Channel, legal force, exceptions, and receipt moment matter more than the exact system label.
+
+- Good full analogue: `Benchmark A` matrix `2.4` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.1` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.3` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.1` with contract marker `1.3` -> `full_match`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Заказчик организует приём карт на ЭТ
+  - Why: Gold treats this candidate as legally relevant for the row conclusion.
+
+### Full analogue: protective right or control
+
+Rule: The right must belong to the protected party and be triggered by the required event.
+
+- Good full analogue: `Benchmark A` matrix `2.4` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.1` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.2` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.3` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+
+### Full analogue: liability wording preserves the expected remedy
+
+Rule: The remedy is full only when the legal effect and protected allocation of risk are preserved.
+
+- Good full analogue: `Benchmark A` matrix `5.1.1.5` with contract marker `5.2.10.5` -> `full_match`.
+  - Matrix signal: topics: Банк вправе удерживать штрафы из сумм Предприятия, возникшие у Банк...; Банк вправе удерживать убытки из сумм Предприятия, возникшие в связ...; required_type: mandatory
+  - Contract signal: Штрафы ПС
+  - Why: Gold treats this candidate as legally relevant for the row conclusion.
+- Good full analogue: `Benchmark A` matrix `7.4` with contract marker `5.3.5` -> `full_match`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Право требовать неустоек
+  - Why: 44-ФЗ
+- Good full analogue: `Benchmark A` matrix `7.5` with contract marker `5.3.5` -> `full_match`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Право требовать неустоек
+  - Why: 44-ФЗ
+- Good full analogue: `Benchmark A` matrix `7.6` with contract marker `5.3.5` -> `full_match`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Право требовать неустоек
+  - Why: 44-ФЗ
+
+### Full analogue: security, data, and information duties
+
+Rule: The same protected information/data/security result can be covered by equivalent contract language.
+
+- Good full analogue: `Benchmark A` matrix `3.1` with contract marker `1.1` -> `full_match`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Предмет — эквайринг
+  - Why: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Good full analogue: `Benchmark A` matrix `3.1` with contract marker `1.3` -> `full_match`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Заказчик организует приём карт на ЭТ
+  - Why: Gold treats this candidate as legally relevant for the row conclusion.
+- Good full analogue: `Benchmark A` matrix `2.3.1` with contract marker `2.3.1` -> `full_match`.
+  - Matrix signal: main idea: Нужно проверять признаётся ли полная юридическая сила e‑mail, есть ли ограничения по видам сведений и возможность изменять/обновлять адреса.; topics: Обмен информацией по электронной почте; Исключение передачи персон...
+  - Contract signal: Обмен по e-mail
+  - Why: Gold treats this candidate as legally relevant for the row conclusion.
+- Good full analogue: `Benchmark A` matrix `2.3.2` with contract marker `2.3.2` -> `full_match`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами посредством системы ДБО или аналогичных систем Банка; required_type: mandatory
+  - Contract signal: ДБО
+  - Why: Gold treats this candidate as legally relevant for the row conclusion.
+
+### Partial analogue: deadline, term, or duration differs
+
+Rule: The same mechanism becomes partial when the timing difference changes risk or protection.
+
+- Useful but not full analogue: `Benchmark A` matrix `10.1` with contract marker `1.2` -> `partial_match`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Объём — не более МЦК
+  - Why: С учетом п.4 Приложения 1 (Техническое задание)
+- Useful but not full analogue: `Benchmark A` matrix `2.3.5` with contract marker `2.3.5` -> `partial_match`.
+  - Matrix signal: main idea: Важна равнозначность документов; topics: Обмен информацией и документами осуществляется через систему E-invo...; электронные документы имеют юридическую силу документов на бумаге; required_type: mandatory
+  - Contract signal: ЭДО (УКЭП) — система не указана
+  - Why: В матрице — E-invoicing/СФЕРА-Курьер; в контракте название системы не заполнено (пропуск). В сотальном 100% совпадение.
+- Useful but not full analogue: `Benchmark A` matrix `4.2.12` with contract marker `4.4` -> `partial_match`.
+  - Matrix signal: main idea: Важен факт обязанности Предприятия подписать закрывающие документы по оплате, а так же сроки в течение которых оно должно это сделать; topics: Предприятие обязано акцептовать платежные требования и счета на опл...; С...
+  - Contract signal: Оплата платёжным поручением
+  - Why: Матрица: оплата/акцепт платежных требований. Контракт: Заказчик платит платежным поручением; механизм оплаты есть, но отличается.
+- Useful but not full analogue: `Benchmark A` matrix `5.2.3` with contract marker `5.1.1` -> `partial_match`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Установить ЭТ за 5 р.д. / инструктаж / обучающие материалы
+  - Why: Обязанность по инструктажу и обучающим материалам есть; адрес сайта не заполнен, поэтому это формальный/частичный разрыв, а не отсутствие аналога.
+
+### Partial analogue: payment mechanism differs
+
+Rule: Functional closeness is not full when basis, acceptance, control, order, or flow changes.
+
+- Useful but not full analogue: `Benchmark A` matrix `2.3.5` with contract marker `2.3.5` -> `partial_match`.
+  - Matrix signal: main idea: Важна равнозначность документов; topics: Обмен информацией и документами осуществляется через систему E-invo...; электронные документы имеют юридическую силу документов на бумаге; required_type: mandatory
+  - Contract signal: ЭДО (УКЭП) — система не указана
+  - Why: В матрице — E-invoicing/СФЕРА-Курьер; в контракте название системы не заполнено (пропуск). В сотальном 100% совпадение.
+- Useful but not full analogue: `Benchmark A` matrix `2.1` with contract marker `4.3` -> `partial_match`.
+  - Matrix signal: main idea: Важен факт, что для регистрации договора банку нужно заявление. В заявлении должна быть указана полная информация необходимая для регистр...; topics: Для регистрации новой ТСТ Предприятие предоставляет заявление на р...
+  - Contract signal: ТСТ и регистрация нового ТСТ
+  - Why: В матрице: банк вправе отказать без объяснений. В контракте такого права нет — потенциальный риск для банка
+- Useful but not full analogue: `Benchmark A` matrix `3.3` with contract marker `4.4` -> `partial_match`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Оплата платёжным поручением
+  - Why: Матрица: оплата/акцепт платежных требований. Контракт: Заказчик платит платежным поручением; механизм оплаты есть, но отличается.
+- Useful but not full analogue: `Benchmark A` matrix `4.2.1` with contract marker `4.4` -> `partial_match`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Оплата платёжным поручением
+  - Why: Матрица: оплата/акцепт платежных требований. Контракт: Заказчик платит платежным поручением; механизм оплаты есть, но отличается.
+
+### Partial analogue: liability exists but economics differ
+
+Rule: Formula, base, cap, percentage, fixed amount, and trigger are material.
+
+- Useful but not full analogue: `Benchmark A` matrix `4.2.13` with contract marker `5.1.3` -> `partial_match`.
+  - Matrix signal: main idea: Важен сам факт обязанности Предприятия возмещать все суммы и убытки, которые Банк понёс из-за Предприятия, все возмещения - в полном объе...; topics: возмещение средств, списанных со счета Банка в пользу Банка-эмитен...
+  - Contract signal: Соответствие требованиям законодательства
+  - Why: 44-ФЗ
+- Useful but not full analogue: `Benchmark A` matrix `7.1` with contract marker `5.1.3` -> `partial_match`.
+  - Matrix signal: topics: Общие слова о том, что за неисполнение или ненадлежащее исполнение...; Общие слова о том, что за неисполнение или ненадлежащее исполнение...; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Why: 44-ФЗ
+- Useful but not full analogue: `Benchmark A` matrix `7.4` with contract marker `5.1.3` -> `partial_match`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Why: 44-ФЗ
+- Useful but not full analogue: `Benchmark A` matrix `7.16` with contract marker `5.1.3` -> `partial_match`.
+  - Matrix signal: topics: Обязательство не совершать коррупционных и иных противозаконных дей...; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Why: 44-ФЗ
+
+### Partial analogue: protective right is weaker
+
+Rule: A narrower, softer, conditional, or wrong-party right is not full.
+
+- Useful but not full analogue: `Benchmark A` matrix `10.1` with contract marker `1.2` -> `partial_match`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Объём — не более МЦК
+  - Why: С учетом п.4 Приложения 1 (Техническое задание)
+- Useful but not full analogue: `Benchmark A` matrix `2.1` with contract marker `4.3` -> `partial_match`.
+  - Matrix signal: main idea: Важен факт, что для регистрации договора банку нужно заявление. В заявлении должна быть указана полная информация необходимая для регистр...; topics: Для регистрации новой ТСТ Предприятие предоставляет заявление на р...
+  - Contract signal: ТСТ и регистрация нового ТСТ
+  - Why: В матрице: банк вправе отказать без объяснений. В контракте такого права нет — потенциальный риск для банка
+- Useful but not full analogue: `Benchmark A` matrix `5.1.1.1` with contract marker `5.1.3` -> `partial_match`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций, являющиеся недействител...; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Why: 44-ФЗ
+- Useful but not full analogue: `Benchmark A` matrix `5.1.16` with contract marker `5.1.3` -> `partial_match`.
+  - Matrix signal: topics: Банк имеет право требовать от Предприятия предоставления документов; Перечень требуемых документов определяется законодательством; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Why: 44-ФЗ
+
+### Partial analogue: procedure or form is incomplete
+
+Rule: There is a useful process but a required form, signer, channel, system, appendix, or act is absent.
+
+- Useful but not full analogue: `Benchmark A` matrix `10.1` with contract marker `1.2` -> `partial_match`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Объём — не более МЦК
+  - Why: С учетом п.4 Приложения 1 (Техническое задание)
+- Useful but not full analogue: `Benchmark A` matrix `2.3.5` with contract marker `2.3.5` -> `partial_match`.
+  - Matrix signal: main idea: Важна равнозначность документов; topics: Обмен информацией и документами осуществляется через систему E-invo...; электронные документы имеют юридическую силу документов на бумаге; required_type: mandatory
+  - Contract signal: ЭДО (УКЭП) — система не указана
+  - Why: В матрице — E-invoicing/СФЕРА-Курьер; в контракте название системы не заполнено (пропуск). В сотальном 100% совпадение.
+- Useful but not full analogue: `Benchmark A` matrix `2.1` with contract marker `4.3` -> `partial_match`.
+  - Matrix signal: main idea: Важен факт, что для регистрации договора банку нужно заявление. В заявлении должна быть указана полная информация необходимая для регистр...; topics: Для регистрации новой ТСТ Предприятие предоставляет заявление на р...
+  - Contract signal: ТСТ и регистрация нового ТСТ
+  - Why: В матрице: банк вправе отказать без объяснений. В контракте такого права нет — потенциальный риск для банка
+- Useful but not full analogue: `Benchmark A` matrix `3.3` with contract marker `4.4` -> `partial_match`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Оплата платёжным поручением
+  - Why: Матрица: оплата/акцепт платежных требований. Контракт: Заказчик платит платежным поручением; механизм оплаты есть, но отличается.
+
+### Partial analogue: one mandatory element is absent
+
+Rule: Keep the useful candidate, but do not upgrade the row while a mandatory element remains uncovered.
+
+- Useful but not full analogue: `Benchmark A` matrix `2.3.5` with contract marker `2.3.5` -> `partial_match`.
+  - Matrix signal: main idea: Важна равнозначность документов; topics: Обмен информацией и документами осуществляется через систему E-invo...; электронные документы имеют юридическую силу документов на бумаге; required_type: mandatory
+  - Contract signal: ЭДО (УКЭП) — система не указана
+  - Why: В матрице — E-invoicing/СФЕРА-Курьер; в контракте название системы не заполнено (пропуск). В сотальном 100% совпадение.
+- Useful but not full analogue: `Benchmark A` matrix `5.2.3` with contract marker `5.1.1` -> `partial_match`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Установить ЭТ за 5 р.д. / инструктаж / обучающие материалы
+  - Why: Обязанность по инструктажу и обучающим материалам есть; адрес сайта не заполнен, поэтому это формальный/частичный разрыв, а не отсутствие аналога.
+- Useful but not full analogue: `Benchmark A` matrix `5.2.5` with contract marker `5.1.1` -> `partial_match`.
+  - Matrix signal: main idea: Подсвечивать разногласие, если только сайты отличаются, если в договоре вместо сайта прочерк, то это не разногласие; topics: обучающие материалы размещены по указанной ссылке; материалы доступны для прохождения инстр...
+  - Contract signal: Установить ЭТ за 5 р.д. / инструктаж / обучающие материалы
+  - Why: Обязанность по инструктажу и обучающим материалам есть; адрес сайта не заполнен, поэтому это формальный/частичный разрыв, а не отсутствие аналога.
+- Useful but not full analogue: `Benchmark A` matrix `2.3.6` with contract marker `5.1.3` -> `partial_match`.
+  - Matrix signal: main idea: Важен сам факт наличия данного канала для обмена электронными документами; topics: Перечисление способов обмена документами: через ЕИС (Единую информа...; Перечисление способов обмена документами: обмен документами ч...
+  - Contract signal: Соответствие требованиям законодательства
+  - Why: 44-ФЗ
+
+### Missing: inactive product, channel, or terminal
+
+Rule: Do not make weak partial matches from capability mentions, empty forms, or generic appendices.
+
+- Bad / reject as analogue: `Benchmark A` matrix `2.5` -> `missing`.
+  - Matrix signal: упоминание в договоре сервисов бесконтактной оплаты или мобильной оплаты - ____pay, оплата через QR
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.5.1` -> `missing`.
+  - Matrix signal: SberPayOnline:
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.5.1.1` -> `missing`.
+  - Matrix signal: сервис оплаты альтернативным способом подключается автоматически
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.5.1.2` -> `missing`.
+  - Matrix signal: если услуга безконтактной оплаты подключается без интернет-эквайринга.
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+
+### Missing: no express protective right
+
+Rule: A generic cooperation or legal-compliance clause does not replace a direct refusal, withholding, audit, suspension, or termination right.
+
+- Bad / reject as analogue: `Benchmark A` matrix `2.6.2.1` -> `missing`.
+  - Matrix signal: если QR - если в договоре говориться о подключении эквайринга к кассам предприятия. информация о API для QR размещена на сайте банка
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.6.2.2` -> `missing`.
+  - Matrix signal: Банк не делает доработок програмного обеспечения клиента (заказчика)
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `4.1` -> `missing`.
+  - Matrix signal: Предприятие имеет право:
+  - Why not analogue: Gold has no useful legal analogue in the contract.
+- Bad / reject as analogue: `Benchmark A` matrix `4.1.3` -> `missing`.
+  - Matrix signal: банк самостоятельно выдает заказчику QR
+  - Why not analogue: Gold has no useful legal analogue in the contract.
+
+### Missing: required procedure or channel absent
+
+Rule: Generic electronic exchange or a notice clause does not cover a concrete required channel, form, receipt moment, or legal effect.
+
+- Bad / reject as analogue: `Benchmark A` matrix `2.5.1.1` -> `missing`.
+  - Matrix signal: сервис оплаты альтернативным способом подключается автоматически
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.5.2.1` -> `missing`.
+  - Matrix signal: возможность принятие оплаты по биометрии оформляется отдельным заявлением
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.6.1.1` -> `missing`.
+  - Matrix signal: для приема QR на смарт-терминал е нужно отдельное програмное обеспечение
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.6.2.1` -> `missing`.
+  - Matrix signal: если QR - если в договоре говориться о подключении эквайринга к кассам предприятия. информация о API для QR размещена на сайте банка
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+
+### Missing: required liability mechanism absent
+
+Rule: A parent liability phrase is not the concrete penalty/interest formula.
+
+- Bad / reject as analogue: `Benchmark A` matrix `4.2.24` -> `missing`.
+  - Matrix signal: Основной смысл: **предприятие должно использовать API и данные по QR‑API только в рамках прав и функционала, описанных в условиях подключения QR‑API на официальном сайте Банка.**
+  - Why not analogue: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Bad / reject as analogue: `Benchmark A` matrix `7` -> `missing`.
+  - Matrix signal: РАЗДЕЛ 7 «ОТВЕТСТВЕННОСТЬ СТОРОН»
+  - Why not analogue: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Bad / reject as analogue: `Benchmark A` matrix `7.8` -> `missing`.
+  - Matrix signal: Основной смысл: банк не отвечает за споры между предприятием и покупателем, если они не связаны с предметом договора, а также за споры, касающиеся товаров или услуг, оплаченных через банковские инструменты (...
+  - Why not analogue: Ограничение ответственности банка (специфика банковского договора); в 44-ФЗ контракте отсутствует
+- Bad / reject as analogue: `Benchmark A` matrix `7.9` -> `missing`.
+  - Matrix signal: Основной смысл: банк освобождается от ответственности за задержку перечисления денег предприятию, если причина задержки не зависит от него. При сравнении важно: формулировка «не по вине Банка» — определяет г...
+  - Why not analogue: Ограничение ответственности банка (специфика банковского договора); в 44-ФЗ контракте отсутствует
+
+### Missing: required data/security duty absent
+
+Rule: General confidentiality is not enough for a concrete data/security obligation.
+
+- Bad / reject as analogue: `Benchmark A` matrix `2.5` -> `missing`.
+  - Matrix signal: упоминание в договоре сервисов бесконтактной оплаты или мобильной оплаты - ____pay, оплата через QR
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.5.1` -> `missing`.
+  - Matrix signal: SberPayOnline:
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.5.1.1` -> `missing`.
+  - Matrix signal: сервис оплаты альтернативным способом подключается автоматически
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.5.1.2` -> `missing`.
+  - Matrix signal: если услуга безконтактной оплаты подключается без интернет-эквайринга.
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+
+### Missing: operational rule absent
+
+Rule: The existence of a service or equipment does not imply a prohibition, duty, limit, verification, or transaction rule.
+
+- Bad / reject as analogue: `Benchmark A` matrix `2.5.1.1` -> `missing`.
+  - Matrix signal: сервис оплаты альтернативным способом подключается автоматически
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.5.2.1` -> `missing`.
+  - Matrix signal: возможность принятие оплаты по биометрии оформляется отдельным заявлением
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.6.1.1` -> `missing`.
+  - Matrix signal: для приема QR на смарт-терминал е нужно отдельное програмное обеспечение
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Bad / reject as analogue: `Benchmark A` matrix `2.6.2.1` -> `missing`.
+  - Matrix signal: если QR - если в договоре говориться о подключении эквайринга к кассам предприятия. информация о API для QR размещена на сайте банка
+  - Why not analogue: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+
+## Anti-Patterns
+
+- Do not treat topical similarity as an analogue when the clause does not perform a mandatory legal element.
+- Do not treat a product capability, empty form, appendix list, definition, heading, or generic law-compliance clause as partial coverage by itself.
+- Do not downgrade a full coverage package merely because no single clause independently covers the whole matrix item.
+- Do not upgrade to full when the candidate changes deadline, amount/formula, payer/payee, trigger, protected party, control point, legal force, or remedy.
+- Do not copy statuses per clause independently: the status belongs to the whole candidate package for the matrix item.
+
+## Complete Pair-Unit Appendix
+
+Every item below is one anonymized gold pair-unit from the benchmark corpus. Use it for search/calibration, not memorization.
+
+### Benchmark A: matched pair units
+
+- Matrix `2.4` + contract marker `1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Gold rationale: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Matrix `3.1` + contract marker `1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Предмет — эквайринг
+  - Gold rationale: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Matrix `3.2` + contract marker `1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Gold rationale: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Matrix `3.3` + contract marker `1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Предмет — эквайринг
+  - Gold rationale: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Matrix `11.7` + contract marker `1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Общие слова про то, что приложения являются неотъемлемой частью дог...; required_type: optional
+  - Contract signal: Предмет — эквайринг
+  - Gold rationale: Предмет раскрыт; приложения указаны как неотъемлемая часть контракта; оплата по постоплате (п/п от Заказчика) vs механизм акцепта требований Банка.
+- Matrix `10.1` + contract marker `1.2` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Объём — не более МЦК
+  - Gold rationale: С учетом п.4 Приложения 1 (Техническое задание)
+- Matrix `3.1` + contract marker `1.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Заказчик организует приём карт на ЭТ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3` + contract marker `2.3` -> `full_match`; tags: `full/document-exchange`.
+  - Contract signal: Каналы обмена (общий)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.1` + contract marker `2.3.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Нужно проверять признаётся ли полная юридическая сила e‑mail, есть ли ограничения по видам сведений и возможность изменять/обновлять адреса.; topics: Обмен информацией по электронной почте; Исключение передачи персон...
+  - Contract signal: Обмен по e-mail
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.2` + contract marker `2.3.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами посредством системы ДБО или аналогичных систем Банка; required_type: mandatory
+  - Contract signal: ДБО
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.3` + contract marker `2.3.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами с доставкой нарочным или курьером; required_type: optional
+  - Contract signal: Нарочный/курьер
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.4` + contract marker `2.3.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами через заказное письмо; required_type: optional
+  - Contract signal: Заказное письмо
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.5` + contract marker `2.3.5` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важна равнозначность документов; topics: Обмен информацией и документами осуществляется через систему E-invo...; электронные документы имеют юридическую силу документов на бумаге; required_type: mandatory
+  - Contract signal: ЭДО (УКЭП) — система не указана
+  - Gold rationale: В матрице — E-invoicing/СФЕРА-Курьер; в контракте название системы не заполнено (пропуск). В сотальном 100% совпадение.
+- Matrix `2.3.6` + contract marker `2.3.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт наличия данного канала для обмена электронными документами; topics: Перечисление способов обмена документами: через ЕИС (Единую информа...; Перечисление способов обмена документами: обмен документами ч...
+  - Contract signal: Обмен через ЕИС
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.7` + contract marker `2.3.7` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Для представленных в контракте способах обмена информацией / документами, не должно быть расхождений в данном пункте на счёт даты, с кото...; topics: Обмен информацией через обращение в службу поддержки Банка; Дата с...
+  - Contract signal: Служба поддержки / момент получения
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `6.21` + contract marker `3.1` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Отсутствие конкретной ценны не является противоречием; topics: Цена договора в рублях; Указана точная сумма в рублях и копейках; required_type: mandatory
+  - Contract signal: Цена: 1 900 000 руб.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `6.1` + contract marker `3.1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно; topics: размер платы в процентах от суммы операций; required_type: mandatory
+  - Contract signal: Цена за единицу в спецификации
+  - Gold rationale: Спецификация прямо названа неотъемлемой частью контракта.
+- Matrix `11.7` + contract marker `3.1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`.
+  - Matrix signal: topics: Общие слова про то, что приложения являются неотъемлемой частью дог...; required_type: optional
+  - Contract signal: Цена за единицу в спецификации
+  - Gold rationale: Спецификация прямо названа неотъемлемой частью контракта.
+- Matrix `6.1` + contract marker `3.2` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно; topics: размер платы в процентах от суммы операций; required_type: mandatory
+  - Contract signal: Цена = % от операции
+  - Gold rationale: 44-ФЗ
+- Matrix `10.1` + contract marker `4.1` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Срок: 01.03–30.11.2025
+  - Gold rationale: 44-ФЗ: бюджетный год
+- Matrix `2.1` + contract marker `4.3` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важен факт, что для регистрации договора банку нужно заявление. В заявлении должна быть указана полная информация необходимая для регистр...; topics: Для регистрации новой ТСТ Предприятие предоставляет заявление на р...
+  - Contract signal: ТСТ и регистрация нового ТСТ
+  - Gold rationale: В матрице: банк вправе отказать без объяснений. В контракте такого права нет — потенциальный риск для банка
+- Matrix `3.3` + contract marker `4.4` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Оплата платёжным поручением
+  - Gold rationale: Матрица: оплата/акцепт платежных требований. Контракт: Заказчик платит платежным поручением; механизм оплаты есть, но отличается.
+- Matrix `4.2.1` + contract marker `4.4` -> `partial_match`; tags: `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Оплата платёжным поручением
+  - Gold rationale: Матрица: оплата/акцепт платежных требований. Контракт: Заказчик платит платежным поручением; механизм оплаты есть, но отличается.
+- Matrix `4.2.12` + contract marker `4.4` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важен факт обязанности Предприятия подписать закрывающие документы по оплате, а так же сроки в течение которых оно должно это сделать; topics: Предприятие обязано акцептовать платежные требования и счета на опл...; С...
+  - Contract signal: Оплата платёжным поручением
+  - Gold rationale: Матрица: оплата/акцепт платежных требований. Контракт: Заказчик платит платежным поручением; механизм оплаты есть, но отличается.
+- Matrix `6.5` + contract marker `4.5` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: topics: оплата услуг банка осуществляется в течение 5 рабочих дней после по...; форма оплаты - безналичная; required_type: mandatory
+  - Contract signal: Срок оплаты 7 р.д.
+  - Gold rationale: 44-ФЗ
+- Matrix `5.2.3` + contract marker `5.1.1` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Установить ЭТ за 5 р.д. / инструктаж / обучающие материалы
+  - Gold rationale: Обязанность по инструктажу и обучающим материалам есть; адрес сайта не заполнен, поэтому это формальный/частичный разрыв, а не отсутствие аналога.
+- Matrix `5.2.5` + contract marker `5.1.1` -> `partial_match`; tags: `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Подсвечивать разногласие, если только сайты отличаются, если в договоре вместо сайта прочерк, то это не разногласие; topics: обучающие материалы размещены по указанной ссылке; материалы доступны для прохождения инстр...
+  - Contract signal: Установить ЭТ за 5 р.д. / инструктаж / обучающие материалы
+  - Gold rationale: Обязанность по инструктажу и обучающим материалам есть; адрес сайта не заполнен, поэтому это формальный/частичный разрыв, а не отсутствие аналога.
+- Matrix `6.2` + contract marker `5.1.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: УПД - это универсальный передаточный документ (документ о приёмке, документ на оплату услуг). Важно проверить сроки и периодичность оплаты; topics: Банк направляет документ на оплату услуг Банка; в вознаграждение бан...
+  - Contract signal: Ежемесячный документ о приёмке через ЕИС
+  - Gold rationale: 44-ФЗ: ст. 94
+- Matrix `2.3.6` + contract marker `5.1.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт наличия данного канала для обмена электронными документами; topics: Перечисление способов обмена документами: через ЕИС (Единую информа...; Перечисление способов обмена документами: обмен документами ч...
+  - Contract signal: Ежемесячный документ о приёмке через ЕИС
+  - Gold rationale: 44-ФЗ: ст. 94
+- Matrix `2.3.6` + contract marker `5.1.3` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важен сам факт наличия данного канала для обмена электронными документами; topics: Перечисление способов обмена документами: через ЕИС (Единую информа...; Перечисление способов обмена документами: обмен документами ч...
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `4.2.4` + contract marker `5.1.3` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важен факт, если банк передает по договору предприятию - заказчику информационные материалы, то заказчик должен их разместить на видном м...; topics: Предприятие обязано размещать информационные материалы Банка о спо...
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `4.2.13` + contract marker `5.1.3` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важен сам факт обязанности Предприятия возмещать все суммы и убытки, которые Банк понёс из-за Предприятия, все возмещения - в полном объе...; topics: возмещение средств, списанных со счета Банка в пользу Банка-эмитен...
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `4.2.15` + contract marker `5.1.3` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важен факт необходимости предоставлять достоверные сведения, своевременное обновление сведений. Важен факт и срок периодичного предоставл...; topics: Предприятие обязано предоставлять документы не реже одного раза в...
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `5.1.1.1` + contract marker `5.1.3` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций, являющиеся недействител...; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `5.1.16` + contract marker `5.1.3` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Банк имеет право требовать от Предприятия предоставления документов; Перечень требуемых документов определяется законодательством; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `6.2` + contract marker `5.1.3` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: main idea: УПД - это универсальный передаточный документ (документ о приёмке, документ на оплату услуг). Важно проверить сроки и периодичность оплаты; topics: Банк направляет документ на оплату услуг Банка; в вознаграждение бан...
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `6.9` + contract marker `5.1.3` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Банк выставляет счет не позднее 10 рабочего дня месяца, следующего...; Счет выставляется по форме №363; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `6.15` + contract marker `5.1.3` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Банк выставляет счет не позднее 10 рабочего дня месяца, следующего...; Счет-фактура предоставляется в соответствии с налоговым законодател...; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `7.1` + contract marker `5.1.3` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: topics: Общие слова о том, что за неисполнение или ненадлежащее исполнение...; Общие слова о том, что за неисполнение или ненадлежащее исполнение...; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `7.4` + contract marker `5.1.3` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `7.16` + contract marker `5.1.3` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: topics: Обязательство не совершать коррупционных и иных противозаконных дей...; required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `7.17` + contract marker `5.1.3` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важно, чтобы в договоре не было сужения ответственности.; topics: Общие слова про то, что Предприятие несет финансовую ответственност...; Общие слова про то, что Предприятие отвечает за соответствие Повтор...; requir...
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `9.3` + contract marker `5.1.3` -> `partial_match`; tags: `partial/payment-mechanics-gap`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `11.1` + contract marker `5.1.3` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: topics: Перечисление источников правового регулирования отношений Сторон; Требование соблюдать законодательство РФ; required_type: optional
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `11.2` + contract marker `5.1.3` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Номера Карт/Платежных счетов, персональные данные Покупателей, сумм...; Объявляется запрет на передачу конфиденциальной информации третьим...; required_type: optional
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `11.8` + contract marker `5.1.3` -> `partial_match`; tags: `partial/payment-mechanics-gap`.
+  - Matrix signal: topics: Предприятие (Заказчик) заверяет, что реализация Товаров/услуг осуще...; required_type: optional
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `11.10` + contract marker `5.1.3` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: topics: При реорганизации одной из Сторон обязательства переходят к правопр...; В случае ликвидации одной из сторон - удовлетворение имущественных...; required_type: optional
+  - Contract signal: Соответствие требованиям законодательства
+  - Gold rationale: 44-ФЗ
+- Matrix `5.2.4` + contract marker `5.1.4` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`.
+  - Matrix signal: topics: Банк осуществляет Авторизацию без перерывов 24 часа в сутки; required_type: optional
+  - Contract signal: Круглосуточная работа / замена за 3 р.д.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.2.7` + contract marker `5.1.4` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: topics: круглосуточная работоспособность Электронных терминалов/Смарт-терми...; замена неисправного Электронного терминала/Смарт-терминала на испра...; required_type: optional
+  - Contract signal: Круглосуточная работа / замена за 3 р.д.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.2.4` + contract marker `5.1.6` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: topics: Банк осуществляет Авторизацию без перерывов 24 часа в сутки; required_type: optional
+  - Contract signal: Круглосуточная авторизация
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.4` + contract marker `5.1.7` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен факт, если банк передает по договору предприятию - заказчику информационные материалы, то заказчик должен их разместить на видном м...; topics: Предприятие обязано размещать информационные материалы Банка о спо...
+  - Contract signal: Рекламно-информационные материалы
+  - Gold rationale: Прямая обязанность обеспечивать терминалы рекламно-информационными материалами, необходимыми для проведения операций.
+- Matrix `5.2.6` + contract marker `5.1.7` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`, `full/payment-or-settlement`.
+  - Matrix signal: topics: Обеспечение Электронных терминалов информационными материалами; Обеспечение Смарт-терминалов информационными материалами; required_type: optional
+  - Contract signal: Рекламно-информационные материалы
+  - Gold rationale: Прямая обязанность обеспечивать терминалы рекламно-информационными материалами, необходимыми для проведения операций.
+- Matrix `2.2` + contract marker `5.1.8` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт, что валюта рубль РФ, другая валюта недопустима; topics: Расчёты производятся в рублях Российской Федерации; required_type: mandatory
+  - Contract signal: Перечисление сумм — 2 р.д.; расчеты в рублях
+  - Gold rationale: Пункт прямо устанавливает перечисление сумм операций оплаты на счет Заказчика в валюте проведения операции (рубли РФ).
+- Matrix `3.2` + contract marker `5.1.8` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Перечисление сумм — 2 р.д.; расчеты в рублях
+  - Gold rationale: Пункт прямо устанавливает перечисление сумм операций оплаты на счет Заказчика в валюте проведения операции (рубли РФ).
+- Matrix `5.2.8` + contract marker `5.1.8` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен срок перечисления средств; topics: перечисление средств на счет Предприятия не позднее 2 рабочих дней...; дата получения расчетной информации - рабочий день, следующий за дн...; required_type: mandatory
+  - Contract signal: Перечисление сумм — 2 р.д.; расчеты в рублях
+  - Gold rationale: Пункт прямо устанавливает перечисление сумм операций оплаты на счет Заказчика в валюте проведения операции (рубли РФ).
+- Matrix `4.2.16` + contract marker `5.1.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`.
+  - Contract signal: Обработка ПДн по 152-ФЗ
+  - Gold rationale: Контракт объединяет 3 пункта матрицы в одном
+- Matrix `4.2.16.1` + contract marker `5.1.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, чтобы было действующее согласие на передачу ПДн руководителя Предприятия. Состав ПДн: ФИО, адрес, паспортные данные. Важно, чтобы...; topics: Предприятие гарантирует наличие правовых оснований на передачу ПДн;...
+  - Contract signal: Обработка ПДн по 152-ФЗ
+  - Gold rationale: Контракт объединяет 3 пункта матрицы в одном
+- Matrix `4.2.16.2` + contract marker `5.1.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, что данный пункт относится ко всем сотрудникам кроме руководителя, важно наличие согласий, обязанность подтвердить наличие согласи...; topics: Предприятие гарантирует наличие согласий сотрудников(кроме руковод...
+  - Contract signal: Обработка ПДн по 152-ФЗ
+  - Gold rationale: Контракт объединяет 3 пункта матрицы в одном
+- Matrix `4.2.16.3` + contract marker `5.1.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, что данный пункт относится только к данным по всем сотрудникам. Важен срок предоставления подтверждения; topics: Предприятие обязано предоставлять подтверждение согласий на обработ...; Сроки предоставления под...
+  - Contract signal: Обработка ПДн по 152-ФЗ
+  - Gold rationale: Контракт объединяет 3 пункта матрицы в одном
+- Matrix `5.2.10` + contract marker `5.1.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/security-data-or-information`, `full/payment-or-settlement`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: Обработка ПДн по 152-ФЗ
+  - Gold rationale: Контракт объединяет 3 пункта матрицы в одном
+- Matrix `3.2` + contract marker `5.1.10` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Перечисление сумм (дубль 5.1.8)
+  - Gold rationale: Технический повтор обязанности перечислять Заказчику суммы операций оплаты.
+- Matrix `5.2.8` + contract marker `5.1.10` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен срок перечисления средств; topics: перечисление средств на счет Предприятия не позднее 2 рабочих дней...; дата получения расчетной информации - рабочий день, следующий за дн...; required_type: mandatory
+  - Contract signal: Перечисление сумм (дубль 5.1.8)
+  - Gold rationale: Технический повтор обязанности перечислять Заказчику суммы операций оплаты.
+- Matrix `4.2.1` + contract marker `5.2.1` -> `partial_match`; tags: `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Требовать своевременной оплаты
+  - Gold rationale: 44-ФЗ
+- Matrix `5.1.17` + contract marker `5.2.2` -> `partial_match`; tags: `partial/weaker-protective-right-or-control`.
+  - Contract signal: Одностороннее расторжение (44-ФЗ/ГК)
+  - Gold rationale: Добавлен прямой аналог к матрице 10.2: право Исполнителя принять решение об одностороннем отказе. Отличается закупочной процедурой и основаниями по 44-ФЗ/ГК.
+- Matrix `10.2` + contract marker `5.2.2` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Одностороннее расторжение (44-ФЗ/ГК)
+  - Gold rationale: Добавлен прямой аналог к матрице 10.2: право Исполнителя принять решение об одностороннем отказе. Отличается закупочной процедурой и основаниями по 44-ФЗ/ГК.
+- Matrix `5.1.6` + contract marker `5.2.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право проверять техническое состояние терминалов на терр...; Банк имеет право производить замену терминалов с уведомлением заказ...; required_type: mandatory
+  - Contract signal: Проверка / замена ЭТ за 2 р.д.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.6` + contract marker `5.2.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право проверять техническое состояние терминалов на терр...; Банк имеет право производить замену терминалов с уведомлением заказ...; required_type: mandatory
+  - Contract signal: Удалённое обновление без уведомления
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.11` + contract marker `5.2.5` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право запрашивать документы по операциям; Банк может требовать письменное заявление предприятия с обстоятельс...; required_type: mandatory
+  - Contract signal: Запрос документов до 13 мес.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.13` + contract marker `5.2.6` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важно именно размещение информации на сайте. Если предусмотрены иные способы уведомления, то это разногласие; topics: Банк имеет право изменять свои реквизиты; Уведомление об изменении реквизитов осуществляется через...
+  - Contract signal: Уведомление об изменении реквизитов — письменно 3 р.д.
+  - Gold rationale: Матрица: публикация на сайте. Контракт: письменное уведомление (более обременительно для банка)
+- Matrix `5.1.14` + contract marker `5.2.7` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право направлять запросы на адрес электронной почты Пред...; Адрес электронной почты указан в Заявлении Предприятия на проведени...; required_type: mandatory
+  - Contract signal: Запросы на e-mail заказчика
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.16` + contract marker `5.2.8` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право требовать от Предприятия предоставления документов; Перечень требуемых документов определяется законодательством; required_type: mandatory
+  - Contract signal: Требовать документы по законодательству
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`.
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.1` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`.
+  - Matrix signal: topics: нарушение Предприятием условий Договора является основанием для пре...; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.2` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: внесение данных Предприятия в перечень организаций и физических лиц...; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.3` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк вправе прекратить Авторизацию при подозрении на отмывание дене...; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.6` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право прекратить проведение авторизации при получении не...; Банк имеет право расторгнуть договор при получении негативной инфор...; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.7` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право прекратить Авторизацию при получении информации о...; Достаточным подтверждением мошенничества являются сведения от Банка...; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.8` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`.
+  - Matrix signal: topics: осуществление ремонта помещений ТСТ препятствует операциям; банк вправе прекратить авторизацию для ТСТ; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.9` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`.
+  - Matrix signal: topics: ликвидация Предприятия; возбуждение дела о банкротстве Предприятия по закону №127-ФЗ; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.10` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: выявление недостоверных сведений о Предприятии; выявление недостоверных сведений о ТСТ; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.11` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право прекратить проведение авторизации при несоответств...; Банк имеет право в одностороннем порядке расторгнуть договор при вы...; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.12` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`.
+  - Matrix signal: topics: отсутствие операций в течение 30 календарных дней подряд является о...; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.13` + contract marker `5.2.9` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`.
+  - Matrix signal: topics: исчерпание Цены Договора; окончание срока действия Договора; required_type: optional
+  - Contract signal: Приостановление / расторжение (11 оснований)
+  - Gold rationale: 11 из 13 оснований матрицы. Отсутствуют 5.1.8.4 и 5.1.8.5 (ИЭ-специфика, нерелевантно)
+- Matrix `5.1.8.1` + contract marker `5.2.9.1` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: нарушение Предприятием условий Договора является основанием для пре...; required_type: optional
+  - Contract signal: Нарушение условий
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.2` + contract marker `5.2.9.2` -> `full_match`; tags: `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: внесение данных Предприятия в перечень организаций и физических лиц...; required_type: optional
+  - Contract signal: Списки экстремистов
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.3` + contract marker `5.2.9.3` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк вправе прекратить Авторизацию при подозрении на отмывание дене...; required_type: optional
+  - Contract signal: ОД/ФТ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.6` + contract marker `5.2.9.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право прекратить проведение авторизации при получении не...; Банк имеет право расторгнуть договор при получении негативной инфор...; required_type: optional
+  - Contract signal: Негативная информация ОГВ/ПС
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.7` + contract marker `5.2.9.5` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право прекратить Авторизацию при получении информации о...; Достаточным подтверждением мошенничества являются сведения от Банка...; required_type: optional
+  - Contract signal: Мошенничество (эмитент)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.8` + contract marker `5.2.9.6` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: осуществление ремонта помещений ТСТ препятствует операциям; банк вправе прекратить авторизацию для ТСТ; required_type: optional
+  - Contract signal: Ремонт ТСТ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.9` + contract marker `5.2.9.7` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: ликвидация Предприятия; возбуждение дела о банкротстве Предприятия по закону №127-ФЗ; required_type: optional
+  - Contract signal: Ликвидация / банкротство
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.10` + contract marker `5.2.9.8` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: выявление недостоверных сведений о Предприятии; выявление недостоверных сведений о ТСТ; required_type: optional
+  - Contract signal: Недостоверные сведения
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.11` + contract marker `5.2.9.9` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право прекратить проведение авторизации при несоответств...; Банк имеет право в одностороннем порядке расторгнуть договор при вы...; required_type: optional
+  - Contract signal: Несоответствие т/у роду деятельности
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.12` + contract marker `5.2.9.10` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: отсутствие операций в течение 30 календарных дней подряд является о...; required_type: optional
+  - Contract signal: Отсутствие операций 30 дней
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.13` + contract marker `5.2.9.11` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: исчерпание Цены Договора; окончание срока действия Договора; required_type: optional
+  - Contract signal: Исчерпание цены / срок
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1` + contract marker `5.2.10` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Contract signal: Удержание (общий)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.1` + contract marker `5.2.10.1` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций, являющиеся недействител...; required_type: mandatory
+  - Contract signal: Недействительные операции (12 случаев)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.2` + contract marker `5.2.10.2` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать ошибочно перечисленные суммы с счета Пр...; required_type: mandatory
+  - Contract signal: Ошибочные суммы
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.3` + contract marker `5.2.10.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций возврата, возврата плате...; required_type: mandatory
+  - Contract signal: Возвраты / реверс
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.4` + contract marker `5.2.10.4` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы оспоренных операций или списанных...; Банк удерживает суммы оспоренных операций в случае реализации товар...; required_type: mandatory
+  - Contract signal: Оспоренные операции
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.5` + contract marker `5.2.10.5` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: topics: Банк вправе удерживать штрафы из сумм Предприятия, возникшие у Банк...; Банк вправе удерживать убытки из сумм Предприятия, возникшие в связ...; required_type: mandatory
+  - Contract signal: Штрафы ПС
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `6.4` + contract marker `5.3.1` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: topics: Предприятие обязано принять и возвратить УПД (принять оказанные усл...; Предприятие предоставляет мотивированный отказ от подписания УПД в...; required_type: mandatory
+  - Contract signal: Принять услуги по документу о приёмке
+  - Gold rationale: суть таже, но нет прямого указания что обязаны принять услуги по документу. В нашей версии обязан подписать УПД (универсальный передаточный документ)
+- Matrix `3.3` + contract marker `5.3.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Оплатить услуги
+  - Gold rationale: Обязанность Заказчика оплатить услуги Исполнителя; покрывает общую обязанность оплаты услуг Банка/Исполнителя.
+- Matrix `4.2.1` + contract marker `5.3.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Оплатить услуги
+  - Gold rationale: Обязанность Заказчика оплатить услуги Исполнителя; покрывает общую обязанность оплаты услуг Банка/Исполнителя.
+- Matrix `6.5` + contract marker `5.3.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: topics: оплата услуг банка осуществляется в течение 5 рабочих дней после по...; форма оплаты - безналичная; required_type: mandatory
+  - Contract signal: Оплатить услуги
+  - Gold rationale: Обязанность Заказчика оплатить услуги Исполнителя; покрывает общую обязанность оплаты услуг Банка/Исполнителя.
+- Matrix `6.6` + contract marker `5.3.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: topics: оплата услуг банка осуществляется в течение 5 рабочих дней после по...; форма оплаты - безналичная; required_type: mandatory
+  - Contract signal: Оплатить услуги
+  - Gold rationale: Обязанность Заказчика оплатить услуги Исполнителя; покрывает общую обязанность оплаты услуг Банка/Исполнителя.
+- Matrix `7.4` + contract marker `5.3.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Право требовать неустоек
+  - Gold rationale: 44-ФЗ
+- Matrix `7.5` + contract marker `5.3.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Право требовать неустоек
+  - Gold rationale: 44-ФЗ
+- Matrix `7.6` + contract marker `5.3.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Право требовать неустоек
+  - Gold rationale: 44-ФЗ
+- Matrix `4.2.4` + contract marker `5.3.7` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен факт, если банк передает по договору предприятию - заказчику информационные материалы, то заказчик должен их разместить на видном м...; topics: Предприятие обязано размещать информационные материалы Банка о спо...
+  - Contract signal: Рекламные материалы
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.6` + contract marker `5.3.8` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен сам факт, что нельзя разбивать Операцию на нескольку сумм; topics: Предприятие обязано проводить Операцию оплаты единой суммой без раз...; required_type: mandatory
+  - Contract signal: Не разбивать операцию
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.7` + contract marker `5.3.9` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Не использовать реквизиты Карты без присутствия или распоряжения По...; Использовать реквизиты Карты только для проведения операций; required_type: mandatory
+  - Contract signal: Не использовать реквизиты карты
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.9` + contract marker `5.3.10` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/liability`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Заказчик несет ответственность за информацию которую он указывает в документах при проведении платежей; topics: Предприятие обязано проводить операции в соответствии с Порядком пр...; Предприятие обязано оформлять до...
+  - Contract signal: Проводить операции по порядку
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.10` + contract marker `5.3.11` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт необходимости хранения документы по операциям, срок в течении которого их нужно хранить, факт передачи копий по опревцияс, а т...; topics: хранение документов по операциям (сам факт хранения и срок храннеи...
+  - Contract signal: Хранить документы 13 мес.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.11` + contract marker `5.3.12` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт обязанности передавать заявление Банку, а так же сроки в течение которых оно должно быть передано; topics: Передача заявления в банк с изложением обстоятельств проведения Опе...; немедленное уведомление ба...
+  - Contract signal: Заявление об обстоятельствах за 3 р.д.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.14` + contract marker `5.3.13` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт предоставления подтверждающих документов, важны сроки предоставления, а так же нужно сравнить события, при которых это допустимо; topics: информирование Банка о реорганизации предприятия в течение 3 рабочи...
+  - Contract signal: Уведомлять об изменениях за 3 р.д.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.15` + contract marker `5.3.14` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт необходимости предоставлять достоверные сведения, своевременное обновление сведений. Важен факт и срок периодичного предоставл...; topics: Предприятие обязано предоставлять документы не реже одного раза в...
+  - Contract signal: KYC не реже 1 р./год
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.16.3` + contract marker `5.3.15` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важно, что данный пункт относится только к данным по всем сотрудникам. Важен срок предоставления подтверждения; topics: Предприятие обязано предоставлять подтверждение согласий на обработ...; Сроки предоставления под...
+  - Contract signal: Подтвердить ПДн (срок не указан)
+  - Gold rationale: В матрице срок — 3 р.д.; в контракте срок не прописан — риск злоупотребления
+- Matrix `4.2.18` + contract marker `5.3.16` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важны факты прекращения приема к оплате Карт, снятия информационных материалов, а так же важен срок; topics: При расторжении договора прекращение приема карт к оплате (регулиру...; При расторжении договора снятие инф...
+  - Contract signal: Прекратить приём карт
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.19` + contract marker `5.3.17` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен, факт что Предприятие не должно мешать Банку, и факт, что Предприятие должно помогать Банку в расследовании; topics: Предприятие обязано не препятствовать проверке со стороны Банка; Предприятие обязано содейств...
+  - Contract signal: Не препятствовать проверкам
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20` + contract marker `5.3.18` -> `full_match`; tags: `full/compound-or-scattered-coverage`.
+  - Contract signal: ТЭ: целевое использование
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.2` + contract marker `5.3.18` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно, чтобы предприятие использовало терминалы и ПО Банка только для целей договора и по месту установки, не менять и не ремонтировать и...; topics: использование Электронных терминалов и программного обеспечения то...
+  - Contract signal: ТЭ: целевое использование
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.2` + contract marker `5.3.18.1` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, чтобы предприятие использовало терминалы и ПО Банка только для целей договора и по месту установки, не менять и не ремонтировать и...; topics: использование Электронных терминалов и программного обеспечения то...
+  - Contract signal: ТЭ: не передавать третьим лицам
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.3` + contract marker `5.3.18.2` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, что если в договоре стоит запрет на предоставление доступа третьим лицам, то это разногласие; topics: Предоставление доступа третьим лицам к местам установки терминалов; Доступ для подключения терминалов; requ...
+  - Contract signal: ТЭ: доступ для обслуживающей компании
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.4` + contract marker `5.3.18.3` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, если указано, что оборудование Предприятие без документов или акта передачи, то всё ок, разногласия нет; topics: Предприятие обязано принять Электронные терминалы / Смарт-терминалв...; подписание акта уполномо...
+  - Contract signal: ТЭ: акт приёмки
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.6` + contract marker `5.3.18.5` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: вернуть терминал в течение 5 рабочих дней после расторжения договора; вернуть терминал после получения письменного/устного требования банка; required_type: mandatory
+  - Contract signal: ТЭ: вернуть за 5 р.д.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.13` + contract marker `5.3.19` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: main idea: Важен сам факт обязанности Предприятия возмещать все суммы и убытки, которые Банк понёс из-за Предприятия, все возмещения - в полном объе...; topics: возмещение средств, списанных со счета Банка в пользу Банка-эмитен...
+  - Contract signal: Возмещать суммы по спорным операциям
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.16` + contract marker `5.3.20` -> `full_match`; tags: `full/compound-or-scattered-coverage`.
+  - Contract signal: ПДн руководителя (передача + гарантии)
+  - Gold rationale: Объединяет 2 пункта матрицы
+- Matrix `4.2.16.1` + contract marker `5.3.20` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, чтобы было действующее согласие на передачу ПДн руководителя Предприятия. Состав ПДн: ФИО, адрес, паспортные данные. Важно, чтобы...; topics: Предприятие гарантирует наличие правовых оснований на передачу ПДн;...
+  - Contract signal: ПДн руководителя (передача + гарантии)
+  - Gold rationale: Объединяет 2 пункта матрицы
+- Matrix `4.2.20.5` + contract marker `5.3.20.4` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Предприятие обязано немедленно информировать Банк о выходе из строя...; Информирование осуществляется согласно пунктам 2.3.1 и 2.3.2 Догово...; required_type: mandatory
+  - Contract signal: ТЭ: уведомить о поломке
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `10.2` + contract marker `5.4.3` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Односторонний отказ заказчика
+  - Gold rationale: Прямой аналог к матрице 10.2 по стороне Заказчика: право принять решение об одностороннем отказе по основаниям 44-ФЗ/ГК; банковский 30-дневный порядок не совпадает.
+- Matrix `4.1.1` + contract marker `5.4.5` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, если Предприятие хочет использовать в информационных материалах упоминание бренда Банка - надо согласовывать с Банком; topics: Предприятие имеет право ссылаться на возможность оплаты с использов...; Согласован...
+  - Contract signal: Право ссылаться на карты в рекламных материалах
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.11` + contract marker `5.5` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт обязанности передавать заявление Банку, а так же сроки в течение которых оно должно быть передано; topics: Передача заявления в банк с изложением обстоятельств проведения Опе...; немедленное уведомление ба...
+  - Contract signal: Заявление об обстоятельствах (дубль 5.3.12)
+  - Gold rationale: Дублирует п. 5.3.12
+- Matrix `4.2.20.6` + contract marker `5.6` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: вернуть терминал в течение 5 рабочих дней после расторжения договора; вернуть терминал после получения письменного/устного требования банка; required_type: mandatory
+  - Contract signal: Возврат ЭТ при утере — 5 р.д.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.7` + contract marker `5.7` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важно, чтобы в соответствующем пункте договора шла речь про штраф за невозврат терминала и его размер, иначе данный пункт матрицы не отно...; topics: Невозврат терминалов. Обязанность предприятия об уплате штрафа за...
+  - Contract signal: Штраф: 10 000 ЭТ / 25 000 Смарт
+  - Gold rationale: Матрица: единая ставка 25 000 за любой терминал. Контракт: ЭТ — 10 000 (расхождение)
+- Matrix `5.1.1.6` + contract marker `5.7` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: main idea: Возможность удержания штрафов за невозврат терминалов.; topics: Банк имеет право удерживать суммы штрафов за невозврат Электронных...; required_type: mandatory
+  - Contract signal: Штраф: 10 000 ЭТ / 25 000 Смарт
+  - Gold rationale: Матрица: единая ставка 25 000 за любой терминал. Контракт: ЭТ — 10 000 (расхождение)
+- Matrix `4.1.2` + contract marker `5.9` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Банк оказывает консультацию заказчика по использованию оборудования; topics: закреплено право Заказчика на получение консультаций по эксплуатаци...; закреплено право Заказчика на получение консуль...
+  - Contract signal: Право на консультацию
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.1` + contract marker `5.10` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятие само следит за прохождением инструктажа сотрудниками, размещенного на сайте Банка; topics: обязательство предприятия проводить инструктаж сотрудников самостоя...; ссылка на инструкцию...
+  - Contract signal: Инструктаж сотрудников
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `7.16` + contract marker `6.1` -> `full_match`; tags: `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: topics: Обязательство не совершать коррупционных и иных противозаконных дей...; required_type: mandatory
+  - Contract signal: Антикоррупционная оговорка
+  - Gold rationale: 44-ФЗ: обязательная оговорка
+- Matrix `7.1` + contract marker `7.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Общие слова о том, что за неисполнение или ненадлежащее исполнение...; Общие слова о том, что за неисполнение или ненадлежащее исполнение...; required_type: mandatory
+  - Contract signal: Общая ответственность / лимит
+  - Gold rationale: Пункт и следующие за ним абзацы устанавливают общую ответственность и лимиты штрафов; прямой аналог общей нормы об ответственности.
+- Matrix `7.3` + contract marker `7.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Общая сумма штрафов за ненадлежащее исполнение Предприятием обязате...; required_type: mandatory
+  - Contract signal: Общая ответственность / лимит
+  - Gold rationale: Пункт и следующие за ним абзацы устанавливают общую ответственность и лимиты штрафов; прямой аналог общей нормы об ответственности.
+- Matrix `7.7` + contract marker `7.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Общая сумма штрафов за нарушения Банка не превышает цену договора; required_type: mandatory
+  - Contract signal: Общая ответственность / лимит
+  - Gold rationale: Пункт и следующие за ним абзацы устанавливают общую ответственность и лимиты штрафов; прямой аналог общей нормы об ответственности.
+- Matrix `7.15` + contract marker `7.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`, `full/liability`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт несения ответственности, если в договоре не говорится про несение ответственности за действия персонала, значит этот пункт...; topics: Предприятие несет полную ответственность за нарушения персонала ус...
+  - Contract signal: Общая ответственность / лимит
+  - Gold rationale: Пункт и следующие за ним абзацы устанавливают общую ответственность и лимиты штрафов; прямой аналог общей нормы об ответственности.
+- Matrix `7.1` + contract marker `7.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Общие слова о том, что за неисполнение или ненадлежащее исполнение...; Общие слова о том, что за неисполнение или ненадлежащее исполнение...; required_type: mandatory
+  - Contract signal: Право исп. требовать неустойку
+  - Gold rationale: 44-ФЗ: ч. 5 ст. 34
+- Matrix `7.2` + contract marker `7.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: main idea: Важно, что штраф именно Предприятию, важен размер штрафа; topics: Штраф Предприятию за неисполнение или ненадлежащее исполнение обяза...; required_type: mandatory
+  - Contract signal: Право исп. требовать неустойку
+  - Gold rationale: 44-ФЗ: ч. 5 ст. 34
+- Matrix `7.2` + contract marker `7.3` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важно, что штраф именно Предприятию, важен размер штрафа; topics: Штраф Предприятию за неисполнение или ненадлежащее исполнение обяза...; required_type: mandatory
+  - Contract signal: Пеня Заказчика за просрочку — 1/300 КС
+  - Gold rationale: Матрица 7.2 — штраф за нарушения предприятия; контракт — пеня 44-ФЗ (1/300 КС) за просрочку Заказчика. Смысл аналогичен, механизм отличается: контракт фиксирует ставку пени по КС, матрица — фиксированный штраф по Приложению
+- Matrix `7.2` + contract marker `7.4` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важно, что штраф именно Предприятию, важен размер штрафа; topics: Штраф Предприятию за неисполнение или ненадлежащее исполнение обяза...; required_type: mandatory
+  - Contract signal: Штрафы Заказчика за ненадлежащее исполнение (общий раздел)
+  - Gold rationale: 44-ФЗ: общий раздел о штрафах для Заказчика. Матрица 7.2 — штрафы предприятия, 7.3 — ограничение суммарного размера. Расхождение: в матрице размер штрафа из Приложения, в контракте — по Постановлению № 1042
+- Matrix `7.3` + contract marker `7.4` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Общая сумма штрафов за ненадлежащее исполнение Предприятием обязате...; required_type: mandatory
+  - Contract signal: Штрафы Заказчика за ненадлежащее исполнение (общий раздел)
+  - Gold rationale: 44-ФЗ: общий раздел о штрафах для Заказчика. Матрица 7.2 — штрафы предприятия, 7.3 — ограничение суммарного размера. Расхождение: в матрице размер штрафа из Приложения, в контракте — по Постановлению № 1042
+- Matrix `7.2` + contract marker `7.4.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: main idea: Важно, что штраф именно Предприятию, важен размер штрафа; topics: Штраф Предприятию за неисполнение или ненадлежащее исполнение обяза...; required_type: mandatory
+  - Contract signal: Штраф заказчика (Постановление №1042)
+  - Gold rationale: Добавлен 7.2: полное совпадение шкалы штрафов заказчика/предприятия по диапазонам цены договора.
+- Matrix `7.6` + contract marker `7.4.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Штраф заказчика (Постановление №1042)
+  - Gold rationale: Добавлен 7.2: полное совпадение шкалы штрафов заказчика/предприятия по диапазонам цены договора.
+- Matrix `7.4` + contract marker `7.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Право заказчика требовать неустойку
+  - Gold rationale: Добавлен 7.4: прямое право Заказчика/Предприятия требовать неустойки при просрочке или ненадлежащем исполнении Исполнителя/Банка.
+- Matrix `7.5` + contract marker `7.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Право заказчика требовать неустойку
+  - Gold rationale: Добавлен 7.4: прямое право Заказчика/Предприятия требовать неустойки при просрочке или ненадлежащем исполнении Исполнителя/Банка.
+- Matrix `7.6` + contract marker `7.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Право заказчика требовать неустойку
+  - Gold rationale: Добавлен 7.4: прямое право Заказчика/Предприятия требовать неустойки при просрочке или ненадлежащем исполнении Исполнителя/Банка.
+- Matrix `7.4` + contract marker `7.6` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Пеня исполнителя 1/300
+  - Gold rationale: 44-ФЗ
+- Matrix `7.1` + contract marker `7.7` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Общие слова о том, что за неисполнение или ненадлежащее исполнение...; Общие слова о том, что за неисполнение или ненадлежащее исполнение...; required_type: mandatory
+  - Contract signal: Штрафы исполнителя (общий)
+  - Gold rationale: Добавлен 7.5: родительская норма о штрафах Исполнителя за неисполнение/ненадлежащее исполнение обязательств.
+- Matrix `7.5` + contract marker `7.7` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Штрафы исполнителя (общий)
+  - Gold rationale: Добавлен 7.5: родительская норма о штрафах Исполнителя за неисполнение/ненадлежащее исполнение обязательств.
+- Matrix `7.5` + contract marker `7.7.1` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Штраф исполнителя (%) №1042
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `7.5` + contract marker `7.7.2` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Штраф исп.-победителя торгов
+  - Gold rationale: 44-ФЗ
+- Matrix `7.6` + contract marker `7.7.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Штраф исполнителя нестоимостной
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `7.7` + contract marker `7.10` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Общая сумма штрафов за нарушения Банка не превышает цену договора; required_type: mandatory
+  - Contract signal: Лимит штрафов исполнителя
+  - Gold rationale: nan; матрица 7.3 также ограничивает лимит штрафов предприятия
+- Matrix `7.3` + contract marker `7.10` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Общая сумма штрафов за ненадлежащее исполнение Предприятием обязате...; required_type: mandatory
+  - Contract signal: Лимит штрафов исполнителя
+  - Gold rationale: nan; матрица 7.3 также ограничивает лимит штрафов предприятия
+- Matrix `7.7` + contract marker `7.11` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Общая сумма штрафов за нарушения Банка не превышает цену договора; required_type: mandatory
+  - Contract signal: Лимит штрафов заказчика
+  - Gold rationale: nan; матрица 7.3 также ограничивает лимит штрафов предприятия
+- Matrix `7.3` + contract marker `7.11` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Общая сумма штрафов за ненадлежащее исполнение Предприятием обязате...; required_type: mandatory
+  - Contract signal: Лимит штрафов заказчика
+  - Gold rationale: nan; матрица 7.3 также ограничивает лимит штрафов предприятия
+- Matrix `6.4` + contract marker `8.5.1` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Предприятие обязано принять и возвратить УПД (принять оказанные усл...; Предприятие предоставляет мотивированный отказ от подписания УПД в...; required_type: mandatory
+  - Contract signal: Подписание документа о приемке или мотивированный отказ
+  - Gold rationale: Матрица 6.4: возврат подписанного УПД либо мотивированный отказ. Контракт: Заказчик подписывает документ о приемке либо формирует мотивированный отказ через ЕИС.
+- Matrix `6.5` + contract marker `8.11` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: topics: оплата услуг банка осуществляется в течение 5 рабочих дней после по...; форма оплаты - безналичная; required_type: mandatory
+  - Contract signal: Подписанный документ о приёмке = основание для оплаты
+  - Gold rationale: Исправлено с несуществующего 8.12: в активном договоре этот смысл содержится в 8.11; подписанный документ о приемке является основанием для оплаты.
+- Matrix `6.2` + contract marker `8.3.1` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: УПД - это универсальный передаточный документ (документ о приёмке, документ на оплату услуг). Важно проверить сроки и периодичность оплаты; topics: Банк направляет документ на оплату услуг Банка; в вознаграждение бан...
+  - Contract signal: Ежемесячное формирование документа о приемке через ЕИС
+  - Gold rationale: Сильный аналог к матрице 6.2: ежемесячный закрывающий документ по услугам; отличается срок и форма (документ о приемке через ЕИС вместо УПД до 5 рабочего дня).
+- Matrix `2.4` + contract marker `8.3.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Прилагаемые к документу о приемке документы — неотъемлемая часть
+  - Gold rationale: Добавлен 6.2: к документу о приемке прилагаются счет-фактура, акт о перечислении сумм операций по картам и счет ф.363 на оплату услуг.
+- Matrix `6.2` + contract marker `8.3.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: УПД - это универсальный передаточный документ (документ о приёмке, документ на оплату услуг). Важно проверить сроки и периодичность оплаты; topics: Банк направляет документ на оплату услуг Банка; в вознаграждение бан...
+  - Contract signal: Прилагаемые к документу о приемке документы — неотъемлемая часть
+  - Gold rationale: Добавлен 6.2: к документу о приемке прилагаются счет-фактура, акт о перечислении сумм операций по картам и счет ф.363 на оплату услуг.
+- Matrix `8.1` + contract marker `9.1` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: описание форс-мажорных обстоятельств как основание для освобождения...; перечень конкретных форс-мажорных событий (стихийные бедствия, пожа...; required_type: mandatory
+  - Contract signal: Форс-мажор
+  - Gold rationale: 44-ФЗ / ГК РФ
+- Matrix `8.2` + contract marker `9.2` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Обязанность уведомления другой стороны при обстоятельствах непреодо...; Срок уведомления другой стороны при обстоятельствах непреодолимой силы; required_type: mandatory
+  - Contract signal: Форс-мажор
+  - Gold rationale: 44-ФЗ / ГК РФ . У нас 24 часа на уведомление, а вдоговоре 5 дней
+- Matrix `9.1` + contract marker `10.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`.
+  - Matrix signal: topics: соблюден претензионный порядок урегулирования споров; указан обязательный досудебный порядок с указанием срока рассмотрен...; required_type: mandatory
+  - Contract signal: Порядок разрешения споров
+  - Gold rationale: 44-ФЗ
+- Matrix `9.2` + contract marker `10.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`.
+  - Matrix signal: main idea: Важен срок рассмотрения претензий; topics: Срок рассмотрения претензий; required_type: mandatory
+  - Contract signal: Порядок разрешения споров
+  - Gold rationale: 44-ФЗ
+- Matrix `9.3` + contract marker `10.2` -> `partial_match`; tags: `partial/same-mechanism-material-gap`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: Арбитражный суд Краснодарского края
+  - Gold rationale: суть одинкаковая - по закону РФ юрисдикция суда по территориальному признакоку одной из торон - Заказчик выдрал свою
+- Matrix `10.1` + contract marker `11.1` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Срок до 30.12.2025
+  - Gold rationale: 44-ФЗ: бюджетный год
+- Matrix `11.4` + contract marker `11.2` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: изменения и дополнения должны быть в письменной форме; подписаны уполномоченными представителями обеих сторон; required_type: optional
+  - Contract signal: Изменения письменно / уведомление 2 дня
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `10.2` + contract marker `11.3` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Расторжение (соглашение/суд/одностороннее)
+  - Gold rationale: 44-ФЗ: ст. 95
+- Matrix `10.3` + contract marker `11.3` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Сроки, в которые договор считается расторгнутым в случае расторжени...; Сроки расчетов после одностороннего внесудебного порядка расторжени...; required_type: mandatory
+  - Contract signal: Расторжение (соглашение/суд/одностороннее)
+  - Gold rationale: 44-ФЗ: ст. 95
+- Matrix `10.2` + contract marker `11.4` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Право заказчика на расторжение
+  - Gold rationale: предусмотрено право , но у нас больше дополнительных условий
+- Matrix `10.2` + contract marker `11.5` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Порядок одностороннего отказа
+  - Gold rationale: 44-ФЗ
+- Matrix `10.2` + contract marker `11.6` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Изменение по ст. 34, 95, 96, 112
+  - Gold rationale: 44-ФЗ + в 10.2. говорится про расторжение
+- Matrix `2.3.6` + contract marker `11.7` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важен сам факт наличия данного канала для обмена электронными документами; topics: Перечисление способов обмена документами: через ЕИС (Единую информа...; Перечисление способов обмена документами: обмен документами ч...
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `4.2.4` + contract marker `11.7` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важен факт, если банк передает по договору предприятию - заказчику информационные материалы, то заказчик должен их разместить на видном м...; topics: Предприятие обязано размещать информационные материалы Банка о спо...
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `4.2.13` + contract marker `11.7` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важен сам факт обязанности Предприятия возмещать все суммы и убытки, которые Банк понёс из-за Предприятия, все возмещения - в полном объе...; topics: возмещение средств, списанных со счета Банка в пользу Банка-эмитен...
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `4.2.15` + contract marker `11.7` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важен факт необходимости предоставлять достоверные сведения, своевременное обновление сведений. Важен факт и срок периодичного предоставл...; topics: Предприятие обязано предоставлять документы не реже одного раза в...
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `5.1.1.1` + contract marker `11.7` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций, являющиеся недействител...; required_type: mandatory
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `5.1.16` + contract marker `11.7` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Банк имеет право требовать от Предприятия предоставления документов; Перечень требуемых документов определяется законодательством; required_type: mandatory
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `6.2` + contract marker `11.7` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: main idea: УПД - это универсальный передаточный документ (документ о приёмке, документ на оплату услуг). Важно проверить сроки и периодичность оплаты; topics: Банк направляет документ на оплату услуг Банка; в вознаграждение бан...
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `6.9` + contract marker `11.7` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Банк выставляет счет не позднее 10 рабочего дня месяца, следующего...; Счет выставляется по форме №363; required_type: mandatory
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `6.15` + contract marker `11.7` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Банк выставляет счет не позднее 10 рабочего дня месяца, следующего...; Счет-фактура предоставляется в соответствии с налоговым законодател...; required_type: mandatory
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `7.1` + contract marker `11.7` -> `partial_match`; tags: `partial/liability-economics-gap`.
+  - Matrix signal: topics: Общие слова о том, что за неисполнение или ненадлежащее исполнение...; Общие слова о том, что за неисполнение или ненадлежащее исполнение...; required_type: mandatory
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `7.4` + contract marker `11.7` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `7.16` + contract marker `11.7` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: topics: Обязательство не совершать коррупционных и иных противозаконных дей...; required_type: mandatory
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `7.17` + contract marker `11.7` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важно, чтобы в договоре не было сужения ответственности.; topics: Общие слова про то, что Предприятие несет финансовую ответственност...; Общие слова про то, что Предприятие отвечает за соответствие Повтор...; requir...
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `9.3` + contract marker `11.7` -> `partial_match`; tags: `partial/same-mechanism-material-gap`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `11.1` + contract marker `11.7` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: topics: Перечисление источников правового регулирования отношений Сторон; Требование соблюдать законодательство РФ; required_type: optional
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `11.2` + contract marker `11.7` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Номера Карт/Платежных счетов, персональные данные Покупателей, сумм...; Объявляется запрет на передачу конфиденциальной информации третьим...; required_type: optional
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `11.8` + contract marker `11.7` -> `partial_match`; tags: `partial/payment-mechanics-gap`.
+  - Matrix signal: topics: Предприятие (Заказчик) заверяет, что реализация Товаров/услуг осуще...; required_type: optional
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `11.10` + contract marker `11.7` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: topics: При реорганизации одной из Сторон обязательства переходят к правопр...; В случае ликвидации одной из сторон - удовлетворение имущественных...; required_type: optional
+  - Contract signal: Всё остальное — законодательство РФ
+  - Gold rationale: в матрице оговорки если не противоречит законодательству РФ
+- Matrix `11.9` + contract marker `12.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`.
+  - Matrix signal: topics: запрет передачи обязательств и прав без письменного согласия другой...; возможность передачи обязательств для случаев реорганизации стороны; required_type: optional
+  - Contract signal: Перемена исполнителя запрещена / правопреемство исполнителя
+  - Gold rationale: Добавлен 11.10: при реорганизации Исполнителя допускается правопреемство, что покрывает переход обязательств к правопреемнику.
+- Matrix `11.10` + contract marker `12.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`.
+  - Matrix signal: topics: При реорганизации одной из Сторон обязательства переходят к правопр...; В случае ликвидации одной из сторон - удовлетворение имущественных...; required_type: optional
+  - Contract signal: Перемена исполнителя запрещена / правопреемство исполнителя
+  - Gold rationale: Добавлен 11.10: при реорганизации Исполнителя допускается правопреемство, что покрывает переход обязательств к правопреемнику.
+- Matrix `11.10` + contract marker `12.2` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: При реорганизации одной из Сторон обязательства переходят к правопр...; В случае ликвидации одной из сторон - удовлетворение имущественных...; required_type: optional
+  - Contract signal: Перемена заказчика — полный объём
+  - Gold rationale: 44-ФЗ
+- Matrix `2.2` + contract marker `Приложение №1 п.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт, что валюта рубль РФ, другая валюта недопустима; topics: Расчёты производятся в рублях Российской Федерации; required_type: mandatory
+  - Contract signal: Валюта расчетов и операции возврата
+  - Gold rationale: Приложение прямо устанавливает расчеты в валюте РФ и правило о невзимании платы по операциям возврата/реверсивным транзакциям.
+- Matrix `6.20` + contract marker `Приложение №1 п.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важен сам факт, что Банк не берёт новую комиссию, а так же, что первоначальная комиссия не возвращается; topics: плата за проведение расчетов по операциям возврата не взимается; удержанная плата за расчеты при первон...
+  - Contract signal: Валюта расчетов и операции возврата
+  - Gold rationale: Приложение прямо устанавливает расчеты в валюте РФ и правило о невзимании платы по операциям возврата/реверсивным транзакциям.
+- Matrix `3.1` + contract marker `Приложение №1 п.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Перечень карт, принимаемых к оплате
+  - Gold rationale: Сильный аналог к матрице 3.1: приложение прямо перечисляет платежные системы/карты, принимаемые к оплате.
+### Benchmark B: matched pair units
+
+- Matrix `2.1` + contract marker `2.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен факт, что для регистрации договора банку нужно заявление. В заявлении должна быть указана полная информация необходимая для регистр...; topics: Для регистрации новой ТСТ Предприятие предоставляет заявление на р...
+  - Contract signal: Регистрация ТСТ; право Банка отказать без объяснений
+  - Gold rationale: —
+- Matrix `2.2` + contract marker `2.2` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт, что валюта рубль РФ, другая валюта недопустима; topics: Расчёты производятся в рублях Российской Федерации; required_type: mandatory
+  - Contract signal: Расчёты в рублях РФ
+  - Gold rationale: —
+- Matrix `2.3` + contract marker `2.3` -> `full_match`; tags: `full/document-exchange`.
+  - Contract signal: Способы обмена документами (заголовок)
+  - Gold rationale: —
+- Matrix `2.3.1` + contract marker `2.3.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Нужно проверять признаётся ли полная юридическая сила e‑mail, есть ли ограничения по видам сведений и возможность изменять/обновлять адреса.; topics: Обмен информацией по электронной почте; Исключение передачи персон...
+  - Contract signal: Обмен по email; полная юридическая сила
+  - Gold rationale: —
+- Matrix `2.3.2` + contract marker `2.3.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами посредством системы ДБО или аналогичных систем Банка; required_type: mandatory
+  - Contract signal: Обмен через ДБО или аналогичные системы Банка
+  - Gold rationale: —
+- Matrix `2.3.3` + contract marker `2.3.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами с доставкой нарочным или курьером; required_type: optional
+  - Contract signal: Направление письма курьером
+  - Gold rationale: —
+- Matrix `2.3.4` + contract marker `2.3.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами через заказное письмо; required_type: optional
+  - Contract signal: Направление заказного письма
+  - Gold rationale: —
+- Matrix `2.3.5` + contract marker `2.3.5` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важна равнозначность документов; topics: Обмен информацией и документами осуществляется через систему E-invo...; электронные документы имеют юридическую силу документов на бумаге; required_type: mandatory
+  - Contract signal: Обмен через автоматизированные системы с УКЭП
+  - Gold rationale: Договор: «автоматизированных систем» без названия. Матрица требует E-invoicing/СФЕРА-Курьер. Рекомендуется конкретизировать
+- Matrix `2.3.6` + contract marker `2.3.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт наличия данного канала для обмена электронными документами; topics: Перечисление способов обмена документами: через ЕИС (Единую информа...; Перечисление способов обмена документами: обмен документами ч...
+  - Contract signal: Обмен в ЕИС (закупки по 223-ФЗ)
+  - Gold rationale: Применимо по 223-ФЗ
+- Matrix `2.3.7` + contract marker `2.3.7` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Для представленных в контракте способах обмена информацией / документами, не должно быть расхождений в данном пункте на счёт даты, с кото...; topics: Обмен информацией через обращение в службу поддержки Банка; Дата с...
+  - Contract signal: Служба поддержки 24/7; определение момента получения документа
+  - Gold rationale: —
+- Matrix `2.4` + contract marker `2.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Документы, ссылки на которые даны в Договоре, — неотъемлемая часть
+  - Gold rationale: —
+- Matrix `2.7` + contract marker `2.5` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт, что договор может быть заключен в электронном виде с подписанием УКЭП; required_type: optional
+  - Contract signal: Договор в электронном виде с УКЭП; равная юридическая сила
+  - Gold rationale: Пункт 2.5 договора = матр. 2.7; нумерация отличается, смысл совпадает
+- Matrix `3.1` + contract marker `3.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Предприятие принимает Карты/NFC/Платёжные решения
+  - Gold rationale: Матрица упоминает SberPay/QR — в договоре только Платёжные решения; для ТЭ без QR допустимо
+- Matrix `3.2` + contract marker `3.2` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Банк перечисляет суммы Операций Предприятию
+  - Gold rationale: —
+- Matrix `3.3` + contract marker `3.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Предприятие ежемесячно уплачивает Банку плату за расчёты
+  - Gold rationale: —
+- Matrix `4.1.1` + contract marker `4.1.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, если Предприятие хочет использовать в информационных материалах упоминание бренда Банка - надо согласовывать с Банком; topics: Предприятие имеет право ссылаться на возможность оплаты с использов...; Согласован...
+  - Contract signal: Ссылаться на оплату картой в материалах после согласования с Банком
+  - Gold rationale: —
+- Matrix `4.1.2` + contract marker `4.1.2` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Банк оказывает консультацию заказчика по использованию оборудования; topics: закреплено право Заказчика на получение консультаций по эксплуатаци...; закреплено право Заказчика на получение консуль...
+  - Contract signal: Получать консультации Банка по терминалам
+  - Gold rationale: —
+- Matrix `4.1.3` + contract marker `4.1.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что QR выдаёт Банк; topics: Предприятие имеет право использовать полученные от Банка QR-коды дл...; required_type: optional
+  - Contract signal: Использовать для приёма оплаты устройства/материалы Банка
+  - Gold rationale: QR в матрице упомянут явно; в договоре QR не подключён — для ТЭ без QR допустимо
+- Matrix `4.2.1` + contract marker `4.2.1` -> `partial_match`; tags: `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Оплачивать услуги Банка по тарифам Раздела 6
+  - Gold rationale: В договоре не упомянута «плата за сервисное обслуживание (при наличии)» — матр. 4.2.1. Нет пунктов матр. 6.7–6.18 (сервисное обслуживание). Уточнить условия сервисного обслуживания терминалов
+- Matrix `4.2.2` + contract marker `4.2.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно в контракте наличие формулировки о том, что Предприятие обязуется выполнять и соблюдать требования договора и инструктивных материа...; topics: Обязанность Предприятия соблюдать положения Договора (наличие форм...
+  - Contract signal: Соблюдать Договор и инструктивные материалы Банка
+  - Gold rationale: —
+- Matrix `4.2.3` + contract marker `4.2.3` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Предприятие обязано самостоятельно и своевременно знакомиться с изм...; Несвоевременное ознакомление не является основанием для неприменени...; required_type: optional
+  - Contract signal: Самостоятельно знакомиться с изменениями документов на сайте Банка
+  - Gold rationale: —
+- Matrix `4.2.4` + contract marker `4.2.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен факт, если банк передает по договору предприятию - заказчику информационные материалы, то заказчик должен их разместить на видном м...; topics: Предприятие обязано размещать информационные материалы Банка о спо...
+  - Contract signal: Размещать информационные материалы Банка на видных местах ТСТ
+  - Gold rationale: —
+- Matrix `4.2.5` + contract marker `4.2.5` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, не принимать от Покупателя более 2 (двух) различных Карт. Не выдавать наличные денежные средства; topics: Принимать к оплате все карты из списка в течение всего рабочего вре...; Не выдавать наличные деньги по...
+  - Contract signal: Принимать все Карты; не выдавать наличные; не более 2 карт
+  - Gold rationale: —
+- Matrix `4.2.6` + contract marker `4.2.6` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен сам факт, что нельзя разбивать Операцию на нескольку сумм; topics: Предприятие обязано проводить Операцию оплаты единой суммой без раз...; required_type: mandatory
+  - Contract signal: Не дробить сумму одной Операции
+  - Gold rationale: —
+- Matrix `4.2.7` + contract marker `4.2.7` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Не использовать реквизиты Карты без присутствия или распоряжения По...; Использовать реквизиты Карты только для проведения операций; required_type: mandatory
+  - Contract signal: Не использовать реквизиты Карты вне Операций
+  - Gold rationale: —
+- Matrix `4.2.8` + contract marker `4.2.8` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно, что цена не зависит от способа оплаты; topics: Предприятие предоставляет полный набор товаров/услуг покупателям; цены для расчетов с использованием банковской карты не превышают це...; required_type: mandatory
+  - Contract signal: Цены при карточной оплате не выше цен за наличные
+  - Gold rationale: —
+- Matrix `4.2.9` + contract marker `4.2.9` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/liability`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Заказчик несет ответственность за информацию которую он указывает в документах при проведении платежей; topics: Предприятие обязано проводить операции в соответствии с Порядком пр...; Предприятие обязано оформлять до...
+  - Contract signal: Проводить Операции и оформлять Документы по Порядку
+  - Gold rationale: —
+- Matrix `4.2.10` + contract marker `4.2.10` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт необходимости хранения документы по операциям, срок в течении которого их нужно хранить, факт передачи копий по опревцияс, а т...; topics: хранение документов по операциям (сам факт хранения и срок храннеи...
+  - Contract signal: Хранить Документы 13 мес.; передавать копии в Банк за 3 р.д.
+  - Gold rationale: —
+- Matrix `4.2.11` + contract marker `4.2.11` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт обязанности передавать заявление Банку, а так же сроки в течение которых оно должно быть передано; topics: Передача заявления в банк с изложением обстоятельств проведения Опе...; немедленное уведомление ба...
+  - Contract signal: Письменное заявление об Операции по запросу — 3 р.д.; сообщать об утрате
+  - Gold rationale: —
+- Matrix `4.2.12` + contract marker `4.2.12` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важен факт обязанности Предприятия подписать закрывающие документы по оплате, а так же сроки в течение которых оно должно это сделать; topics: Предприятие обязано акцептовать платежные требования и счета на опл...; С...
+  - Contract signal: Акцептовать платёжные требования/счета в течение 5 р.д.
+  - Gold rationale: —
+- Matrix `4.2.13` + contract marker `4.2.13` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: main idea: Важен сам факт обязанности Предприятия возмещать все суммы и убытки, которые Банк понёс из-за Предприятия, все возмещения - в полном объе...; topics: возмещение средств, списанных со счета Банка в пользу Банка-эмитен...
+  - Contract signal: Безусловное возмещение Банку по спорным/недействительным Операциям
+  - Gold rationale: —
+- Matrix `4.2.14` + contract marker `4.2.14` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт предоставления подтверждающих документов, важны сроки предоставления, а так же нужно сравнить события, при которых это допустимо; topics: информирование Банка о реорганизации предприятия в течение 3 рабочи...
+  - Contract signal: Уведомить Банк о реорганизации/банкротстве/реквизитах — 3 р.д.
+  - Gold rationale: —
+- Matrix `4.2.15` + contract marker `4.2.15` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт необходимости предоставлять достоверные сведения, своевременное обновление сведений. Важен факт и срок периодичного предоставл...; topics: Предприятие обязано предоставлять документы не реже одного раза в...
+  - Contract signal: Достоверные документы; обновление не реже 1 раза/год, по запросу — 7 р.д.
+  - Gold rationale: —
+- Matrix `4.2.16` + contract marker `4.2.16` -> `full_match`; tags: `full/direct-legal-function`.
+  - Contract signal: Передача ПДн руководителя Предприятия в Банк (заголовок)
+  - Gold rationale: —
+- Matrix `4.2.16.1` + contract marker `4.2.16.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, чтобы было действующее согласие на передачу ПДн руководителя Предприятия. Состав ПДн: ФИО, адрес, паспортные данные. Важно, чтобы...; topics: Предприятие гарантирует наличие правовых оснований на передачу ПДн;...
+  - Contract signal: Гарантия правовых оснований для передачи ПДн руководителя (в т.ч. в ПС МИР)
+  - Gold rationale: —
+- Matrix `4.2.16.2` + contract marker `4.2.16.2` -> `full_match`; tags: `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, что данный пункт относится ко всем сотрудникам кроме руководителя, важно наличие согласий, обязанность подтвердить наличие согласи...; topics: Предприятие гарантирует наличие согласий сотрудников(кроме руковод...
+  - Contract signal: Гарантия согласий работников на ПДн; подтверждение по запросу
+  - Gold rationale: —
+- Matrix `4.2.16.3` + contract marker `4.2.16.3` -> `full_match`; tags: `full/document-exchange`, `full/liability`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, что данный пункт относится только к данным по всем сотрудникам. Важен срок предоставления подтверждения; topics: Предприятие обязано предоставлять подтверждение согласий на обработ...; Сроки предоставления под...
+  - Contract signal: Подтверждение правомерности ПДн — 3 р.д.; компенсация при непредоставлении
+  - Gold rationale: —
+- Matrix `4.2.17` + contract marker `4.2.17` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важен сам факт обязанности соблюдения стандарта, а так же факт обязанности предоставления подтверждения; topics: Обязательство соблюдать требования PCI DSS; Предоставление аттестата соответствия или листа самооценки...
+  - Contract signal: Соблюдение PCI DSS; результаты оценки по запросу
+  - Gold rationale: Договор не указывает email pcidss@sberbank.ru для результатов PCI DSS. Рекомендуется добавить
+- Matrix `4.2.18` + contract marker `4.2.18` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важны факты прекращения приема к оплате Карт, снятия информационных материалов, а так же важен срок; topics: При расторжении договора прекращение приема карт к оплате (регулиру...; При расторжении договора снятие инф...
+  - Contract signal: С даты расторжения — прекратить приём Карт, убрать материалы
+  - Gold rationale: —
+- Matrix `4.2.19` + contract marker `4.2.19` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен, факт что Предприятие не должно мешать Банку, и факт, что Предприятие должно помогать Банку в расследовании; topics: Предприятие обязано не препятствовать проверке со стороны Банка; Предприятие обязано содейств...
+  - Contract signal: Не препятствовать проверкам Банка; содействовать по подозрительным Операциям
+  - Gold rationale: —
+- Matrix `4.2.20` + contract marker `4.2.20` -> `full_match`; tags: `full/direct-legal-function`.
+  - Contract signal: Торговый эквайринг: обязанности в ТСТ (заголовок)
+  - Gold rationale: —
+- Matrix `4.2.20.1` + contract marker `4.2.20.1` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятие само следит за прохождением инструктажа сотрудниками, размещенного на сайте Банка; topics: обязательство предприятия проводить инструктаж сотрудников самостоя...; ссылка на инструкцию...
+  - Contract signal: Инструктаж сотрудников по Порядку Операций
+  - Gold rationale: —
+- Matrix `4.2.20.2` + contract marker `4.2.20.2` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, чтобы предприятие использовало терминалы и ПО Банка только для целей договора и по месту установки, не менять и не ремонтировать и...; topics: использование Электронных терминалов и программного обеспечения то...
+  - Contract signal: Использовать терминалы только для Договора; не модифицировать; не передавать
+  - Gold rationale: —
+- Matrix `4.2.20.3` + contract marker `4.2.20.3` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, что если в договоре стоит запрет на предоставление доступа третьим лицам, то это разногласие; topics: Предоставление доступа третьим лицам к местам установки терминалов; Доступ для подключения терминалов; requ...
+  - Contract signal: Допускать Обслуживающую компанию к терминалам
+  - Gold rationale: —
+- Matrix `4.2.20.4` + contract marker `4.2.20.4` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, если указано, что оборудование Предприятие без документов или акта передачи, то всё ок, разногласия нет; topics: Предприятие обязано принять Электронные терминалы / Смарт-терминалв...; подписание акта уполномо...
+  - Contract signal: Принять терминалы по акту (2 экземпляра)
+  - Gold rationale: —
+- Matrix `4.2.20.5` + contract marker `4.2.20.5` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Предприятие обязано немедленно информировать Банк о выходе из строя...; Информирование осуществляется согласно пунктам 2.3.1 и 2.3.2 Догово...; required_type: mandatory
+  - Contract signal: При поломке/утрате — немедленно уведомить Банк
+  - Gold rationale: —
+- Matrix `4.2.20.6` + contract marker `4.2.20.6` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: вернуть терминал в течение 5 рабочих дней после расторжения договора; вернуть терминал после получения письменного/устного требования банка; required_type: mandatory
+  - Contract signal: Вернуть терминалы за 5 р.д. с расторжения или требования Банка
+  - Gold rationale: —
+- Matrix `4.2.20.7` + contract marker `4.2.20.7` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/liability-economics-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важно, чтобы в соответствующем пункте договора шла речь про штраф за невозврат терминала и его размер, иначе данный пункт матрицы не отно...; topics: Невозврат терминалов. Обязанность предприятия об уплате штрафа за...
+  - Contract signal: Штраф за невозврат терминала: «_____ руб.» за ЭТ и «_____ руб.» за Смарт
+  - Gold rationale: Суммы штрафов не заполнены! Матрица: 25 000 руб. за каждый терминал. Без суммы пункт не исполним. Внести суммы до подписания
+- Matrix `5.1.1` + contract marker `5.1.1` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Contract signal: Удерживать из перечисляемых сумм (заголовок)
+  - Gold rationale: —
+- Matrix `5.1.1.1` + contract marker `5.1.1.1` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций, являющиеся недействител...; required_type: mandatory
+  - Contract signal: 12 оснований недействительности Операций → удержание
+  - Gold rationale: —
+- Matrix `5.1.1.2` + contract marker `5.1.1.2` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать ошибочно перечисленные суммы с счета Пр...; required_type: mandatory
+  - Contract signal: Удержание ошибочно перечисленных сумм
+  - Gold rationale: —
+- Matrix `5.1.1.3` + contract marker `5.1.1.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций возврата, возврата плате...; required_type: mandatory
+  - Contract signal: Удержание сумм возвратов, Возврата платежа, Реверсивных транзакций
+  - Gold rationale: —
+- Matrix `5.1.1.4` + contract marker `5.1.1.4` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы оспоренных операций или списанных...; Банк удерживает суммы оспоренных операций в случае реализации товар...; required_type: mandatory
+  - Contract signal: Удержание по оспоренным Операциям (ТСТ + Платёжные решения + агент)
+  - Gold rationale: —
+- Matrix `5.1.1.5` + contract marker `5.1.1.5` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: topics: Банк вправе удерживать штрафы из сумм Предприятия, возникшие у Банк...; Банк вправе удерживать убытки из сумм Предприятия, возникшие в связ...; required_type: mandatory
+  - Contract signal: Удержание штрафов/убытков Банка вследствие нарушений Предприятия
+  - Gold rationale: —
+- Matrix `5.1.1.6` + contract marker `5.1.1.6` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: main idea: Возможность удержания штрафов за невозврат терминалов.; topics: Банк имеет право удерживать суммы штрафов за невозврат Электронных...; required_type: mandatory
+  - Contract signal: Удержание штрафов за невозврат терминалов (п. 4.2.20.7)
+  - Gold rationale: —
+- Matrix `5.1.2` + contract marker `5.1.2` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк вправе приостанавливать авторизацию при наличии задолженности...; Приостановка допускается до полного погашения задолженности Предпри...; required_type: mandatory
+  - Contract signal: Приостановить Авторизацию при задолженности Предприятия
+  - Gold rationale: —
+- Matrix `5.1.5` + contract marker `5.1.3` -> `full_match`; tags: `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право не возмещать суммы операций, проведенных с нарушен...; required_type: mandatory
+  - Contract signal: Не возмещать суммы Операций с нарушением условий Договора
+  - Gold rationale: Соответствует матр. 5.1.5. Матр. 5.1.3 (заранее данный акцепт) и матр. 5.1.4 (платёжное требование) в договоре ОТСУТСТВУЮТ — см. строки «только в матрице»
+- Matrix `5.1.6` + contract marker `5.1.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право проверять техническое состояние терминалов на терр...; Банк имеет право производить замену терминалов с уведомлением заказ...; required_type: mandatory
+  - Contract signal: Проверка, замена, обновление ПО терминалов; уведомление за 2 р.д.
+  - Gold rationale: Соответствует матр. 5.1.6
+- Matrix `5.1.7` + contract marker `5.1.5` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право передавать информацию о предприятии при выявлении...; Банк передает данные в Платежную систему МИР при расторжении догово...; required_type: mandatory
+  - Contract signal: Передача ПДн и сведений о Предприятии в ПС МИР при мошенничестве/расторжении
+  - Gold rationale: —
+- Matrix `5.1.8` + contract marker `5.1.6` -> `full_match`; tags: `full/direct-legal-function`.
+  - Contract signal: Прекратить авторизацию / расторгнуть при событиях (заголовок)
+  - Gold rationale: —
+- Matrix `5.1.8.1` + contract marker `5.1.6.1` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: нарушение Предприятием условий Договора является основанием для пре...; required_type: optional
+  - Contract signal: Нарушение условий Договора
+  - Gold rationale: —
+- Matrix `5.1.8.2` + contract marker `5.1.6.2` -> `full_match`; tags: `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: внесение данных Предприятия в перечень организаций и физических лиц...; required_type: optional
+  - Contract signal: Внесение в перечень экстремистов/террористов
+  - Gold rationale: —
+- Matrix `5.1.8.3` + contract marker `5.1.6.3` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк вправе прекратить Авторизацию при подозрении на отмывание дене...; required_type: optional
+  - Contract signal: Подозрение в легализации/финансировании терроризма
+  - Gold rationale: —
+- Matrix `5.1.8.6` + contract marker `5.1.6.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право прекратить проведение авторизации при получении не...; Банк имеет право расторгнуть договор при получении негативной инфор...; required_type: optional
+  - Contract signal: Негативная информация от органов власти/ПС
+  - Gold rationale: Матр. 5.1.8.4 (несоответствие Ресурса) и 5.1.8.5 — только ИЭ, не применимо для ТЭ
+- Matrix `5.1.8.7` + contract marker `5.1.6.5` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право прекратить Авторизацию при получении информации о...; Достаточным подтверждением мошенничества являются сведения от Банка...; required_type: optional
+  - Contract signal: Информация о мошенничестве в ТСТ
+  - Gold rationale: —
+- Matrix `5.1.8.8` + contract marker `5.1.6.6` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: осуществление ремонта помещений ТСТ препятствует операциям; банк вправе прекратить авторизацию для ТСТ; required_type: optional
+  - Contract signal: Ремонт помещений ТСТ, препятствующий Операциям
+  - Gold rationale: —
+- Matrix `5.1.8.9` + contract marker `5.1.6.7` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: ликвидация Предприятия; возбуждение дела о банкротстве Предприятия по закону №127-ФЗ; required_type: optional
+  - Contract signal: Ликвидация / банкротство Предприятия
+  - Gold rationale: —
+- Matrix `5.1.8.10` + contract marker `5.1.6.8` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: выявление недостоверных сведений о Предприятии; выявление недостоверных сведений о ТСТ; required_type: optional
+  - Contract signal: Недостоверные сведения о Предприятии/ТСТ/руководителе
+  - Gold rationale: —
+- Matrix `5.1.8.11` + contract marker `5.1.6.9` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право прекратить проведение авторизации при несоответств...; Банк имеет право в одностороннем порядке расторгнуть договор при вы...; required_type: optional
+  - Contract signal: Несоответствие Товаров/услуг роду деятельности
+  - Gold rationale: —
+- Matrix `5.1.8.12` + contract marker `5.1.6.10` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: отсутствие операций в течение 30 календарных дней подряд является о...; required_type: optional
+  - Contract signal: Отсутствие Операций 30 к.д. подряд
+  - Gold rationale: —
+- Matrix `5.1.8.13` + contract marker `5.1.6.11` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: исчерпание Цены Договора; окончание срока действия Договора; required_type: optional
+  - Contract signal: Исчерпание Цены Договора / окончание срока
+  - Gold rationale: —
+- Matrix `5.1.9` + contract marker `5.1.7` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Банк имеет право осуществлять дополнительные проверки проведения Оп...; Банк имеет право обращаться в Банк-эмитент для проверки правомернос...; required_type: mandatory
+  - Contract signal: Дополнительные проверки Операций; запрос в Банк-эмитент
+  - Gold rationale: —
+- Matrix `5.1.10` + contract marker `5.1.8` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право проводить проверки Предприятия; Проверки проводятся для выявления мошенничества и несоответствия ро...; required_type: mandatory
+  - Contract signal: Проверка Предприятия на мошенничество и несоответствие деятельности
+  - Gold rationale: —
+- Matrix `5.1.11` + contract marker `5.1.9` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право запрашивать документы по операциям; Банк может требовать письменное заявление предприятия с обстоятельс...; required_type: mandatory
+  - Contract signal: Запрашивать Документы по операциям — не позднее 13 месяцев
+  - Gold rationale: —
+- Matrix `5.1.12` + contract marker `5.1.10` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк вправе вносить изменения в связанные документы unilateral_in_o...; Опубликование изменений осуществляется на Официальном сайте Банка; required_type: optional
+  - Contract signal: Одностороннее изменение документов через сайт (за 1 к.д.)
+  - Gold rationale: —
+- Matrix `5.1.13` + contract marker `5.1.11` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно именно размещение информации на сайте. Если предусмотрены иные способы уведомления, то это разногласие; topics: Банк имеет право изменять свои реквизиты; Уведомление об изменении реквизитов осуществляется через...
+  - Contract signal: Уведомить Предприятие об изменении реквизитов Банка через сайт
+  - Gold rationale: —
+- Matrix `5.1.14` + contract marker `5.1.12` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право направлять запросы на адрес электронной почты Пред...; Адрес электронной почты указан в Заявлении Предприятия на проведени...; required_type: mandatory
+  - Contract signal: Направлять запросы по Операциям на email Предприятия
+  - Gold rationale: —
+- Matrix `5.1.15` + contract marker `5.1.13` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право отказать Предприятию в заключении Договора без ука...; required_type: optional
+  - Contract signal: Отказать в заключении Договора без объяснения причин
+  - Gold rationale: —
+- Matrix `5.1.16` + contract marker `5.1.14` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право требовать от Предприятия предоставления документов; Перечень требуемых документов определяется законодательством; required_type: mandatory
+  - Contract signal: Требовать документы и сведения по законодательству
+  - Gold rationale: —
+- Matrix `5.1.17` + contract marker `5.1.15` -> `full_match`; tags: `full/direct-legal-function`.
+  - Contract signal: Расторгнуть + возврат терминалов при малом обороте (заголовок)
+  - Gold rationale: —
+- Matrix `5.1.17.1` + contract marker `5.1.15.1` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: оборот менее 40 000 руб. за месяц для регионов; оборот менее 80 000 руб. за месяц для Москвы и СПб; required_type: optional
+  - Contract signal: Оборот ЭТ < 40 000 (80 000) руб./мес.
+  - Gold rationale: —
+- Matrix `5.1.17.2` + contract marker `5.1.15.2` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: торговый оборот менее 40 000 руб. для регионов; торговый оборот менее 80 000 руб. для Москвы и СПб; required_type: optional
+  - Contract signal: Оборот Смарт < 40 000 (80 000) руб./мес. или задолженность
+  - Gold rationale: —
+- Matrix `5.2.3` + contract marker `5.2.1` -> `full_match`; tags: `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Установить и подготовить терминалы; первичный инструктаж
+  - Gold rationale: Матр. 5.2.1 (СПЭП) и 5.2.2 (3DSecure) — только ИЭ, не применимо
+- Matrix `5.2.4` + contract marker `5.2.2` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: topics: Банк осуществляет Авторизацию без перерывов 24 часа в сутки; required_type: optional
+  - Contract signal: Круглосуточная Авторизация
+  - Gold rationale: —
+- Matrix `5.2.5` + contract marker `5.2.3` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Подсвечивать разногласие, если только сайты отличаются, если в договоре вместо сайта прочерк, то это не разногласие; topics: обучающие материалы размещены по указанной ссылке; материалы доступны для прохождения инстр...
+  - Contract signal: Разместить обучающие материалы на сайте
+  - Gold rationale: —
+- Matrix `5.2.6` + contract marker `5.2.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`, `full/payment-or-settlement`.
+  - Matrix signal: topics: Обеспечение Электронных терминалов информационными материалами; Обеспечение Смарт-терминалов информационными материалами; required_type: optional
+  - Contract signal: Обеспечивать терминалы информационными материалами
+  - Gold rationale: —
+- Matrix `5.2.7` + contract marker `5.2.5` -> `full_match`; tags: `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: topics: круглосуточная работоспособность Электронных терминалов/Смарт-терми...; замена неисправного Электронного терминала/Смарт-терминала на испра...; required_type: optional
+  - Contract signal: Круглосуточная работоспособность терминалов; замена за 3 р.д.
+  - Gold rationale: —
+- Matrix `5.2.8` + contract marker `5.2.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен срок перечисления средств; topics: перечисление средств на счет Предприятия не позднее 2 рабочих дней...; дата получения расчетной информации - рабочий день, следующий за дн...; required_type: mandatory
+  - Contract signal: Перечислять суммы Операций — 2 р.д.; при сбое — 3 к.д.
+  - Gold rationale: —
+- Matrix `5.2.9` + contract marker `5.2.7` -> `full_match`; tags: `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: topics: Предоставление QR-кода партнера в электронном виде или на бумажном...; required_type: optional
+  - Contract signal: Предоставить QR-код партнёра
+  - Gold rationale: —
+- Matrix `5.2.10` + contract marker `5.2.8` -> `full_match`; tags: `full/security-data-or-information`, `full/payment-or-settlement`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: Обработка ПДн по 152-ФЗ; конфиденциальность и защита
+  - Gold rationale: —
+- Matrix `5.2.12` + contract marker `5.2.10` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`, `full/payment-or-settlement`.
+  - Matrix signal: topics: Банк предоставляет QR-API без гарантий; required_type: optional
+  - Contract signal: QR-API предоставляется «как есть», без гарантий
+  - Gold rationale: —
+- Matrix `6.1` + contract marker `6.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно; topics: размер платы в процентах от суммы операций; required_type: mandatory
+  - Contract signal: Тариф: процент от каждой Операции (VISA/MC/МИР и др.)
+  - Gold rationale: —
+- Matrix `6.2` + contract marker `6.2` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: УПД - это универсальный передаточный документ (документ о приёмке, документ на оплату услуг). Важно проверить сроки и периодичность оплаты; topics: Банк направляет документ на оплату услуг Банка; в вознаграждение бан...
+  - Contract signal: Банк направляет УПД не позднее 5-го р.д. следующего месяца
+  - Gold rationale: —
+- Matrix `6.3` + contract marker `6.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: topics: Банк направляет Акт до 10 рабочего дня месяца, следующего за отчетным; Акт направляется вместе со счетом-фактурой формы 363; required_type: mandatory
+  - Contract signal: Банк направляет Акт + счет ф.363 не позднее 10-го р.д. следующего месяца
+  - Gold rationale: —
+- Matrix `6.5` + contract marker `6.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: topics: оплата услуг банка осуществляется в течение 5 рабочих дней после по...; форма оплаты - безналичная; required_type: mandatory
+  - Contract signal: Оплата услуг в течение 5 р.д. с даты подписания УПД (безналично п/п)
+  - Gold rationale: Соответствует матр. 6.5. Матр. 6.4 (возврат подписанного УПД до 25-го числа) в договоре явно не прописан — незначительное упущение
+- Matrix `6.6` + contract marker `6.5` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: topics: оплата услуг банка осуществляется в течение 5 рабочих дней после по...; форма оплаты - безналичная; required_type: mandatory
+  - Contract signal: Оплата услуг в течение 5 р.д. с даты получения Акта и счёта ф.363
+  - Gold rationale: —
+- Matrix `6.20` + contract marker `6.6` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важен сам факт, что Банк не берёт новую комиссию, а так же, что первоначальная комиссия не возвращается; topics: плата за проведение расчетов по операциям возврата не взимается; удержанная плата за расчеты при первон...
+  - Contract signal: По Операциям возврата/Возврата платежа/Реверсивным транзакциям плата не взимается
+  - Gold rationale: —
+- Matrix `6.21` + contract marker `6.7` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Отсутствие конкретной ценны не является противоречием; topics: Цена договора в рублях; Указана точная сумма в рублях и копейках; required_type: mandatory
+  - Contract signal: Цена Договора: _____ рублей (общая)
+  - Gold rationale: —
+- Matrix `7.1` + contract marker `7.1` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: Общие слова о том, что за неисполнение или ненадлежащее исполнение...; Общие слова о том, что за неисполнение или ненадлежащее исполнение...; required_type: mandatory
+  - Contract signal: Ответственность Сторон по Договору и законодательству РФ
+  - Gold rationale: —
+- Matrix `7.7` + contract marker `7.3` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: Общая сумма штрафов за нарушения Банка не превышает цену договора; required_type: mandatory
+  - Contract signal: Лимит штрафов/пени для Банка = Цена Договора
+  - Gold rationale: В договоре п. 7.3 ограничивает ответственность Банка = матр. 7.7
+- Matrix `7.2` + contract marker `7.4` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: main idea: Важно, что штраф именно Предприятию, важен размер штрафа; topics: Штраф Предприятию за неисполнение или ненадлежащее исполнение обяза...; required_type: mandatory
+  - Contract signal: Размер штрафа — фиксированная сумма или % от цены Договора
+  - Gold rationale: Общая формулировка; охватывает матр. 7.2, 7.5, 7.6 в части механизма расчёта штрафов
+- Matrix `7.5` + contract marker `7.4` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Размер штрафа — фиксированная сумма или % от цены Договора
+  - Gold rationale: Общая формулировка; охватывает матр. 7.2, 7.5, 7.6 в части механизма расчёта штрафов
+- Matrix `7.6` + contract marker `7.4` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Размер штрафа — фиксированная сумма или % от цены Договора
+  - Gold rationale: Общая формулировка; охватывает матр. 7.2, 7.5, 7.6 в части механизма расчёта штрафов
+- Matrix `7.4` + contract marker `7.5` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Ответственность Заказчика (hospital): пеня и штраф
+  - Gold rationale: Структура 223-ФЗ — ответственность Заказчика сформулирована иначе, но смысл совпадает с матр. 7.4
+- Matrix `7.4` + contract marker `7.5.1` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Пеня: 1/300 ключевой ставки за каждый день просрочки
+  - Gold rationale: —
+- Matrix `7.4` + contract marker `7.6` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Ответственность Поставщика (Банка): пеня и штраф
+  - Gold rationale: Структура 223-ФЗ — ответственность Банка; совокупно покрывает матр. 7.4, 7.5, 7.6
+- Matrix `7.5` + contract marker `7.6` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Ответственность Поставщика (Банка): пеня и штраф
+  - Gold rationale: Структура 223-ФЗ — ответственность Банка; совокупно покрывает матр. 7.4, 7.5, 7.6
+- Matrix `7.6` + contract marker `7.6` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Ответственность Поставщика (Банка): пеня и штраф
+  - Gold rationale: Структура 223-ФЗ — ответственность Банка; совокупно покрывает матр. 7.4, 7.5, 7.6
+- Matrix `7.4` + contract marker `7.6.1` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: В случае просрочки исполнения Банком обязательств, Предприятие напр...; Штраф Банку. Начисление пени за каждый день просрочки; required_type: mandatory
+  - Contract signal: Пеня Банка: 1/300 ключевой ставки от цены за каждый день просрочки
+  - Gold rationale: —
+- Matrix `7.5` + contract marker `7.6.2` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Штраф Банка за каждый факт нарушения: 10% от цены Договора
+  - Gold rationale: В договоре 10% от цены Договора — единая ставка. Матр. 7.5 и 7.6 предусматривают дифференцированный штраф в зависимости от суммы цены. Для Банка это менее выгодно: фиксированный % от крупной суммы может превышать матричный штраф
+- Matrix `7.6` + contract marker `7.6.2` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: topics: Размер штрафа за неисполнение или ненадлежащее исполнение обязатель...; required_type: mandatory
+  - Contract signal: Штраф Банка за каждый факт нарушения: 10% от цены Договора
+  - Gold rationale: В договоре 10% от цены Договора — единая ставка. Матр. 7.5 и 7.6 предусматривают дифференцированный штраф в зависимости от суммы цены. Для Банка это менее выгодно: фиксированный % от крупной суммы может превышать матричный штраф
+- Matrix `7.8` + contract marker `7.9` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: main idea: Важен факт, что Банк (Исполнитель) не несет ответственности по спорам и разногласиям Предприятия(Заказчика) и Покупателя (клиент Предприя...; topics: Ответственность Банка (Исполнителя) за споры между Предприятием (З...
+  - Contract signal: Банк не несёт ответственности по спорам Предприятие–Покупатель
+  - Gold rationale: —
+- Matrix `7.9` + contract marker `7.10` -> `full_match`; tags: `full/payment-or-settlement`, `full/liability`.
+  - Matrix signal: topics: Банк освобожден от ответственности при задержках переводов без свое...; required_type: optional
+  - Contract signal: Банк не несёт за задержки перечислений не по его вине
+  - Gold rationale: —
+- Matrix `7.10` + contract marker `7.11` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: Банк не несёт ответственность за неисполнение условий Договора в св...; required_type: optional
+  - Contract signal: Банк не несёт за нарушения из-за действий третьих лиц / участников ПС
+  - Gold rationale: —
+- Matrix `7.11` + contract marker `7.12` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/liability`.
+  - Matrix signal: topics: Банк освобождается от ответственности за задержку перечисления сред...; required_type: optional
+  - Contract signal: Банк не несёт за задержки при расследовании подозрительных Операций
+  - Gold rationale: —
+- Matrix `7.12` + contract marker `7.13` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: Общие слова о том, что банк освобожден от ответственности при превы...; required_type: optional
+  - Contract signal: Банк не несёт при превышении Цены Договора
+  - Gold rationale: —
+- Matrix `7.15` + contract marker `7.14` -> `full_match`; tags: `full/document-exchange`, `full/liability`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт несения ответственности, если в договоре не говорится про несение ответственности за действия персонала, значит этот пункт...; topics: Предприятие несет полную ответственность за нарушения персонала ус...
+  - Contract signal: Предприятие несёт ответственность за действия персонала
+  - Gold rationale: —
+- Matrix `7.16` + contract marker `7.15` -> `full_match`; tags: `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: topics: Обязательство не совершать коррупционных и иных противозаконных дей...; required_type: mandatory
+  - Contract signal: Антикоррупционная оговорка
+  - Gold rationale: —
+- Matrix `7.17` + contract marker `7.16` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: main idea: Важно, чтобы в договоре не было сужения ответственности.; topics: Общие слова про то, что Предприятие несет финансовую ответственност...; Общие слова про то, что Предприятие отвечает за соответствие Повтор...; requir...
+  - Contract signal: Полная финансовая ответственность Предприятия за Повторяющиеся платежи
+  - Gold rationale: —
+- Matrix `8.1` + contract marker `8.1` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: описание форс-мажорных обстоятельств как основание для освобождения...; перечень конкретных форс-мажорных событий (стихийные бедствия, пожа...; required_type: mandatory
+  - Contract signal: Форс-мажор: освобождение от ответственности; срок сдвигается
+  - Gold rationale: —
+- Matrix `8.2` + contract marker `8.2` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Обязанность уведомления другой стороны при обстоятельствах непреодо...; Срок уведомления другой стороны при обстоятельствах непреодолимой силы; required_type: mandatory
+  - Contract signal: Уведомление о форс-мажоре — 24 ч.; при > 3 месяцев — право расторжения
+  - Gold rationale: —
+- Matrix `9.1` + contract marker `9.1` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: соблюден претензионный порядок урегулирования споров; указан обязательный досудебный порядок с указанием срока рассмотрен...; required_type: mandatory
+  - Contract signal: Претензионный порядок урегулирования споров
+  - Gold rationale: —
+- Matrix `9.2` + contract marker `9.2` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: main idea: Важен срок рассмотрения претензий; topics: Срок рассмотрения претензий; required_type: mandatory
+  - Contract signal: Рассмотрение претензий — 10 к.д.
+  - Gold rationale: —
+- Matrix `9.3` + contract marker `9.3` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: Разрешение неурегулированных споров по законодательству РФ
+  - Gold rationale: —
+- Matrix `10.1` + contract marker `10.1` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Срок: 01.01.2025 – 31.12.2025 или до исчерпания Цены (первое наступившее)
+  - Gold rationale: —
+- Matrix `10.2` + contract marker `10.2` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Досрочное расторжение любой Стороной — уведомление за 30 к.д.
+  - Gold rationale: —
+- Matrix `10.3` + contract marker `10.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Сроки, в которые договор считается расторгнутым в случае расторжени...; Сроки расчетов после одностороннего внесудебного порядка расторжени...; required_type: mandatory
+  - Contract signal: Расторжение Банком в одностороннем порядке (п. 5.1.8); расчёты — 18 месяцев
+  - Gold rationale: —
+- Matrix `11.1` + contract marker `11.1` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: topics: Перечисление источников правового регулирования отношений Сторон; Требование соблюдать законодательство РФ; required_type: optional
+  - Contract signal: Источники правового регулирования: Договор, законодательство РФ, правила ПС
+  - Gold rationale: —
+- Matrix `11.2` + contract marker `11.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/security-data-or-information`.
+  - Matrix signal: topics: Номера Карт/Платежных счетов, персональные данные Покупателей, сумм...; Объявляется запрет на передачу конфиденциальной информации третьим...; required_type: optional
+  - Contract signal: Конфиденциальность платёжных данных (номера Карт, ПДн Покупателей)
+  - Gold rationale: —
+- Matrix `11.3` + contract marker `11.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/security-data-or-information`.
+  - Matrix signal: topics: Стороны обязуются не разглашать иным лицам полученные сведения о за...; Стороны обязуются не разглашать иным лицам полученные сведения о те...; required_type: optional
+  - Contract signal: Стороны не разглашают сведения о технологиях, защитных элементах, деятельности
+  - Gold rationale: —
+- Matrix `11.4` + contract marker `11.4` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: изменения и дополнения должны быть в письменной форме; подписаны уполномоченными представителями обеих сторон; required_type: optional
+  - Contract signal: Изменения и дополнения — только письменно и с подписями обеих Сторон
+  - Gold rationale: —
+- Matrix `11.5` + contract marker `11.5` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: required_type: optional
+  - Contract signal: Предыдущие договорённости до подписания утрачивают силу
+  - Gold rationale: —
+- Matrix `11.6` + contract marker `11.6` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Договор составлен в определенном количестве экземпляров; указано количество экземпляров Договора для Банка; required_type: optional
+  - Contract signal: Договор составлен в 2 экземплярах
+  - Gold rationale: —
+- Matrix `11.7` + contract marker `11.7` -> `full_match`; tags: `full/incorporated-document-or-appendix`.
+  - Matrix signal: topics: Общие слова про то, что приложения являются неотъемлемой частью дог...; required_type: optional
+  - Contract signal: Все Приложения — неотъемлемая часть Договора
+  - Gold rationale: —
+- Matrix `11.8` + contract marker `11.8` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Предприятие (Заказчик) заверяет, что реализация Товаров/услуг осуще...; required_type: optional
+  - Contract signal: Предприятие заверяет соответствие деятельности законодательству РФ
+  - Gold rationale: —
+- Matrix `11.9` + contract marker `11.9` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: запрет передачи обязательств и прав без письменного согласия другой...; возможность передачи обязательств для случаев реорганизации стороны; required_type: optional
+  - Contract signal: Запрет передачи прав/обязанностей третьим лицам без согласования
+  - Gold rationale: —
+- Matrix `11.10` + contract marker `11.10` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: При реорганизации одной из Сторон обязательства переходят к правопр...; В случае ликвидации одной из сторон - удовлетворение имущественных...; required_type: optional
+  - Contract signal: При реорганизации — обязательства переходят к правопреемнику
+  - Gold rationale: —
+- Matrix `11.11` + contract marker `11.11` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Если в договоре не указан сайт - это не является разногласием; topics: Срок, с которого инструктивные материалы становятся обязательными к...; required_type: optional
+  - Contract signal: Инструктивные материалы вступают в силу на следующий р.д. после публикации
+  - Gold rationale: —
+- Matrix `11.12` + contract marker `11.12` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно само наличие такой или похожей формулировки; topics: Общие слова про правомерность отправки уведомлений и запросов, если...; required_type: optional
+  - Contract signal: Уведомления/запросы — по порядку п. 2.3 Договора
+  - Gold rationale: —
+- Matrix `11.13` + contract marker `11.13` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Перечень документов, приложенных к договору; required_type: optional
+  - Contract signal: Приложения к Договору: №1 (Заявление), №1.1 (Информация о ТСТ), №2 (Акт)
+  - Gold rationale: —
+### Benchmark C: matched pair units
+
+- Matrix `2.1` + contract marker `2.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен факт, что для регистрации договора банку нужно заявление. В заявлении должна быть указана полная информация необходимая для регистр...; topics: Для регистрации новой ТСТ Предприятие предоставляет заявление на р...
+  - Contract signal: Регистрация ТСТ; право Банка отказать без объяснений
+  - Gold rationale: Формулировки идентичны.
+- Matrix `2.2` + contract marker `2.2` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт, что валюта рубль РФ, другая валюта недопустима; topics: Расчёты производятся в рублях Российской Федерации; required_type: mandatory
+  - Contract signal: Расчёты в рублях РФ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3` + contract marker `2.3` -> `full_match`; tags: `full/document-exchange`.
+  - Contract signal: Способы обмена документами (общий пункт)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.1` + contract marker `2.3.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Нужно проверять признаётся ли полная юридическая сила e‑mail, есть ли ограничения по видам сведений и возможность изменять/обновлять адреса.; topics: Обмен информацией по электронной почте; Исключение передачи персон...
+  - Contract signal: Обмен по e-mail; полная юридическая сила
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.2` + contract marker `2.3.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами посредством системы ДБО или аналогичных систем Банка; required_type: mandatory
+  - Contract signal: Обмен через систему ДБО
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.3` + contract marker `2.3.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами с доставкой нарочным или курьером; required_type: optional
+  - Contract signal: Доставка нарочным/курьером
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.4` + contract marker `2.3.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами через заказное письмо; required_type: optional
+  - Contract signal: Заказное письмо
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.5` + contract marker `2.3.5` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важна равнозначность документов; topics: Обмен информацией и документами осуществляется через систему E-invo...; электронные документы имеют юридическую силу документов на бумаге; required_type: mandatory
+  - Contract signal: ЭДО E-invoicing / СФЕРА-Курьер с УКЭП
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.3.6` + contract marker `2.3.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт наличия данного канала для обмена электронными документами; topics: Перечисление способов обмена документами: через ЕИС (Единую информа...; Перечисление способов обмена документами: обмен документами ч...
+  - Contract signal: Обмен через ЕИС (44-ФЗ)
+  - Gold rationale: Обязательный канал для 44-ФЗ.
+- Matrix `2.4` + contract marker `2.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Документы на сайте Банка — неотъемлемая часть Договора
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `2.7` + contract marker `2.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт, что договор может быть заключен в электронном виде с подписанием УКЭП; required_type: optional
+  - Contract signal: Форма договора: бумажная или электронная (УКЭП)
+  - Gold rationale: Нумерация сдвинута: п. 2.6 договора = п. 2.7.
+- Matrix `3.1` + contract marker `3.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Предприятие организует приём оплаты Картами/NFC/QR
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `3.2` + contract marker `3.2` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Банк перечисляет суммы Операций Предприятию
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `3.3` + contract marker `3.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Предприятие ежемесячно уплачивает плату Банку (тарифы + сервис)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.1.1` + contract marker `4.1.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, если Предприятие хочет использовать в информационных материалах упоминание бренда Банка - надо согласовывать с Банком; topics: Предприятие имеет право ссылаться на возможность оплаты с использов...; Согласован...
+  - Contract signal: Право ссылаться на приём Карт/QR (после согласования с Банком)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.1.2` + contract marker `4.1.2` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Банк оказывает консультацию заказчика по использованию оборудования; topics: закреплено право Заказчика на получение консультаций по эксплуатаци...; закреплено право Заказчика на получение консуль...
+  - Contract signal: Право на консультацию по эксплуатации ЭТ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.1.3` + contract marker `4.1.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что QR выдаёт Банк; topics: Предприятие имеет право использовать полученные от Банка QR-коды дл...; required_type: optional
+  - Contract signal: Право использовать QR-коды на устройствах Предприятия
+  - Gold rationale: Договор: QR (без SberPayQR). Матрица: SberPayQR/Плати QR. Смысловое соответствие.
+- Matrix `4.2.1` + contract marker `4.2.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Оплачивать услуги Банка (тарифы, сервисное обслуживание)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.2` + contract marker `4.2.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно в контракте наличие формулировки о том, что Предприятие обязуется выполнять и соблюдать требования договора и инструктивных материа...; topics: Обязанность Предприятия соблюдать положения Договора (наличие форм...
+  - Contract signal: Соблюдать Договор и инструктивные материалы
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.3` + contract marker `4.2.3` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Предприятие обязано самостоятельно и своевременно знакомиться с изм...; Несвоевременное ознакомление не является основанием для неприменени...; required_type: optional
+  - Contract signal: Следить за изменениями документов на сайте Банка
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.4` + contract marker `4.2.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен факт, если банк передает по договору предприятию - заказчику информационные материалы, то заказчик должен их разместить на видном м...; topics: Предприятие обязано размещать информационные материалы Банка о спо...
+  - Contract signal: Размещать информационные материалы Банка в ТСТ/на Ресурсе
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.5` + contract marker `4.2.5` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, не принимать от Покупателя более 2 (двух) различных Карт. Не выдавать наличные денежные средства; topics: Принимать к оплате все карты из списка в течение всего рабочего вре...; Не выдавать наличные деньги по...
+  - Contract signal: Принимать все Карты; не выдавать наличные; не более 2 разных Карт
+  - Gold rationale: Правила ПС МИР п. 8.1.
+- Matrix `4.2.6` + contract marker `4.2.6` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен сам факт, что нельзя разбивать Операцию на нескольку сумм; topics: Предприятие обязано проводить Операцию оплаты единой суммой без раз...; required_type: mandatory
+  - Contract signal: Не дробить сумму Операции
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.7` + contract marker `4.2.7` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Не использовать реквизиты Карты без присутствия или распоряжения По...; Использовать реквизиты Карты только для проведения операций; required_type: mandatory
+  - Contract signal: Не использовать реквизиты Карты вне целей Операций
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.8` + contract marker `4.2.8` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно, что цена не зависит от способа оплаты; topics: Предприятие предоставляет полный набор товаров/услуг покупателям; цены для расчетов с использованием банковской карты не превышают це...; required_type: mandatory
+  - Contract signal: Цена товара не зависит от способа оплаты
+  - Gold rationale: Правила ПС МИР п. 8.7.
+- Matrix `4.2.9` + contract marker `4.2.9` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/liability`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Заказчик несет ответственность за информацию которую он указывает в документах при проведении платежей; topics: Предприятие обязано проводить операции в соответствии с Порядком пр...; Предприятие обязано оформлять до...
+  - Contract signal: Проводить Операции по Порядку; ответственность за документы
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.10` + contract marker `4.2.10` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт необходимости хранения документы по операциям, срок в течении которого их нужно хранить, факт передачи копий по опревцияс, а т...; topics: хранение документов по операциям (сам факт хранения и срок храннеи...
+  - Contract signal: Хранить документы 13 мес.; передавать в Банк за 3 р.д. по запросу
+  - Gold rationale: Правила ПС МИР п. 8.4.
+- Matrix `4.2.11` + contract marker `4.2.11` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт обязанности передавать заявление Банку, а так же сроки в течение которых оно должно быть передано; topics: Передача заявления в банк с изложением обстоятельств проведения Опе...; немедленное уведомление ба...
+  - Contract signal: Передавать заявление об обстоятельствах Операции (3 р.д.)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.12` + contract marker `4.2.12` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важен факт обязанности Предприятия подписать закрывающие документы по оплате, а так же сроки в течение которых оно должно это сделать; topics: Предприятие обязано акцептовать платежные требования и счета на опл...; С...
+  - Contract signal: Акцептовать платёжные требования/счета в 5 р.д.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.13` + contract marker `4.2.13` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: main idea: Важен сам факт обязанности Предприятия возмещать все суммы и убытки, которые Банк понёс из-за Предприятия, все возмещения - в полном объе...; topics: возмещение средств, списанных со счета Банка в пользу Банка-эмитен...
+  - Contract signal: Возместить Банку суммы по спорным/недействительным Операциям
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.14` + contract marker `4.2.14` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт предоставления подтверждающих документов, важны сроки предоставления, а так же нужно сравнить события, при которых это допустимо; topics: информирование Банка о реорганизации предприятия в течение 3 рабочи...
+  - Contract signal: Уведомить Банк об изменениях (реорганизация, адрес, реквизиты) за 3 р.д.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.15` + contract marker `4.2.15` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт необходимости предоставлять достоверные сведения, своевременное обновление сведений. Важен факт и срок периодичного предоставл...; topics: Предприятие обязано предоставлять документы не реже одного раза в...
+  - Contract signal: Предоставлять достоверные сведения (115-ФЗ); обновлять 1 раз в год
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.16` + contract marker `4.2.16` -> `partial_match`; tags: `partial/weaker-protective-right-or-control`, `partial/missing-mandatory-element`.
+  - Contract signal: ПДн руководителя + гарантия правовых оснований + передача в МЕЖДУНАРОДные ПС + 3 р.д. подтверждение
+  - Gold rationale: РАСХОЖДЕНИЕ (критическое): договор объединяет 4.2.16+4.2.16.1+4.2.16.3. Ключевое отличие: договор допускает трансграничную передачу ПДн в МЕЖДУНАРОДНЫЕ ПС (MasterCard, Visa, UnionPay, JCB, AmEx, МИР). Матрица (п. 4.2.16.1) огра...
+- Matrix `4.2.16.1` + contract marker `4.2.16` -> `partial_match`; tags: `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важно, чтобы было действующее согласие на передачу ПДн руководителя Предприятия. Состав ПДн: ФИО, адрес, паспортные данные. Важно, чтобы...; topics: Предприятие гарантирует наличие правовых оснований на передачу ПДн;...
+  - Contract signal: ПДн руководителя + гарантия правовых оснований + передача в МЕЖДУНАРОДные ПС + 3 р.д. подтверждение
+  - Gold rationale: РАСХОЖДЕНИЕ (критическое): договор объединяет 4.2.16+4.2.16.1+4.2.16.3. Ключевое отличие: договор допускает трансграничную передачу ПДн в МЕЖДУНАРОДНЫЕ ПС (MasterCard, Visa, UnionPay, JCB, AmEx, МИР). Матрица (п. 4.2.16.1) огра...
+- Matrix `4.2.16.3` + contract marker `4.2.16` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важно, что данный пункт относится только к данным по всем сотрудникам. Важен срок предоставления подтверждения; topics: Предприятие обязано предоставлять подтверждение согласий на обработ...; Сроки предоставления под...
+  - Contract signal: ПДн руководителя + гарантия правовых оснований + передача в МЕЖДУНАРОДные ПС + 3 р.д. подтверждение
+  - Gold rationale: РАСХОЖДЕНИЕ (критическое): договор объединяет 4.2.16+4.2.16.1+4.2.16.3. Ключевое отличие: договор допускает трансграничную передачу ПДн в МЕЖДУНАРОДНЫЕ ПС (MasterCard, Visa, UnionPay, JCB, AmEx, МИР). Матрица (п. 4.2.16.1) огра...
+- Matrix `4.2.17` + contract marker `4.2.17` -> `full_match`; tags: `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт обязанности соблюдения стандарта, а так же факт обязанности предоставления подтверждения; topics: Обязательство соблюдать требования PCI DSS; Предоставление аттестата соответствия или листа самооценки...
+  - Contract signal: Соблюдение PCI DSS; аттестат/SAQ по запросу Банка
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.18` + contract marker `4.2.18` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важны факты прекращения приема к оплате Карт, снятия информационных материалов, а так же важен срок; topics: При расторжении договора прекращение приема карт к оплате (регулиру...; При расторжении договора снятие инф...
+  - Contract signal: После расторжения — прекратить приём Карт, снять материалы
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.19` + contract marker `4.2.19` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен, факт что Предприятие не должно мешать Банку, и факт, что Предприятие должно помогать Банку в расследовании; topics: Предприятие обязано не препятствовать проверке со стороны Банка; Предприятие обязано содейств...
+  - Contract signal: Не препятствовать проверкам Банка; содействовать расследованию
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20` + contract marker `4.2.20` -> `full_match`; tags: `full/direct-legal-function`.
+  - Contract signal: Раздел: Торговый эквайринг (вводный)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.1` + contract marker `4.2.20.1` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятие само следит за прохождением инструктажа сотрудниками, размещенного на сайте Банка; topics: обязательство предприятия проводить инструктаж сотрудников самостоя...; ссылка на инструкцию...
+  - Contract signal: Инструктаж сотрудников (ссылка на сайт Банка)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.2` + contract marker `4.2.20.2` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, чтобы предприятие использовало терминалы и ПО Банка только для целей договора и по месту установки, не менять и не ремонтировать и...; topics: использование Электронных терминалов и программного обеспечения то...
+  - Contract signal: Использовать ЭТ только для целей Договора; не ремонтировать; не передавать 3-м лицам
+  - Gold rationale: Смысловое соответствие. В договоре только ЭТ; в матрице ЭТ+Смарт.
+- Matrix `4.2.20.3` + contract marker `4.2.20.3` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, что если в договоре стоит запрет на предоставление доступа третьим лицам, то это разногласие; topics: Предоставление доступа третьим лицам к местам установки терминалов; Доступ для подключения терминалов; requ...
+  - Contract signal: Обеспечить доступ Обслуживающей компании к местам установки ЭТ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.4` + contract marker `4.2.20.4` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, если указано, что оборудование Предприятие без документов или акта передачи, то всё ок, разногласия нет; topics: Предприятие обязано принять Электронные терминалы / Смарт-терминалв...; подписание акта уполномо...
+  - Contract signal: Принять ЭТ по акту приёма (2 экз.)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.5` + contract marker `4.2.20.5` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Предприятие обязано немедленно информировать Банк о выходе из строя...; Информирование осуществляется согласно пунктам 2.3.1 и 2.3.2 Догово...; required_type: mandatory
+  - Contract signal: Немедленно уведомить Банк о поломке/утрате ЭТ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.6` + contract marker `4.2.20.6` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: вернуть терминал в течение 5 рабочих дней после расторжения договора; вернуть терминал после получения письменного/устного требования банка; required_type: mandatory
+  - Contract signal: Вернуть ЭТ в 5 р.д. с расторжения/по требованию
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.20.7` + contract marker `4.2.20.7` -> `partial_match`; tags: `partial/liability-economics-gap`.
+  - Matrix signal: main idea: Важно, чтобы в соответствующем пункте договора шла речь про штраф за невозврат терминала и его размер, иначе данный пункт матрицы не отно...; topics: Невозврат терминалов. Обязанность предприятия об уплате штрафа за...
+  - Contract signal: ШТРАФ за невозврат ЭТ: 10 000 руб. (с НДС) за каждый
+  - Gold rationale: РАСХОЖДЕНИЕ: договор — 10 000 руб., матрица — 25 000 руб. Штраф занижен в 2,5 раза. Финансовый риск Банка при утрате терминала.
+- Matrix `4.2.21` + contract marker `4.2.21` -> `full_match`; tags: `full/direct-legal-function`.
+  - Contract signal: Раздел: Интернет-эквайринг (вводный)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.21.1` + contract marker `4.2.21.1` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Приступить к проведению операций на ресурсе только после успешного...; required_type: mandatory
+  - Contract signal: Начать Операции на Ресурсе только после тестирования
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.21.2` + contract marker `4.2.21.2` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Предприятие обязано соответствовать Требованиям Банка к Ресурсу, ра...; required_type: mandatory
+  - Contract signal: Соответствовать Требованиям Банка к Ресурсу
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.21.3` + contract marker `4.2.21.3` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Подтверждение сумм к списанию не позднее 5 календарных дней; Соответствие подтвержденной суммы фактически оказанным товарам/услугам; required_type: mandatory
+  - Contract signal: Подтверждать предавторизацию через СПЭП в 5 кал. дней
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.21.4` + contract marker `4.2.21.4` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Согласование дизайна Платежной страницы с Банком; Согласование электронных вариантов информационных наклеек с Банком; required_type: mandatory
+  - Contract signal: Согласовывать дизайн Платёжной страницы с Банком
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.21.5` + contract marker `4.2.21.5` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Предприятие проводит интеграцию Ресурса со СПЭП в течение 30 календ...; Предприятие проводит интеграционные тесты в течение 30 календарных...; required_type: mandatory
+  - Contract signal: Интеграция Ресурса со СПЭП; тесты в 30 кал. дней
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.21.6` + contract marker `4.2.21.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/security-data-or-information`.
+  - Matrix signal: topics: Самостоятельное обеспечение безопасности информационных ресурсов в...; required_type: mandatory
+  - Contract signal: Самостоятельно обеспечивать безопасность ИТ-ресурсов в интернете
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.21.7` + contract marker `4.2.21.7` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Предоставление доступа к разделам Ресурса с ограниченным доступом п...; required_type: mandatory
+  - Contract signal: Предоставить Банку доступ к закрытым разделам Ресурса (VIP, оптовый)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.21.8` + contract marker `4.2.21.8` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Соблюдение правил пользования Личным кабинетом Интернет-эквайринга; required_type: mandatory
+  - Contract signal: Соблюдать правила Личного кабинета ИЭ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.22` + contract marker `4.2.22` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно, чтобы в пункте было прямо указано, что он про QR-код; topics: Предприятие обязуется предоставлять QR-код для использования SberPa...; required_type: optional
+  - Contract signal: Предоставить Покупателю QR-код для Операции
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.23` + contract marker `4.2.23` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: main idea: Важно, чтобы в пункте было прямо указано, что он про QR-код; topics: Предприятие обязуется не изменять QR-код партнера в одностороннем п...; required_type: optional
+  - Contract signal: Не изменять QR-код партнёра в одностороннем порядке
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `4.2.26` + contract marker `4.2.26` -> `full_match`; tags: `full/incorporated-document-or-appendix`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: Повторяющиеся платежи: соглашение, согласие держателя, отмена
+  - Gold rationale: Пп. 4.2.24–4.2.25 (QR-API) в договоре отсутствуют — типично для ТЭ без QR-API.
+- Matrix `5.1.1` + contract marker `5.1.1` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Contract signal: Право Банка удерживать суммы (общий)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.1` + contract marker `5.1.1.1` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций, являющиеся недействител...; required_type: mandatory
+  - Contract signal: Удержание по недействительным Операциям (12 оснований)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.2` + contract marker `5.1.1.2` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать ошибочно перечисленные суммы с счета Пр...; required_type: mandatory
+  - Contract signal: Удержание ошибочно перечисленных сумм
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.3` + contract marker `5.1.1.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций возврата, возврата плате...; required_type: mandatory
+  - Contract signal: Удержание возвратов / Возврата платежа / Реверсивных транзакций
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.4` + contract marker `5.1.1.4` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы оспоренных операций или списанных...; Банк удерживает суммы оспоренных операций в случае реализации товар...; required_type: mandatory
+  - Contract signal: Удержание оспоренных/списанных сумм (QR, агентские)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.5` + contract marker `5.1.1.5` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: topics: Банк вправе удерживать штрафы из сумм Предприятия, возникшие у Банк...; Банк вправе удерживать убытки из сумм Предприятия, возникшие в связ...; required_type: mandatory
+  - Contract signal: Удержание штрафов и убытков из-за нарушений Предприятия
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.1.6` + contract marker `5.1.1.6` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: main idea: Возможность удержания штрафов за невозврат терминалов.; topics: Банк имеет право удерживать суммы штрафов за невозврат Электронных...; required_type: mandatory
+  - Contract signal: Удержание штрафа за невозврат ЭТ (п. 4.2.20.7)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.2` + contract marker `5.1.2` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк вправе приостанавливать авторизацию при наличии задолженности...; Приостановка допускается до полного погашения задолженности Предпри...; required_type: mandatory
+  - Contract signal: Приостановить Авторизацию при задолженности Предприятия
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.3` + contract marker `5.1.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: списание средств без дополнительного распоряжения; условие заранее данного акцепта; required_type: mandatory
+  - Contract signal: Списание без доп. распоряжения (заранее данный акцепт — счёт в Банке)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.4` + contract marker `5.1.4` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: указан номер расчетного счета Предприятия; указано наименование Банка, в котором у Предприятия открыт счет; required_type: mandatory
+  - Contract signal: Выставить счёт/платёжное требование к счёту в другом банке
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.5` + contract marker `5.1.5` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Банк имеет право не возмещать суммы операций, проведенных с нарушен...; required_type: mandatory
+  - Contract signal: Не возмещать суммы Операций с нарушением Договора
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.6` + contract marker `5.1.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право проверять техническое состояние терминалов на терр...; Банк имеет право производить замену терминалов с уведомлением заказ...; required_type: mandatory
+  - Contract signal: Проверять и заменять ЭТ; уведомлять за 2 р.д. до замены
+  - Gold rationale: Смысловое соответствие. Договор: только ЭТ. Матрица: ЭТ + Смарт-терминалы.
+- Matrix `5.1.7` + contract marker `5.1.7` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Банк имеет право передавать информацию о предприятии при выявлении...; Банк передает данные в Платежную систему МИР при расторжении догово...; required_type: mandatory
+  - Contract signal: Передача ПДн Предприятия в МЕЖДУНАРОДНЫЕ ПС при мошенничестве/расторжении
+  - Gold rationale: РАСХОЖДЕНИЕ: договор разрешает передачу ПДн в МС Worldwide, Visa, UnionPay, JCB, AmEx, МИР. Матрица (п. 5.1.7) — только ПС МИР. Риск по 152-ФЗ (трансграничная передача).
+- Matrix `5.1.8` + contract marker `5.1.8` -> `full_match`; tags: `full/direct-legal-function`.
+  - Contract signal: Право прекратить Авторизацию/расторгнуть (вводный)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.1` + contract marker `5.1.8.1` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: нарушение Предприятием условий Договора является основанием для пре...; required_type: optional
+  - Contract signal: Нарушение условий Договора
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.2` + contract marker `5.1.8.2` -> `full_match`; tags: `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: внесение данных Предприятия в перечень организаций и физических лиц...; required_type: optional
+  - Contract signal: Включение в перечень террористов/экстремистов
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.3` + contract marker `5.1.8.3` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк вправе прекратить Авторизацию при подозрении на отмывание дене...; required_type: optional
+  - Contract signal: Подозрение в легализации доходов / финансировании терроризма
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.4` + contract marker `5.1.8.4` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк вправе прекратить Авторизацию при несоответствии Ресурса Требо...; required_type: optional
+  - Contract signal: Несоответствие Ресурса требованиям Банка
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.5` + contract marker `5.1.8.5` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право в одностороннем порядке прекратить проведение авто...; required_type: optional
+  - Contract signal: Запрещённые виды деятельности на Ресурсе
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.6` + contract marker `5.1.8.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право прекратить проведение авторизации при получении не...; Банк имеет право расторгнуть договор при получении негативной инфор...; required_type: optional
+  - Contract signal: Негативная информация от госорганов/ПС
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.7` + contract marker `5.1.8.7` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право прекратить Авторизацию при получении информации о...; Достаточным подтверждением мошенничества являются сведения от Банка...; required_type: optional
+  - Contract signal: Информация о мошенничестве в ТСТ/на Ресурсе
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.8` + contract marker `5.1.8.8` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: осуществление ремонта помещений ТСТ препятствует операциям; банк вправе прекратить авторизацию для ТСТ; required_type: optional
+  - Contract signal: Ремонт помещений ТСТ, препятствующий Операциям
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.9` + contract marker `5.1.8.9` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: ликвидация Предприятия; возбуждение дела о банкротстве Предприятия по закону №127-ФЗ; required_type: optional
+  - Contract signal: Ликвидация / банкротство Предприятия
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.10` + contract marker `5.1.8.10` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: выявление недостоверных сведений о Предприятии; выявление недостоверных сведений о ТСТ; required_type: optional
+  - Contract signal: Недостоверные сведения о Предприятии/ТСТ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.11` + contract marker `5.1.8.11` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право прекратить проведение авторизации при несоответств...; Банк имеет право в одностороннем порядке расторгнуть договор при вы...; required_type: optional
+  - Contract signal: Несоответствие товаров роду деятельности
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.12` + contract marker `5.1.8.12` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: отсутствие операций в течение 30 календарных дней подряд является о...; required_type: optional
+  - Contract signal: Отсутствие Операций 30 кал. дней подряд
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.8.13` + contract marker `5.1.8.13` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: исчерпание Цены Договора; окончание срока действия Договора; required_type: optional
+  - Contract signal: Исчерпание Цены Договора / окончание срока действия
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.9` + contract marker `5.1.9` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Банк имеет право осуществлять дополнительные проверки проведения Оп...; Банк имеет право обращаться в Банк-эмитент для проверки правомернос...; required_type: mandatory
+  - Contract signal: Дополнительные проверки Операций; запрос в Банк-эмитент
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.10` + contract marker `5.1.10` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право проводить проверки Предприятия; Проверки проводятся для выявления мошенничества и несоответствия ро...; required_type: mandatory
+  - Contract signal: Проверять Предприятие/Ресурс на мошенничество и соответствие деятельности
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.11` + contract marker `5.1.11` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право запрашивать документы по операциям; Банк может требовать письменное заявление предприятия с обстоятельс...; required_type: mandatory
+  - Contract signal: Запрашивать документы по Операциям в 13-мес. срок
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.12` + contract marker `5.1.12` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк вправе вносить изменения в связанные документы unilateral_in_o...; Опубликование изменений осуществляется на Официальном сайте Банка; required_type: optional
+  - Contract signal: Одностороннее изменение документов на сайте (за 1 кал. день)
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.13` + contract marker `5.1.13` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно именно размещение информации на сайте. Если предусмотрены иные способы уведомления, то это разногласие; topics: Банк имеет право изменять свои реквизиты; Уведомление об изменении реквизитов осуществляется через...
+  - Contract signal: Изменение реквизитов Банка — публикация на сайте
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.14` + contract marker `5.1.14` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право направлять запросы на адрес электронной почты Пред...; Адрес электронной почты указан в Заявлении Предприятия на проведени...; required_type: mandatory
+  - Contract signal: Запросы по Операциям на e-mail Предприятия/ТСТ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.15` + contract marker `5.1.15` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право отказать Предприятию в заключении Договора без ука...; required_type: optional
+  - Contract signal: Право отказать в заключении Договора без объяснений
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.1.16` + contract marker `5.1.16` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право требовать от Предприятия предоставления документов; Перечень требуемых документов определяется законодательством; required_type: mandatory
+  - Contract signal: Требовать документы для исполнения законодательных требований
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.2.1` + contract marker `5.2.1` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: topics: обязательство обеспечить доступ к СПЭП; описание порядка доступа к СПЭП; required_type: mandatory
+  - Contract signal: Обеспечить доступ Предприятия к СПЭП
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.2.2` + contract marker `5.2.2` -> `full_match`; tags: `full/security-data-or-information`, `full/payment-or-settlement`.
+  - Matrix signal: topics: использование современных протоколов безопасности; использование технологий 3DSecure; required_type: mandatory
+  - Contract signal: Безопасность ИЭ через 3DSecure
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.2.3` + contract marker `5.2.3` -> `full_match`; tags: `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Установить и подготовить ЭТ; провести первичный инструктаж
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.2.4` + contract marker `5.2.4` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: topics: Банк осуществляет Авторизацию без перерывов 24 часа в сутки; required_type: optional
+  - Contract signal: Круглосуточная Авторизация
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.2.5` + contract marker `5.2.5` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Подсвечивать разногласие, если только сайты отличаются, если в договоре вместо сайта прочерк, то это не разногласие; topics: обучающие материалы размещены по указанной ссылке; материалы доступны для прохождения инстр...
+  - Contract signal: Разместить обучающие материалы на сайте Банка
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.2.6` + contract marker `5.2.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`, `full/payment-or-settlement`.
+  - Matrix signal: topics: Обеспечение Электронных терминалов информационными материалами; Обеспечение Смарт-терминалов информационными материалами; required_type: optional
+  - Contract signal: Обеспечивать ЭТ информационными материалами
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `5.2.7` + contract marker `5.2.7` -> `full_match`; tags: `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: topics: круглосуточная работоспособность Электронных терминалов/Смарт-терми...; замена неисправного Электронного терминала/Смарт-терминала на испра...; required_type: optional
+  - Contract signal: Обеспечивать круглосуточную работоспособность ЭТ; замена в 3 р.д.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `9.1` + contract marker `9.1` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: соблюден претензионный порядок урегулирования споров; указан обязательный досудебный порядок с указанием срока рассмотрен...; required_type: mandatory
+  - Contract signal: Урегулирование споров — претензионный порядок
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `9.2` + contract marker `9.2` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: main idea: Важен срок рассмотрения претензий; topics: Срок рассмотрения претензий; required_type: mandatory
+  - Contract signal: Срок рассмотрения претензий — 10 кал. дней
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `9.3` + contract marker `9.3` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: Неурегулированные споры — по законодательству РФ
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `10.1` + contract marker `10.1` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Договор действует с даты подписания по _____ или до исчерпания Цены
+  - Gold rationale: Дата окончания: 31.12.2023 — контракт истёк. Требует пролонгации.
+- Matrix `10.2` + contract marker `10.2` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Досрочное расторжение любой Стороной с уведомлением за 30 кал. дней
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `10.3` + contract marker `10.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Сроки, в которые договор считается расторгнутым в случае расторжени...; Сроки расчетов после одностороннего внесудебного порядка расторжени...; required_type: mandatory
+  - Contract signal: Расторжение Банком по п. 5.1.8: взаиморасчёты в 18 мес.
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `11.1` + contract marker `11.1` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: topics: Перечисление источников правового регулирования отношений Сторон; Требование соблюдать законодательство РФ; required_type: optional
+  - Contract signal: Источники правового регулирования: Договор, законодательство РФ, правила ПС
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `11.2` + contract marker `11.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/security-data-or-information`.
+  - Matrix signal: topics: Номера Карт/Платежных счетов, персональные данные Покупателей, сумм...; Объявляется запрет на передачу конфиденциальной информации третьим...; required_type: optional
+  - Contract signal: Конфиденциальность данных Покупателей; запрет передачи 3-м лицам
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `11.3` + contract marker `11.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/security-data-or-information`.
+  - Matrix signal: topics: Стороны обязуются не разглашать иным лицам полученные сведения о за...; Стороны обязуются не разглашать иным лицам полученные сведения о те...; required_type: optional
+  - Contract signal: Обязательство не разглашать коммерческую информацию Сторон
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `11.4` + contract marker `11.4` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: изменения и дополнения должны быть в письменной форме; подписаны уполномоченными представителями обеих сторон; required_type: optional
+  - Contract signal: Изменения и дополнения к Договору — только в письменной форме
+  - Gold rationale: Gold treats this candidate as legally relevant for the row conclusion.
+- Matrix `11.5` + contract marker `11.8` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: required_type: optional
+  - Contract signal: Инструктивные материалы — обязательны со следующего р.д. после публикации
+  - Gold rationale: Нумерация сдвинута: п. 11.8 договора соответствует 11.5.
+- Matrix `11.6` + contract marker `11.9` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Договор составлен в определенном количестве экземпляров; указано количество экземпляров Договора для Банка; required_type: optional
+  - Contract signal: Уведомления по Договору — согласно п. 2.3
+  - Gold rationale: Нумерация сдвинута: п. 11.9 договора соответствует 11.6.
+### Benchmark D: matched pair units
+
+- Matrix `3.1` + contract marker `1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Предмет: оказание услуг эквайринга (торгового); принятие/оплата услуг заказчиком
+  - Gold rationale: Смысловое соответствие. Контракт описывает услугу симметрично матрице
+- Matrix `3.2` + contract marker `1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Предмет: оказание услуг эквайринга (торгового); принятие/оплата услуг заказчиком
+  - Gold rationale: Смысловое соответствие. Контракт описывает услугу симметрично матрице
+- Matrix `3.1` + contract marker `1.3` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Заказчик принимает банковские карты как средство расчётов
+  - Gold rationale: Полное смысловое совпадение
+- Matrix `4.2.5` + contract marker `1.3` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, не принимать от Покупателя более 2 (двух) различных Карт. Не выдавать наличные денежные средства; topics: Принимать к оплате все карты из списка в течение всего рабочего вре...; Не выдавать наличные деньги по...
+  - Contract signal: Заказчик принимает банковские карты как средство расчётов
+  - Gold rationale: Полное смысловое совпадение
+- Matrix `3.2` + contract marker `1.4` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Исполнитель обеспечивает операции по карте на территории заказчика
+  - Gold rationale: Смысловое соответствие
+- Matrix `5.2.3` + contract marker `1.4` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Исполнитель обеспечивает операции по карте на территории заказчика
+  - Gold rationale: Смысловое соответствие
+- Matrix `2.2` + contract marker `1.5` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт, что валюта рубль РФ, другая валюта недопустима; topics: Расчёты производятся в рублях Российской Федерации; required_type: mandatory
+  - Contract signal: Валюта операций и расчётов — рубль РФ
+  - Gold rationale: Полное соответствие
+- Matrix `3.3` + contract marker `2.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Цена договора; тариф % от суммы операции; перечень ПС (MasterCard, Visa, UnionPay, МИР)
+  - Gold rationale: Содержит перечень ПС. Тариф прописан единым %.
+- Matrix `4.2.1` + contract marker `2.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Цена договора; тариф % от суммы операции; перечень ПС (MasterCard, Visa, UnionPay, МИР)
+  - Gold rationale: Содержит перечень ПС. Тариф прописан единым %.
+- Matrix `4.2.12` + contract marker `2.3` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важен факт обязанности Предприятия подписать закрывающие документы по оплате, а так же сроки в течение которых оно должно это сделать; topics: Предприятие обязано акцептовать платежные требования и счета на опл...; С...
+  - Contract signal: Комиссия не удерживается из перечислений; оплата раз в месяц по акту и счёту
+  - Gold rationale: Согласовать механизм оплаты; привести срок к 5 р.д.
+- Matrix `5.1.4` + contract marker `2.3` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`.
+  - Matrix signal: topics: указан номер расчетного счета Предприятия; указано наименование Банка, в котором у Предприятия открыт счет; required_type: mandatory
+  - Contract signal: Комиссия не удерживается из перечислений; оплата раз в месяц по акту и счёту
+  - Gold rationale: Согласовать механизм оплаты; привести срок к 5 р.д.
+- Matrix `4.2.1` + contract marker `2.5` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Заказчик оплачивает в течение 7 р.д. после подписания акта; декабрь — до 20 декабря
+  - Gold rationale: Привести к 5 р.д. или согласовать особый бюджетный порядок
+- Matrix `4.2.12` + contract marker `2.5` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важен факт обязанности Предприятия подписать закрывающие документы по оплате, а так же сроки в течение которых оно должно это сделать; topics: Предприятие обязано акцептовать платежные требования и счета на опл...; С...
+  - Contract signal: Заказчик оплачивает в течение 7 р.д. после подписания акта; декабрь — до 20 декабря
+  - Gold rationale: Привести к 5 р.д. или согласовать особый бюджетный порядок
+- Matrix `10.1` + contract marker `3.1` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Срок оказания: с момента заключения по 31.12.2025; ежедневно, круглосуточно
+  - Gold rationale: Добавить условие об исчерпании цены как дополнительный критерий
+- Matrix `5.2.3` + contract marker `4.1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Установить 3 POS-терминала бесплатно в течение 1 р.д. с момента заключения
+  - Gold rationale: В контракте конкретизировано: 1 р.д., 3 терминала, бесплатно
+- Matrix `2.1` + contract marker `4.1.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен факт, что для регистрации договора банку нужно заявление. В заявлении должна быть указана полная информация необходимая для регистр...; topics: Для регистрации новой ТСТ Предприятие предоставляет заявление на р...
+  - Contract signal: Установить 3 POS-терминала бесплатно в течение 1 р.д. с момента заключения
+  - Gold rationale: В контракте конкретизировано: 1 р.д., 3 терминала, бесплатно
+- Matrix `5.2.3` + contract marker `4.1.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`, `full/security-data-or-information`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Проводить инструктаж персонала (1 р.д.; темы расписаны; акт инструктажа)
+  - Gold rationale: В контракте инструктаж — обязанность исполнителя (детально). В матрице 4.2.20.1 — самообязанность предприятия.
+- Matrix `4.2.20.1` + contract marker `4.1.2` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятие само следит за прохождением инструктажа сотрудниками, размещенного на сайте Банка; topics: обязательство предприятия проводить инструктаж сотрудников самостоя...; ссылка на инструкцию...
+  - Contract signal: Проводить инструктаж персонала (1 р.д.; темы расписаны; акт инструктажа)
+  - Gold rationale: В контракте инструктаж — обязанность исполнителя (детально). В матрице 4.2.20.1 — самообязанность предприятия.
+- Matrix `5.2.4` + contract marker `4.1.3` -> `full_match`; tags: `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: topics: Банк осуществляет Авторизацию без перерывов 24 часа в сутки; required_type: optional
+  - Contract signal: Обеспечить круглосуточную электронную авторизацию
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.6` + contract marker `4.1.4` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Банк имеет право проверять техническое состояние терминалов на терр...; Банк имеет право производить замену терминалов с уведомлением заказ...; required_type: mandatory
+  - Contract signal: Работоспособность терминалов круглосуточно; замена исправного оборудования — 1 р.д.
+  - Gold rationale: Сохранить — выгодно для заказчика. Согласовать разграничение аварийной и плановой замены.
+- Matrix `4.1.2` + contract marker `4.1.8` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Банк оказывает консультацию заказчика по использованию оборудования; topics: закреплено право Заказчика на получение консультаций по эксплуатаци...; закреплено право Заказчика на получение консуль...
+  - Contract signal: Оперативные консультации с 08:00 до 16:30 в рабочие дни неограниченно
+  - Gold rationale: В контракте часы 08:00–16:30. Матрица — телефон поддержки 24/7 (4.2.20.7).
+- Matrix `5.1.1` + contract marker `4.2.1` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Contract signal: Исполнитель вправе удерживать суммы из перечислений (общее право)
+  - Gold rationale: Структура права на удержание совпадает
+- Matrix `5.1.1.3` + contract marker `4.2.1.1` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций возврата, возврата плате...; required_type: mandatory
+  - Contract signal: Суммы операций возврата, возврата платежа и реверсивные транзакции
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.1.1` + contract marker `4.2.1.2` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/missing-mandatory-element`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций, являющиеся недействител...; required_type: mandatory
+  - Contract signal: Суммы недействительных операций (10 оснований)
+  - Gold rationale: Добавить основания 3 и 8 из матрицы 5.1.1.1
+- Matrix `5.1.1.2` + contract marker `4.2.1.3` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать ошибочно перечисленные суммы с счета Пр...; required_type: mandatory
+  - Contract signal: Суммы, ошибочно перечисленные на счёт заказчика
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.1.4` + contract marker `4.2.1.4` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы оспоренных операций или списанных...; Банк удерживает суммы оспоренных операций в случае реализации товар...; required_type: mandatory
+  - Contract signal: Суммы оспоренных операций, списанных банком-эмитентом
+  - Gold rationale: SberPay/агентские — не применимо
+- Matrix `5.1.1.5` + contract marker `4.2.1.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: topics: Банк вправе удерживать штрафы из сумм Предприятия, возникшие у Банк...; Банк вправе удерживать убытки из сумм Предприятия, возникшие в связ...; required_type: mandatory
+  - Contract signal: Суммы убытков банка из-за штрафных санкций по вине заказчика
+  - Gold rationale: В матрице 4.2.13 — отдельная обязанность возместить сверх удержания. В контракте нет.
+- Matrix `4.2.13` + contract marker `4.2.1.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: main idea: Важен сам факт обязанности Предприятия возмещать все суммы и убытки, которые Банк понёс из-за Предприятия, все возмещения - в полном объе...; topics: возмещение средств, списанных со счета Банка в пользу Банка-эмитен...
+  - Contract signal: Суммы убытков банка из-за штрафных санкций по вине заказчика
+  - Gold rationale: В матрице 4.2.13 — отдельная обязанность возместить сверх удержания. В контракте нет.
+- Matrix `5.1.6` + contract marker `4.2.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право проверять техническое состояние терминалов на терр...; Банк имеет право производить замену терминалов с уведомлением заказ...; required_type: mandatory
+  - Contract signal: Проверка состояния, замена терминалов, обновление ПО (уведомление за 2 р.д.)
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.8` + contract marker `4.2.3` -> `full_match`; tags: `full/direct-legal-function`.
+  - Contract signal: Прекратить авторизацию при наступлении событий (общий пункт)
+  - Gold rationale: Структура совпадает
+- Matrix `5.1.8.1` + contract marker `4.2.3.1` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: нарушение Предприятием условий Договора является основанием для пре...; required_type: optional
+  - Contract signal: Нарушение заказчиком условий договора
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.8.6` + contract marker `4.2.3.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право прекратить проведение авторизации при получении не...; Банк имеет право расторгнуть договор при получении негативной инфор...; required_type: optional
+  - Contract signal: Негативная информация от госорганов/платёжных систем
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.8.7` + contract marker `4.2.3.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право прекратить Авторизацию при получении информации о...; Достаточным подтверждением мошенничества являются сведения от Банка...; required_type: optional
+  - Contract signal: Информация о мошенничестве (от эмитентов или ПС)
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.8.9` + contract marker `4.2.3.4` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: ликвидация Предприятия; возбуждение дела о банкротстве Предприятия по закону №127-ФЗ; required_type: optional
+  - Contract signal: Ликвидация заказчика или возбуждение дела о банкротстве
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.8.8` + contract marker `4.2.3.5` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: осуществление ремонта помещений ТСТ препятствует операциям; банк вправе прекратить авторизацию для ТСТ; required_type: optional
+  - Contract signal: Ремонт помещений заказчика, препятствующий операциям
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.8.11` + contract marker `4.2.3.6` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право прекратить проведение авторизации при несоответств...; Банк имеет право в одностороннем порядке расторгнуть договор при вы...; required_type: optional
+  - Contract signal: Несоответствие услуг роду деятельности заказчика
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.9` + contract marker `4.2.4` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Банк имеет право осуществлять дополнительные проверки проведения Оп...; Банк имеет право обращаться в Банк-эмитент для проверки правомернос...; required_type: mandatory
+  - Contract signal: Доп. проверки операций; обращение в банк-эмитент
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.11` + contract marker `4.2.5` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право запрашивать документы по операциям; Банк может требовать письменное заявление предприятия с обстоятельс...; required_type: mandatory
+  - Contract signal: Запрашивать документы по операциям за 13 мес.
+  - Gold rationale: Полное соответствие
+- Matrix `5.1.14` + contract marker `4.2.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право направлять запросы на адрес электронной почты Пред...; Адрес электронной почты указан в Заявлении Предприятия на проведени...; required_type: mandatory
+  - Contract signal: Направлять запросы и получать разъяснения от заказчика
+  - Gold rationale: Смысловое соответствие
+- Matrix `4.1.1` + contract marker `4.3.1` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, если Предприятие хочет использовать в информационных материалах упоминание бренда Банка - надо согласовывать с Банком; topics: Предприятие имеет право ссылаться на возможность оплаты с использов...; Согласован...
+  - Contract signal: Ссылаться на приём карт в рекламных материалах (согласование с исполнителем)
+  - Gold rationale: Смысловое соответствие
+- Matrix `4.1.2` + contract marker `4.3.2` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Банк оказывает консультацию заказчика по использованию оборудования; topics: закреплено право Заказчика на получение консультаций по эксплуатаци...; закреплено право Заказчика на получение консуль...
+  - Contract signal: Получать консультации у исполнителя по терминалам и операциям
+  - Gold rationale: Полное соответствие
+- Matrix `4.2.1` + contract marker `4.4.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Принимать и оплачивать надлежащно оказанные услуги
+  - Gold rationale: Смысловое соответствие
+- Matrix `3.3` + contract marker `4.4.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Принимать и оплачивать надлежащно оказанные услуги
+  - Gold rationale: Смысловое соответствие
+- Matrix `4.2.2` + contract marker `4.4.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно в контракте наличие формулировки о том, что Предприятие обязуется выполнять и соблюдать требования договора и инструктивных материа...; topics: Обязанность Предприятия соблюдать положения Договора (наличие форм...
+  - Contract signal: Соблюдать договор и инструктивные материалы исполнителя
+  - Gold rationale: Нет ссылки на сайт банка (матрица 4.2.3). Выгодно для заказчика.
+- Matrix `4.2.4` + contract marker `4.4.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен факт, если банк передает по договору предприятию - заказчику информационные материалы, то заказчик должен их разместить на видном м...; topics: Предприятие обязано размещать информационные материалы Банка о спо...
+  - Contract signal: Размещать информационные материалы банка о возможности оплаты картами
+  - Gold rationale: Полное соответствие
+- Matrix `4.2.5` + contract marker `4.4.4` -> `partial_match`; tags: `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важно, не принимать от Покупателя более 2 (двух) различных Карт. Не выдавать наличные денежные средства; topics: Принимать к оплате все карты из списка в течение всего рабочего вре...; Не выдавать наличные деньги по...
+  - Contract signal: Принимать все карты указанных ПС; не выдавать наличные
+  - Gold rationale: Добавить: не принимать более 2 карт от одного покупателя
+- Matrix `4.2.8` + contract marker `4.4.5` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно, что цена не зависит от способа оплаты; topics: Предприятие предоставляет полный набор товаров/услуг покупателям; цены для расчетов с использованием банковской карты не превышают це...; required_type: mandatory
+  - Contract signal: Предоставлять услуги по ценам не выше наличных расчётов
+  - Gold rationale: Полное соответствие
+- Matrix `4.2.9` + contract marker `4.4.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/liability`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Заказчик несет ответственность за информацию которую он указывает в документах при проведении платежей; topics: Предприятие обязано проводить операции в соответствии с Порядком пр...; Предприятие обязано оформлять до...
+  - Contract signal: Проводить операции и оформлять документы согласно договору
+  - Gold rationale: Смысловое соответствие
+- Matrix `4.2.6` + contract marker `4.4.7` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен сам факт, что нельзя разбивать Операцию на нескольку сумм; topics: Предприятие обязано проводить Операцию оплаты единой суммой без раз...; required_type: mandatory
+  - Contract signal: Не разбивать сумму одной операции на несколько
+  - Gold rationale: Полное соответствие
+- Matrix `4.2.7` + contract marker `4.4.8` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: Не использовать реквизиты Карты без присутствия или распоряжения По...; Использовать реквизиты Карты только для проведения операций; required_type: mandatory
+  - Contract signal: Не использовать реквизиты карты для иных целей
+  - Gold rationale: Полное соответствие
+- Matrix `4.2.10` + contract marker `4.4.9` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт необходимости хранения документы по операциям, срок в течении которого их нужно хранить, факт передачи копий по опревцияс, а т...; topics: хранение документов по операциям (сам факт хранения и срок храннеи...
+  - Contract signal: Хранить документы 13 мес.; передавать копии по запросу за 3 р.д.
+  - Gold rationale: Нет требования к качеству копий (чёткость, размер) из матрицы 4.2.10.
+- Matrix `4.2.11` + contract marker `4.4.10` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт обязанности передавать заявление Банку, а так же сроки в течение которых оно должно быть передано; topics: Передача заявления в банк с изложением обстоятельств проведения Опе...; немедленное уведомление ба...
+  - Contract signal: Направить описание обстоятельств операции за 3 р.д.
+  - Gold rationale: Нет обязанности немедленно уведомлять об утрате документов (матрица 4.2.11)
+- Matrix `4.2.15` + contract marker `4.4.11` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт необходимости предоставлять достоверные сведения, своевременное обновление сведений. Важен факт и срок периодичного предоставл...; topics: Предприятие обязано предоставлять документы не реже одного раза в...
+  - Contract signal: Предоставлять сведения для 115-ФЗ, о бенефициарах
+  - Gold rationale: В контракте нет периодичности обновления (матрица: 1 раз в год + 7 р.д. по запросу).
+- Matrix `4.2.20.2` + contract marker `4.4.12` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, чтобы предприятие использовало терминалы и ПО Банка только для целей договора и по месту установки, не менять и не ремонтировать и...; topics: использование Электронных терминалов и программного обеспечения то...
+  - Contract signal: Использовать терминалы только для договора; не ремонтировать; не передавать третьим лицам
+  - Gold rationale: Нет исключения для «обслуживающей компании» банка.
+- Matrix `4.2.20.3` + contract marker `4.4.13` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, что если в договоре стоит запрет на предоставление доступа третьим лицам, то это разногласие; topics: Предоставление доступа третьим лицам к местам установки терминалов; Доступ для подключения терминалов; requ...
+  - Contract signal: Предоставлять доступ сотрудникам исполнителя к местам установки терминалов
+  - Gold rationale: Полное соответствие
+- Matrix `4.2.20.5` + contract marker `4.4.14` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Предприятие обязано немедленно информировать Банк о выходе из строя...; Информирование осуществляется согласно пунктам 2.3.1 и 2.3.2 Догово...; required_type: mandatory
+  - Contract signal: Немедленно уведомлять о поломке или утрате терминала
+  - Gold rationale: Полное соответствие
+- Matrix `4.2.20.6` + contract marker `4.4.15` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: topics: вернуть терминал в течение 5 рабочих дней после расторжения договора; вернуть терминал после получения письменного/устного требования банка; required_type: mandatory
+  - Contract signal: Вернуть терминалы в течение 7 р.д. после расторжения/требования исполнителя
+  - Gold rationale: Сократить срок до 5 р.д.; добавить обязанность снять материалы при расторжении
+- Matrix `4.2.18` + contract marker `4.4.15` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важны факты прекращения приема к оплате Карт, снятия информационных материалов, а так же важен срок; topics: При расторжении договора прекращение приема карт к оплате (регулиру...; При расторжении договора снятие инф...
+  - Contract signal: Вернуть терминалы в течение 7 р.д. после расторжения/требования исполнителя
+  - Gold rationale: Сократить срок до 5 р.д.; добавить обязанность снять материалы при расторжении
+- Matrix `7.1` + contract marker `7.1` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: Общие слова о том, что за неисполнение или ненадлежащее исполнение...; Общие слова о том, что за неисполнение или ненадлежащее исполнение...; required_type: mandatory
+  - Contract signal: Общая ответственность по законодательству РФ и договору
+  - Gold rationale: Общая норма; смысловое соответствие
+- Matrix `10.1` + contract marker `8.1` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Договор вступает в силу со дня подписания сторонами
+  - Gold rationale: Полное соответствие
+- Matrix `10.1` + contract marker `8.2` -> `full_match`; tags: `full/protective-right-or-control`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Договор действует до 31.12.2025 или до полного исполнения обязательств
+  - Gold rationale: «До полного исполнения» = «исчерпание цены» по смыслу.
+- Matrix `10.2` + contract marker `8.3` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Расторжение: соглашение / односторонний отказ / суд
+  - Gold rationale: Смысловое соответствие
+- Matrix `10.2` + contract marker `8.4` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Расторжение по соглашению — ответ на предложение за 5 к.д.
+  - Gold rationale: В матрице нет конкретного срока ответа
+- Matrix `8.1` + contract marker `9.1` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: описание форс-мажорных обстоятельств как основание для освобождения...; перечень конкретных форс-мажорных событий (стихийные бедствия, пожа...; required_type: mandatory
+  - Contract signal: Освобождение от ответственности при форс-мажоре
+  - Gold rationale: Смысловое соответствие. Перечни обстоятельств немного различаются.
+- Matrix `8.2` + contract marker `9.2` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: topics: Обязанность уведомления другой стороны при обстоятельствах непреодо...; Срок уведомления другой стороны при обстоятельствах непреодолимой силы; required_type: mandatory
+  - Contract signal: Уведомление о форс-мажоре в течение 3 дней; при >2 мес. — право на расторжение
+  - Gold rationale: Сократить уведомление до 24–48 ч.; порог 2 мес. приемлем для заказчика
+- Matrix `8.1` + contract marker `9.3` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: описание форс-мажорных обстоятельств как основание для освобождения...; перечень конкретных форс-мажорных событий (стихийные бедствия, пожа...; required_type: mandatory
+  - Contract signal: Срок исполнения продлевается на период форс-мажора
+  - Gold rationale: Полное соответствие
+- Matrix `9.1` + contract marker `11.1` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: topics: соблюден претензионный порядок урегулирования споров; указан обязательный досудебный порядок с указанием срока рассмотрен...; required_type: mandatory
+  - Contract signal: Урегулирование споров в добровольном порядке (протокол)
+  - Gold rationale: Смысловое соответствие
+- Matrix `9.1` + contract marker `11.3` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: topics: соблюден претензионный порядок урегулирования споров; указан обязательный досудебный порядок с указанием срока рассмотрен...; required_type: mandatory
+  - Contract signal: Претензионный порядок до передачи в суд
+  - Gold rationale: Срок 20 р.д. невыгоден банку; рекомендуется 10–15 к.д.
+- Matrix `9.2` + contract marker `11.3` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важен срок рассмотрения претензий; topics: Срок рассмотрения претензий; required_type: mandatory
+  - Contract signal: Претензионный порядок до передачи в суд
+  - Gold rationale: Срок 20 р.д. невыгоден банку; рекомендуется 10–15 к.д.
+- Matrix `9.2` + contract marker `11.3.1` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важен срок рассмотрения претензий; topics: Срок рассмотрения претензий; required_type: mandatory
+  - Contract signal: Претензия письменно; ответ 20 р.д.; молчание = признание требований
+  - Gold rationale: Пересмотреть срок; убрать автоматическое признание при молчании
+- Matrix `9.3` + contract marker `11.4` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: Споры в Арбитражном суде по месту нахождения заказчика ([region])
+  - Gold rationale: Контракт явно указывает Арбитражный суд [region]
+- Matrix `2.3` + contract marker `12.1` -> `partial_match`; tags: `partial/formal-or-procedure-gap`.
+  - Contract signal: Уведомления: заказное письмо, факс, эл. почта + оригинал; 14 к.д. = надлежащее вручение
+  - Gold rationale: Добавить E-invoicing/ДБО как обязательный канал для 223-ФЗ (матрица 2.3.5)
+- Matrix `2.3.1` + contract marker `12.1` -> `partial_match`; tags: `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Нужно проверять признаётся ли полная юридическая сила e‑mail, есть ли ограничения по видам сведений и возможность изменять/обновлять адреса.; topics: Обмен информацией по электронной почте; Исключение передачи персон...
+  - Contract signal: Уведомления: заказное письмо, факс, эл. почта + оригинал; 14 к.д. = надлежащее вручение
+  - Gold rationale: Добавить E-invoicing/ДБО как обязательный канал для 223-ФЗ (матрица 2.3.5)
+- Matrix `2.3.4` + contract marker `12.1` -> `partial_match`; tags: `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: main idea: Важен сам факт возможности отправки информации / документов таким способом; topics: Обмен документами через заказное письмо; required_type: optional
+  - Contract signal: Уведомления: заказное письмо, факс, эл. почта + оригинал; 14 к.д. = надлежащее вручение
+  - Gold rationale: Добавить E-invoicing/ДБО как обязательный канал для 223-ФЗ (матрица 2.3.5)
+- Matrix `2.4` + contract marker `12.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Приложения к договору (Спецификация, ТЗ, Акт и др.)
+  - Gold rationale: Полное соответствие
+- Matrix `7.16` + contract marker `Прил.6` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: topics: Обязательство не совершать коррупционных и иных противозаконных дей...; required_type: mandatory
+  - Contract signal: Соглашение о недопущении коррупционных действий; ответственность по КоАП и УК
+  - Gold rationale: Отдельное приложение в контракте. Смысловое полное соответствие.
+### Benchmark E: matched pair units
+
+- Matrix `4.2.17` + contract marker `1.1-1.32` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт обязанности соблюдения стандарта, а так же факт обязанности предоставления подтверждения; topics: Обязательство соблюдать требования PCI DSS; Предоставление аттестата соответствия или листа самооценки...
+  - Contract signal: Определения: Авторизация, Банковская карта, Банк-эквайер, Банк-эмитент, Возврат платежа, Держатель карты, Документ по операции, Код авторизации, ККТ, Операция, Операция возврата, Операция оплаты, Операция от...
+  - Gold rationale: —
+- Matrix `2.1` + contract marker `1.1-1.32` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен факт, что для регистрации договора банку нужно заявление. В заявлении должна быть указана полная информация необходимая для регистр...; topics: Для регистрации новой ТСТ Предприятие предоставляет заявление на р...
+  - Contract signal: Определения: Авторизация, Банковская карта, Банк-эквайер, Банк-эмитент, Возврат платежа, Держатель карты, Документ по операции, Код авторизации, ККТ, Операция, Операция возврата, Операция оплаты, Операция от...
+  - Gold rationale: —
+- Matrix `3.1` + contract marker `2.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно подсветить разногласие, если перечислена платёжная система отличная от НСПК или МИР; topics: Предприятие обязано организовать приём оплаты за Товары/услуги с ис...; Приём оплаты осуществляется в ТСТ (торгово-се...
+  - Contract signal: Банк оказывает услуги эквайринга с предоставлением в аренду Смарт-терминала, Предприятие принимает и оплачивает
+  - Gold rationale: —
+- Matrix `3.2` + contract marker `2.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Банк оказывает услуги эквайринга с предоставлением в аренду Смарт-терминала, Предприятие принимает и оплачивает
+  - Gold rationale: —
+- Matrix `2.4` + contract marker `2.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Наименование, количество, характеристики услуги — в Приложениях №1 и №3 (неотъемлемая часть)
+  - Gold rationale: —
+- Matrix `10.1` + contract marker `2.3` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Оборудование в аренду с ___ 2023 по 29.02.2024
+  - Gold rationale: Нет условия досрочного завершения при исчерпании цены
+- Matrix `4.1.2` + contract marker `3.1` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Банк оказывает консультацию заказчика по использованию оборудования; topics: закреплено право Заказчика на получение консультаций по эксплуатаци...; закреплено право Заказчика на получение консуль...
+  - Contract signal: Предприятие вправе получать консультации по телефону службы поддержки банка
+  - Gold rationale: —
+- Matrix `4.2.1` + contract marker `3.2.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Оплачивать услуги банка по тарифам согласно разделу 5
+  - Gold rationale: —
+- Matrix `3.3` + contract marker `3.2.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Оплачивать услуги банка по тарифам согласно разделу 5
+  - Gold rationale: —
+- Matrix `4.2.2` + contract marker `3.2.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно в контракте наличие формулировки о том, что Предприятие обязуется выполнять и соблюдать требования договора и инструктивных материа...; topics: Обязанность Предприятия соблюдать положения Договора (наличие форм...
+  - Contract signal: Соблюдать договор и выполнять требования инструктивных/информационных материалов банка
+  - Gold rationale: —
+- Matrix `4.2.20.2` + contract marker `3.2.3` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, чтобы предприятие использовало терминалы и ПО Банка только для целей договора и по месту установки, не менять и не ремонтировать и...; topics: использование Электронных терминалов и программного обеспечения то...
+  - Contract signal: Использовать терминалы только для договора и на территории ТСТ, не изменять ПО, не ремонтировать самостоятельно, не передавать третьим лицам
+  - Gold rationale: —
+- Matrix `4.2.20.3` + contract marker `3.2.4` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, что если в договоре стоит запрет на предоставление доступа третьим лицам, то это разногласие; topics: Предоставление доступа третьим лицам к местам установки терминалов; Доступ для подключения терминалов; requ...
+  - Contract signal: Предоставлять доступ уполномоченным работникам банка к местам установки терминалов
+  - Gold rationale: —
+- Matrix `4.2.20.4` + contract marker `3.2.5` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, если указано, что оборудование Предприятие без документов или акта передачи, то всё ок, разногласия нет; topics: Предприятие обязано принять Электронные терминалы / Смарт-терминалв...; подписание акта уполномо...
+  - Contract signal: Принять Смарт-терминалы по акту приёмки-передачи (Прил.№2) в 2-х экземплярах
+  - Gold rationale: —
+- Matrix `4.2.20.5` + contract marker `3.2.6` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Предприятие обязано немедленно информировать Банк о выходе из строя...; Информирование осуществляется согласно пунктам 2.3.1 и 2.3.2 Догово...; required_type: mandatory
+  - Contract signal: При выходе из строя или утрате терминала — немедленно уведомить банк
+  - Gold rationale: —
+- Matrix `4.2.20.6` + contract marker `3.2.7` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: topics: вернуть терминал в течение 5 рабочих дней после расторжения договора; вернуть терминал после получения письменного/устного требования банка; required_type: mandatory
+  - Contract signal: Вернуть терминалы в течение 5 р.д. с даты расторжения или окончания аренды
+  - Gold rationale: —
+- Matrix `4.2.20.7` + contract marker `3.2.8` -> `full_match`; tags: `full/document-exchange`, `full/liability`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, чтобы в соответствующем пункте договора шла речь про штраф за невозврат терминала и его размер, иначе данный пункт матрицы не отно...; topics: Невозврат терминалов. Обязанность предприятия об уплате штрафа за...
+  - Contract signal: При невозврате — штраф 25 000 руб. (вкл. НДС) за каждый терминал
+  - Gold rationale: —
+- Matrix `5.1.1` + contract marker `4.1.1` -> `partial_match`; tags: `partial/liability-economics-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/missing-mandatory-element`.
+  - Contract signal: Банк вправе удерживать суммы (общий пункт — перечислены только 2 основания)
+  - Gold rationale: КРИТИЧНО: Только 2 основания (4.1.1.1–4.1.1.2). Отсутствуют: 5.1.1.1 — недействительные операции (12 оснований!), 5.1.1.4 — оспоренные эмитентом, 5.1.1.5 — штрафы/убытки ПС
+- Matrix `5.1.1.2` + contract marker `4.1.1.1` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать ошибочно перечисленные суммы с счета Пр...; required_type: mandatory
+  - Contract signal: Удержание: суммы, ошибочно перечисленные на счёт предприятия
+  - Gold rationale: —
+- Matrix `5.1.1.3` + contract marker `4.1.1.2` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций возврата, возврата плате...; required_type: mandatory
+  - Contract signal: Удержание: суммы операций возврата, Возврата платежа и Реверсивных транзакций
+  - Gold rationale: —
+- Matrix `5.1.6` + contract marker `4.1.2` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право проверять техническое состояние терминалов на терр...; Банк имеет право производить замену терминалов с уведомлением заказ...; required_type: mandatory
+  - Contract signal: Проверка/замена терминалов, обновление ПО с уведомлением за 2 р.д., удалённое обновление без уведомления (если не затрагивает операции)
+  - Gold rationale: —
+- Matrix `5.1.7` + contract marker `4.1.3` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право передавать информацию о предприятии при выявлении...; Банк передает данные в Платежную систему МИР при расторжении догово...; required_type: mandatory
+  - Contract signal: Передача ПДн руководителя/представителя предприятия в ПС МИР при мошенничестве, информирование ПС о расторжении
+  - Gold rationale: —
+- Matrix `4.2.16` + contract marker `4.1.3` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/protective-right-or-control`.
+  - Contract signal: Передача ПДн руководителя/представителя предприятия в ПС МИР при мошенничестве, информирование ПС о расторжении
+  - Gold rationale: —
+- Matrix `5.1.9` + contract marker `4.1.4` -> `full_match`; tags: `full/compound-or-scattered-coverage`.
+  - Matrix signal: topics: Банк имеет право осуществлять дополнительные проверки проведения Оп...; Банк имеет право обращаться в Банк-эмитент для проверки правомернос...; required_type: mandatory
+  - Contract signal: Дополнительные проверки операций, обращение в банк-эмитент
+  - Gold rationale: —
+- Matrix `5.1.10` + contract marker `4.1.4` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право проводить проверки Предприятия; Проверки проводятся для выявления мошенничества и несоответствия ро...; required_type: mandatory
+  - Contract signal: Дополнительные проверки операций, обращение в банк-эмитент
+  - Gold rationale: —
+- Matrix `5.1.14` + contract marker `4.1.5` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право направлять запросы на адрес электронной почты Пред...; Адрес электронной почты указан в Заявлении Предприятия на проведени...; required_type: mandatory
+  - Contract signal: Направлять запросы на e-mail предприятия/ТСТ из заявления
+  - Gold rationale: —
+- Matrix `5.1.16` + contract marker `4.1.6` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право требовать от Предприятия предоставления документов; Перечень требуемых документов определяется законодательством; required_type: mandatory
+  - Contract signal: Требовать документы/сведения для законодательных функций
+  - Gold rationale: —
+- Matrix `4.2.15` + contract marker `4.1.6` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт необходимости предоставлять достоверные сведения, своевременное обновление сведений. Важен факт и срок периодичного предоставл...; topics: Предприятие обязано предоставлять документы не реже одного раза в...
+  - Contract signal: Требовать документы/сведения для законодательных функций
+  - Gold rationale: —
+- Matrix `5.2.3` + contract marker `4.2.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Передать и подготовить терминалы, первичный инструктаж сотрудников, срок: 2 р.д.
+  - Gold rationale: —
+- Matrix `2.1` + contract marker `4.2.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен факт, что для регистрации договора банку нужно заявление. В заявлении должна быть указана полная информация необходимая для регистр...; topics: Для регистрации новой ТСТ Предприятие предоставляет заявление на р...
+  - Contract signal: Передать и подготовить терминалы, первичный инструктаж сотрудников, срок: 2 р.д.
+  - Gold rationale: —
+- Matrix `5.2.4` + contract marker `4.2.2` -> `full_match`; tags: `full/payment-or-settlement`.
+  - Matrix signal: topics: Банк осуществляет Авторизацию без перерывов 24 часа в сутки; required_type: optional
+  - Contract signal: Круглосуточная авторизация
+  - Gold rationale: —
+- Matrix `5.2.3` + contract marker `4.2.3` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Обеспечивать терминалы информационными материалами для операций
+  - Gold rationale: —
+- Matrix `4.2.20.4` + contract marker `4.2.4` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важно, если указано, что оборудование Предприятие без документов или акта передачи, то всё ок, разногласия нет; topics: Предприятие обязано принять Электронные терминалы / Смарт-терминалв...; подписание акта уполномо...
+  - Contract signal: Передать принадлежности (батарея, зарядное, шнур) и документацию (тех. паспорта, инструкции) к терминалам
+  - Gold rationale: —
+- Matrix `5.1.6` + contract marker `4.2.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: topics: Банк имеет право проверять техническое состояние терминалов на терр...; Банк имеет право производить замену терминалов с уведомлением заказ...; required_type: mandatory
+  - Contract signal: Круглосуточная работоспособность, ремонт за 3 к.д., замена (если ремонт невозможен) за 3 р.д. от заявки
+  - Gold rationale: —
+- Matrix `5.2.3` + contract marker `4.2.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важно, чтобы в договоре срок установки был не менее 3 рабочих дней. Срок инструктажа не декларируется. Отсутствие отсылки на с инструктив...; topics: установка Электронных терминалов/Смарт-терминалов Банка на Предпри...
+  - Contract signal: Круглосуточная работоспособность, ремонт за 3 к.д., замена (если ремонт невозможен) за 3 р.д. от заявки
+  - Gold rationale: —
+- Matrix `3.2` + contract marker `4.2.6` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важен сам факт обязанности Банка в перечислении сумм Предприятию; topics: Банк обязан перечислять суммы операций оплаты товаров/услуг Предпри...; required_type: optional
+  - Contract signal: Перечисление сумм на р/с предприятия ([bank branch]) не позднее 2 р.д. от расчётной информации, за вычетом удержаний
+  - Gold rationale: —
+- Matrix `5.1.1` + contract marker `4.2.6` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/protective-right-or-control`, `full/security-data-or-information`.
+  - Contract signal: Перечисление сумм на р/с предприятия ([bank branch]) не позднее 2 р.д. от расчётной информации, за вычетом удержаний
+  - Gold rationale: —
+- Matrix `3.3` + contract marker `5.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен сам факт, что Предприятия должно оплачивать услуги предоставляемые по договору; topics: Предприятие перечисляет Банку плату за проведение расчётов ежемесячно; required_type: mandatory
+  - Contract signal: Тариф: _% от суммы операции, МИР/Visa/MasterCard/UnionPay, банк направляет УПД + Акт + счёт до 10-го р.д. следующего месяца
+  - Gold rationale: —
+- Matrix `4.2.1` + contract marker `5.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`.
+  - Matrix signal: main idea: Важен факт, что предприятие обязуется оплачивать услуги; topics: Предприятие обязуется оплачивать услуги банка по выполнению расчёто...; Предприятие обязуется вносить плату за сервисное обслуживание (если...; require...
+  - Contract signal: Тариф: _% от суммы операции, МИР/Visa/MasterCard/UnionPay, банк направляет УПД + Акт + счёт до 10-го р.д. следующего месяца
+  - Gold rationale: —
+- Matrix `4.2.12` + contract marker `5.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важен факт обязанности Предприятия подписать закрывающие документы по оплате, а так же сроки в течение которых оно должно это сделать; topics: Предприятие обязано акцептовать платежные требования и счета на опл...; С...
+  - Contract signal: Тариф: _% от суммы операции, МИР/Visa/MasterCard/UnionPay, банк направляет УПД + Акт + счёт до 10-го р.д. следующего месяца
+  - Gold rationale: —
+- Matrix `5.1.4` + contract marker `5.1` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: указан номер расчетного счета Предприятия; указано наименование Банка, в котором у Предприятия открыт счет; required_type: mandatory
+  - Contract signal: Тариф: _% от суммы операции, МИР/Visa/MasterCard/UnionPay, банк направляет УПД + Акт + счёт до 10-го р.д. следующего месяца
+  - Gold rationale: —
+- Matrix `4.2.12` + contract marker `5.2` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важен факт обязанности Предприятия подписать закрывающие документы по оплате, а так же сроки в течение которых оно должно это сделать; topics: Предприятие обязано акцептовать платежные требования и счета на опл...; С...
+  - Contract signal: Предприятие возвращает подписанный УПД (эквайринг) до 25-го числа следующего месяца или мотивированный отказ
+  - Gold rationale: Срок: до 25-го числа (~25+ р.д.) vs матрица — 5 р.д. с даты выставления
+- Matrix `5.1.4` + contract marker `5.4` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: указан номер расчетного счета Предприятия; указано наименование Банка, в котором у Предприятия открыт счет; required_type: mandatory
+  - Contract signal: Банк направляет УПД + счёт по аренде до 10-го р.д. следующего месяца
+  - Gold rationale: —
+- Matrix `4.2.12` + contract marker `5.5` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важен факт обязанности Предприятия подписать закрывающие документы по оплате, а так же сроки в течение которых оно должно это сделать; topics: Предприятие обязано акцептовать платежные требования и счета на опл...; С...
+  - Contract signal: Предприятие возвращает подписанный УПД по аренде до 25-го числа или мотивированный отказ
+  - Gold rationale: Аналогично п.5.2: срок до 25-го числа vs матрица — 5 р.д.
+- Matrix `4.2.12` + contract marker `5.6` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`, `partial/formal-or-procedure-gap`.
+  - Matrix signal: main idea: Важен факт обязанности Предприятия подписать закрывающие документы по оплате, а так же сроки в течение которых оно должно это сделать; topics: Предприятие обязано акцептовать платежные требования и счета на опл...; С...
+  - Contract signal: Срок оплаты: 7 р.д. после полного комплекта документов
+  - Gold rationale: 7 р.д. (контракт) vs 5 р.д. (матрица)
+- Matrix `5.1.1.3` + contract marker `5.7` -> `full_match`; tags: `full/payment-or-settlement`, `full/protective-right-or-control`.
+  - Matrix signal: topics: Банк имеет право удерживать суммы операций возврата, возврата плате...; required_type: mandatory
+  - Contract signal: По операциям возврата/ВП/реверсивным — плата не взимается, ранее удержанная плата не возвращается
+  - Gold rationale: —
+- Matrix `10.1` + contract marker `6.1` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/weaker-protective-right-or-control`, `partial/formal-or-procedure-gap`, `partial/missing-mandatory-element`.
+  - Matrix signal: topics: указана дата окончания действия договора; определен порядок учета цены договора при определении срока действия; required_type: mandatory
+  - Contract signal: Договор с даты подписания по 29.02.2024, расчёты — до полного исполнения
+  - Gold rationale: Нет условия исчерпания цены как второго критерия завершения
+- Matrix `10.2` + contract marker `6.2` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`.
+  - Matrix signal: main idea: Важно описание возможности расторгнуть договор в одностороннем порядке. Важен срок уведомления о расторжении.; topics: Право любой стороны расторгнуть договор в одностороннем порядке; Обязанность уведомления другой с...
+  - Contract signal: Изменение/досрочное расторжение по соглашению или по закону
+  - Gold rationale: —
+- Matrix `5.1.13` + contract marker `6.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно именно размещение информации на сайте. Если предусмотрены иные способы уведомления, то это разногласие; topics: Банк имеет право изменять свои реквизиты; Уведомление об изменении реквизитов осуществляется через...
+  - Contract signal: Взаимное уведомление об изменении реквизитов/адреса в течение 5 р.д.
+  - Gold rationale: —
+- Matrix `4.2.14` + contract marker `6.5` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт предоставления подтверждающих документов, важны сроки предоставления, а так же нужно сравнить события, при которых это допустимо; topics: информирование Банка о реорганизации предприятия в течение 3 рабочи...
+  - Contract signal: Взаимное уведомление об изменении реквизитов/адреса в течение 5 р.д.
+  - Gold rationale: —
+- Matrix `7.1` + contract marker `7.1` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: Общие слова о том, что за неисполнение или ненадлежащее исполнение...; Общие слова о том, что за неисполнение или ненадлежащее исполнение...; required_type: mandatory
+  - Contract signal: Ответственность за неисполнение по договору и законодательству (общий)
+  - Gold rationale: —
+- Matrix `7.8` + contract marker `7.8` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: main idea: Важен факт, что Банк (Исполнитель) не несет ответственности по спорам и разногласиям Предприятия(Заказчика) и Покупателя (клиент Предприя...; topics: Ответственность Банка (Исполнителя) за споры между Предприятием (З...
+  - Contract signal: Банк не отвечает за задержки перевода не по его вине
+  - Gold rationale: —
+- Matrix `7.9` + contract marker `7.9` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: Банк освобожден от ответственности при задержках переводов без свое...; required_type: optional
+  - Contract signal: Банк не отвечает за действия третьих лиц (участников ПС)
+  - Gold rationale: —
+- Matrix `7.10` + contract marker `7.10` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`, `full/liability`.
+  - Matrix signal: topics: Банк не несёт ответственность за неисполнение условий Договора в св...; required_type: optional
+  - Contract signal: Банк не отвечает при расследовании подозрительных операций
+  - Gold rationale: —
+- Matrix `5.1.10` + contract marker `7.10` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк имеет право проводить проверки Предприятия; Проверки проводятся для выявления мошенничества и несоответствия ро...; required_type: mandatory
+  - Contract signal: Банк не отвечает при расследовании подозрительных операций
+  - Gold rationale: —
+- Matrix `7.11` + contract marker `7.11` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/liability`, `full/security-data-or-information`.
+  - Matrix signal: topics: Банк освобождается от ответственности за задержку перечисления сред...; required_type: optional
+  - Contract signal: Предприятие несёт ответственность за действия персонала
+  - Gold rationale: —
+- Matrix `7.16` + contract marker `7.12` -> `full_match`; tags: `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: topics: Обязательство не совершать коррупционных и иных противозаконных дей...; required_type: mandatory
+  - Contract signal: Антикоррупционное обязательство (в разделе ответственности)
+  - Gold rationale: —
+- Matrix `7.17` + contract marker `7.13` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: main idea: Важно, чтобы в договоре не было сужения ответственности.; topics: Общие слова про то, что Предприятие несет финансовую ответственност...; Общие слова про то, что Предприятие отвечает за соответствие Повтор...; requir...
+  - Contract signal: Финансовая ответственность за несоответствие повторяющихся платежей требованиям законодательства
+  - Gold rationale: —
+- Matrix `8.1` + contract marker `8.1` -> `full_match`; tags: `full/liability`.
+  - Matrix signal: topics: описание форс-мажорных обстоятельств как основание для освобождения...; перечень конкретных форс-мажорных событий (стихийные бедствия, пожа...; required_type: mandatory
+  - Contract signal: Форс-мажор: освобождение от ответственности, срок откладывается соразмерно
+  - Gold rationale: —
+- Matrix `8.2` + contract marker `8.2` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: topics: Обязанность уведомления другой стороны при обстоятельствах непреодо...; Срок уведомления другой стороны при обстоятельствах непреодолимой силы; required_type: mandatory
+  - Contract signal: Уведомление в 24 ч., при >3 мес. — право расторгнуть
+  - Gold rationale: —
+- Matrix `9.1` + contract marker `9.1` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: topics: соблюден претензионный порядок урегулирования споров; указан обязательный досудебный порядок с указанием срока рассмотрен...; required_type: mandatory
+  - Contract signal: Претензионный порядок, претензия письменно+e-mail+заказное письмо, дата = следующий р.д. после e-mail, срок ответа 30 к.д.
+  - Gold rationale: Срок ответа: 30 к.д. (контракт) vs 10 к.д. (матрица) — в 3 раза дольше
+- Matrix `9.2` + contract marker `9.1` -> `partial_match`; tags: `partial/deadline-term-or-duration-gap`, `partial/payment-mechanics-gap`.
+  - Matrix signal: main idea: Важен срок рассмотрения претензий; topics: Срок рассмотрения претензий; required_type: mandatory
+  - Contract signal: Претензионный порядок, претензия письменно+e-mail+заказное письмо, дата = следующий р.д. после e-mail, срок ответа 30 к.д.
+  - Gold rationale: Срок ответа: 30 к.д. (контракт) vs 10 к.д. (матрица) — в 3 раза дольше
+- Matrix `9.2` + contract marker `9.2` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: main idea: Важен срок рассмотрения претензий; topics: Срок рассмотрения претензий; required_type: mandatory
+  - Contract signal: Ответ направляется аналогично, дата получения = следующий р.д. после e-mail
+  - Gold rationale: —
+- Matrix `9.3` + contract marker `9.1` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: При неурегулировании — Арбитражный суд [region] (дубл. нумерация)
+  - Gold rationale: —
+- Matrix `9.3` + contract marker `9.2` -> `full_match`; tags: `full/direct-legal-function`.
+  - Matrix signal: required_type: mandatory
+  - Contract signal: Споры — Арбитражный суд [region] (дубл. нумерация)
+  - Gold rationale: —
+- Matrix `7.16` + contract marker `10.1` -> `full_match`; tags: `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: topics: Обязательство не совершать коррупционных и иных противозаконных дей...; required_type: mandatory
+  - Contract signal: Запрет взяток/коммерческого подкупа, не осуществлять коррупционных действий
+  - Gold rationale: —
+- Matrix `7.16` + contract marker `10.2` -> `full_match`; tags: `full/document-exchange`, `full/protective-right-or-control`, `full/liability`.
+  - Matrix signal: topics: Обязательство не совершать коррупционных и иных противозаконных дей...; required_type: mandatory
+  - Contract signal: При подозрении — уведомить письменно с материалами
+  - Gold rationale: —
+- Matrix `4.2.8` + contract marker `11.2` -> `full_match`; tags: `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, что цена не зависит от способа оплаты; topics: Предприятие предоставляет полный набор товаров/услуг покупателям; цены для расчетов с использованием банковской карты не превышают це...; required_type: mandatory
+  - Contract signal: Конфиденциальность: номера карт/счетов, ПДн покупателей, суммы — не передавать третьим лицам
+  - Gold rationale: —
+- Matrix `4.2.8` + contract marker `11.3` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/payment-or-settlement`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно, что цена не зависит от способа оплаты; topics: Предприятие предоставляет полный набор товаров/услуг покупателям; цены для расчетов с использованием банковской карты не превышают це...; required_type: mandatory
+  - Contract signal: Стороны не разглашают: защитные элементы карт, технологии операций, финансовую информацию, только при согласии обеих сторон
+  - Gold rationale: —
+- Matrix `11.3` + contract marker `11.3` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/incorporated-document-or-appendix`, `full/security-data-or-information`.
+  - Matrix signal: topics: Стороны обязуются не разглашать иным лицам полученные сведения о за...; Стороны обязуются не разглашать иным лицам полученные сведения о те...; required_type: optional
+  - Contract signal: Стороны не разглашают: защитные элементы карт, технологии операций, финансовую информацию, только при согласии обеих сторон
+  - Gold rationale: —
+- Matrix `2.4` + contract marker `11.5` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Все приложения — неотъемлемая часть договора
+  - Gold rationale: —
+- Matrix `4.2.15` + contract marker `11.6` -> `full_match`; tags: `full/compound-or-scattered-coverage`, `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт необходимости предоставлять достоверные сведения, своевременное обновление сведений. Важен факт и срок периодичного предоставл...; topics: Предприятие обязано предоставлять документы не реже одного раза в...
+  - Contract signal: Заверение о соответствии реализации товаров/услуг в ТСТ законодательству РФ
+  - Gold rationale: —
+- Matrix `11.6` + contract marker `11.6` -> `full_match`; tags: `full/compound-or-scattered-coverage`.
+  - Matrix signal: topics: Договор составлен в определенном количестве экземпляров; указано количество экземпляров Договора для Банка; required_type: optional
+  - Contract signal: Заверение о соответствии реализации товаров/услуг в ТСТ законодательству РФ
+  - Gold rationale: —
+- Matrix `4.2.14` + contract marker `11.8` -> `full_match`; tags: `full/document-exchange`.
+  - Matrix signal: main idea: Важен факт предоставления подтверждающих документов, важны сроки предоставления, а так же нужно сравнить события, при которых это допустимо; topics: информирование Банка о реорганизации предприятия в течение 3 рабочи...
+  - Contract signal: При реорганизации — права к правопреемнику, при ликвидации — требования из имущества
+  - Gold rationale: —
+- Matrix `2.4` + contract marker `11.9` -> `full_match`; tags: `full/incorporated-document-or-appendix`, `full/document-exchange`, `full/security-data-or-information`.
+  - Matrix signal: main idea: Важно именно признание ссылок и документов в догворе его неотъемлемой частью; required_type: optional
+  - Contract signal: Перечень приложений: №1 (ТЗ), №2 (Акт), №3 (Спецификация), №4 (Заявление), №4.1 (Информация о ТСТ)
+  - Gold rationale: —
+
+## Complete Missing Appendix
+
+Every item below is an anonymized gold missing example from the benchmark corpus. These are calibration anti-examples: do not include contextual candidates unless they perform a mandatory legal element.
+
+### Benchmark A: missing matrix items
+
+- Matrix `2.5` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: упоминание в договоре сервисов бесконтактной оплаты или мобильной оплаты - ____pay, оплата через QR
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.5.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: SberPayOnline:
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.5.1.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: сервис оплаты альтернативным способом подключается автоматически
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.5.1.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: если услуга безконтактной оплаты подключается без интернет-эквайринга.
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.5.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: оплата по биометрии
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.5.2.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: возможность принятие оплаты по биометрии оформляется отдельным заявлением
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.6` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: смарт терминал
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.6.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: смарт терминал
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.6.1.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: для приема QR на смарт-терминал е нужно отдельное програмное обеспечение
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.6.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: если QR - если в договоре говориться о подключении эквайринга к кассам предприятия
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.6.2.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: если QR - если в договоре говориться о подключении эквайринга к кассам предприятия. информация о API для QR размещена на сайте банка
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.6.2.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Банк не делает доработок програмного обеспечения клиента (заказчика)
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.6.3` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Для Электронных терминалов при подключении на них QR-кода Вендором, которым является Банк:
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.6.3.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR-код подключается при установке Электронного терминала в ТСТ;
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.6.3.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: отключение QR-кода по инициативе Предприятия осуществляется при обращении в Банк одним из способов, указанных в п.2.3.1. – п.2.3.4., п.2.3.7. Договора.
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `2.7` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: договор должен быть заключен в электронном виде но при этом подписывается УКЭП
+  - Gold rationale: Требование УКЭП для контракта — в 44-ФЗ контракте п. 12.4 (электронная форма/УКЭП)
+- Matrix `3` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: «ПРЕДМЕТ ДОГОВОРА»
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `4` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: «ПРАВА И ОБЯЗАННОСТИ ПРЕДПРИЯТИЯ»
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `4.1` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Предприятие имеет право:
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `4.1.3` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: банк самостоятельно выдает заказчику QR
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `4.2` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: Предприятие обязуется:
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `4.2.2` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: соблюдать положение договора
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `4.2.3` -> `missing`; tags: `missing/no-operational-rule`.
+  - Matrix signal: 4.2.3. Самостоятельно и своевременно знакомиться с изменениями, внесенными в документы, ссылки на которые даются в настоящем Договоре, размещенными на Официальном сайте Банка. Несвоевременное ознакомление Пр...
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `4.2.5` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Не принимать от Покупателя более 2 (двух) различных Карт. Не выдавать наличные денежные средства
+  - Gold rationale: Интернет/QR-эквайринг — не применим для данного контракта (торговый POS-эквайринг)
+- Matrix `4.2.8` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: цена не зависит от способа оплаты
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `4.2.17` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: предприятие обязано соблюдать требования стандарта PCI DSS и по запросу Банка направлять результаты оценки соответствия (аттестат или лист самооценки) на указанный e‑mail.
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `4.2.21` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: операции интернет-эквайринга на ресурсе подлежат проверке на этапе согласования контракта со стороны БР ГОСБ.
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.21.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **начать проводить операции на ресурсе можно только после успешного тестирования выбранных операций в тестовой среде.** Ключевые акценты: - запрет на реальные операции до теста; - условие ста...
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.21.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: ресурс предприятия (сайт/сервис) должен соответствовать требованиям банка, размещенным на официальном сайте банка.
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.21.3` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: подтверждать предавторизованные суммы к списанию через СПЭП в течение 5 календарных дней на фактическую сумму товаров/услуг. Ключевые акценты: тип операций — суммы, заблокированные по предавт...
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.21.4` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: предприятие обязано согласовывать с Банком дизайн платежной страницы, включая электронные версии информационных наклеек.
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.21.5` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **предприятие должно в течение 30 календарных дней с даты заключения договора интегрировать ресурс со СПЭП и провести необходимые интеграционные тесты.**
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.21.6` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **предприятие само отвечает за безопасность своих информационных ресурсов в интернете.**
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.21.7` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **по требованию Банка предприятие должно предоставлять доступ к закрытым разделам ресурса (VIP, оптовое, клубное обслуживание и т.п.), не связанным с администрированием.**
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.21.8` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Соблюдать правила пользования Личным кабинетом Интернет-эквайринга, размещенным на Официальном сайте Банка.
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.22` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Предоставить Покупателю для считывания QR-код с целью осуществления оплаты Товаров/услуг с использованием SberPayQR/Плати QR
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.23` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Не изменять QR-код партнера в одностороннем порядке.
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.24` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-liability-mechanism`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Основной смысл: **предприятие должно использовать API и данные по QR‑API только в рамках прав и функционала, описанных в условиях подключения QR‑API на официальном сайте Банка.**
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.25` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Основной смысл: **при признаках нарушения безопасности использования QR‑API предприятие должно немедленно прекратить его использовать и уведомить Банк любым предусмотренным договором способом.**
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `4.2.26` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **для повторяющихся платежей предприятие должно иметь и размещать условия, получать и хранить согласие держателя, дать возможность отмены и прекращать списания по уведомлению покупателя.**
+  - Gold rationale: Интернет-эквайринг / QR-API — не применим для данного торгового контракта
+- Matrix `5` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: «ПРАВА И ОБЯЗАННОСТИ БАНКА»
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `5.1` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Банк имеет право:
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `5.1.2` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **банк вправе приостановить авторизацию операций при наличии задолженности предприятия до ее полного погашения.**
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.1.3` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **если банк не может удержать нужные суммы из поступлений по операциям, он списывает их без доп. распоряжения с расчетного счета предприятия на основании ранее данного акцепта в заявлении.**
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.1.4` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Основной смысл: **если удержать суммы из поступлений нельзя, Банк вправе выставить счет или платежное требование к расчетному счету предприятия в обслуживающем банке.**
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.1.5` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **банк имеет право не перечислять предприятию суммы операций, которые были проведены с нарушением условий договора.**
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.1.7` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **банк вправе передавать сведения о предприятии и его представителях в ПС «Мир» при подозрительных/мошеннических операциях и при расторжении договора из‑за мошенничества указывать даты и прич...
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.1.8.4` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: несоответствие Ресурса Требованиям Банка к Ресурсу Предприятия;
+  - Gold rationale: Специфика интернет-эквайринга — не применима для данного торгового POS-контракта
+- Matrix `5.1.8.5` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: осуществление видов деятельности, указанных в Требованиях к Ресурсу Предприятия;
+  - Gold rationale: Специфика интернет-эквайринга — не применима для данного торгового POS-контракта
+- Matrix `5.1.9` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **банк имеет право проводить дополнительные проверки операций в ТСТ, включая запросы в банк‑эмитент для проверки их правомерности.**
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.1.10` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: **банк вправе проверять предприятие и ресурс на мошенничество, несоответствие товаров виду деятельности и соблюдение требований договора, включая доступ к закрытым разделам ресурса (VIP, опт,...
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.1.12` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: В одностороннем порядке вносить изменения в документы, ссылки на которые даются в Договоре, путем публикации информации на Официальном сайте Банка не менее чем за 1 (один) календарный день до введения в дейс...
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.1.15` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Отказать Предприятию в заключении Договора без объяснения причин.
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.1.17.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Торговый оборот на один Электронный терминал Банка не превышает 40 000 (сорок тысяч) рублей (для г. Москва и г. Санкт-Петербург не превышает 80 000 (восемьдесят тысяч) рублей) за последний календарный месяц...
+  - Gold rationale: Ограничения торгового оборота на терминал — в контракте не установлены (44-ФЗ)
+- Matrix `5.1.17.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: 5.1.17.2. Торговый оборот на один Смарт-терминал Банка не превышает 40 000 (сорок тысяч) рублей (для г. Москва и г. Санкт-Петербург не превышает 80 000 (восемьдесят тысяч) рублей) за последний календарный ме...
+  - Gold rationale: Ограничения торгового оборота на терминал — в контракте не установлены (44-ФЗ)
+- Matrix `5.2` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: Банк обязуется:
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `5.2.1` -> `missing`; tags: `missing/no-operational-rule`.
+  - Matrix signal: Обеспечить Предприятию доступ к СПЭП для осуществления Операций.
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.2.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Обеспечить безопасность проведения Операций в Интернет-эквайринге посредством использования современных протоколов и Технологий 3DSecure
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.2.9` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Предоставить Предприятию QR-код партнера по электронным каналам связи в электронном виде или на бумажном носителе
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.2.12` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Банк предоставляет QR-API (в т.ч. всё, что связано с организацией информационно-технологического взаимодействия посредством такого API) «как есть» без предоставления каких-либо гарантий
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `6` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: «ОПЛАТА УСЛУГ БАНКА»
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `6.3` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: банк до 10‑го рабочего дня месяца, следующего за отчетным, направляет предприятию акт по форме приложения 2 и счет на оплату услуг, вознаграждение по п. 6.1 договора не облагается НДС по п. 3...
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `6.7` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: Основной смысл: предприятие ежемесячно платит фиксированную сумму (с НДС) за сервисное обслуживание каждого электронного терминала.
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `6.8` -> `missing`; tags: `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Основной смысл: банк до 5‑го рабочего дня месяца, следующего за отчетным, направляет предприятию УПД на сумму ежемесячной платы за сервисное обслуживание электронных терминалов.
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `6.10` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Основной смысл: предприятие до 25‑го числа месяца, следующего за отчетным, должно вернуть в банк подписанный УПД за сервисное обслуживание терминалов или направить мотивированный отказ.
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `6.11` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: предприятие оплачивает сервисное обслуживание терминалов в течение 5 рабочих дней с даты подписания УПД, безналично, на счет банка, указанный в УПД.
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `6.12` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: предприятие оплачивает сервисное обслуживание терминалов в течение 5 рабочих дней с даты получения счета 363, безналично, на счет банка, указанный в этом счете.
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `6.13` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Основной смысл: предприятие ежемесячно платит за каждый смарт‑терминал по тарифу из Приложения 1.1, пропорционально дням использования в месяце, с пересчетом платы при подключении/отключении 2D‑сканера.
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `6.14` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Основной смысл: банк до 5‑го рабочего дня месяца, следующего за отчетным, направляет предприятию УПД на сумму ежемесячной платы за сервисное обслуживание смарт‑терминалов.
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `6.16` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Основной смысл: предприятие до 25‑го числа месяца, следующего за отчетным, должно вернуть в банк подписанный УПД за сервис смарт‑терминалов или направить мотивированный отказ.
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `6.17` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: предприятие оплачивает сервисное обслуживание смарт‑терминалов в течение 5 рабочих дней с даты подписания УПД, безналично, на счет банка, указанный в УПД.
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `6.18` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: предприятие оплачивает сервис смарт‑терминалов в течение 5 рабочих дней с даты получения счета 363, безналично, на счет банка, указанный в этом счете.
+  - Gold rationale: Сервисное обслуживание терминалов (абонентская плата) — по контракту плата за терминалы отсутствует
+- Matrix `7` -> `missing`; tags: `missing/no-required-liability-mechanism`.
+  - Matrix signal: РАЗДЕЛ 7 «ОТВЕТСТВЕННОСТЬ СТОРОН»
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `7.8` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-liability-mechanism`.
+  - Matrix signal: Основной смысл: банк не отвечает за споры между предприятием и покупателем, если они не связаны с предметом договора, а также за споры, касающиеся товаров или услуг, оплаченных через банковские инструменты (...
+  - Gold rationale: Ограничение ответственности банка (специфика банковского договора); в 44-ФЗ контракте отсутствует
+- Matrix `7.9` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-liability-mechanism`.
+  - Matrix signal: Основной смысл: банк освобождается от ответственности за задержку перечисления денег предприятию, если причина задержки не зависит от него. При сравнении важно: формулировка «не по вине Банка» — определяет г...
+  - Gold rationale: Ограничение ответственности банка (специфика банковского договора); в 44-ФЗ контракте отсутствует
+- Matrix `7.10` -> `missing`; tags: `missing/no-required-liability-mechanism`.
+  - Matrix signal: Основной смысл: банк не отвечает за невыполнение договора, если это вызвано действиями или бездействием третьих лиц, включая участников платёжной системы. При сравнении важно: степень расширения понятия «тре...
+  - Gold rationale: Ограничение ответственности банка (специфика банковского договора); в 44-ФЗ контракте отсутствует
+- Matrix `7.11` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-liability-mechanism`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: банк не отвечает за задержку перечисления средств, если она вызвана внутренним расследованием из-за подозрения на нарушение условий договора. При сравнении важно: наличие и формулировка основ...
+  - Gold rationale: Ограничение ответственности банка (специфика банковского договора); в 44-ФЗ контракте отсутствует
+- Matrix `7.12` -> `missing`; tags: `missing/no-required-liability-mechanism`.
+  - Matrix signal: Банк не несет ответственности в случае превышения установленной Цены Договора
+  - Gold rationale: Ограничение ответственности банка (специфика банковского договора); в 44-ФЗ контракте отсутствует
+- Matrix `7.13` -> `missing`; tags: `missing/no-required-liability-mechanism`, `missing/no-operational-rule`.
+  - Matrix signal: Основной смысл: предприятие отвечает за неправильное проведение операций на своём ресурсе, если оно не выполнило обязательства, указанные в договора.
+  - Gold rationale: Ограничение ответственности банка (специфика банковского договора); в 44-ФЗ контракте отсутствует
+- Matrix `7.14` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-liability-mechanism`.
+  - Matrix signal: Смысл: предприятие отвечает за все действия свои и ТСТ в системе СПЭП. Сравнение: проверить, уточнено ли, какие именно действия охватывает ответственность.
+  - Gold rationale: Ограничение ответственности банка (специфика банковского договора); в 44-ФЗ контракте отсутствует
+- Matrix `8` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: РАЗДЕЛ 8 «ФОРС-МАЖОРНЫЕ ОБСТОЯТЕЛЬСТВА»
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `9` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Смысл: стороны обязаны сначала соблюдать претензионный порядок, срок рассмотрения претензий — 10 дней. Сравнение: проверить срок ответа и наличие указания суда/подсудности после досудебного этапа.
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `10` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: РАЗДЕЛ 10 «СРОК ДЕЙСТВИЯ ДОГОВОРА И ПОРЯДОК ЕГО РАСТОРЖЕНИЯ
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `11` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: РАЗДЕЛ 11 «ПРОЧИЕ УСЛОВИЯ
+  - Gold rationale: Заголовочный раздел матрицы, не требует прямого аналога в контракте
+- Matrix `11.3` -> `missing`; tags: `missing/no-operational-rule`.
+  - Matrix signal: Стороны обязуются не разглашать полученные в ходе исполнения Договора сведения, включая: • описание защитных элементов Карт; • технологию проведения Операций; • информацию об управлении, финансовой и иной де...
+  - Gold rationale: Прочие условия банковского договора — специфика банковской формы, не перенесена в 44-ФЗ контракт
+- Matrix `11.5` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: Все имевшие место до подписания настоящего Договора соглашения, переговоры и переписка между Сторонами по вопросам, изложенным в настоящем Договоре, утрачивают силу с даты подписания настоящего Договора.
+  - Gold rationale: Прочие условия банковского договора — специфика банковской формы, не перенесена в 44-ФЗ контракт
+- Matrix `11.6` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: Настоящий Договор составлен в ________ экземплярах, _________ экземпляр(-а) для Банка, один экземпляр для Предприятия
+  - Gold rationale: Прочие условия банковского договора — специфика банковской формы, не перенесена в 44-ФЗ контракт
+- Matrix `11.11` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Инструктивные материалы, касающиеся предмета Договора, включая документы, ссылки на которые даются в настоящем Договоре, размещенные на Официальном сайте Банка, становятся обязательными к исполнению со следу...
+  - Gold rationale: Прочие условия банковского договора — специфика банковской формы, не перенесена в 44-ФЗ контракт
+- Matrix `11.12` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Все уведомления и запросы по Договору, за исключением случаев, когда Договором предусмотрен иной порядок их направления, считаются направленными надлежащим образом другой Стороне, если они направлены в соотв...
+  - Gold rationale: Прочие условия банковского договора — специфика банковской формы, не перенесена в 44-ФЗ контракт
+- Matrix `11.13` -> `missing`; tags: `missing/no-operational-rule`.
+  - Matrix signal: К настоящему Договору прилагаются: 1) Приложение № 1 – Заявление Предприятия на проведение расчетов по операциям оплаты товаров/услуг. 2) Приложение № 1.1 – Информация о Торгово-Сервисной Точке/Ресурсе Предп...
+  - Gold rationale: Прочие условия банковского договора — специфика банковской формы, не перенесена в 44-ФЗ контракт
+### Benchmark B: missing matrix items
+
+- Matrix `2.5` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: SberPay: порядок подключения (заголовок)
+  - Gold rationale: 🟡 Сервис SberPay не подключён к данному Договору (ТЭ без SberPay)
+- Matrix `2.5.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: SberPayOnline (подраздел)
+  - Gold rationale: 🟡 SberPay не подключён
+- Matrix `2.5.1.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: SberPayOnline подключается автоматически при ИЭ
+  - Gold rationale: 🟡 ИЭ + SberPay не применимо
+- Matrix `2.5.1.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: SberPayOnline как отдельная услуга без ИЭ
+  - Gold rationale: 🟡 SberPay не подключён
+- Matrix `2.5.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: SberPayFaceScan (биометрия — подраздел)
+  - Gold rationale: 🟡 Биометрия не применяется
+- Matrix `2.5.2.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Биометрия подключается доп. к Торговому эквайрингу
+  - Gold rationale: 🟡 Биометрия не применяется
+- Matrix `2.6` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: QR-код на терминалах/ККТ (заголовок)
+  - Gold rationale: 🟡 QR не подключён к данному Договору
+- Matrix `2.6.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: Смарт-терминалы: подключение QR (подраздел)
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `2.6.1.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: QR подключается при установке Смарт-терминала
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `2.6.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: ЭТ с ККТ: виды подключения динамического QR
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `2.6.2.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR через API (QR-API) при наличии ПО у Предприятия
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `2.6.2.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR через Вендора при отсутствии ПО у Предприятия
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `2.6.3` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: ЭТ при подключении QR Вендором (=Банком)
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `2.6.3.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR подключается при установке ЭТ
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `2.6.3.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Отключение QR по инициативе Предприятия
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `4.2.21` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: ИЭ: обязанности на Ресурсе (заголовок)
+  - Gold rationale: 🔴 Internet-эквайринг — не предмет данного Договора (только ТЭ)
+- Matrix `4.2.21.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: ИЭ: начинать операции только после тестирования
+  - Gold rationale: 🔴 ИЭ не применимо
+- Matrix `4.2.21.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: ИЭ: соответствовать требованиям Банка к Ресурсу
+  - Gold rationale: 🔴 ИЭ не применимо
+- Matrix `4.2.21.3` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: ИЭ: подтверждать предавторизации за 5 к.д.
+  - Gold rationale: 🔴 ИЭ не применимо
+- Matrix `4.2.21.4` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: ИЭ: согласовывать дизайн платёжной страницы
+  - Gold rationale: 🔴 ИЭ не применимо
+- Matrix `4.2.21.5` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: ИЭ: интеграция со СПЭП и тесты — 30 к.д.
+  - Gold rationale: 🔴 ИЭ не применимо
+- Matrix `4.2.21.6` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: ИЭ: обеспечивать безопасность Ресурса самостоятельно
+  - Gold rationale: 🔴 ИЭ не применимо
+- Matrix `4.2.21.7` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: ИЭ: предоставлять доступ к закрытым разделам Ресурса
+  - Gold rationale: 🔴 ИЭ не применимо
+- Matrix `4.2.21.8` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: ИЭ: соблюдать правила Личного кабинета ИЭ
+  - Gold rationale: 🔴 ИЭ не применимо
+- Matrix `4.2.22` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Предоставлять Покупателю QR-код для оплаты QR/Плати QR
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `4.2.23` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: Не изменять QR-код в одностороннем порядке
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `4.2.24` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-liability-mechanism`.
+  - Matrix signal: Использовать QR-API в границах прав и описания
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `4.2.25` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: При нарушении безопасности QR-API — приостановить и уведомить
+  - Gold rationale: 🟡 QR не подключён
+- Matrix `4.2.26` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-operational-rule`.
+  - Matrix signal: Повторяющиеся платежи: хранить согласие, давать отмену (ИЭ)
+  - Gold rationale: 🔴 ИЭ/Повторяющиеся платежи — не применимо для ТЭ
+- Matrix `5.1.3` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: При невозможности удержания — АВТОМАТИЧЕСКОЕ СПИСАНИЕ с р/с Предприятия (заранее данный акцепт)
+  - Gold rationale: 🔴 КРИТИЧЕСКИ ОТСУТСТВУЕТ. Договор не содержит этот пункт. Банк лишён права автосписания с р/с Предприятия. Необходимо включить или согласовать альтернативный механизм взыскания
+- Matrix `5.1.4` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: При невозможности удержания — Банк выставляет платёжное требование к р/с в стороннем банке
+  - Gold rationale: ⚠️ В договоре механизм замещён постоплатой через УПД/Акт (разд. 6). Платёжное требование к стороннему банку не предусмотрено — риск задержки взыскания
+- Matrix `5.1.8.4` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`.
+  - Matrix signal: Прекращение авторизации: несоответствие Ресурса требованиям Банка
+  - Gold rationale: 🔴 ИЭ — не применимо для ТЭ
+- Matrix `5.1.8.5` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`.
+  - Matrix signal: Прекращение авторизации: виды деятельности, запрещённые на Ресурсе
+  - Gold rationale: 🔴 ИЭ — не применимо для ТЭ
+- Matrix `5.2.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-operational-rule`.
+  - Matrix signal: Банк обеспечивает Предприятию доступ к СПЭП
+  - Gold rationale: 🔴 ИЭ — не применимо для ТЭ
+- Matrix `5.2.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Банк обеспечивает безопасность ИЭ через 3DSecure
+  - Gold rationale: 🔴 ИЭ — не применимо для ТЭ
+- Matrix `6.4` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Предприятие возвращает подписанный УПД или мотивированный отказ до 25-го числа
+  - Gold rationale: ⚠️ Договор устанавливает срок оплаты (5 р.д. с подписания УПД), но явного обязательства возвратить подписанный УПД до 25-го числа нет. Рекомендуется добавить
+- Matrix `6.7` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: Плата за сервисное обслуживание ЭТ — ежемесячно фиксированная сумма
+  - Gold rationale: ⚠️ В договоре нет отдельного пункта о плате за сервисное обслуживание ЭТ. Матр. 6.7–6.18 не имеют аналога. Если обслуживание терминалов включено в тариф — указать явно
+- Matrix `6.8` -> `missing`; tags: `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Банк направляет УПД на сервисное обслуживание ЭТ — до 5-го р.д.
+  - Gold rationale: ⚠️ Нет отдельной строки для сервисного обслуживания в договоре
+- Matrix `6.9` -> `missing`; tags: `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Банк направляет Акт+счёт на сервисное обслуживание ЭТ — до 10-го р.д.
+  - Gold rationale: ⚠️ Аналогично 6.8
+- Matrix `6.10` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Предприятие возвращает подписанные документы по сервису ЭТ до 25-го числа
+  - Gold rationale: ⚠️ Нет в договоре
+- Matrix `6.11` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Оплата сервиса ЭТ — 5 р.д. с подписания УПД
+  - Gold rationale: ⚠️ Нет отдельного пункта
+- Matrix `6.12` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Оплата сервиса ЭТ — 5 р.д. с получения Акта+счёт
+  - Gold rationale: ⚠️ Нет отдельного пункта
+- Matrix `6.13` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Плата за сервисное обслуживание Смарт-терминалов — ежемесячно по тарифу
+  - Gold rationale: ⚠️ Нет отдельного пункта для Смарт-терминалов
+- Matrix `6.14` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Банк направляет УПД на сервис Смарт — до 5-го р.д.
+  - Gold rationale: ⚠️ Нет в договоре
+- Matrix `6.15` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Банк направляет Акт+счёт на сервис Смарт — до 10-го р.д.
+  - Gold rationale: ⚠️ Нет в договоре
+- Matrix `6.16` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Предприятие возвращает документы по сервису Смарт до 25-го числа
+  - Gold rationale: ⚠️ Нет в договоре
+- Matrix `6.17` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Оплата сервиса Смарт — 5 р.д. с подписания УПД
+  - Gold rationale: ⚠️ Нет в договоре
+- Matrix `6.18` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Оплата сервиса Смарт — 5 р.д. с получения Акта+счёт
+  - Gold rationale: ⚠️ Нет в договоре
+- Matrix `7.2` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-liability-mechanism`.
+  - Matrix signal: Штраф Предприятия за каждый факт нарушения (кроме просрочки) — % от Цены
+  - Gold rationale: ⚠️ В договоре структура 223-ФЗ: штраф 10% от Цены Договора установлен для БАНКА (7.6.2); аналогичного штрафа для ПРЕДПРИЯТИЯ в договоре нет. Банк теряет право взыскать фиксированный штраф с Предприятия за каждое нарушение
+- Matrix `7.3` -> `missing`; tags: `missing/no-required-liability-mechanism`.
+  - Matrix signal: Лимит штрафов Предприятия = Цена Договора
+  - Gold rationale: ⚠️ В договоре лимит установлен только для Банка (п. 7.3 = матр. 7.7). Лимит штрафов для Предприятия в договоре явно не установлен
+- Matrix `7.13` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-liability-mechanism`, `missing/no-operational-rule`.
+  - Matrix signal: Ответственность за некорректные Операции на Ресурсе (ИЭ)
+  - Gold rationale: 🔴 ИЭ — не применимо
+- Matrix `7.14` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-liability-mechanism`.
+  - Matrix signal: Ответственность за все действия в СПЭП
+  - Gold rationale: 🔴 ИЭ / СПЭП — не применимо для ТЭ
+### Benchmark C: missing matrix items
+
+- Matrix `2.3.7` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Служба поддержки Банка (24/7) как канал обмена; момент получения информации
+  - Gold rationale: Канал обращения в поддержку отсутствует в договоре как отдельный способ.
+- Matrix `2.5` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: Порядок подключения SberPay (торговый эквайринг) — вводный пункт
+  - Gold rationale: Договор не предусматривает SberPay для торгового эквайринга.
+- Matrix `2.5.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: SberPayOnline (вводный)
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `2.5.1.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: SberPayOnline подключается автоматически при ИЭ
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `2.5.1.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: SberPayOnline как отдельная услуга (без ИЭ)
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `2.5.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: SberPayFaceScan (оплата по биометрии) — вводный
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `2.5.2.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: FaceScan подключается доп. к Торговому эквайрингу
+  - Gold rationale: Биометрия не предусмотрена договором.
+- Matrix `2.6` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: QR-код для Смарт/ЭТ/ККТ — вводный пункт
+  - Gold rationale: В договоре QR упоминается, но без структурированного блока как в матрице.
+- Matrix `2.6.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: Для Смарт-терминалов — вводный
+  - Gold rationale: Смарт-терминалы в договоре не используются.
+- Matrix `2.6.1.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: QR подключается при установке Смарт-терминала
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `2.6.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: QR для ЭТ, работающих под управлением ККТ Предприятия
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `2.6.2.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR через QR-API при наличии собственного ПО
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `2.6.2.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR через Вендора при отсутствии собственного ПО
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `2.6.3` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: ЭТ с QR, где Вендором является Банк
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `2.6.3.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR подключается при установке ЭТ
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `2.6.3.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Отключение QR по инициативе Предприятия
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `4.2.16.2` -> `missing`; tags: `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Гарантия Предприятия о наличии согласий СОТРУДНИКОВ на обработку их ПДн
+  - Gold rationale: КРИТИЧЕСКИ ВАЖНЫЙ пункт! Защищает Банк от претензий работников Предприятия по 152-ФЗ. В договоре отсутствует. Рекомендуется включить.
+- Matrix `4.2.24` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-liability-mechanism`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Использовать QR-API только в границах функционала; запрет выхода за рамки API
+  - Gold rationale: QR-API не используется в данном договоре.
+- Matrix `4.2.25` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: При нарушении безопасности QR-API — немедленно прекратить использование и уведомить Банк
+  - Gold rationale: QR-API не используется в данном договоре.
+- Matrix `5.1.17` -> `missing`; tags: `missing/no-useful-legal-function`.
+  - Matrix signal: Банк вправе расторгнуть Договор и потребовать возврата терминалов при низком обороте
+  - Gold rationale: КРИТИЧЕСКИ ВАЖНЫЙ пункт для Банка! Отсутствует в договоре. Без него Банк не может расторгнуть договор при обороте < 40 000 руб./мес. на ЭТ.
+- Matrix `5.1.17.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`.
+  - Matrix signal: Порог для ЭТ: < 40 000 руб./мес. (Москва/СПб: < 80 000 руб./мес.)
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `5.1.17.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`.
+  - Matrix signal: Порог для Смарт-терминала: < 40 000 руб./мес. или задолженность
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+### Benchmark D: missing matrix items
+
+- Matrix `2.1` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Регистрация ТСТ: банк вправе отказать без объяснений
+  - Gold rationale: Банк утрачивает право отказать без объяснений. Риск: навязанные ТСТ без проверки.
+- Matrix `2.3.5` -> `missing`; tags: `missing/no-required-procedure-or-channel`.
+  - Matrix signal: E-invoicing / СФЕРА-Курьер как канал ЭДО (обязателен для 223-ФЗ)
+  - Gold rationale: В контракте п.12.1 нет E-invoicing и ДБО. Для 223-ФЗ канал ЭДО необходим.
+- Matrix `2.3.2` -> `missing`; tags: `missing/no-required-procedure-or-channel`.
+  - Matrix signal: ДБО (дистанционное банковское обслуживание) как канал обмена
+  - Gold rationale: Отсутствует. Только факс/эл.почта/почта.
+- Matrix `2.5.1.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: SberPay Online, SberPayFaceScan (биометрия)
+  - Gold rationale: Не применимо: торговый POS-эквайринг
+- Matrix `2.5.2.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: SberPay Online, SberPayFaceScan (биометрия)
+  - Gold rationale: Не применимо: торговый POS-эквайринг
+- Matrix `2.6.1.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: QR-код (SmartPOS, POS, ККТ, QR-API)
+  - Gold rationale: Не применимо: нет QR-эквайринга
+- Matrix `2.6.2.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR-код (SmartPOS, POS, ККТ, QR-API)
+  - Gold rationale: Не применимо: нет QR-эквайринга
+- Matrix `2.6.2.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR-код (SmartPOS, POS, ККТ, QR-API)
+  - Gold rationale: Не применимо: нет QR-эквайринга
+- Matrix `2.6.3.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR-код (SmartPOS, POS, ККТ, QR-API)
+  - Gold rationale: Не применимо: нет QR-эквайринга
+- Matrix `2.6.3.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: QR-код (SmartPOS, POS, ККТ, QR-API)
+  - Gold rationale: Не применимо: нет QR-эквайринга
+- Matrix `2.7` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Договор в электронном виде с УКЭП
+  - Gold rationale: Не применимо для данного контракта
+- Matrix `4.2.3` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Предприятие самостоятельно следит за изменениями на сайте банка
+  - Gold rationale: В контракте отсутствует. Инициатива уведомления — на банке (через акт/счёт).
+- Matrix `4.2.13` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Безусловно и полностью возместить банку суммы по спорным/недействительным операциям
+  - Gold rationale: В контракте только удержание (п.4.2.1.5). Обязанность заказчика возместить сверх удержаний отсутствует. Банк незащищён при недостаточности удержаний.
+- Matrix `4.2.14` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Уведомить банк о реорганизации, изменении документов за 3 р.д.
+  - Gold rationale: Явно не прописано. Риск: банк не узнает об изменениях своевременно.
+- Matrix `4.2.16.1` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: ПДн руководителя: гарантия правового основания; подтверждение за 3 р.д.
+  - Gold rationale: Полностью отсутствует. Риск нарушения 152-ФЗ при передаче ПДн в ПС МИР.
+- Matrix `4.2.16.2` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: ПДн руководителя: гарантия правового основания; подтверждение за 3 р.д.
+  - Gold rationale: Полностью отсутствует. Риск нарушения 152-ФЗ при передаче ПДн в ПС МИР.
+- Matrix `4.2.16.3` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: ПДн руководителя: гарантия правового основания; подтверждение за 3 р.д.
+  - Gold rationale: Полностью отсутствует. Риск нарушения 152-ФЗ при передаче ПДн в ПС МИР.
+- Matrix `4.2.17` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Соблюдение PCI DSS; предоставление аттестата/листа самооценки по запросу
+  - Gold rationale: Отсутствует. Рекомендован для торгового эквайринга.
+- Matrix `4.2.18` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Прекратить приём карт и снять информационные материалы с даты расторжения
+  - Gold rationale: Частично: возврат терминалов (4.4.15). Снятие материалов явно не прописано.
+- Matrix `4.2.19` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Не противодействовать проверкам банка, содействовать расследованию
+  - Gold rationale: Нет отдельного пункта. Косвенно — из 4.4.2.
+- Matrix `4.2.20.4` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-operational-rule`.
+  - Matrix signal: Принять терминалы по акту установленной формы в 2 экз.
+  - Gold rationale: Нет явной формы акта приёмки оборудования.
+- Matrix `4.2.20.7` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-liability-mechanism`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Штраф за невозврат терминала: 25 000 руб. за каждый
+  - Gold rationale: КРИТИЧНО: срок возврата 7 р.д. в контракте, но штрафа за невозврат НЕТ. Банк финансово не защищён.
+- Matrix `4.2.21` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: Интернет-эквайринг, QR, повторяющиеся платежи
+  - Gold rationale: Не применимо: торговый POS
+- Matrix `4.2.22` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Интернет-эквайринг, QR, повторяющиеся платежи
+  - Gold rationale: Не применимо: торговый POS
+- Matrix `4.2.23` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`.
+  - Matrix signal: Интернет-эквайринг, QR, повторяющиеся платежи
+  - Gold rationale: Не применимо: торговый POS
+- Matrix `4.2.24` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-liability-mechanism`.
+  - Matrix signal: Интернет-эквайринг, QR, повторяющиеся платежи
+  - Gold rationale: Не применимо: торговый POS
+- Matrix `4.2.25` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Интернет-эквайринг, QR, повторяющиеся платежи
+  - Gold rationale: Не применимо: торговый POS
+- Matrix `4.2.26` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-operational-rule`.
+  - Matrix signal: Интернет-эквайринг, QR, повторяющиеся платежи
+  - Gold rationale: Не применимо: торговый POS
+- Matrix `5.1.2` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Приостановить авторизацию при задолженности предприятия
+  - Gold rationale: Контракт: право прекратить при нарушении (4.2.3.1). Отдельного права при задолженности нет.
+- Matrix `5.1.3` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Списание без распоряжения (заранее данный акцепт) с р/с в банке
+  - Gold rationale: КРИТИЧНО: В контракте оплата по счёту (п.2.5). Р/с заказчика — казначейский (бюджетный), заранее данный акцепт невозможен по бюджетному законодательству.
+- Matrix `5.1.5` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Не возмещать суммы операций, проведённых с нарушением договора
+  - Gold rationale: Отдельного права нет. Вытекает из 4.2.1.2, но явно не оговорено.
+- Matrix `5.1.7` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Передавать сведения о предприятии (ПДн руководителя) в ПС МИР при мошенничестве
+  - Gold rationale: Отсутствует. Риск: банк не может передавать ПДн без правового основания (152-ФЗ).
+- Matrix `5.1.8.2` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Внесение в списки экстремистов/террористов как основание прекратить авторизацию
+  - Gold rationale: Не включено в п.4.2.3 контракта.
+- Matrix `5.1.8.3` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Подозрение в ОД/ФТ как основание прекратить авторизацию
+  - Gold rationale: Не включено. Важно для 115-ФЗ.
+- Matrix `5.1.8.10` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Недостоверные сведения о предприятии/руководстве
+  - Gold rationale: Не включено в п.4.2.3.
+- Matrix `5.1.8.12` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: 30 дней без операций как основание расторгнуть
+  - Gold rationale: Не применимо: медучреждение с гарантированным потоком (80 млн. руб./год).
+- Matrix `5.1.10` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Право банка проводить проверку предприятия
+  - Gold rationale: Нет явного права. Косвенно — через 4.2.3.
+- Matrix `5.1.12` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`.
+  - Matrix signal: Одностороннее изменение документов банком через сайт
+  - Gold rationale: Противоречит 223-ФЗ: существенные условия неизменны (п.8.7 контракта). НЕ ПРИМЕНИМО.
+- Matrix `5.1.13` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Уведомление об изменении реквизитов банка через публикацию на сайте
+  - Gold rationale: Нет аналога. Риск: заказчик не заметит изменения реквизитов банка.
+- Matrix `5.1.16` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Требовать документы для законодательных функций (шире 115-ФЗ)
+  - Gold rationale: Частично покрыто п.4.4.11. Матрица шире.
+- Matrix `5.1.17.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`.
+  - Matrix signal: Расторжение при низком обороте (<40/80 тыс. руб. в мес.)
+  - Gold rationale: Не применимо: оборот ~80 млн/год (>> лимита). НЕ ПРИМЕНИМО.
+- Matrix `5.1.17.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`.
+  - Matrix signal: Расторжение при низком обороте (<40/80 тыс. руб. в мес.)
+  - Gold rationale: Не применимо: оборот ~80 млн/год (>> лимита). НЕ ПРИМЕНИМО.
+- Matrix `5.2.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-operational-rule`.
+  - Matrix signal: Обеспечить доступ к СПЭП
+  - Gold rationale: Не применимо: только POS
+- Matrix `5.2.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: 3DSecure для интернет-эквайринга
+  - Gold rationale: Не применимо: торговый эквайринг
+- Matrix `7.17` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-liability-mechanism`.
+  - Matrix signal: Полная ответственность за повторяющиеся платежи
+  - Gold rationale: Не применимо: нет повторяющихся платежей
+### Benchmark E: missing matrix items
+
+- Matrix `4.2.3` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Предприятие самостоятельно отслеживает изменения условий на сайте банка
+  - Gold rationale: Предприятие не обязано следить за сайтом банка. Банк не может ссылаться на публикацию как уведомление.
+- Matrix `4.2.4` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Предприятие размещает в ТСТ информационные материалы о приёме карт МИР и логотипы ПС
+  - Gold rationale: Обязанность предприятия размещать материалы не прописана (только банк «обеспечивает» их по 4.2.3).
+- Matrix `4.2.5` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Принимать ВСЕ карты одинаково; не выдавать наличные держателям карт; ≤2 карты одного типа
+  - Gold rationale: Запрет отказа в приёме карт отдельных ПС и запрет выдачи наличных ОТСУТСТВУЮТ (требование ПС МИР п.8.1).
+- Matrix `4.2.6` -> `missing`; tags: `missing/no-operational-rule`.
+  - Matrix signal: Не разбивать сумму одной операции на несколько
+  - Gold rationale: Запрет разбивки операций ОТСУТСТВУЕТ. Риск дробления.
+- Matrix `4.2.7` -> `missing`; tags: `missing/no-operational-rule`.
+  - Matrix signal: Не использовать реквизиты карты для операций, не авторизованных держателем
+  - Gold rationale: Запрет использования реквизитов для иных операций ОТСУТСТВУЕТ.
+- Matrix `4.2.8` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Не устанавливать цены выше при оплате картой, чем при наличных (запрет наценки)
+  - Gold rationale: Запрет наценки ОТСУТСТВУЕТ (требование ПС МИР п.8.7).
+- Matrix `4.2.9` -> `missing`; tags: `missing/no-required-liability-mechanism`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Проводить операции строго по Порядку в ТСТ; ответственность за данные в документах
+  - Gold rationale: Ссылка на Порядок проведения операций отсутствует (только общая обязанность соблюдать материалы — 3.2.2).
+- Matrix `4.2.10` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Хранить документы по операциям 13 месяцев; предоставлять в банк за 3 р.д.
+  - Gold rationale: Обязанность хранить документы 13 мес. и срок 3 р.д. ОТСУТСТВУЮТ. Риск при претензиях ПС.
+- Matrix `4.2.11` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Письменное заявление за 3 р.д. до прекращения работы в ТСТ; уведомление об утрате оборудования
+  - Gold rationale: Обязанность заявления до прекращения работы ТСТ отсутствует.
+- Matrix `4.2.13` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Безусловно возместить банку убытки, не покрытые удержаниями
+  - Gold rationale: Обязанность безусловного возмещения убытков ОТСУТСТВУЕТ. Банк взыскивает только через суд.
+- Matrix `4.2.14` -> `missing`; tags: `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Уведомить банк о реорганизации/банкротстве/ликвидации за 3 р.д.
+  - Gold rationale: П.11.8 — только переход прав; п.6.5 — 5 р.д. для реквизитов. Срок 3 р.д. для реорганизации не закреплён.
+- Matrix `4.2.15` -> `missing`; tags: `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Достоверные сведения по 115-ФЗ; обновлять ≥1 раза в год; передать в 7 р.д. по запросу
+  - Gold rationale: Обязанность регулярного обновления сведений по 115-ФЗ отсутствует (только заверение в 11.6).
+- Matrix `4.2.16.1` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: main idea: Важно, чтобы было действующее согласие на передачу ПДн руководителя Предприятия. Состав ПДн: ФИО, адрес, паспортные данные. Важно, чтобы...; topics: Предприятие гарантирует наличие правовых оснований на передачу ПДн;...
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `4.2.16.2` -> `missing`; tags: `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: main idea: Важно, что данный пункт относится ко всем сотрудникам кроме руководителя, важно наличие согласий, обязанность подтвердить наличие согласи...; topics: Предприятие гарантирует наличие согласий сотрудников(кроме руковод...
+  - Gold rationale: Gold has no useful legal analogue in the contract.
+- Matrix `4.2.16.3` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-required-liability-mechanism`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: ПДн руководителя: гарантия правового основания; согласие ФЛ; подтверждение за 3 р.д.; ответственность
+  - Gold rationale: Гарантии ПДн руководителя и механизм подтверждения ОТСУТСТВУЮТ. Есть только право банка передавать ПДн (4.1.3).
+- Matrix `4.2.17` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-required-procedure-or-channel`, `missing/no-required-security-or-data-duty`, `missing/no-operational-rule`.
+  - Matrix signal: Соответствие PCI DSS; аттестат и результаты тестов по запросу банка
+  - Gold rationale: PCI DSS только в определении (1.24). Обязанность соответствовать и предоставить аттестат ОТСУТСТВУЕТ.
+- Matrix `4.2.18` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: При расторжении — снять информационные материалы о приёме карт с ТСТ
+  - Gold rationale: Обязанность снятия материалов при расторжении отсутствует.
+- Matrix `4.2.19` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Не противодействовать проверкам банка; содействовать при проверке
+  - Gold rationale: Содействие проверкам явно не прописано (только 3.2.4 — доступ к терминалам).
+- Matrix `4.2.20.1` -> `missing`; tags: `missing/no-operational-rule`.
+  - Matrix signal: Проходить первичный инструктаж на сайте банка; обеспечить прохождение сотрудниками ТСТ
+  - Gold rationale: В контракте банк сам проводит инструктаж (4.2.1). Обязанность предприятия организовать инструктаж сотрудников — отсутствует.
+- Matrix `4.1.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Право предприятия ссылаться на приём карт МИР в рекламе (по согласованию с банком)
+  - Gold rationale: Право предприятия на рекламу с логотипом ПС в контракте не упомянуто.
+- Matrix `5.1.1.1` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Банк удерживает суммы недействительных операций (12 оснований: нарушение условий, без авторизации, превышение суммы, нарушение Порядка и др.)
+  - Gold rationale: КРИТИЧНО: Все 12 оснований удержания недействительных операций ОТСУТСТВУЮТ. Банк незащищён от мошеннических операций.
+- Matrix `5.1.1.4` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Банк удерживает суммы оспоренных операций, списанных эмитентом (чарджбэк)
+  - Gold rationale: Основание чарджбэка ОТСУТСТВУЕТ. При списании эмитентом банк не может удержать сумму из перечислений.
+- Matrix `5.1.1.5` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-liability-mechanism`.
+  - Matrix signal: Банк удерживает суммы штрафов ПС и убытков по вине предприятия
+  - Gold rationale: ОТСУТСТВУЕТ. При штрафах ПС банк не может взыскать их с предприятия удержанием.
+- Matrix `5.1.2` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Приостановить авторизацию при задолженности предприятия или подозрении в мошенничестве
+  - Gold rationale: Право банка приостановить авторизацию при задолженности ОТСУТСТВУЕТ полностью.
+- Matrix `5.1.5` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Не возмещать предприятию суммы операций при нарушении договора
+  - Gold rationale: Право не возмещать при нарушении ОТСУТСТВУЕТ. Банк обязан платить даже при подозрительных операциях.
+- Matrix `5.1.8.1` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.2` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-security-or-data-duty`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.3` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.4` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.5` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.6` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.7` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.8` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-operational-rule`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.9` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.10` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.11` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.12` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.8.13` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Основания прекратить/приостановить авторизацию (13 оснований: задолженность, мошенничество, нарушение Порядка, низкий оборот, предписание ЦБ и др.)
+  - Gold rationale: Раздел об основаниях прекращения авторизации ПОЛНОСТЬЮ ОТСУТСТВУЕТ. Банк не может прекратить авторизацию ни при каких нарушениях.
+- Matrix `5.1.11` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`, `missing/no-operational-rule`.
+  - Matrix signal: Запрашивать документы по операциям в течение 13 месяцев; срок предоставления 3 р.д.
+  - Gold rationale: Право запрашивать документы 13 мес. не закреплено (только общий 4.1.6 без срока 13 мес.).
+- Matrix `5.1.12` -> `missing`; tags: `missing/no-express-protective-right`, `missing/no-required-procedure-or-channel`.
+  - Matrix signal: Одностороннее изменение условий через публикацию на сайте банка (уведомление за 15 к.д.)
+  - Gold rationale: Неприменимо (223-ФЗ требует доп. соглашения — п.6.3 контракта). Нейтральный пункт.
+- Matrix `5.1.15` -> `missing`; tags: `missing/no-express-protective-right`.
+  - Matrix signal: Банк вправе отказать в заключении договора/регистрации ТСТ без объяснения причин
+  - Gold rationale: Право отказать в регистрации ТСТ без объяснений в контракте не упомянуто.
+- Matrix `5.1.17.1` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`.
+  - Matrix signal: Расторжение при обороте <30 000 руб./мес. или систематически <80% прогнозного (>3 мес.)
+  - Gold rationale: Транспортный оборот [counterparty] существенно выше порога; практический риск минимален.
+- Matrix `5.1.17.2` -> `missing`; tags: `missing/inactive-product-channel-or-terminal`, `missing/no-express-protective-right`.
+  - Matrix signal: Расторжение при обороте <30 000 руб./мес. или систематически <80% прогнозного (>3 мес.)
+  - Gold rationale: Транспортный оборот [counterparty] существенно выше порога; практический риск минимален.
