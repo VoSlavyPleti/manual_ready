@@ -1,62 +1,59 @@
 ---
 name: mapping-skill
 description: >
-  Selects legally useful contract candidate clauses for acquiring risk-matrix
-  items using legal-function analysis.
+  Find legally meaningful contract candidate clauses for each item in a
+  standard acquiring risk matrix. Use for candidate recall only.
 ---
 
 # mapping-skill
 
-## Task
+## Purpose
 
-For each assigned matrix item, find the contract clauses that are legally useful
-candidates for that item. This is a one-to-many mapping task: one matrix item
-may have zero, one, or many contract candidates. The goal is candidate recall
-with disciplined pruning: include clauses that perform or materially explain the
-required legal function, and exclude clauses that are only topically similar.
+For each assigned matrix item, return the contract clauses that may legally
+cover, qualify, implement, limit, evidence, or explain the matrix requirement.
 
-The task is not numbering alignment, keyword matching, or semantic similarity
-search. Match the legal function.
+The matrix is the bank standard. The incoming contract is checked against that
+standard. This skill only builds the candidate pool. It does not assign
+compliance status.
 
 ## Inputs
 
-The task input must provide:
+Use only the assigned data:
 
-- matrix path or assigned matrix items;
-- contract path or full contract text;
-- assigned matrix ids, range, or batch file;
+- matrix items from `inputs/matrix.json`;
+- contract text from `inputs/contract.txt`;
+- assigned matrix ids or ranges;
 - exact output path.
 
-Use matrix fields as follows:
+Matrix field priority:
 
-- `number` only as the immutable output identifier in `matrix_id`;
-- `enriched_text` or source text as the main legal-content source;
-- `main_idea` to identify the required legal function;
-- `topics` to identify the legal zone and likely search vocabulary;
-- applicability fields;
-- product, terminal, channel, payment-method, lot, and procurement restrictions.
+1. `main_idea`: legal risk focus and what must be preserved.
+2. `enriched_text`: operative wording of the standard requirement.
+3. `topics`: search vocabulary and navigation hints.
+4. applicability fields: product, terminal, channel, lot, payment method, scope.
+5. `number`: output id only; never a matching signal.
 
-Candidate selection must be driven by the legal meaning of `enriched_text`,
-`main_idea`, and `topics`. Do not select candidates because matrix numbers,
-contract clause numbers, headings, or words happen to look similar.
+If `enriched_text` lists a menu of alternative products, channels, payment
+instruments, documents, or devices, search for the part that is inside the
+contract scope. Do not treat every unused alternative as a separate candidate
+target unless the matrix fields or `main_idea` make that alternative mandatory.
 
-## Output
+## Output Schema
 
-Save a JSON array to the exact assigned output path. Each item must use exactly
-this schema:
+Save a JSON array to the assigned output path:
 
 ```json
 {
   "matrix_id": "<matrix number>",
-  "contract_analog": ["<contract clause id>"],
+  "contract_analog": ["<exact contract clause id>"],
   "candidate_analysis": [
     {
-      "contract_id": "<contract clause id>",
-      "matrix_evidence": "<short legal core of the matrix requirement>",
-      "contract_evidence": "<short legal core of the contract clause>",
-      "coverage": "<why this clause is a useful candidate>",
+      "contract_id": "<exact contract clause id>",
       "legal_role": "direct|parent|child|framework|payment|liability|notice|termination|appendix|context",
-      "covered_elements": ["<matrix legal element covered by this clause>"]
+      "matrix_evidence": "<short legal core from the matrix>",
+      "contract_evidence": "<short legal content of this clause>",
+      "coverage": "<why this clause is legally useful>",
+      "covered_elements": ["<matrix legal element this clause may cover>"]
     }
   ],
   "matrix_legal_elements": [
@@ -69,314 +66,178 @@ this schema:
   "element_candidate_map": [
     {
       "element": "<material legal element>",
-      "candidate_ids": ["<contract clause id>"],
+      "candidate_ids": ["<exact contract clause id>"],
       "candidate_role": "direct|parent|child|framework|payment|liability|notice|termination|appendix|context",
       "search_result": "found|not_found"
     }
   ],
-  "candidate_limit_reason": "<why no other clauses were added, or why the candidate set is empty>"
+  "candidate_limit_reason": "<why no other clauses were added, or why none were found>"
 }
 ```
 
-Rules:
-
-- preserve `matrix_id` exactly from the matrix `number` field;
-- preserve contract clause ids exactly as they appear in the contract;
-- use decimal contract clause ids when the contract provides them, for example
-  `5.1.1`, `2.3`, or `4.2.6.3`;
-- never infer a candidate from numbering similarity;
-- do not add fields outside the schema;
-- use `contract_analog: []` and `candidate_analysis: []` when no useful
-  candidate exists;
-- when the candidate set is empty, `candidate_limit_reason` must name the
-  recovery zones checked and why none produced a useful legal candidate;
-- `contract_analog` must equal the set of
-  `candidate_analysis[].contract_id`;
-- `contract_analog` may contain multiple clauses for one matrix item when the
-  legal function is split across contract provisions;
-- every candidate must have one `legal_role` value from the schema and at least
-  one `covered_elements` item;
-- `matrix_legal_elements` must list the material legal elements extracted from
-  `main_idea`, `topics`, and `enriched_text`;
-- `element_candidate_map` must show which candidates were found for each
-  material element, or `not_found` when no useful candidate exists;
-- include exactly the assigned matrix ids once each.
-
-Do not write a batch result to `outputs/matrix_contract_mapping.json` unless
-that exact path was assigned for this task.
-
-## Analysis Method
-
-For every matrix item:
-
-1. Build the active profile:
-   - active product, channel, payment method, terminal, and lot mode;
-   - inactive alternatives;
-   - procurement or statutory framework;
-   - whether the item concerns payment, liability, document exchange, notice,
-     product activation, confidentiality, termination, technical duties, or
-     legal framework.
-2. Extract the legal core:
-   - protected party;
-   - legal object;
-   - operative action;
-   - trigger;
-   - measure: deadline, amount, formula, cap, document, channel, list, or
-     procedure;
-   - legal consequence.
-3. Search broadly by legal function and legal synonyms. Synonyms are search
-   handles only; they are not proof that a candidate belongs.
-4. Expand the candidate package with required parent, child, sibling, appendix,
-   framework, payment, liability, notice, or termination clauses.
-5. Build `matrix_legal_elements` and map each material element to direct,
-   framework, payment, liability, notice, termination, appendix, or context
-   candidates.
-6. If no candidate remains, run Pre-Missing Recovery before returning an empty
-   candidate set.
-7. Remove false positives.
-8. Write evidence that explains why each candidate belongs.
-
-Do not stop at the first candidate. Many useful packages are scattered across
-several sections.
-
-## Pre-Missing Recovery
-
-Before returning `contract_analog: []`, run a narrow recovery search by the
-uncovered legal element. Check these contract zones even when the first search
-found nothing:
-
-- payment, settlement, invoice, act, acceptance, reimbursement, withholding,
-  set-off, direct-debit, fee, and post-termination payment clauses;
-- liability, penalty, fine, damages, cap, non-liability, reimbursement, and
-  protected-risk clauses;
-- termination, refusal, suspension, return, survival, reorganization, assignment,
-  and post-termination clauses;
-- confidentiality, personal-data, lawful-basis, consent, banking-secrecy, and
-  information-use clauses;
-- appendix incorporation, technical assignment, tariff, statement, form,
-  specification, procurement, EIS, residual-law, and framework clauses;
-- notice, document exchange, EDI, signature, mailbox, platform, proof-of-receipt,
-  and channel clauses.
-
-An empty candidate set is allowed only after recovery fails to find a clause with
-the same protected party, legal object, trigger, or legal consequence. Record
-that limit in `candidate_limit_reason`.
-
-## Scattered Package Recall
-
-When a direct clause is found, search for companion clauses that may supply a
-mandatory legal element. Add them only when they materially explain the current
-matrix item:
-
-- parent clause creating legal force;
-- appendix, tariff, table, form, or specification with the operative detail;
-- payment deadline, amount basis, document route, payer, payee, or collection
-  mechanism;
-- liability consequence, formula, cap, protected party, or non-liability shield;
-- termination ground, notice, effective date, survival, return, or settlement;
-- framework clause changing source, trigger, procedure, remedy, or legal effect.
-
-## Contract Row Candidate Recall
-
-When a direct candidate is found, also search for parent, framework, context,
-and cross-referenced clauses that may stand as separate legally useful contract
-rows for the same matrix item. Add them only when they perform or materially
-explain a legal element of the current item.
+`contract_analog` must equal the set of `candidate_analysis[].contract_id`.
+Use exact clause ids as printed in the contract. Do not add parenthetical
+explanations, translations, repaired numbering, or invented ids.
 
-Always inspect clauses referenced by `clause`, `section`, `appendix`, table,
-tariff, form, statement, or specification references when the referenced clause
-defines one of these elements:
+If the legal rule is in an appendix, table, form, or technical assignment row,
+use the most specific row-level id available, for example `Приложение №1 п.5`.
+Descriptions belong in evidence fields, not in ids.
 
-- scope, product, channel, terminal, operation, or party;
-- deadline, term, amount, formula, cap, tariff, or payment basis;
-- procedure, notice route, evidence route, acceptance route, or document route;
-- liability trigger, protected party, penalty, cap, exception, or shield;
-- applicable rules, standards, law, survival, return, assignment, or continuing
-  consequence.
+## Workflow
 
-Do not add every referenced clause automatically. Add a referenced clause only
-when it can be tied to a material element in `element_candidate_map`.
+### 1. Extract Legal Elements
 
-## Framework Anchor Recall
+For each matrix item, extract:
 
-For matrix items about legal framework, payment-system rules, general party
-duties, confidentiality, liability, term, termination, legal succession,
-applicable law, incorporated documents, or continuing effects, include useful
-framework anchors in addition to direct operative clauses.
+- functional roles: bank/acquirer/executor, merchant/customer/enterprise,
+  cardholder, operator, payment system, third party;
+- legal object: service, operation, money, terminal, data, document, risk,
+  payment instrument, product, channel;
+- required right, duty, prohibition, permission, remedy, or procedure;
+- trigger or condition;
+- deadline, amount, formula, cap, tariff, currency, payment route;
+- notice route, document form, signature, proof, platform, appendix, table;
+- product/scope restriction.
+
+Search by legal function and matrix field priority, not by clause numbering or
+isolated word overlap.
+
+### 2. Search By Legal Function
+
+Use headings and keywords only to navigate. Include a clause only when it may
+supply a material element or materially explain another candidate.
+
+Search across:
+
+- definitions, subject, scope, services, and incorporated documents;
+- rights and obligations of each functional role;
+- payment, acceptance, invoice, act, set-off, withholding, reimbursement;
+- equipment, terminal, software, security, return, support;
+- liability, penalties, caps, exceptions, non-liability, indemnity, chargeback;
+- notice, document exchange, EDI, e-mail, platform, signature, proof;
+- term, termination, refusal, suspension, survival, post-termination settlement;
+- procurement, mandatory law, payment-system rules, privacy rules, framework
+  documents, appendices, specifications, forms, tables.
 
-A framework anchor belongs when it supplies:
-
-- source of legal regulation;
-- incorporated document force;
-- rule or standard that controls performance;
-- survival or post-termination effect;
-- assignment, reorganization, or succession rule;
-- legal consequence that limits or explains the operative clause.
-
-Reject framework anchors that only repeat background law or section context
-without changing a material element of the current item.
-
-## Candidate Selection Rules
-
-### Direct Operative Clauses
-
-When the contract contains a direct operative clause that performs the exact
-function named by the matrix, collect it first. Do not reject it merely because
-the contract also contains generic framework language.
-
-If the direct clause alone carries the legal function, do not add background
-clauses merely because they are nearby.
-
-
-### Procurement / Statutory Framework
-
-For procurement or statutory contracts, check general legal framework clauses
-when the matrix item concerns:
-
-- legal admissibility or residual law;
-- lawfulness of services;
-- confidentiality and legal exceptions;
-- electronic exchange legal force;
-- tax, invoice, payment, or acceptance framework;
-- liability formula or statutory penalty model;
-- assignment, replacement, termination, or continuing legal consequences.
-
-Use framework clauses as legal-function candidates, not as noise. Add them only
-when they cover or materially explain the current item.
-
-### Payment Package
-
-For payment rows, identify the exact payment object first:
-
-- acquiring commission for operations;
-- separate terminal, software, subscription, or service fee;
-- act, invoice, UPD, EIS acceptance document, or payment document;
-- payment deadline;
-- payer, payee, account, or payment route;
-- reimbursement, withholding, direct debit, set-off, or demand;
-- post-termination settlement.
-
-Do not substitute one payment object for another. A general payment duty is not
-the same candidate as a separate service fee or a bank-controlled collection
-mechanism.
-
-### Liability Package
-
-For liability rows, check:
-
-- general liability;
-- party-specific liability;
-- violation-specific clause;
-- amount, formula, base, cap, accrual period, or statutory calculation;
-- protected party and protected risk;
-- non-liability shields.
-
-Protected party controls candidate usefulness. A cap or penalty for one party is
-not a candidate for an opposite-party requirement unless it materially explains
-a broader liability framework.
-
-### Personal Data Package
-
-For personal-data rows, check:
-
-- consent or confirmation of consent;
-- covered persons;
-- processing or transfer purpose;
-- contract-performance purpose;
-- protection, confidentiality, or lawful-basis duties.
-
-The useful package must cover both the relevant person category and the legally
-protected purpose or duty.
-
-### Termination And Continuing Duties
-
-For termination, suspension, return, settlement, survival, and continuing-duty
-rows, check:
-
-- termination or suspension right and grounds;
-- notice and effective date;
-- statutory termination framework;
-- post-termination settlements;
-- return, survival, and continuing duties.
-
-Do not import unrelated confidentiality, merger, or survival clauses when the
-current item only requires a direct continuing duty.
-
-## False Positives
-
-Reject a candidate when it is only topical and does not perform the same legal
-function.
-
-Reject these recurring near-misses:
-
-- generic electronic form, qualified signature, or EDI clause for a matrix item
-  that requires a specific document channel, platform, proof model, or named
-  route;
-- general payment, invoice, act, acceptance, or price clause for a separate
-  bank-control mechanism such as demand, pre-acceptance, debit, set-off,
-  withholding, approval, or payment trigger;
-- general inspection, cooperation, support, or document request for a matrix item
-  about fraud, business profile, issuer-bank verification, restricted-resource
-  use, terminal security, or actual activity;
-- technical capability, form field, checkbox, hardware name, or product mention
-  for a matrix item that requires enforceable active product terms.
-
-
-## Active Profile
-
-Inactive products and channels do not create candidate gaps. Search for
-enforceable terms that match the active profile.
-
-A product, channel, terminal, software route, or payment method is legally
-activated only when the contract creates an active package for it:
-
-- activation or deactivation;
-- price, tariff, or settlement;
-- party duties;
-- operating procedure;
-- notice or support;
-- liability or termination consequences.
-
-Technical capability, a form field, a checkbox, or a hardware name is not legal
-activation.
-
-## Evidence
-
-Evidence must be short and legal-function based:
-
-- `matrix_evidence`: required legal function;
-- `contract_evidence`: what the candidate clause provides;
-- `coverage`: why this clause belongs in the candidate package.
-
-Do not include a clause if you cannot explain how it helps prove the legal
-function.
-
-## Examples
-
-Use `examples/candidate-selection-patterns.md` for candidate-selection examples.
-Those examples show which clauses to select, which clauses to prune, and why a
-candidate package is legally useful.
-
-Do not infer answers from old benchmark ids, workbook labels, archived corpora,
-or prior document-specific runs.
-
-## Final QA
+### 3. Preserve Contract Row Level
+
+Include the contract row that carries the legal rule and any row that gives that
+rule legal force.
+
+Add the parent or umbrella clause when it:
+
+- introduces a list of grounds, rights, duties, penalties, documents, or
+  procedures later detailed in child clauses;
+- allocates the party, object, trigger, scope, or common consequence for child
+  clauses;
+- incorporates an appendix, specification, table, form, statute, or external
+  rule;
+- states that a set of child clauses is exhaustive or applies as a package;
+- is the contract row a reviewer would cite for the whole package.
+
+Add the child clause when it supplies the concrete trigger, deadline, amount,
+formula, exception, document, or consequence.
+
+For appendix/table content, include:
+
+- the main clause that incorporates the appendix when needed for legal force;
+- the exact appendix/table/specification row carrying operative content;
+- cross-referenced rows that define scope, timing, payment, liability, notice,
+  or consequence.
+
+### 4. Package Scattered Candidates
+
+If one candidate is found, search for companion clauses that supply uncovered
+parts of the same legal package:
+
+- framework or statutory source;
+- product or scope limitation;
+- payment route, price base, invoice, act, acceptance, document deadline;
+- liability trigger, protected party, cap, formula, exception, penalty amount;
+- notice method, receipt proof, signature, platform, EDI route;
+- termination ground, return duty, survival, post-termination settlement.
+
+Do not stop at the first direct clause when the contract distributes the legal
+requirement across several rows.
+
+### 5. Regulatory And Framework Recall
+
+For contracts governed by mandatory public-procurement, banking, payment-system,
+privacy, or other regulatory frameworks, include clauses that implement the
+matrix function through that framework even when wording differs.
+
+Useful candidates include:
+
+- statutory acceptance or refusal procedure for a matrix act/acceptance rule;
+- procurement payment or penalty mechanism for a matrix payment/liability rule;
+- mandatory electronic platform/signature rule for a matrix document-exchange
+  rule;
+- incorporated payment-system or banking rules for operational consequences.
+
+Include these candidates when they govern the same legal object and consequence.
+
+### 6. False Positive Filter
+
+Reject clauses that are only topically similar.
+
+Common false positives:
+
+- generic e-signature for a matrix item requiring a specific platform, mailbox,
+  proof model, provider, or EDI process;
+- ordinary card acquiring, POS terminal, generic tariff, or payment clause for a
+  named product/channel such as QR, biometric payment, tokenized wallet, mobile
+  payment, internet acquiring, API, or another separately named instrument;
+- generic payment/invoice/act wording for a distinct collection mechanism such
+  as direct debit, set-off, payment demand, acceptance, withholding;
+- general inspection/cooperation/request rights for fraud, issuer verification,
+  business-profile control, terminal security, or restricted-resource use;
+- a duty to cooperate, not obstruct, undergo instruction, or follow a procedure
+  for a matrix item requiring a direct audit, investigation, compliance,
+  verification, or instruction-compliance right;
+- a clause covering only a minor adjacent element when `main_idea` identifies a
+  different legal core as the risk focus;
+- a generic QR, card, terminal, tariff, currency, form, or appendix mention for
+  a matrix item requiring a lifecycle trigger such as automatic connection,
+  installation, activation, support, suspension, or proof procedure;
+- a generic electronic contract, copy-count, annex-list, notice, or address
+  boilerplate clause for a matrix item requiring a different formal legal object;
+- technical capability, form field, product label, or appendix title without an
+  enforceable right, duty, trigger, or consequence.
+
+If the matrix item is product-specific, a generic acquiring clause is not enough
+unless it actually regulates that product or a clear legal substitute.
+
+If the matrix item is common-scope and merely lists product/channel alternatives,
+do not reject a common acquiring clause only because unused alternatives are not
+present in the contract.
+
+If `main_idea` states that a certain similar clause is not on-topic, follow that
+instruction and reject that clause type.
+
+### 7. Empty Candidate Recovery
+
+Before returning an empty list, search the uncovered legal element in:
+
+- payment/settlement/acceptance/invoice/act/withholding/set-off;
+- liability/penalty/fine/damages/cap/non-liability/reimbursement;
+- termination/refusal/suspension/return/survival/post-termination;
+- confidentiality/personal data/banking secrecy/information use;
+- appendix/specification/tariff/form/technical assignment/framework;
+- notice/document exchange/EDI/signature/mailbox/platform/proof;
+- mandatory law, procurement rules, payment-system rules, incorporated rules.
+
+`candidate_limit_reason` must name the checked zones and the legal element that
+remained uncovered.
+
+## Final Checks
 
 Before saving:
 
-- every assigned matrix id is present once;
-- JSON parses;
-- no fields outside the output schema are present;
-- every contract id in `contract_analog` appears once in `candidate_analysis`;
-- every candidate has legal-function evidence;
-- every candidate has `legal_role` and `covered_elements`;
-- `matrix_legal_elements` lists material elements from the matrix content;
-- `element_candidate_map` ties each material element to found candidates or
-  records `not_found`;
-- every empty candidate set has a `candidate_limit_reason` naming recovery
-  zones checked;
-- no topical near-miss is kept only because it shares vocabulary or section
-  context;
-- no candidate is kept because of matrix numbering, contract numbering, or
-  clause proximity without the same legal function;
-- the file is saved strictly to the assigned output path.
+- every assigned matrix id appears exactly once;
+- every candidate id appears in the contract text;
+- every `contract_analog` id has a matching `candidate_analysis` object;
+- parent/umbrella, child, appendix, table, and cross-reference rows were checked;
+- appendix/table candidates use specific row ids when available;
+- empty candidate rows include recovery evidence;
+- false positives were removed;
+- no compliance status is assigned.

@@ -1,542 +1,185 @@
-# Status Evaluation Pattern Examples
+# Status Validation Patterns
 
-Use these examples for legal status-evaluation tasks. They calibrate how to
-decide pair-level status for each `(matrix_id, contract_id)` candidate and then
-derive the compatibility `overall_status`.
+Generic examples for package-level status evaluation.
 
-Do not copy statuses from examples, spreadsheet labels, prior runs, or
-document-specific memories. Each example below is a transferable reasoning
-pattern.
+## status/package-full
 
-## How To Use
+Matrix requires duty, document route, deadline, and consequence.
 
-For each matrix item and supplied candidate artifact:
+Contract package:
 
-1. Rebuild the legal core from the full matrix item.
-2. Re-read every supplied candidate clause in context.
-3. Evaluate `pair_status` separately for each `contract_id`.
-4. Do not transfer coverage between different contract clauses.
-5. Build `pair_status_checklist` and `full_match_blockers` for each pair.
-6. Run targeted recovery only for a concrete uncovered material element.
-7. Derive `overall_status` conservatively from pair statuses.
-8. Rewrite evidence so each pair status follows from a concrete legal element.
+- clause A creates the duty;
+- clause B gives the route;
+- clause C gives the deadline and consequence.
 
-## Status Examples
+Result: `full_match`.
 
-### Example: `status/full-pair-with-empty-blockers`
+Reason: individual clauses may be incomplete alone, but the package covers all
+material elements.
 
-Matrix legal test:
+## status/package-incomplete
 
-- A concrete right, duty, payment rule, notice rule, or liability allocation
-  must exist.
+Matrix requires duty, deadline, and penalty.
 
-Candidate pair:
+Contract has duty and deadline, but no penalty or equivalent consequence.
 
-- The clause independently preserves the protected party, legal object, trigger,
-  measure, and consequence.
+Result: `partial_match`.
 
-Pair result:
+Named gap: consequence missing.
 
-- `pair_status`: `full_match`
-- `full_match_blockers`: `[]`
+## status/product-absent
 
-Reason:
+Matrix item applies only to a named product/channel outside the contract scope.
 
-- Pair-level full is allowed only when no material blocker remains.
+Contract has no functional substitute.
 
-### Example: `status/same-matrix-direct-full-framework-partial`
+Result: `missing`.
 
-Matrix legal test:
+Reason: absent product scope is not `full_match`.
 
-- A matrix item has both an operative mechanism and a framework source.
+## status/product-menu-unused-options
 
-Candidate pairs:
+Matrix text lists several alternative acquiring channels. Contract is scoped to
+one channel and fully regulates it.
 
-- Direct operative clause: contains the required duty or right.
-- Framework clause: gives the legal source but does not itself create the duty
-  or right.
+Result: `full_match`.
 
-Pair results:
+Reason: unused menu alternatives are not gaps unless matrix fields make them
+mandatory.
 
-- Direct clause: `pair_status` is `full_match` if all elements are covered.
-- Framework clause: `pair_status` is `partial_match`.
+## status/named-product-required
 
-Reason:
+Matrix specifically requires a named QR/API/wallet/EDI/platform product.
 
-- A framework carrier can be a useful analogue, but it does not inherit full
-  coverage from the direct clause.
+Contract has only ordinary card acquiring or generic e-document wording.
 
-### Example: `status/no-cross-candidate-status-lifting`
+Result: `missing` or `partial_match` if the generic clause is legally useful.
 
-Matrix legal test:
+Reason: named product/channel is the legal object.
 
-- Full coverage is achieved only by a package of several clauses.
+## status/statutory-equivalent
 
-Candidate pairs:
+Matrix requires acceptance document with signature and reject function.
 
-- Clause A covers the operative duty.
-- Clause B covers deadline or procedure.
-- Clause C covers survival or legal force.
+Contract uses mandatory statutory electronic acceptance with the same accept or
+reasoned-refusal result.
 
-Pair result:
+Result: `full_match`.
 
-- Evaluate A, B, and C separately.
-- Do not mark B or C `full_match` merely because the package as a whole is
-  sufficient.
+Reason: different legal route, same enforceable result.
 
-Reason:
+## status/statutory-not-equivalent
 
-- Row-level comparison may score each contract row separately. Each pair must
-  stand on its own legal role.
+Matrix gives one party bank-controlled collection or unilateral remedy.
 
-### Example: `status/framework-carrier-is-partial`
+Contract replaces it with ordinary payment order or weaker procedure, and no
+mandatory rule preserves the control.
 
-Matrix legal test:
+Result: `partial_match`.
 
-- The row requires a special commercial right, duty, control, or remedy.
+Named gap: control mechanism weakened.
 
-Candidate pair:
+## status/placeholder-not-gap
 
-- A clause incorporates rules, law, standards, or residual regulation but does
-  not contain the operative right or duty.
+Matrix and contract use blank fields for a rate, site, identifier, or form value
+to be completed later. No conflicting value is stated.
 
-Pair result:
+Result: `full_match`.
 
-- `pair_status`: `partial_match`
-- blocker type: `framework_missing`
+Reason: completion placeholder is not a changed term.
 
-Reason:
+## status/named-platform-blank
 
-- Framework language is useful context, not a full substitute for the operative
-  mechanism.
+Matrix requires a named EDI system, platform, provider, mailbox, or proof model.
 
-### Example: `status/payment-economic-term-blocks-full`
+Contract leaves that name blank or replaces it with a materially different
+channel.
 
-Matrix legal test:
+Result: `partial_match`.
 
-- Payment must preserve object, payer, payee, amount basis, trigger, deadline,
-  and collection route.
+Named gap: required named channel not preserved.
 
-Candidate pair:
+## status/broader-channel
 
-- Payment duty exists, but deadline, amount basis, acceptance route, withholding,
-  set-off, demand, or payer/payee is changed.
+Matrix requires a specified notice route. Contract permits any contractual route
+and the specified route is available elsewhere.
 
-Pair result:
+Result: `full_match`.
 
-- `pair_status`: `partial_match`
-- blocker type: `deadline_changed`, `amount_changed`, `different`, or `weaker`.
+Reason: broader route includes the matrix function.
 
-Reason:
+## status/missing-cross-reference
 
-- Payment topic is useful, but changed economics block pair-level full.
+Matrix repeats a cross-reference to procedure or document-exchange rules.
 
-### Example: `status/liability-trigger-or-cap-blocks-full`
+Contract states the operative duty and the procedure exists elsewhere.
 
-Matrix legal test:
+Result: `full_match`.
 
-- Liability must protect a party for a specific trigger with a specific formula,
-  cap, amount, exception, or accrual period.
+Reason: omitted cross-reference text is not a material gap.
 
-Candidate pair:
+## status/deadline-changed
 
-- General liability exists, but trigger, protected party, cap, penalty amount,
-  base, or exception differs.
+Matrix contains a fixed deadline and no mandatory framework substitutes it.
 
-Pair result:
+Contract has a different deadline.
 
-- `pair_status`: `partial_match`
+Result: `partial_match`.
 
-Reason:
+Named gap: deadline changed.
 
-- Liability clauses are not interchangeable when the protected risk or economic
-  consequence changes.
+## status/deadline-statutory-route
 
-### Example: `status/named-channel-generic-notice-blocks-full`
+Matrix has a standard commercial deadline. Contract is governed by a mandatory
+statutory process with a different deadline but the same accept/pay/remedy
+result.
 
-Matrix legal test:
+Result: `full_match`.
 
-- A named site, mailbox, platform, EDI route, support channel, proof model, or
-  procedure is material.
+Reason: mandatory framework preserves the legal result.
 
-Candidate pair:
+## status/economic-term-changed
 
-- The clause provides only generic notice, generic approval, ordinary document
-  exchange, or electronic form.
+Matrix states a fixed amount, cap, rate, formula, currency, or penalty.
 
-Pair result:
+Contract states a different value and no mandatory equivalent applies.
 
-- `pair_status`: `partial_match` when the generic route is useful but weaker.
-- `missing` when it does not perform the protected channel function at all.
+Result: `partial_match`.
 
-Reason:
+Named gap: economic term changed.
 
-- A generic channel cannot be full for a named-channel requirement.
+## status/party-inverted
 
-### Example: `status/unilateral-rule-vs-bilateral-requirement`
+Matrix imposes liability or duty on the merchant/customer role.
 
-Matrix legal test:
+Contract imposes it on the bank/acquirer/executor role, or protects the wrong
+party.
 
-- Both parties must be bound by the same prohibition, right, duty, succession,
-  assignment, confidentiality, or survival rule.
+Result: `partial_match`.
 
-Candidate pair:
+Named gap: functional role changed.
 
-- The clause binds or protects only one party.
+## status/force-majeure-examples
 
-Pair result:
+Matrix and contract both provide force-majeure release and open-ended coverage,
+but illustrative event lists differ.
 
-- `pair_status`: `partial_match`
-- blocker type: `party_inverted` or `narrower`.
+Result: `full_match`.
 
-Reason:
+Reason: examples differ; legal consequence is preserved.
 
-- One-sided coverage is narrower than a bilateral requirement.
+## status/formal-label
 
-### Example: `status/scope-channel-narrowing-is-partial`
+Matrix uses one document title or appendix number. Contract uses another title
+for the same operative rule.
 
-Matrix legal test:
+Result: `full_match`.
 
-- A rule must cover several products, channels, terminals, operations, documents,
-  persons, risks, or lots.
+Reason: label difference is not a legal gap.
 
-Candidate pair:
+## status/equivalent-not-status
 
-- The clause covers only one active subset.
+Checklist may mark an element `equivalent`.
 
-Pair result:
-
-- `pair_status`: `partial_match`
-
-Reason:
-
-- A useful analogue exists, but scope narrowing blocks full.
-
-### Example: `status/formal-difference-still-full`
-
-Matrix legal test:
-
-- A legal result must be preserved; labels may differ.
-
-Candidate pair:
-
-- Appendix number, document title, procurement label, placeholder, or channel
-  label differs, but sender/recipient, trigger, legal force, timing, content,
-  and consequence are preserved.
-
-Pair result:
-
-- `pair_status`: `full_match`
-
-Reason:
-
-- Formal labels are not blockers when the enforceable result is unchanged.
-
-### Example: `status/partial-requires-named-blocker`
-
-Matrix legal test:
-
-- A candidate looks close, but the suspected gap must be concrete.
-
-Candidate pair:
-
-- No deadline, amount, formula, party, trigger, channel, scope, procedure, or
-  consequence gap can be named after reading the contract.
-
-Pair result:
-
-- `pair_status`: `full_match`
-
-Reason:
-
-- Do not use `partial_match` for uncertainty alone. A pair-level partial needs a
-  named blocker.
-
-### Example: `status/recovery-closes-only-gap`
-
-Matrix legal test:
-
-- A candidate omits a concrete material element.
-
-Recovery search:
-
-- Search only for that missing element.
-- A separate clause closes the gap.
-
-Pair result:
-
-- Add the recovered clause as its own pair and recompute `overall_status`.
-
-Reason:
-
-- Recovery changes evidence only when it finds the exact missing legal element.
-
-### Example: `status/recovery-confirms-partial`
-
-Matrix legal test:
-
-- A duty, right, payment rule, or liability rule omits a protected limit,
-  deadline, formula, channel, or consequence.
-
-Recovery search:
-
-- No clause supplies that exact element.
-
-Pair result:
-
-- `pair_status`: `partial_match`
-
-Reason:
-
-- A useful analogue remains, but the named blocker survives recovery.
-
-### Example: `status/missing-no-useful-candidate`
-
-Matrix legal test:
-
-- A concrete legal function must exist.
-
-Candidate package:
-
-- Empty after false-positive pruning and targeted recovery.
-
-Row result:
-
-- `overall_status`: `missing`
-- `contract_analog`: `[]`
-- `legal_analysis`: `[]`
-
-Reason:
-
-- `missing` is used only when no useful candidate remains.
-
-### Example: `status/generic-boilerplate-is-missing`
-
-Matrix legal test:
-
-- A concrete duty, right, remedy, channel, payment, liability rule, or product
-  activation must exist.
-
-Candidate pair:
-
-- Broad cooperation, good faith, law compliance, ordinary notice,
-  confidentiality, or dispute language only.
-
-Pair result:
-
-- Reject the pair; if no useful candidate remains, use `missing`.
-
-Reason:
-
-- Boilerplate does not perform the protected legal function.
-
-### Example: `status/payment-control-vs-general-payment`
-
-Matrix legal test:
-
-- A payment rule requires demand, pre-acceptance, debit, set-off, withholding,
-  document-control, or a specific acceptance trigger.
-
-Candidate pair:
-
-- General price or payment duty exists without the control mechanism.
-
-Pair result:
-
-- `pair_status`: `partial_match` if the payment object is useful.
-- Reject the pair if it concerns a different payment object.
-
-Reason:
-
-- Payment existence does not prove the protected control route.
-
-### Example: `status/separate-fee-not-general-price`
-
-Matrix legal test:
-
-- A separate service, subscription, terminal, software, or maintenance fee must
-  be payable.
-
-Candidate pair:
-
-- Only a general commission, contract price, or ordinary service payment exists.
-
-Pair result:
-
-- Reject as a false positive unless it creates that separate fee.
-
-Reason:
-
-- A separate fee is a different legal object.
-
-### Example: `status/opposite-party-liability-is-missing`
-
-Matrix legal test:
-
-- Liability, cap, fine, shield, or non-liability protects one party.
-
-Candidate pair:
-
-- Similar liability rule protects the opposite party.
-
-Pair result:
-
-- Reject the pair unless it materially explains a broader bilateral regime.
-
-Reason:
-
-- Protected party is a mandatory legal element.
-
-### Example: `status/personal-data-purpose-gap`
-
-Matrix legal test:
-
-- Personal-data transfer or processing must cover a person category, purpose,
-  consent, confirmation duty, legal basis, or deadline.
-
-Candidate pair:
-
-- Privacy clause exists but omits one protected person category or purpose.
-
-Pair result:
-
-- `pair_status`: `partial_match`
-
-Reason:
-
-- Privacy coverage is useful but incomplete.
-
-### Example: `status/technical-capability-not-product-activation`
-
-Matrix legal test:
-
-- A product, channel, terminal, software route, or payment method must be active
-  under the contract.
-
-Candidate pair:
-
-- Technical capability, checkbox, form field, hardware name, or possible feature
-  appears without active duties, price, procedure, support, liability, or
-  termination terms.
-
-Pair result:
-
-- Reject as a false positive.
-
-Reason:
-
-- Technical possibility is not enforceable activation.
-
-### Example: `status/direct-plus-context-overall-summary`
-
-Matrix legal test:
-
-- One direct clause is full, while a context clause is only partial.
-
-Candidate pairs:
-
-- Direct clause: `pair_status` is `full_match`.
-- Context clause: `pair_status` is `partial_match`.
-
-Row result:
-
-- `overall_status`: `partial_match`
-
-Reason:
-
-- `overall_status` is conservative for compatibility; row-level metrics should
-  use `legal_analysis[].pair_status`.
-
-### Example: `status/full-active-profile-only`
-
-Matrix legal test:
-
-- The active profile concerns one product, channel, terminal, payment method, or
-  lot; other alternatives are inactive.
-
-Candidate pair:
-
-- Fully covers the active profile and omits inactive alternatives.
-
-Pair result:
-
-- `pair_status`: `full_match`
-
-Reason:
-
-- Inactive alternatives are not blockers unless the current item makes them
-  operative.
-
-### Example: `status/termination-ground-vs-procedure`
-
-Matrix legal test:
-
-- The protected element is either the termination ground or the procedure.
-
-Candidate pair:
-
-- Same ground but changed notice, period, settlement, return, survival, or
-  continuing consequence.
-
-Pair result:
-
-- `pair_status`: `full_match` if the row protects only the ground.
-- `pair_status`: `partial_match` if the row protects procedure or consequence.
-
-Reason:
-
-- The protected element controls status, not the section heading.
-
-### Example: `status/incorporated-document-detail-gap`
-
-Matrix legal test:
-
-- An incorporated document must contain a specific field, tariff, list, location,
-  procedure, or limit.
-
-Candidate pair:
-
-- Incorporation exists, but the protected detail is blank, narrower, or deferred.
-
-Pair result:
-
-- `pair_status`: `partial_match`
-
-Reason:
-
-- Legal force exists, but the material content is incomplete.
-
-### Example: `status/economic-placeholder-not-material`
-
-Matrix legal test:
-
-- The item tests existence of a payment or document duty, not the final value of
-  a placeholder.
-
-Candidate pair:
-
-- The duty exists and only a site, form, price field, or placeholder value is
-  blank.
-
-Pair result:
-
-- `pair_status`: `full_match`
-
-Reason:
-
-- A nonmaterial placeholder does not block full.
-
-## Evidence Check
-
-Before saving output, verify:
-
-- `missing` rows have empty arrays;
-- `contract_analog` equals the set of `legal_analysis[].contract_id`;
-- every legal-analysis entry has `pair_status`, `pair_status_checklist`, and
-  `full_match_blockers`;
-- every pair-level `full_match` has empty `discrepancies` and empty blockers;
-- every pair-level `partial_match` has a named blocker and checklist gap;
-- `overall_status` is derived conservatively from pair statuses;
-- every absent material element behind `partial_match` or `missing` was checked
-  with targeted recovery search;
-- evidence explains why each pair produces its own status.
+Result: final `overall_status` remains `full_match` if all elements are covered
+or equivalent. Never output `equivalent` as final status.
