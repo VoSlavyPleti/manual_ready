@@ -1,958 +1,382 @@
 ---
 name: mapping-skill
 description: >
-  Сопоставляет пункты матрицы по эквайрингу (inputs/matrix.json) с положениями
-  договора (inputs/contract.txt) и возвращает JSON со статусами full_match /
-  partial_match / missing для каждого matrix_id. Используй этот skill, когда
-  нужно юридически сравнить требования матрицы и текст договора, а не просто
-  найти похожие формулировки.
+  Selects legally useful contract candidate clauses for acquiring risk-matrix
+  items using legal-function analysis.
 ---
 
 # mapping-skill
 
-## TL;DR
+## Task
 
-Определи для каждого пункта матрицы, даёт ли договор требуемый юридический
-результат:
+For each assigned matrix item, find the contract clauses that are legally useful
+candidates for that item. This is a one-to-many mapping task: one matrix item
+may have zero, one, or many contract candidates. The goal is candidate recall
+with disciplined pruning: include clauses that perform or materially explain the
+required legal function, and exclude clauses that are only topically similar.
 
-- `full_match` — все обязательные элементы требования покрыты без материальных
-  расхождений;
-- `partial_match` — есть полезное юридическое покрытие, но остаётся хотя бы
-  один существенный gap;
-- `missing` — нет полезной юридической функции для этого требования.
+The task is not numbering alignment, keyword matching, or semantic similarity
+search. Match the legal function.
 
-Работай в два шага:
+## Inputs
 
-1. Найди кандидатов по теме (поиск по договору).
-2. Юридически квалифицируй весь пакет клауз по чеклисту элементов и только
-   после этого выставь статус.
+The task input must provide:
 
----
+- matrix path or assigned matrix items;
+- contract path or full contract text;
+- assigned matrix ids, range, or batch file;
+- exact output path.
 
-## Входные данные
+Use matrix fields as follows:
 
-Используй этот skill, только если в контексте доступны оба файла:
+- `number` only as the immutable output identifier in `matrix_id`;
+- `enriched_text` or source text as the main legal-content source;
+- `main_idea` to identify the required legal function;
+- `topics` to identify the legal zone and likely search vocabulary;
+- applicability fields;
+- product, terminal, channel, payment-method, lot, and procurement restrictions.
 
-- `inputs/matrix.json` — массив объектов матрицы.
-  Для каждого matrix item используй:
-  - `number` (идентификатор matrix_id),
-  - `main_idea`,
-  - `topics`,
-  - `enriched_text`,
-  - applicability fields,
-  - product / terminal / payment‑method restrictions.
-- `inputs/contract.txt` — полный текст договора, включающий:
-  - основной текст;
-  - приложения;
-  - тарифы;
-  - таблицы;
-  - спецификации;
-  - формы;
-  - графики;
-  - notice/payment/liability/termination‑разделы;
-  - ссылочные документы, если они инкорпорированы.
+Candidate selection must be driven by the legal meaning of `enriched_text`,
+`main_idea`, and `topics`. Do not select candidates because matrix numbers,
+contract clause numbers, headings, or words happen to look similar.
 
-Не придумывай дополнительные поля матрицы. Если данных в matrix item не хватает,
-всё равно классифицируй по трём статусам, опираясь только на доступный текст.
+## Output
 
----
-
-## Назначение
-
-Используй этот skill для сопоставления требований из `inputs/matrix.json` с
-положениями договора из `inputs/contract.txt`.
-
-Задача — не поиск похожих формулировок, а юридическое сравнение требования
-матрицы с договором. Для каждого пункта матрицы нужно определить, есть ли в
-договоре положения, которые:
-
-- полностью покрывают требование;
-- покрывают его частично, но с существенными расхождениями;
-- не дают полезного юридического покрытия.
-
-Матрица — это эталон. Договор — проверяемый документ.
-
----
-
-## Калибровочные примеры
-
-Основная логика анализа находится в этом `SKILL.md`. Примеры и анти‑примеры
-вынесены отдельно: [gold-patterns.md](examples/gold-patterns.md).
-
-Используй файл примеров только для калибровки юридического смысла:
-
-- что в эталонах считалось полноценным аналогом;
-- что считалось полезным, но частичным аналогом;
-- какие near‑miss кандидаты нужно отвергать как `missing`.
-
-Не используй примеры как таблицу готовых ответов по номерам. В каждом новом
-запуске заново сравнивай полный текст matrix item с полным договорным пакетом.
-Полный архив эталонных примеров находится в `examples/archive/` и не
-используется в обычном анализе.
-
----
-
-## Формат вывода
-
-Файлы должны быть сохранены строго по тому пути, который указал вызывавший
-агент. Сохраняй результаты строго по схеме.
-
-Если в одном файле нужно отразить несколько matrix items, возвращай JSON‑массив:
+Save a JSON array to the exact assigned output path. Each item must use exactly
+this schema:
 
 ```json
-[
-  {
-    "matrix_id": "<matrix_id>",
-    "contract_analog": ["<contract_clause_id>"],
-    "overall_status": "full_match|partial_match|missing",
-    "legal_analysis": [
-      {
-        "contract_id": "<contract_clause_id>",
-        "matrix_evidence": "<короткое юридическое ядро требования или исходная формулировка>",
-        "contract_evidence": "<короткое юридическое ядро положения договора>",
-        "coverage": "<какие элементы требования покрывает эта норма>",
-        "discrepancies": ["<существенное расхождение по сроку/обязанности/каналу/сумме/строгости и т.д.>"]
-      }
-    ]
-  }
-]
+{
+  "matrix_id": "<matrix number>",
+  "contract_analog": ["<contract clause id>"],
+  "candidate_analysis": [
+    {
+      "contract_id": "<contract clause id>",
+      "matrix_evidence": "<short legal core of the matrix requirement>",
+      "contract_evidence": "<short legal core of the contract clause>",
+      "coverage": "<why this clause is a useful candidate>",
+      "legal_role": "direct|parent|child|framework|payment|liability|notice|termination|appendix|context",
+      "covered_elements": ["<matrix legal element covered by this clause>"]
+    }
+  ],
+  "matrix_legal_elements": [
+    {
+      "element": "<material legal element>",
+      "element_type": "scope|party|trigger|deadline|amount|formula|channel|framework|liability|procedure|survival|other",
+      "source_field": "main_idea|topics|enriched_text"
+    }
+  ],
+  "element_candidate_map": [
+    {
+      "element": "<material legal element>",
+      "candidate_ids": ["<contract clause id>"],
+      "candidate_role": "direct|parent|child|framework|payment|liability|notice|termination|appendix|context",
+      "search_result": "found|not_found"
+    }
+  ],
+  "candidate_limit_reason": "<why no other clauses were added, or why the candidate set is empty>"
+}
 ```
 
----
+Rules:
+
+- preserve `matrix_id` exactly from the matrix `number` field;
+- preserve contract clause ids exactly as they appear in the contract;
+- use decimal contract clause ids when the contract provides them, for example
+  `5.1.1`, `2.3`, or `4.2.6.3`;
+- never infer a candidate from numbering similarity;
+- do not add fields outside the schema;
+- use `contract_analog: []` and `candidate_analysis: []` when no useful
+  candidate exists;
+- when the candidate set is empty, `candidate_limit_reason` must name the
+  recovery zones checked and why none produced a useful legal candidate;
+- `contract_analog` must equal the set of
+  `candidate_analysis[].contract_id`;
+- `contract_analog` may contain multiple clauses for one matrix item when the
+  legal function is split across contract provisions;
+- every candidate must have one `legal_role` value from the schema and at least
+  one `covered_elements` item;
+- `matrix_legal_elements` must list the material legal elements extracted from
+  `main_idea`, `topics`, and `enriched_text`;
+- `element_candidate_map` must show which candidates were found for each
+  material element, or `not_found` when no useful candidate exists;
+- include exactly the assigned matrix ids once each.
+
+Do not write a batch result to `outputs/matrix_contract_mapping.json` unless
+that exact path was assigned for this task.
+
+## Analysis Method
+
+For every matrix item:
+
+1. Build the active profile:
+   - active product, channel, payment method, terminal, and lot mode;
+   - inactive alternatives;
+   - procurement or statutory framework;
+   - whether the item concerns payment, liability, document exchange, notice,
+     product activation, confidentiality, termination, technical duties, or
+     legal framework.
+2. Extract the legal core:
+   - protected party;
+   - legal object;
+   - operative action;
+   - trigger;
+   - measure: deadline, amount, formula, cap, document, channel, list, or
+     procedure;
+   - legal consequence.
+3. Search broadly by legal function and legal synonyms. Synonyms are search
+   handles only; they are not proof that a candidate belongs.
+4. Expand the candidate package with required parent, child, sibling, appendix,
+   framework, payment, liability, notice, or termination clauses.
+5. Build `matrix_legal_elements` and map each material element to direct,
+   framework, payment, liability, notice, termination, appendix, or context
+   candidates.
+6. If no candidate remains, run Pre-Missing Recovery before returning an empty
+   candidate set.
+7. Remove false positives.
+8. Write evidence that explains why each candidate belongs.
+
+Do not stop at the first candidate. Many useful packages are scattered across
+several sections.
+
+## Pre-Missing Recovery
+
+Before returning `contract_analog: []`, run a narrow recovery search by the
+uncovered legal element. Check these contract zones even when the first search
+found nothing:
+
+- payment, settlement, invoice, act, acceptance, reimbursement, withholding,
+  set-off, direct-debit, fee, and post-termination payment clauses;
+- liability, penalty, fine, damages, cap, non-liability, reimbursement, and
+  protected-risk clauses;
+- termination, refusal, suspension, return, survival, reorganization, assignment,
+  and post-termination clauses;
+- confidentiality, personal-data, lawful-basis, consent, banking-secrecy, and
+  information-use clauses;
+- appendix incorporation, technical assignment, tariff, statement, form,
+  specification, procurement, EIS, residual-law, and framework clauses;
+- notice, document exchange, EDI, signature, mailbox, platform, proof-of-receipt,
+  and channel clauses.
+
+An empty candidate set is allowed only after recovery fails to find a clause with
+the same protected party, legal object, trigger, or legal consequence. Record
+that limit in `candidate_limit_reason`.
+
+## Scattered Package Recall
+
+When a direct clause is found, search for companion clauses that may supply a
+mandatory legal element. Add them only when they materially explain the current
+matrix item:
+
+- parent clause creating legal force;
+- appendix, tariff, table, form, or specification with the operative detail;
+- payment deadline, amount basis, document route, payer, payee, or collection
+  mechanism;
+- liability consequence, formula, cap, protected party, or non-liability shield;
+- termination ground, notice, effective date, survival, return, or settlement;
+- framework clause changing source, trigger, procedure, remedy, or legal effect.
+
+## Contract Row Candidate Recall
+
+When a direct candidate is found, also search for parent, framework, context,
+and cross-referenced clauses that may stand as separate legally useful contract
+rows for the same matrix item. Add them only when they perform or materially
+explain a legal element of the current item.
 
-## File output contract
+Always inspect clauses referenced by `clause`, `section`, `appendix`, table,
+tariff, form, statement, or specification references when the referenced clause
+defines one of these elements:
 
-Жёсткие правила формата:
+- scope, product, channel, terminal, operation, or party;
+- deadline, term, amount, formula, cap, tariff, or payment basis;
+- procedure, notice route, evidence route, acceptance route, or document route;
+- liability trigger, protected party, penalty, cap, exception, or shield;
+- applicable rules, standards, law, survival, return, assignment, or continuing
+  consequence.
 
-- Не добавляй поля вне схемы.
-- Не добавляй markdown‑комментарии, пояснения, debug‑информацию, confidence,
-  альтернативные id.
-- Не используй `//`‑комментарии, `"_comment"` или другие сервисные ключи.
-- Все значения должны быть строками или массивами строк. Не используй числа,
-  boolean, объекты или `null` в описанных полях.
-- `matrix_id` сохраняй ровно из поля `number` из матрицы.
-- `contract_id` сохраняй ровно так, как он написан в договоре:
-  - не заменяй пробелы на `_`;
-  - не нормализуй `№`;
-  - не меняй `п.` / `пункт`;
-  - не исправляй нумерацию;
-  - не придумывай короткие alias.
-- `overall_status` — это статус всего пункта матрицы, а не отдельной клаузы.
-- Если статус `missing`, возвращай:
-  - `"contract_analog": []`
-  - `"overall_status": "missing"`
-  - `"legal_analysis": []`
+Do not add every referenced clause automatically. Add a referenced clause only
+when it can be tied to a material element in `element_candidate_map`.
 
-Если вызывающий агент ожидает один объект на файл, возвращай один JSON‑объект.
-Никогда не оборачивай результат в дополнительные ключи вроде `"result"` или
-`"data"`.
+## Framework Anchor Recall
 
----
+For matrix items about legal framework, payment-system rules, general party
+duties, confidentiality, liability, term, termination, legal succession,
+applicable law, incorporated documents, or continuing effects, include useful
+framework anchors in addition to direct operative clauses.
 
-## Основной принцип
+A framework anchor belongs when it supplies:
 
-Работай в два этапа:
+- source of legal regulation;
+- incorporated document force;
+- rule or standard that controls performance;
+- survival or post-termination effect;
+- assignment, reorganization, or succession rule;
+- legal consequence that limits or explains the operative clause.
 
-1. **Поиск кандидатов** — используй `main_idea` и `topics` только как навигацию
-   по договору.
-2. **Юридическая квалификация** — статус определяй только после сравнения
-   полного требования матрицы с найденными положениями.
+Reject framework anchors that only repeat background law or section context
+without changing a material element of the current item.
 
-`main_idea` и `topics` помогают понять:
+## Candidate Selection Rules
 
-- где искать;
-- какой юридический механизм ожидается;
-- какие синонимы, соседние пункты, приложения, таблицы и формы нужно проверить.
+### Direct Operative Clauses
 
-Но `main_idea` и `topics` **не доказывают соответствие**. Они не заменяют полное
-содержание matrix item.
+When the contract contains a direct operative clause that performs the exact
+function named by the matrix, collect it first. Do not reject it merely because
+the contract also contains generic framework language.
 
-После нахождения кандидатов всегда возвращайся к полному требованию матрицы,
-включая:
+If the direct clause alone carries the legal function, do not add background
+clauses merely because they are nearby.
 
-- `enriched_text`;
-- исходную формулировку требования;
-- applicability fields;
-- ограничения по продукту, способу оплаты, типу терминала и профилю.
 
-Только после этого определяй `full_match`, `partial_match` или `missing`.
+### Procurement / Statutory Framework
 
-Никогда не присваивай статус, проверив только один очевидный кандидат. Всегда
-делай шаг добора связанного пакета и пересчитывай статус по всему пакету.
+For procurement or statutory contracts, check general legal framework clauses
+when the matrix item concerns:
 
----
+- legal admissibility or residual law;
+- lawfulness of services;
+- confidentiality and legal exceptions;
+- electronic exchange legal force;
+- tax, invoice, payment, or acceptance framework;
+- liability formula or statutory penalty model;
+- assignment, replacement, termination, or continuing legal consequences.
 
-## Два рабочих профиля
+Use framework clauses as legal-function candidates, not as noise. Add them only
+when they cover or materially explain the current item.
 
-Для каждого пункта матрицы построй два внутренних профиля.
+### Payment Package
 
-### 1. Search profile
+For payment rows, identify the exact payment object first:
 
-Формируется из `main_idea` и `topics`.
+- acquiring commission for operations;
+- separate terminal, software, subscription, or service fee;
+- act, invoice, UPD, EIS acceptance document, or payment document;
+- payment deadline;
+- payer, payee, account, or payment route;
+- reimbursement, withholding, direct debit, set-off, or demand;
+- post-termination settlement.
 
-Используется только для поиска:
+Do not substitute one payment object for another. A general payment duty is not
+the same candidate as a separate service fee or a bank-controlled collection
+mechanism.
 
-- нужной правовой зоны;
-- вероятного механизма;
-- синонимов;
-- приложений, тарифов, таблиц, форм, спецификаций;
-- разбросанных по договору норм, которые могут работать вместе.
+### Liability Package
 
-### 2. Status profile
+For liability rows, check:
 
-Формируется из полного содержания matrix item, а не только из
-`main_idea/topics`.
+- general liability;
+- party-specific liability;
+- violation-specific clause;
+- amount, formula, base, cap, accrual period, or statutory calculation;
+- protected party and protected risk;
+- non-liability shields.
 
-Для каждого требования выдели:
+Protected party controls candidate usefulness. A cap or penalty for one party is
+not a candidate for an opposite-party requirement unless it materially explains
+a broader liability framework.
 
-- party role — какая сторона получает право, защиту, риск или обязанность;
-- legal object — деньги, комиссия, услуга, терминал, операция, документ,
-  уведомление, данные, приложение, штраф, право на расторжение и т.д.;
-- operative action — оплатить, перечислить, удержать, установить, вернуть,
-  уведомить, предоставить, подписать, отказать, прекратить, компенсировать
-  и т.д.;
-- trigger — событие, нарушение, требование, отчётный период, окончание услуги,
-  уведомление, активация продукта, изменение реквизитов и т.д.;
-- measure — срок, сумма, формула, способ, канал, форма документа, перечень,
-  пакет документов;
-- legal consequence — какое правовое последствие наступает.
+### Personal Data Package
 
-Внутренне веди status checklist. Для каждого обязательного элемента поставь одну
-из отметок:
+For personal-data rows, check:
 
-- `covered` — прямо покрыт договором;
-- `equivalent` — покрыт функциональной заменой без ухудшения правового
-  результата;
-- `different` — есть полезная норма, но элемент изменён материально;
-- `missing` — элемент не покрыт;
-- `not_applicable` — элемент не относится к активному договорному профилю.
+- consent or confirmation of consent;
+- covered persons;
+- processing or transfer purpose;
+- contract-performance purpose;
+- protection, confidentiality, or lawful-basis duties.
 
-Статус строки выводится из этого checklist:
+The useful package must cover both the relevant person category and the legally
+protected purpose or duty.
 
-- все активные обязательные элементы `covered` или `equivalent`
-  → `full_match`;
-- хотя бы один активный элемент `different` или `missing`, но есть полезная
-  юридическая функция → `partial_match`;
-- нет ни одного активного элемента с полезной юридической функцией
-  → `missing`.
+### Termination And Continuing Duties
 
----
+For termination, suspension, return, settlement, survival, and continuing-duty
+rows, check:
 
-## Стандарты статусов
+- termination or suspension right and grounds;
+- notice and effective date;
+- statutory termination framework;
+- post-termination settlements;
+- return, survival, and continuing duties.
 
-Используй только три статуса:
+Do not import unrelated confidentiality, merger, or survival clauses when the
+current item only requires a direct continuing duty.
 
-- `full_match`
-- `partial_match`
-- `missing`
+## False Positives
 
-### full_match
+Reject a candidate when it is only topical and does not perform the same legal
+function.
 
-Ставь `full_match`, только если:
+Reject these recurring near-misses:
 
-- все обязательные элементы matrix item покрыты одной или несколькими нормами
-  вместе;
-- роли сторон совпадают или функционально эквивалентны;
-- сохраняется тот же практический юридический результат для защищаемой стороны;
-- совпадают или эквивалентны объект, действие, триггер, сумма/формула, срок,
-  способ, последствие;
-- не остаётся ни одного существенного расхождения.
+- generic electronic form, qualified signature, or EDI clause for a matrix item
+  that requires a specific document channel, platform, proof model, or named
+  route;
+- general payment, invoice, act, acceptance, or price clause for a separate
+  bank-control mechanism such as demand, pre-acceptance, debit, set-off,
+  withholding, approval, or payment trigger;
+- general inspection, cooperation, support, or document request for a matrix item
+  about fraud, business profile, issuer-bank verification, restricted-resource
+  use, terminal security, or actual activity;
+- technical capability, form field, checkbox, hardware name, or product mention
+  for a matrix item that requires enforceable active product terms.
 
-Не ставь `full_match`, если хотя бы один обязательный элемент:
 
-- только предполагается;
-- отнесён к другой стороне;
-- выражен мягче;
-- зависит от будущего согласования;
-- вынесен в отсутствующее приложение или документ;
-- явно не покрыт в активном профиле.
+## Active Profile
 
-### partial_match
+Inactive products and channels do not create candidate gaps. Search for
+enforceable terms that match the active profile.
 
-Ставь `partial_match`, если:
+A product, channel, terminal, software route, or payment method is legally
+activated only when the contract creates an active package for it:
 
-- в договоре есть реальный юридический аналог или частичное покрытие функции;
-- но хотя бы один обязательный элемент отсутствует, ослаблен, ужесточен,
-  сужен, смещён, отложен, сделан факультативным или менее защищающим.
+- activation or deactivation;
+- price, tariff, or settlement;
+- party duties;
+- operating procedure;
+- notice or support;
+- liability or termination consequences.
 
-Любое существенное различие по одному из следующих параметров достаточно для
-`partial_match`:
+Technical capability, a form field, a checkbox, or a hardware name is not legal
+activation.
 
-- срок;
-- сумма или формула расчёта;
-- обязанность или право;
-- сторона;
-- триггер;
-- канал или форма;
-- объём;
-- строгость;
-- распределение риска;
-- состав документов;
-- механизм одобрения;
-- право на удержание, отказ, приостановление, проверку, расторжение.
+## Evidence
 
-Тематической близости недостаточно. Но если есть тот же юридический механизм с
-материальным дефектом, такую норму нужно включить и объяснить расхождение.
+Evidence must be short and legal-function based:
 
-### missing
+- `matrix_evidence`: required legal function;
+- `contract_evidence`: what the candidate clause provides;
+- `coverage`: why this clause belongs in the candidate package.
 
-Ставь `missing`, если:
+Do not include a clause if you cannot explain how it helps prove the legal
+function.
 
-- в договоре нет ни одной нормы, которая помогает доказать полное или частичное
-  покрытие;
-- найденные положения похожи по словам или теме, но не по юридической функции;
-- требование относится к продукту/каналу/терминалу, который в этом договорном
-  профиле не активен и не выбран.
+## Examples
 
-Для `missing` всегда возвращай пустые `contract_analog` и `legal_analysis`.
+Use `examples/candidate-selection-patterns.md` for candidate-selection examples.
+Those examples show which clauses to select, which clauses to prune, and why a
+candidate package is legally useful.
 
----
-
-## Правило включения клауз
-
-Включай положение договора в `contract_analog` только если оно реально влияет
-на вывод по статусу.
-
-### Включать
-
-Включай:
-
-- норму, которая прямо реализует требуемую функцию;
-- родительскую норму, если она нужна для работы дочерней;
-- дочернюю норму, если она даёт срок, триггер, сумму, исключение, процедуру
-  или перечень;
-- разбросанные нормы, которые вместе покрывают обязательные элементы;
-- положения приложений, тарифов, технических заданий, форм, таблиц и графиков,
-  если они содержат юридически значимые детали.
-
-Ограничение по объёму:
-
-- не включай более 15 клауз в `contract_analog` для одного matrix item;
-- если полезных клауз больше, выбери те, которые максимально влияют на статус
-  (сроки, суммы, триггеры, распределение риска, последствия).
-
-Приоритет включения:
-
-1. Нормы, устанавливающие суммы, сроки, триггеры.
-2. Нормы, распределяющие риск и ответственность.
-3. Нормы о процедуре и документах, без которых механизм не работает.
-
-### Обязательный добор связанного пакета
-
-Если найден кандидат, не останавливайся на нём. Проверь связанный пакет норм:
-
-- родительский пункт, который задаёт общее право/обязанность/механизм;
-- дочерние подпункты, которые задают срок, сумму, триггер, исключение,
-  ответственность, порядок подписания или перечень документов;
-- соседние пункты того же механизма, если один пункт отсылает к ним или
-  использует общий термин;
-- приложения, спецификации, формы и таблицы, если основной текст только
-  инкорпорирует их;
-- нормы закупочного, электронного, претензионного, платежного или иного
-  процедурного режима, если договор прямо строит исполнение через такой режим.
-
-Не обязательно включать весь контекст. Но если без parent/child/framework нормы
-статус станет неверным или неполным, эта норма должна быть в `contract_analog`.
-
-Проверочный вопрос: если убрать эту клаузу из пакета, изменится ли вывод о
-покрытии, сроке, сумме, триггере, стороне, процедуре или силе защиты? Если да,
-клаузу нужно включить.
-
-### Recall gate перед статусом
-
-Перед тем как ставить `overall_status`, проверь, что кандидатный пакет не
-оборван.
-
-Для каждого прямого кандидата обязательно проверь:
-
-- parent clause, если текущий пункт является подпунктом или зависит от общего
-  механизма;
-- child clauses, если parent задаёт только общий механизм без срока, суммы,
-  триггера, исключения, документа или последствия;
-- соседние подпункты того же механизма, если они распределяют элементы одного
-  требования;
-- определения и разделы с тем же defined term, если без них неясен объект
-  или scope;
-- все явные cross‑references, приложения, формы, таблицы, тарифы,
-  спецификации и технические задания;
-- общие payment, notice, liability, termination, acceptance, procurement
-  и electronic‑workflow sections, если найденный кандидат зависит от этих
-  процедур.
-
-Добор нужен не для длинного контекста, а для recall. В `contract_analog`
-включай только те связанные нормы, которые закрывают обязательный элемент или
-меняют статусный вывод.
-
-Если после добора обнаружилась норма, которая полностью закрывает ранее
-найденный gap, пересчитай статус всего пакета. Не оставляй `partial_match`
-только потому, что первый найденный кандидат был неполным.
-
-Если добор показал, что найденный кандидат был лишь контекстом и не покрывает
-обязательный элемент, отбрось его и оцени строку заново.
-
-### Не включать
-
-Не включай:
-
-- заголовки и определения, если matrix item не требует именно определения
-  или инкорпорации;
-- пустые общие формулы вроде «стороны соблюдают законодательство», если
-  matrix item требует конкретную коммерческую, операционную или контрольную
-  обязанность;
-- boilerplate, не выполняющий нужную функцию;
-- положения о другом продукте, канале, документе, комиссии, объекте
-  или механизме;
-- контекстные нормы, которые не меняют итоговый статус;
-- положения, найденные только потому, что они стоят в том же разделе,
-  приложении или тематической зоне;
-- подразумеваемые права, если matrix item требует именно прямого права
-  или прямой обязанности;
-- общий catch‑all, если матрица требует конкретный subground, trigger,
-  amount, list или procedure;
-- общий пункт об электронной форме договора, если matrix item требует
-  конкретный канал документооборота, юридическую силу конкретного сообщения,
-  экземпляры договора или иную самостоятельную функцию;
-- общий перечень приложений, если matrix item требует конкретную форму,
-  содержание приложения или документ с определённым правовым эффектом;
-- общую обязанность соблюдать закон или договор, если matrix item требует
-  конкретную инструкцию, процедуру, запрет, срок, сумму или право контроля
-  и эта общая норма не добавляет самостоятельного правового режима;
-- общую норму об ответственности, если matrix item требует конкретный штраф,
-  пеню, предел, формулу, основание или распределение риска;
-- capability statement или техническую возможность продукта, если matrix item
-  требует подключение, отключение, оплату, обслуживание, уведомление или
-  юридически значимую процедуру.
+Do not infer answers from old benchmark ids, workbook labels, archived corpora,
+or prior document-specific runs.
 
----
+## Final QA
 
-## Как определять общий статус строки
+Before saving:
 
-Определяй `overall_status` только после анализа всех включённых клауз.
-
-Правила:
-
-- `full_match` — все обязательные элементы покрыты без существенных
-  расхождений;
-- `partial_match` — хотя бы одно полезное покрытие есть, но остаётся хотя бы
-  один материальный gap;
-- `missing` — полезного покрытия нет.
-
-Важно:
-
-- не оценивай каждую клаузу так, как будто она обязана закрывать весь
-  matrix item сама по себе;
-- допускается многоклаузное покрытие;
-- если вместе нормы полностью покрывают требование без материальных
-  расхождений, это `full_match`;
-- если сильная норма есть, но другой обязательный элемент отсутствует, это
-  `partial_match`.
-
-### Развилки статусов
-
-#### `full_match` vs `partial_match`
-
-Ставь `partial_match`, а не `full_match`, если хотя бы один активный
-обязательный элемент:
-
-- покрыт другим сроком, суммой, формулой, cap, base или accrual period;
-- переносит обязанность или право на другую сторону;
-- меняет protected party или распределение риска;
-- заменяет обязательный механизм на факультативный;
-- оставляет документ, канал, ставку, срок или процедуру неопределёнными;
-- зависит от будущего соглашения, заявки, согласования или незаполненного
-  поля;
-- сужает продукт, терминал, операцию, услугу или набор документов.
-
-Не понижай до `partial_match`, если отличие только формальное:
-
-- другое название формы или приложения;
-- другой номер приложения;
-- другой label канала или системы;
-- другой provider/service‑company label;
-- закупочная, электронная или актовая процедура вместо банковского шаблона,
-  если она сохраняет тот же enforceable result.
-
-#### `partial_match` vs `missing`
-
-Ставь `partial_match`, если кандидат выполняет ту же юридическую функцию, но
-хуже, уже или неполно.
-
-Ставь `missing`, если кандидат:
-
-- только находится в той же теме или разделе;
-- содержит похожие слова, но регулирует другой legal object;
-- является generic law‑compliance вместо конкретной обязанности, кроме случаев,
-  где matrix item сам требует правовую рамку, 44-ФЗ/закупочную процедуру,
-  применимое право или соответствие обязательному законодательству;
-- является generic liability / notice / e‑signature / appendix‑list
-  boilerplate без нужной функции;
-- относится к неактивному продукту, каналу, терминалу или услуге;
-- описывает техническую возможность вместо права, обязанности, процедуры,
-  платежа, ответственности или последствия.
-
-#### `full_match` vs `missing`
-
-Не прыгай из тематического сходства сразу в `full_match`. Сначала докажи
-полезную юридическую функцию, затем полный checklist покрытия.
-
-Если полезной функции нет, статус `missing` независимо от количества похожих
-слов, соседства пунктов или совпадения `topics`.
-
----
-
-## Evidence и legal_analysis
-
-Для каждого `contract_id` должен быть ровно один объект в `legal_analysis`.
-
-### matrix_evidence
-
-Используй `matrix_evidence` для короткой, юридически точной фиксации сути
-требования матрицы. Поле должно называть конкретное право, обязанность, объект,
-триггер или последствие, а не тему раздела и не полный пересказ требования.
-
-### contract_evidence
-
-Используй `contract_evidence` для короткой фиксации того, что реально делает
-договор. Поле должно фиксировать юридическое действие договора: кто обязан или
-вправе что сделать, в отношении какого объекта, при каком триггере и с каким
-последствием. Не копируй длинный абзац и не оставляй абстрактную тему без
-юридического содержания.
-
-### coverage
-
-В `coverage` объясняй, почему эта клауза важна:
-
-- какую сторону она защищает или обязывает;
-- какой объект/действие/триггер/последствие она покрывает;
-- закрывает ли она всё требование или только часть общего пакета покрытия.
-
-### discrepancies
-
-В `discrepancies` перечисляй только существенные различия, влияющие на статус.
-
-Типовые материальные расхождения:
-
-- другой срок;
-- другая сумма или формула;
-- другой канал или форма;
-- факультативность вместо обязанности;
-- право у другой стороны;
-- более узкий или более слабый trigger;
-- другой продукт или способ оплаты;
-- более слабое последствие;
-- дополнительное одобрение, которого матрица не допускает;
-- вынесение обязательства в будущее соглашение или отсутствующее приложение.
-
-Не считай расхождением само по себе:
-
-- другое название документа или приложения;
-- иную нумерацию;
-- иной system/channel label;
-- другой service‑company/provider label;
-- различие в словах при одинаковом юридическом результате;
-- если в матрице указан список опций, а в контракте выбрана только одна
-  допустимая опция;
-- если в матрице перечислены альтернативные допустимые способы, а договор
-  выбирает один активный способ и этот выбор сохраняет требуемый результат.
-
-Пустое поле в договоре оценивай отдельно:
-
-- если matrix item требует сам факт канала/формы/поля, а договор оставляет
-  реквизит пустым так, что исполнение всё равно определимо из другого
-  договорного механизма, это может быть формальным отличием;
-- если пустое поле делает канал, систему, срок, адрес, ставку или иной
-  обязательный элемент неопределённым, это материальный gap → `partial_match`.
-
-Если практический юридический результат для защищаемой стороны одинаков,
-сохраняй `full_match` и оставляй `discrepancies: []`.
-
-Правила:
-
-- для `full_match` во всех `legal_analysis` списки `discrepancies` должны быть
-  пустыми;
-- для `partial_match` хотя бы в одном объекте должен быть конкретный
-  материальный gap или существенное отличие.
-
----
-
-## Калибровка статусов
-
-Перед присвоением статуса проходи по этой логике:
-
-1. Определи, какой именно банковский или эквайринговый результат защищает
-   matrix item:
-   - расчёт по операциям;
-   - оплата услуг/комиссий;
-   - право отказа;
-   - право удержания;
-   - обслуживание и поддержка;
-   - эксплуатация оборудования;
-   - документооборот;
-   - ответственность;
-   - расторжение;
-   - защита данных;
-   - инкорпорация приложений.
-2. Проверь активный профиль договора:
-   - продукт;
-   - тип терминала;
-   - способ оплаты;
-   - procurement mode;
-   - включённые приложения.
-3. Собери разбросанное покрытие из основного текста, приложений, тарифов,
-   спецификаций, форм и ссылочных документов.
-4. Классифицируй каждое различие:
-   - эквивалентная замена — не влияет на результат → `full_match`;
-   - формальное отличие без практического ухудшения → `full_match`;
-   - ослабление права, срока, суммы, триггера, контроля, объёма или защиты
-     → `partial_match`;
-   - отсутствие полезной юридической функции → `missing`.
-5. Оценивай строку как единый coverage package, а не как набор независимых
-   мини‑оценок по каждому clause id.
-
-### Status decision gate
-
-Перед записью `overall_status` явно проверь пять вопросов:
-
-1. Есть ли полезная юридическая функция?
-   - Если кандидат только тематический, контекстный или boilerplate, статус
-     `missing`, даже если слова похожи.
-2. Покрыты ли все обязательные элементы полным пакетом клауз?
-   - Смотри на combined candidate set, а не на один пункт изолированно.
-3. Есть ли материальное отличие в защищаемом результате?
-   - Отличие материально, если меняет право, обязанность, срок, сумму/формулу,
-     trigger, сторону, платёжный поток, документ, канал, процедуру, контроль,
-     ответственность, риск или силу защиты.
-4. Является ли отличие только формальным?
-    - Если правовой результат тот же, не понижай статус из‑за номера
-      приложения, названия формы, названия провайдера, выбранной из списка
-      опции или закупочного способа исполнения.
-    - Не считай label канала формальностью, если matrix item требует конкретную
-      систему, адрес, API, сайт, способ доставки или named channel как
-      обязательный элемент. Например, замена `E-invoicing/СФЕРА-Курьер` на
-      безымянную автоматизированную систему или отсутствие `pcidss@sberbank.ru`
-      является материальным gap → `partial_match`.
-
-5. Является ли отсутствующий элемент неактивной альтернативой профиля?
-   - Если договор по своему тексту активирует только POS/card/электронные
-     терминалы, не понижай статус из-за отсутствия SberPay, QR, NFC,
-     интернет-ресурса, СПЭП или смарт-терминала, когда matrix item перечисляет
-     их как альтернативы общей банковской формы.
-    - Понижай статус только если отсутствующая альтернатива активна в договоре
-      или matrix item требует именно её как самостоятельную обязанность.
-    - Если matrix item целиком посвящён неактивному продукту или каналу
-      (например, QR-API, SberPay, Ресурс, СПЭП), а договор содержит только
-      техническое упоминание или disclaimer без подключения, цены, процедуры,
-      ответственности и обязательства сторон, это `missing`, а не
-      `partial_match`.
-
-Итог:
-
-- полезной функции нет → `missing`;
-- полезная функция есть, но есть материальный gap → `partial_match`;
-- весь обязательный результат сохранён без материального gap → `full_match`.
-
-### Procurement / framework equivalence
-
-Если договор исполняется через публичную закупку, электронную площадку, ЕИС,
-актирование, претензионный порядок, законную неустойку или иной процедурный
-framework, не оценивай его автоматически как хуже банковского шаблона.
-
-Такой framework может давать `full_match`, если он сохраняет тот же исполняемый
-результат:
-
-- кто должен платить/подписывать/предоставлять/возмещать;
-- когда наступает обязанность;
-- какой документ или процедура запускает последствие;
-- какая сторона получает защиту;
-- сохраняется ли сумма, срок, контроль и средство защиты.
-
-Ставь `partial_match`, если framework заменяет форму, но ослабляет срок, сумму,
-триггер, контроль банка/исполнителя, право удержания, право отказа,
-ответственность или распределение риска.
-
-Для контрактов в режиме 44-ФЗ/ЕИС не считай материальным gap само по себе, что:
-
-- УПД заменён документом о приёмке в ЕИС;
-- возврат подписанного документа заменён размещением подписанного документа
-  или мотивированного отказа в ЕИС;
-- банковский срок или форма оплаты заменены сроком/основанием оплаты,
-  допустимыми в закупочной процедуре;
-- банковский порядок расторжения заменён расторжением по соглашению сторон,
-  решению суда или одностороннему отказу по ГК РФ/44-ФЗ;
-- перемена исполнителя регулируется специальным запретом/исключением 44-ФЗ.
-
-Если такая процедура сохраняет обязанность, документ, срок или правовую защиту
-в обязательном для сторон режиме, это `full_match`. Ставь `partial_match`
-только когда закупочный framework реально убирает требуемое право, срок,
-документ, защиту или экономический результат.
-
-### Liability and penalty packages
-
-Для требований о штрафах, пенях, неустойке и ответственности не оценивай один
-пункт изолированно. Сначала собери пакет:
-
-- общая рамка ответственности или способ расчёта;
-- сторона, которая платит или получает штраф;
-- вид нарушения: просрочка, неисполнение, ненадлежащее исполнение,
-  обязательство без стоимостного выражения;
-- формула, ставка, база, cap, цена договора/этапа;
-- освобождение от ответственности, если оно влияет на результат.
-
-Если договор содержит полезный пакет ответственности, не ставь `missing` только
-из-за отличия банковской шкалы от закупочной формулы. При отличии формулы,
-ставки, базы или protected party ставь `partial_match`; при сохранении
-исполняемого результата в закупочной модели ставь `full_match`.
-
-Не заменяй специальную норму ответственности соседним пунктом о другой стороне
-или другом виде нарушения. Для штрафов Предприятия ищи право Банка требовать
-штраф с Предприятия; для штрафов Банка ищи ответственность Банка/Исполнителя
-перед Предприятием/Заказчиком.
-
-### General statutory / legal-framework clauses
-
-Общие нормы о соблюдении законодательства, 44-ФЗ, закупочном режиме, ЕИС,
-претензионном порядке или применимом праве могут быть полезным аналогом, если
-сам matrix item требует именно правовую рамку, соответствие обязательному
-законодательству, допустимость условия по закону, закупочную/статутную
-процедуру или остаточное регулирование правом РФ.
-
-В таких случаях не возвращай `missing` только потому, что пункт договора общий.
-Включай рамочную норму как `partial_match`, если она:
-
-- подтверждает применимость обязательного закона или 44-ФЗ к спорному вопросу;
-- задаёт остаточное регулирование правом РФ для неурегулированной части;
-- делает исполнение через ЕИС, закупочную, актовую или претензионную процедуру
-  юридически значимым;
-- покрывает только правовую рамку, но не закрывает специальный срок, сумму,
-  документ, право контроля, санкцию или иной конкретный элемент matrix item.
-
-Такая норма обычно не даёт `full_match` сама по себе. `full_match` возможен
-только когда matrix item сам ограничен общим требованием законности/применимого
-права и не требует отдельного коммерческого или операционного механизма.
-
-Не используй это правило как универсальный fallback. Если matrix item требует
-конкретную обязанность, запрет, срок, сумму, формулу, документ, право контроля
-или ответственность, а общая норма закона не выполняет эту функцию, это
-near-miss и её нужно отбросить.
-
-### Blank fields, VAT, and scoped linked gaps
-
-Пустое поле не всегда является материальным gap. Сначала проверь, что именно
-оценивает matrix item:
-
-- если matrix item сам содержит placeholder или `main_idea` говорит, что
-  отсутствие конкретной цены не является противоречием, оценивай наличие
-  механизма цены/тарифа, а не заполненность суммы → обычно `full_match`;
-- если matrix item требует конкретную сумму, ставку, адрес, срок или систему,
-  а договор оставляет это поле пустым, это материальный gap → `partial_match`;
-- если matrix item про срок, периодичность и документ оплаты, а договор
-  сохраняет УПД/период/срок, отличие `НДС включён` vs `не облагается НДС по
-  ст. 149 НК РФ` само по себе не понижает статус;
-- не переноси gap из связанного пункта на текущий matrix item, если этот gap не
-  входит в его status profile. Например, пункт про право удерживать штраф
-  оценивает само право удержания; пустой размер штрафа в другом подпункте
-  релевантен только если matrix item требует именно размер.
-
----
-
-## Когда различия не мешают full_match
-
-Не понижай статус только потому, что:
-
-- публично‑закупочная процедура заменяет банковскую форму, но сохраняет тот же
-  практический результат;
-- договор покрывает активный POS/card/электронный-терминальный профиль, а
-  matrix item дополнительно перечисляет неактивные альтернативы вроде QR,
-  SberPay, NFC, Ресурса, СПЭП или смарт-терминала;
-- изменено название документа, но его юридическая функция та же;
-- УПД называется документом о приёмке, актом, счётом или иной закупочной формой,
-  если сохранены обязанность подписать/принять/отказать и правовое последствие;
-- ставка, тариф, форма, сайт, перечень услуг или техническая деталь вынесены
-  в корректно инкорпорированное приложение, таблицу, тариф или спецификацию;
-- канал уведомления обозначен иначе, но сохраняет доставку, получение и
-  юридическую силу;
-- конкретный номер канала связи, пункт канала или label системы не повторён,
-  но адресат, обязанность сообщить/передать документ и правовой эффект
-  сохранены, и matrix item не требует именно named system/address/API/site как
-  обязательный элемент;
-- ссылка на сайт, форму или техническую страницу оставлена как placeholder, но
-  сама обязанность обучить, уведомить, разместить материалы или предоставить
-  документ уже прямо установлена и не зависит от содержания этого placeholder;
-- вместо «авторизованной сервисной компании» указан provider, который несёт
-  ту же функцию и ответственность;
-- «информационные материалы» и «рекламно-информационные материалы» выполняют
-  одну функцию для операций и держателей карт;
-- объект назван немного иначе, но правовой смысл и последствие совпадают.
-
----
-
-## Когда topical coverage всё равно partial_match
-
-Ставь `partial_match`, если есть юридически релевантное покрытие, но различие
-материально.
-
-Типовые случаи:
-
-- та же обязанность, но другой срок, меняющий риск исполнения;
-- тот же платёжный механизм, но другой payer, basis, trigger или контроль;
-- право на штраф есть, но отличаются amount, formula, cap, base
-  или accrual period;
-- размер штрафа/пени/неустойки определяется другим источником или режимом
-  расчёта, например постановлением о закупочных штрафах вместо приложения,
-  тарифа или формулы матрицы;
-- общий порядок разрешения споров заменён конкретным судом или конкретной
-  подсудностью, если matrix item требует более широкую модель по закону РФ;
-- notice‑duty похожа, но отличаются recipient, deadline, legal effect, required
-  content или channel в существенной части;
-- обязанность по сервису/оборудованию сформулирована, но детали отложены на
-  будущее или оставлены на усмотрение стороны;
-- общая data/confidentiality clause покрывает только часть более конкретного
-  требования.
-
----
-
-## Near‑miss случаи, которые нужно отвергать
-
-Не включай кандидата даже как `partial_match`, если он не выполняет ту же
-юридическую функцию.
-
-Типовые near‑miss:
-
-- похожие слова, но другой legal object;
-- обратная сторона или обратный денежный поток;
-- generic law‑compliance вместо конкретной обязанности, кроме случаев, где
-  сам matrix item требует правовую рамку, 44-ФЗ/закупочную процедуру,
-  применимое право или соответствие обязательному законодательству;
-- product capability statement вместо процедуры, расчёта, подключения,
-  отключения или обслуживания;
-- общий список приложений вместо конкретной требуемой формы или документа;
-- родительская норма о наличии ответственности без требуемой конкретной
-  суммы/формулы;
-- обычная notice clause для matrix item, который требует не общий способ
-  связи, а конкретный правовой эффект уведомления;
-- обычная termination clause для matrix item про post‑termination settlements;
-- обязанность «не препятствовать» вместо прямого inspection/access/audit right;
-- электронная подпись или электронная форма договора вместо конкретного
-  договорного канала обмена документами;
-- перечень приложений вместо требуемого приложения с нужным содержанием;
-- общая обязанность принять карты вместо конкретного запрета, ограничения
-  количества карт, запрета выдачи наличных или специального режима операции;
-- заявление/форма подключения вместо права на безакцептное списание,
-  удержание, выставление счёта или другого платежного механизма;
-- право проверки технического состояния вместо права проверки мошенничества,
-  документов, операций или комплаенс‑данных, если matrix item требует именно
-  их;
-- общий срок действия договора вместо специального порядка одностороннего
-  расторжения, post‑termination расчётов или перехода обязательств.
-
-Если кандидат похож тематически, но не покрывает ни одного обязательного
-элемента status profile, его нужно отбросить. Это не `partial_match`, а отсутствие
-полезного аналога.
-
----
-
-## Слова могут быть обманчивы
-
-Одинаковые слова могут обозначать разные юридические механизмы. Всегда проверяй:
-
-- сторону;
-- объект;
-- trigger;
-- consequence.
-
-Если слова похожи, но объект или последствие другие, отклоняй кандидата или
-используй его только как `partial_match`, если он покрывает хотя бы материальную
-часть нужной функции.
-
----
-
-## Запрещено (anti‑hallucination guardrails)
-
-- Не придумывай matrix items, которых нет в `inputs/matrix.json`.
-- Не придумывай `contract_id`, которых нет в тексте договора.
-- Не ссылайся на приложения, таблицы, формы или внешние документы, если они
-  не упомянуты и не инкорпорированы в договор.
-- Не вводи новые поля в JSON, даже если они помогли бы объяснению.
-- Не используй внешние знания о законах или рыночных практиках для изменения
-  статуса. Оценивай только по матрице и тексту договора.
-- Если не можешь уверенно привязать норму к нужному продукту/каналу/терминалу,
-  трактуй это как потенциальный gap и склоняйся к `partial_match` или `missing`
-  в зависимости от наличия полезной функции.
-
----
-
-## Порядок работы
-
-Для каждого matrix id:
-
-1. Прочитай:
-   - `number`;
-   - `main_idea`;
-   - `topics`;
-   - `enriched_text`;
-   - applicability fields;
-   - product, terminal, payment‑method restrictions.
-2. Используй `main_idea` и `topics` только для маршрутизации поиска.
-3. Ищи по всему договору, включая основной текст, приложения, тарифы, таблицы,
-   спецификации, формы, графики, notice/payment/liability/termination‑разделы
-   и ссылочные документы.
-4. Сначала ищи прямые нормы, затем разбросанное покрытие, затем функциональные
-   замены.
-5. Для каждого найденного прямого кандидата сделай добор связанного пакета:
-   parent, child, соседние подпункты, приложения, спецификации, процедуры.
-6. После нахождения кандидатов извлеки обязательные элементы из полного matrix
-   requirement.
-7. Сравни весь candidate set со всеми обязательными элементами.
-8. Отбрось near‑miss кандидатов, которые не поддерживают статусный вывод.
-9. Оставь только те нормы, которые реально поддерживают итоговый
-   compliance‑вывод.
-10. Заполни внутренний status checklist: `covered`, `equivalent`, `different`,
-    `missing`, `not_applicable`.
-11. На основе чеклиста выставь один `overall_status` на весь matrix item.
-12. Если ни один кандидат не проходит тест юридической функции, верни `missing`.
-
----
-
-## Quality gates
-
-Перед записью результата проверь:
-
-- каждый присвоенный `matrix_id` присутствует ровно один раз;
-- не появилось ни одного лишнего `matrix_id`;
-- в каждом объекте есть ровно поля:
-  - `matrix_id`
-  - `contract_analog`
-  - `overall_status`
-  - `legal_analysis`
-- `overall_status` ∈ {`full_match`, `partial_match`, `missing`};
-- `contract_analog` — список уникальных строк;
-- contract ids в `contract_analog` и `legal_analysis[].contract_id` не
-  нормализованы и не содержат технических замен вроде `_` вместо пробела;
-- для `missing` используются пустые списки;
-- каждый `contract_analog` имеет ровно один matching объект в `legal_analysis`;
-- каждый `legal_analysis[].contract_id` точно совпадает с id из
-  `contract_analog`;
-- `full_match` не содержит discrepancies;
-- `partial_match` содержит хотя бы одно конкретное материальное расхождение;
-- evidence короткие, юридически точные и действительно объясняют правовой
-  вывод.
-
----
-
-## Финальные ограничения
-
-Всегда помни:
-
-- похожая тема ≠ тот же юридический механизм;
-- то же слово ≠ тот же legal object;
-- та же тема раздела ≠ полезный кандидат;
-- общая норма ≠ покрытие конкретной обязанности;
-- одна сильная клаузa ≠ `full_match`, если другой обязательный элемент не
-  покрыт;
-- несколько разбросанных клауз могут вместе дать `full_match`;
-- разница в названии документа, канала или приложения не важна, если правовой
-  результат тот же;
-- разница в сроке, сумме, формуле, триггере, стороне или степени защиты обычно
-  статус‑релевантна;
-- ВСЕ ФАЙЛЫ ДОЛЖНЫ БЫТЬ ЗАПИСАНЫ СТРОГО ПО ТОМУ ПУТИ, КОТОРЫЙ УКАЗАЛ
-  ОРКЕСТРАТОР, И С ТЕМ НАЗВАНИЕМ, КОТОРОЕ ОН СООБЩИЛ.
+- every assigned matrix id is present once;
+- JSON parses;
+- no fields outside the output schema are present;
+- every contract id in `contract_analog` appears once in `candidate_analysis`;
+- every candidate has legal-function evidence;
+- every candidate has `legal_role` and `covered_elements`;
+- `matrix_legal_elements` lists material elements from the matrix content;
+- `element_candidate_map` ties each material element to found candidates or
+  records `not_found`;
+- every empty candidate set has a `candidate_limit_reason` naming recovery
+  zones checked;
+- no topical near-miss is kept only because it shares vocabulary or section
+  context;
+- no candidate is kept because of matrix numbering, contract numbering, or
+  clause proximity without the same legal function;
+- the file is saved strictly to the assigned output path.
