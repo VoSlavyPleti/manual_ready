@@ -88,6 +88,10 @@ Each `legal_analysis` object must include `contract_row_status`. This is the
 standalone contribution of that contract row, not a replacement for
 `overall_status`.
 
+If a sentence, paragraph, or list item has no separate printed id, cite the
+parent clause id only and describe the exact sentence or paragraph in
+`contract_evidence`. Do not invent ids such as `<clause> (paragraph 2)`.
+
 ## Status Rule
 
 Use package-level status for each matrix item:
@@ -143,6 +147,11 @@ Extract material elements using matrix field priority:
 Do not turn every word in `topics` or every alternative in `enriched_text` into
 a mandatory element. Use `main_idea` and applicability fields to decide what is
 material.
+
+When `main_idea` narrows the risk to one legal issue, do not downgrade for other
+menu items, examples, channels, product names, or drafting details from
+`enriched_text` unless they change that narrowed issue. The standard matrix may
+contain template breadth that is not material for the assigned contract scope.
 
 ### 2. Evaluate Coverage
 
@@ -226,6 +235,10 @@ mechanism: EDI provider, platform, payment system, mailbox, website, registry,
 tariff source, proof provider, or support channel. A blank named mechanism is a
 material gap unless `main_idea` says that an unfilled placeholder is acceptable.
 
+If the matrix itself names a concrete external mechanism and the contract uses a
+blank line where that name should be, treat it as `partial_match`. This applies
+even when the rest of the channel, signature, or document-force rule is present.
+
 ### 4. Hard Partial Gates
 
 Use `partial_match` when any gate is triggered:
@@ -265,10 +278,21 @@ contract row calculates a fine, penalty, cap, or liability amount through an
 external statute or regulation while the matrix fixes a different source,
 amount, formula, or appendix-based schedule.
 
+If the matrix source for liability is an appendix, tariff, fixed table, or bank
+standard schedule and the contract source is a statute, regulation, or different
+external formula, use `partial_match` unless the values and legal effect are
+demonstrably identical.
+
 If a package-level gap applies to the whole matrix proposition, apply that gap
 to direct `contract_row_status` values too. Do not mark a direct row full when
 the same direct row is part of a package that is partial because the bank right,
 named mechanism, protected party, trigger, or economic source is absent.
+
+For row-level status, inherit package-level gaps that affect the same candidate:
+if the row is the direct candidate for a matrix requirement and the package is
+partial because a material bank right, named mechanism, payment-control route,
+or liability formula is missing, that row is also `contract_row_status =
+partial_match`.
 
 If a cited clause is only adjacent, implicit, or weaker and does not share the
 same functional role, legal object, trigger, and consequence, treat it as not a
@@ -337,6 +361,8 @@ Before saving:
 
 - every assigned matrix id appears exactly once;
 - `contract_analog` equals `legal_analysis[].contract_id`;
+- ids contain only printed clause, appendix, table, or row identifiers; paragraph
+  explanations stay in evidence fields;
 - every `legal_analysis` row has `contract_row_status` and `package_role`;
 - `missing` rows have empty `contract_analog` and `legal_analysis`;
 - every `full_match` or `partial_match` row has at least one candidate;

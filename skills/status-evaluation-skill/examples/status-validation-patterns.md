@@ -68,6 +68,18 @@ Result: `full_match`.
 Reason: unused menu alternatives are not gaps unless matrix fields make them
 mandatory.
 
+## status/main-idea-narrows-materiality
+
+Matrix text contains a broad template menu, but `main_idea` says the only risk
+is a specific legal issue.
+
+Contract preserves that issue for the active scope and omits unrelated menu
+items.
+
+Result: `full_match`.
+
+Reason: materiality follows the narrowed legal risk, not every template option.
+
 ## status/lifecycle-trigger-required
 
 Matrix requires automatic connection, activation, installation, suspension,

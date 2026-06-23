@@ -219,6 +219,9 @@ USER_PROMPT = """
 - `contract_analog` и `legal_analysis[].contract_id` содержат только точные
   номера пунктов из договора, без пояснений в скобках и без исправленной
   нумерации;
+- если отдельное предложение, абзац или элемент списка не имеет собственного
+  напечатанного номера, укажи только id родительского пункта, а точный абзац
+  опиши в `contract_evidence`; не создавай id вида `2.3.7 (абз. 2)`;
 - каждый id из `contract_analog` должен иметь ровно один объект в
   `legal_analysis` с таким же `contract_id`; не добавляй parent/context id в
   `contract_analog`, если не описываешь его в `legal_analysis`;
@@ -242,6 +245,8 @@ USER_PROMPT = """
   значения, такой placeholder не является расхождением сам по себе;
 - если пункт договора только косвенно похож на тему матрицы, но не содержит тот
   же правовой объект, триггер и последствие, не считай его полезным аналогом;
+- если `main_idea` сужает риск до конкретного юридического вопроса, не считай
+  все остальные опции из типового `enriched_text` обязательными элементами;
 - если матрица требует конкретную систему/платформу/канал, автоматическое
   подключение, активацию, установку или иной lifecycle-trigger, простое
   упоминание продукта или общего канала не является достаточным аналогом;
@@ -315,10 +320,15 @@ def verify_final_artifact() -> None:
     matrix_path = PROJECT_ROOT / "inputs" / "matrix.json"
     final_path = PROJECT_ROOT / "outputs" / "matrix_contract_mapping.json"
     if not final_path.exists():
-        raise RuntimeError(
-            "Final artifact is missing: outputs/matrix_contract_mapping.json. "
-            "The workflow must not stop after a partial batch."
-        )
+        legacy_path = PROJECT_ROOT / "output" / "matrix_contract_mapping.json"
+        if legacy_path.exists():
+            final_path.parent.mkdir(parents=True, exist_ok=True)
+            final_path.write_bytes(legacy_path.read_bytes())
+        else:
+            raise RuntimeError(
+                "Final artifact is missing: outputs/matrix_contract_mapping.json. "
+                "The workflow must not stop after a partial batch."
+            )
 
     matrix = json.loads(matrix_path.read_text(encoding="utf-8-sig"))
     final = json.loads(final_path.read_text(encoding="utf-8"))

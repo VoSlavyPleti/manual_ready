@@ -90,6 +90,10 @@ If the legal rule is in an appendix, table, form, or technical assignment row,
 use the most specific row-level id available, for example `Приложение №1 п.5`.
 Descriptions belong in evidence fields, not in ids.
 
+If a sentence, paragraph, or list item has no separate printed id, cite the
+parent clause id only and describe the exact sentence or paragraph in
+`contract_evidence`. Do not invent ids such as `<clause> (paragraph 2)`.
+
 ## Workflow
 
 ### 1. Extract Legal Elements
@@ -303,6 +307,8 @@ Before saving:
 
 - every assigned matrix id appears exactly once;
 - every candidate id appears in the contract text;
+- no candidate id contains parenthetical explanations or invented paragraph
+  labels;
 - every `contract_analog` id has a matching `candidate_analysis` object;
 - parent/umbrella, child, appendix, table, and cross-reference rows were checked;
 - appendix/table candidates use specific row ids when available;
