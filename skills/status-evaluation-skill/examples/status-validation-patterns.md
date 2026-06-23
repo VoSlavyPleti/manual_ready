@@ -2,20 +2,31 @@
 
 Generic examples for package-level status evaluation.
 
-## status/package-full
+## status/package-full-from-partial-rows
 
 Matrix requires duty, document route, deadline, and consequence.
 
 Contract package:
 
-- clause A creates the duty;
-- clause B gives the route;
-- clause C gives the deadline and consequence.
+- row A creates the duty;
+- row B gives the route;
+- row C gives the deadline and consequence.
 
-Result: `full_match`.
+Result: `overall_status = full_match`.
 
-Reason: individual clauses may be incomplete alone, but the package covers all
-material elements.
+Row status: A, B, and C may each be `contract_row_status = partial_match` when
+they are incomplete alone.
+
+Reason: package status and row contribution status answer different questions.
+
+## status/direct-row-full-package-full
+
+Matrix requires one operative duty with a trigger and consequence.
+
+Contract row contains the same duty, trigger, and consequence.
+
+Result: `overall_status = full_match`; that row may have
+`contract_row_status = full_match`.
 
 ## status/package-incomplete
 
@@ -26,6 +37,16 @@ Contract has duty and deadline, but no penalty or equivalent consequence.
 Result: `partial_match`.
 
 Named gap: consequence missing.
+
+## status/adjacent-only-is-missing
+
+Matrix requires a specific right, trigger, and consequence.
+
+Contract mentions the same topic but lacks the trigger or consequence.
+
+Result: `missing` if no other useful candidate exists.
+
+Reason: topic adjacency is not a legal analog.
 
 ## status/product-absent
 
@@ -47,15 +68,15 @@ Result: `full_match`.
 Reason: unused menu alternatives are not gaps unless matrix fields make them
 mandatory.
 
-## status/named-product-required
+## status/lifecycle-trigger-required
 
-Matrix specifically requires a named QR/API/wallet/EDI/platform product.
+Matrix requires automatic connection, activation, installation, suspension,
+support, access, or proof procedure.
 
-Contract has only ordinary card acquiring or generic e-document wording.
+Contract only mentions product capability or appendix availability.
 
-Result: `missing` or `partial_match` if the generic clause is legally useful.
-
-Reason: named product/channel is the legal object.
+Result: `missing` if the lifecycle trigger is absent, or `partial_match` only
+when another useful clause contains the same operative mechanism.
 
 ## status/statutory-equivalent
 
@@ -68,16 +89,87 @@ Result: `full_match`.
 
 Reason: different legal route, same enforceable result.
 
-## status/statutory-not-equivalent
+## status/statutory-not-blanket-full
 
-Matrix gives one party bank-controlled collection or unilateral remedy.
+Matrix fixes an economic amount, formula, penalty trigger, liability cap,
+protected party, or special bank-control mechanism.
 
-Contract replaces it with ordinary payment order or weaker procedure, and no
-mandatory rule preserves the control.
+Contract relies on a mandatory-law regime but changes that material term.
 
 Result: `partial_match`.
 
-Named gap: control mechanism weakened.
+Reason: mandatory law can substitute procedures, but it does not erase material
+economic or protected-party differences.
+
+## status/deadline-statutory-route
+
+Matrix has a standard commercial deadline. Contract is governed by a mandatory
+statutory process with a different deadline but the same accept/pay/remedy
+result.
+
+Result: `full_match`.
+
+Reason: mandatory framework preserves the legal result.
+
+## status/bank-controlled-payment
+
+Matrix requires accepted payment demand, set-off, withholding, direct debit, or
+another bank-controlled collection mechanism.
+
+Contract uses ordinary payment order or ordinary post-acceptance payment.
+
+Result: `partial_match`.
+
+Reason: payment exists, but the control mechanism is weaker or different.
+
+## status/deadline-changed
+
+Matrix contains a fixed deadline and no mandatory framework substitutes it.
+
+Contract has a different deadline.
+
+Result: `partial_match`.
+
+Named gap: deadline changed.
+
+## status/payment-settlement-object
+
+Matrix requires a settlement act, settlement invoice, VAT treatment, operation
+sum, set-off, withholding, or bank-controlled collection.
+
+Contract has only service acceptance or ordinary payment language.
+
+Result: `missing` when the settlement object is absent; `partial_match` when the
+same mechanism exists but a material parameter differs.
+
+## status/liability-source-changed
+
+Matrix fixes a fine, penalty, cap, amount source, or appendix schedule.
+
+Contract calculates the same liability through a different statute, regulation,
+or external source.
+
+Result: `partial_match` when the source changes the economic risk allocation.
+
+## status/confidentiality-vs-personal-data
+
+Matrix protects card security, transaction technology, business, financial, or
+other confidential information.
+
+Contract protects only personal data.
+
+Result: `missing` if no broader confidentiality clause exists.
+
+Reason: the protected legal object differs.
+
+## status/non-liability-vs-indemnity
+
+Matrix says one party is not liable for a defined claim category.
+
+Contract only gives that party indemnity for losses.
+
+Result: `partial_match` only if the same claim category and protected party are
+preserved; otherwise `missing`.
 
 ## status/placeholder-not-gap
 
@@ -88,16 +180,16 @@ Result: `full_match`.
 
 Reason: completion placeholder is not a changed term.
 
-## status/named-platform-blank
+## status/named-mechanism-blank
 
-Matrix requires a named EDI system, platform, provider, mailbox, or proof model.
+Matrix requires a named EDI provider, platform, mailbox, tariff source, website,
+proof provider, or payment-system channel.
 
-Contract leaves that name blank or replaces it with a materially different
-channel.
+Contract leaves that named mechanism blank.
 
-Result: `partial_match`.
+Result: `partial_match` unless `main_idea` says the blank is acceptable.
 
-Named gap: required named channel not preserved.
+Reason: the missing name affects the enforceable route or source.
 
 ## status/broader-channel
 
@@ -118,36 +210,6 @@ Result: `full_match`.
 
 Reason: omitted cross-reference text is not a material gap.
 
-## status/deadline-changed
-
-Matrix contains a fixed deadline and no mandatory framework substitutes it.
-
-Contract has a different deadline.
-
-Result: `partial_match`.
-
-Named gap: deadline changed.
-
-## status/deadline-statutory-route
-
-Matrix has a standard commercial deadline. Contract is governed by a mandatory
-statutory process with a different deadline but the same accept/pay/remedy
-result.
-
-Result: `full_match`.
-
-Reason: mandatory framework preserves the legal result.
-
-## status/economic-term-changed
-
-Matrix states a fixed amount, cap, rate, formula, currency, or penalty.
-
-Contract states a different value and no mandatory equivalent applies.
-
-Result: `partial_match`.
-
-Named gap: economic term changed.
-
 ## status/party-inverted
 
 Matrix imposes liability or duty on the merchant/customer role.
@@ -167,15 +229,6 @@ but illustrative event lists differ.
 Result: `full_match`.
 
 Reason: examples differ; legal consequence is preserved.
-
-## status/formal-label
-
-Matrix uses one document title or appendix number. Contract uses another title
-for the same operative rule.
-
-Result: `full_match`.
-
-Reason: label difference is not a legal gap.
 
 ## status/equivalent-not-status
 

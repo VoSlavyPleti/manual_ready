@@ -9,8 +9,13 @@ description: >
 
 ## Purpose
 
-For each assigned matrix item, return the contract clauses that may legally
-cover, qualify, implement, limit, evidence, or explain the matrix requirement.
+For each assigned matrix item, return the contract clauses that are legal
+analogs or necessary package members for the matrix requirement.
+
+A candidate must share the same core legal proposition: functional role, legal
+object, operative right/duty/prohibition/procedure, and at least the same
+trigger or consequence. A clause that is only adjacent by topic is not a
+candidate.
 
 The matrix is the bank standard. The incoming contract is checked against that
 standard. This skill only builds the candidate pool. It does not assign
@@ -50,9 +55,11 @@ Save a JSON array to the assigned output path:
     {
       "contract_id": "<exact contract clause id>",
       "legal_role": "direct|parent|child|framework|payment|liability|notice|termination|appendix|context",
+      "candidate_kind": "direct_analog|package_member|statutory_substitute",
       "matrix_evidence": "<short legal core from the matrix>",
       "contract_evidence": "<short legal content of this clause>",
       "coverage": "<why this clause is legally useful>",
+      "core_elements_matched": ["role|object|act|trigger|consequence|scope"],
       "covered_elements": ["<matrix legal element this clause may cover>"]
     }
   ],
@@ -102,7 +109,33 @@ For each matrix item, extract:
 Search by legal function and matrix field priority, not by clause numbering or
 isolated word overlap.
 
-### 2. Search By Legal Function
+### 2. Apply The Core Proposition Test
+
+Before adding any clause, check the candidate against the matrix legal core:
+
+- same functional role or a role-equivalent party;
+- same legal object, not merely the same product label;
+- same operative act: right, duty, prohibition, permission, remedy, procedure;
+- same trigger, condition, or lifecycle event when the matrix makes it material;
+- same consequence or legal effect.
+
+Add the clause when it passes this test directly, when it is a mandatory-law
+substitute for the same legal effect, or when it is a package member needed to
+give a direct candidate force, scope, timing, formula, or consequence.
+
+Reject a clause that covers only one factual component while the matrix core is
+another legal proposition. Examples:
+
+- QR display or terminal capability is not a candidate for automatic QR
+  connection at installation;
+- general suspension is not a candidate for suspension triggered by debt unless
+  the debt trigger is present;
+- personal-data processing is not a candidate for confidentiality of card
+  security, transaction technology, and business information;
+- electronic signing is not a candidate for paper-copy count or original-copy
+  allocation.
+
+### 3. Search By Legal Function
 
 Use headings and keywords only to navigate. Include a clause only when it may
 supply a material element or materially explain another candidate.
@@ -119,7 +152,7 @@ Search across:
 - procurement, mandatory law, payment-system rules, privacy rules, framework
   documents, appendices, specifications, forms, tables.
 
-### 3. Preserve Contract Row Level
+### 4. Preserve Contract Row Level
 
 Include the contract row that carries the legal rule and any row that gives that
 rule legal force.
@@ -138,6 +171,35 @@ Add the parent or umbrella clause when it:
 Add the child clause when it supplies the concrete trigger, deadline, amount,
 formula, exception, document, or consequence.
 
+Expand within the same numbered family when the contract distributes one legal
+package across adjacent rows. If a child row is useful, inspect and include
+nearby parent, sibling, and immediately preceding/following rows that state:
+
+- the same protected party and liability package;
+- a delay penalty, non-delay fine, cap, exception, or demand right;
+- the same acceptance/payment route or document trigger;
+- a general right or duty that gives force to a detailed subclause;
+- a statutory implementation row that the direct clause depends on.
+
+Do not expand to rows that only share a section heading.
+
+Also search for mirrored rows in rights-and-obligations sections. Contracts
+often state the same legal package twice: once as a party right or duty and once
+again in a payment, acceptance, liability, termination, or appendix section.
+When a useful candidate is found in one of these zones, look for mirrored rows
+that use the same role, object, and consequence:
+
+- right to demand payment, acceptance, documents, penalties, or performance;
+- duty to accept services, pay, return documents, provide access, or notify;
+- right to demand fines, penalties, damages, reimbursement, or termination;
+- general duty to comply with law or contract requirements when the matrix core
+  is legal/regulatory conformity;
+- contract term, service period, price-cap, or exhaustion-of-price rows when the
+  matrix item concerns duration or survival.
+
+Include mirrored rows only when they would be independently citeable by a legal
+reviewer for the same package.
+
 For appendix/table content, include:
 
 - the main clause that incorporates the appendix when needed for legal force;
@@ -145,7 +207,7 @@ For appendix/table content, include:
 - cross-referenced rows that define scope, timing, payment, liability, notice,
   or consequence.
 
-### 4. Package Scattered Candidates
+### 5. Package Scattered Candidates
 
 If one candidate is found, search for companion clauses that supply uncovered
 parts of the same legal package:
@@ -160,7 +222,7 @@ parts of the same legal package:
 Do not stop at the first direct clause when the contract distributes the legal
 requirement across several rows.
 
-### 5. Regulatory And Framework Recall
+### 6. Regulatory And Framework Recall
 
 For contracts governed by mandatory public-procurement, banking, payment-system,
 privacy, or other regulatory frameworks, include clauses that implement the
@@ -176,7 +238,7 @@ Useful candidates include:
 
 Include these candidates when they govern the same legal object and consequence.
 
-### 6. False Positive Filter
+### 7. False Positive Filter
 
 Reject clauses that are only topically similar.
 
@@ -202,7 +264,13 @@ Common false positives:
 - a generic electronic contract, copy-count, annex-list, notice, or address
   boilerplate clause for a matrix item requiring a different formal legal object;
 - technical capability, form field, product label, or appendix title without an
-  enforceable right, duty, trigger, or consequence.
+  enforceable right, duty, trigger, or consequence;
+- generic legal-compliance wording for a specific operational right, audit,
+  information-transfer right, refusal right, or payment-control mechanism;
+- a clause about acceptance of services for a matrix item about a bank settlement
+  act, settlement invoice, VAT treatment, or operation-sum calculation;
+- an indemnity clause for a matrix item whose core is non-liability, unless the
+  indemnity protects the same party from the same claim category and consequence.
 
 If the matrix item is product-specific, a generic acquiring clause is not enough
 unless it actually regulates that product or a clear legal substitute.
@@ -214,7 +282,7 @@ present in the contract.
 If `main_idea` states that a certain similar clause is not on-topic, follow that
 instruction and reject that clause type.
 
-### 7. Empty Candidate Recovery
+### 8. Empty Candidate Recovery
 
 Before returning an empty list, search the uncovered legal element in:
 

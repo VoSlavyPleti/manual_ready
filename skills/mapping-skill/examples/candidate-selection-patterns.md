@@ -2,16 +2,50 @@
 
 Generic examples for candidate recall. They do not assign compliance status.
 
-## candidate/umbrella-plus-child
+## candidate/core-proposition-pass
 
-Matrix signal: several detailed grounds, duties, penalties, or procedures.
+Matrix signal: a party has a right to suspend a service when a named trigger
+occurs.
+
+Good candidate: contract clause giving the same party a suspension right for
+that trigger, even if the deadline or procedure differs.
+
+Reject: a general suspension list that does not include the trigger.
+
+## candidate/core-proposition-fail
+
+Matrix signal: automatic connection, activation, installation, or proof event.
+
+Good candidate: clause stating that lifecycle event or a mandatory substitute.
+
+Reject: product availability, terminal capability, appendix title, or tariff row
+with no lifecycle trigger.
+
+## candidate/numbered-family-expansion
+
+Matrix signal: liability, acceptance, payment, termination, or document package.
 
 Good candidates:
 
-- umbrella clause that introduces the list and common legal consequence;
-- child clause that states the exact ground, duty, formula, or exception.
+- parent row stating the right, duty, protected party, or common consequence;
+- child row stating the amount, formula, deadline, trigger, or exception;
+- adjacent sibling row covering delay, non-delay, cap, demand, or procedure.
 
-Reject: child-only output when the parent gives the row legal force.
+Reject: a child-only output when the family rows carry separate operative rules.
+
+## candidate/mirrored-right-duty-row
+
+Matrix signal: payment, acceptance, liability, termination, service period, or
+legal-compliance package.
+
+Good candidates:
+
+- special-section clause with the detailed mechanism;
+- rights-and-obligations row that gives a party the mirrored right or duty;
+- price-cap, service-period, or survival row when duration depends on them.
+
+Reject: mirrored rows that only share vocabulary but would not be cited for the
+same legal package.
 
 ## candidate/appendix-row
 
@@ -20,15 +54,15 @@ appendix/table/specification.
 
 Good candidates:
 
-- incorporation clause if needed;
+- incorporation clause if needed for legal force;
 - exact appendix/table row carrying the operative term.
 
 Reject: appendix heading alone when a specific row exists.
 
 ## candidate/statutory-substitute
 
-Matrix signal: acceptance, payment, penalty, termination, signature, or document
-exchange procedure.
+Matrix signal: acceptance, payment, termination, assignment, signature, or
+document exchange procedure.
 
 Good candidate: mandatory-law or incorporated-rule clause that governs the same
 object and consequence.
@@ -55,19 +89,15 @@ Good candidate: clause regulating that named product or a true legal substitute.
 Reject: generic card acquiring, terminal, tariff, or form row with no active
 terms for the named product.
 
-## candidate/payment-package
+## candidate/payment-settlement-separation
 
-Matrix signal: payment deadline, invoice, act, acceptance, set-off, withholding,
-direct debit, payment demand, reimbursement.
+Matrix signal: settlement act, operation-sum calculation, bank invoice, VAT
+treatment, payment route, set-off, withholding, or reimbursement.
 
-Good candidates:
+Good candidates: clauses that govern that same payment or settlement mechanism.
 
-- payment obligation;
-- document or acceptance trigger;
-- route or collection mechanism;
-- deadline and consequence.
-
-Reject: generic price clause if the required mechanism is elsewhere or absent.
+Reject: service acceptance or generic price clauses when the settlement legal
+object is different.
 
 ## candidate/liability-package
 
@@ -85,26 +115,16 @@ Good candidates:
 
 Reject: broad responsibility wording with no matching trigger or consequence.
 
-## candidate/channel-specific-notice
+## candidate/confidentiality-object
 
-Matrix signal: named e-mail, EDI, platform, mailbox, courier, receipt proof, or
-qualified signature process.
+Matrix signal: confidentiality of card security, transaction technology,
+business information, financial information, or similar protected categories.
 
-Good candidates:
+Good candidate: clause protecting the same information class or a broader
+confidentiality clause that includes it.
 
-- clause naming the channel;
-- clause giving documents legal force;
-- clause defining receipt date or proof.
-
-Reject: generic electronic-document clause for a named-channel requirement.
-
-## candidate/non-empty-before-missing
-
-Before empty output, recover by legal element across payment, liability,
-termination, appendix, notice, signature, mandatory-law, and incorporated-rule
-zones.
-
-Reject: empty candidate set without recovery evidence.
+Reject: personal-data processing alone when the protected object is not personal
+data.
 
 ## candidate/exact-id
 

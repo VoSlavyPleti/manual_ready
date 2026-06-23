@@ -106,11 +106,22 @@ def load_agent(path: Path) -> dict[str, dict[str, Any]]:
         analogs = row.get("contract_analog") or []
         if isinstance(analogs, str):
             analogs = split_ids(analogs)
+        overall_status = normalize_status(row.get("overall_status"))
+        contract_statuses: dict[str, str] = {}
+        for item in row.get("legal_analysis") or []:
+            if not isinstance(item, dict):
+                continue
+            contract_norm = normalize_id(item.get("contract_id"))
+            if not contract_norm:
+                continue
+            row_status = normalize_status(item.get("contract_row_status"))
+            contract_statuses[contract_norm] = row_status or overall_status
         rows[matrix_id] = {
             "raw": row,
-            "status": normalize_status(row.get("overall_status")),
+            "status": overall_status,
             "contract_ids": {normalize_id(item) for item in analogs if normalize_id(item)},
             "contract_display": [display_id(item) for item in analogs if display_id(item)],
+            "contract_statuses": contract_statuses,
         }
     return rows
 
@@ -192,15 +203,21 @@ def evaluate(agent: dict[str, dict[str, Any]], pair_rows: list[dict[str, Any]], 
         matched_status_ids = []
         agent_candidates = {}
         agent_statuses = {}
+        agent_contract_statuses = {}
         for matrix_norm, matrix_display in zip(gold["matrix_norms"], gold["matrix_ids"]):
             row = agent.get(matrix_norm)
             if not row:
                 continue
             agent_candidates[matrix_display] = row["contract_display"]
             agent_statuses[matrix_display] = row["status"]
+            agent_contract_statuses[matrix_display] = {
+                cid: row.get("contract_statuses", {}).get(normalize_id(cid), row["status"])
+                for cid in row["contract_display"]
+            }
             if gold["contract_norm"] in row["contract_ids"]:
                 matched_matrix_ids.append(matrix_display)
-                if row["status"] == gold["gold_status"]:
+                row_status = row.get("contract_statuses", {}).get(gold["contract_norm"], row["status"])
+                if row_status == gold["gold_status"]:
                     matched_status_ids.append(matrix_display)
 
         mapping_hit = bool(matched_matrix_ids)
@@ -221,6 +238,7 @@ def evaluate(agent: dict[str, dict[str, Any]], pair_rows: list[dict[str, Any]], 
             "matched_status_ids": matched_status_ids,
             "agent_candidates_by_matrix": agent_candidates,
             "agent_statuses_by_matrix": agent_statuses,
+            "agent_contract_statuses_by_matrix": agent_contract_statuses,
         }
         evaluated.append(item)
 

@@ -200,6 +200,8 @@ USER_PROMPT = """
   "legal_analysis": [
     {
       "contract_id": "<contract clause id>",
+      "contract_row_status": "full_match|partial_match",
+      "package_role": "direct|parent|child|framework|payment|liability|notice|termination|appendix|companion|context",
       "matrix_evidence": "<краткое юридическое требование матрицы>",
       "contract_evidence": "<краткое содержание пункта договора>",
       "coverage": "<что покрывает пункт договора>",
@@ -220,6 +222,10 @@ USER_PROMPT = """
 - каждый id из `contract_analog` должен иметь ровно один объект в
   `legal_analysis` с таким же `contract_id`; не добавляй parent/context id в
   `contract_analog`, если не описываешь его в `legal_analysis`;
+- в каждом объекте `legal_analysis` укажи `contract_row_status`: это статус
+  конкретной строки договора с учетом ее неразрывных parent/child/cross-reference
+  пунктов; `overall_status` остается статусом всего пакета кандидатов по пункту
+  матрицы;
 - если правило находится в приложении, таблице или техническом задании, укажи
   самый точный доступный id строки/пункта, например `Приложение №1 п.5`, а не
   только название приложения;
@@ -328,6 +334,7 @@ def verify_final_artifact() -> None:
     invalid_missing_rows: list[str] = []
     invalid_non_missing_rows: list[str] = []
     invalid_id_rows: list[str] = []
+    invalid_analysis_rows: list[str] = []
     for row in final:
         if not isinstance(row, dict):
             malformed += 1
@@ -365,6 +372,29 @@ def verify_final_artifact() -> None:
             for item in legal_analysis
             if isinstance(item, dict)
         ]
+        if status in {"full_match", "partial_match"}:
+            for item in legal_analysis:
+                if not isinstance(item, dict):
+                    invalid_analysis_rows.append(matrix_id)
+                    continue
+                if item.get("contract_row_status") not in {"full_match", "partial_match"}:
+                    invalid_analysis_rows.append(matrix_id)
+                    continue
+                if item.get("package_role") not in {
+                    "direct",
+                    "parent",
+                    "child",
+                    "framework",
+                    "payment",
+                    "liability",
+                    "notice",
+                    "termination",
+                    "appendix",
+                    "companion",
+                    "context",
+                }:
+                    invalid_analysis_rows.append(matrix_id)
+                    continue
         if sorted(contract_ids) != sorted(analysis_ids):
             invalid_id_rows.append(matrix_id)
         if any("(" in cid or ")" in cid for cid in contract_ids + analysis_ids):
@@ -381,6 +411,7 @@ def verify_final_artifact() -> None:
         or invalid_missing_rows
         or invalid_non_missing_rows
         or invalid_id_rows
+        or invalid_analysis_rows
     ):
         raise RuntimeError(
             "Final artifact coverage check failed: "
@@ -390,7 +421,8 @@ def verify_final_artifact() -> None:
             f"invalid_statuses={invalid_statuses[:5]}, "
             f"invalid_missing_rows={invalid_missing_rows[:5]}, "
             f"invalid_non_missing_rows={invalid_non_missing_rows[:5]}, "
-            f"invalid_id_rows={invalid_id_rows[:5]}."
+            f"invalid_id_rows={invalid_id_rows[:5]}, "
+            f"invalid_analysis_rows={invalid_analysis_rows[:5]}."
         )
 
 
