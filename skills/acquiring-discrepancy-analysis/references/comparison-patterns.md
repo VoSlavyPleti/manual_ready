@@ -167,58 +167,40 @@ Result:
 - `materiality_reason` states that it creates no standalone right, duty,
   procedure, economic term, liability, or consequence.
 
-## 12. Selected Product Scope Is Not A Deviation
+## 12. Parent And Child Locator Recall
 
 Matrix standard:
-- a requirement lists several product variants, payment instruments, channels,
-  or terminal types;
-- only one of them is used in the counterparty contract.
+- the Bank may demand penalties for late performance;
+- amount and calculation trigger are material.
 
 Contract position:
-- the contract regulates the selected product or channel and preserves the same
-  Bank right, merchant duty, deadline, and consequence for that scope.
+- a parent clause grants the penalty right;
+- child clauses set amount, trigger, exceptions, and cap.
 
 Result:
-- do not mark `deviation` only because unused matrix alternatives are absent;
-- mark the scoped element `equivalent` in `value_comparison`;
-- use `missing_in_contract` only for an operative module that is required for
-  the contract scope and has no analogue.
+- include both parent and child locators when both have legal effect;
+- do not cite only the child if the parent contains the operative right;
+- do not cite only the parent if the child contains the amount, trigger, or cap.
 
-## 13. Mandatory Procedure Preserves The Result
+## 13. Grouped Package And Atomic Rows
 
 Matrix standard:
-- the Bank standard requires an electronic document, acceptance, payment, or
-  signature route with legal force.
+- one requirement needs a parent right, an operative duty, and a formula.
 
 Contract position:
-- a mandatory public-procurement, EIS, qualified electronic signature, statutory
-  acceptance, or statutory payment route supplies the same enforceable result.
+- several clauses jointly preserve the complete result.
 
-Result:
-- `aligned` when the Bank keeps the same right, duty, deadline, evidence effect,
-  and consequence;
-- `value_comparison` records the different route as `equivalent` and explains
-  the mandatory legal mechanism;
-- `deviation` only if the mandatory route changes a material value, weakens a
-  Bank right, or adds a material Bank burden.
+Grouped result:
+- one `links` item may be `aligned`.
 
-## 14. Non-Identical Economic Value Needs A Decision
+Atomic result:
+- create one row for each real matrix-contract pair;
+- each row has `coverage_role`, `analogue_strength`, `element_checklist`, and
+  `status_reason`;
+- do not mark a necessary package clause as `deviation` merely because it covers
+  only its role. `deviation` needs a named material gap.
 
-Matrix standard:
-- fee, penalty, cap, VAT treatment, payment base, or settlement formula is fixed
-  or legally material.
-
-Contract position:
-- the contract uses another amount, formula, source, cap, tax treatment, or
-  payment base.
-
-Result:
-- `relationship = deviation` unless the legal and economic result is proven
-  identical or stronger for the Bank;
-- `value_comparison` records both values and marks `different`;
-- discrepancy explains the lost economic or enforcement position.
-
-## 15. Same Broad Topic But Different Legal Object
+## 14. Same Broad Topic But Different Legal Object
 
 Matrix standard:
 - the Bank can reject a merchant terminal registration for risk reasons.

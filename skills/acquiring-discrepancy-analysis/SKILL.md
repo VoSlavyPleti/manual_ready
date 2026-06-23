@@ -131,11 +131,6 @@ Full preservation is allowed when the difference is only formal:
 - mandatory law provides the same or stronger result and the contract does not
   waive or narrow it.
 
-Do not spend analysis budget optimizing structural rows, headings, or framework
-labels. They may help navigation, but the quality target is the operative legal
-proposition: the right, duty, trigger, amount, deadline, procedure, liability,
-or consequence that can change risk for the Bank.
-
 ## Legal Analogue Threshold
 
 Create a link only after testing these elements:
@@ -195,18 +190,6 @@ Use these fixed results: `same`, `equivalent`, `different`, `missing`,
 - `scope_exceptions`
 - `consequence`
 
-When an element contains a value, deadline, amount, cap, formula, party, named
-channel, document route, or trigger, record the comparison explicitly in
-`value_comparison`:
-
-- `element`: checklist element being compared;
-- `matrix_value`: value or legal position in the Bank standard;
-- `contract_value`: value or legal position in the contract;
-- `result`: `same`, `equivalent`, `different`, `missing`, or
-  `not_applicable`;
-- `equivalence_reason`: why a non-identical value is still equivalent, or empty
-  when it is not equivalent.
-
 Rules:
 
 - `aligned` requires every material element to be `same`, `equivalent`, or
@@ -227,68 +210,6 @@ Rules:
   text, selected allowed option, or mandatory-law structure when the Bank's
   legal result is preserved.
 
-## Status Calibration
-
-Use these gates before finalizing `aligned` or `deviation`.
-
-### False Deviation Guard
-
-Do not create a `deviation` only because:
-
-- the contract selects one product, terminal, payment instrument, or channel
-  from a matrix menu and the omitted alternatives are outside the contract
-  scope;
-- the contract uses a public-procurement, EIS, qualified electronic signature,
-  statutory acceptance, or statutory payment route that preserves the same
-  enforceable result for the Bank;
-- the contract names a different form, appendix, act, UTD/UPD, invoice, website,
-  email, or document label while the same right, duty, deadline, evidentiary
-  force, and consequence remain;
-- the contract sends personal data to payment systems, service companies,
-  processors, or mandatory operational participants for the same acquiring
-  purpose and keeps the same legal basis, responsibility, and scope;
-- the contract includes additional examples, procurement terminology, customer
-  labels, or implementation wording that does not narrow a Bank right or add a
-  Bank burden.
-
-If a suspected gap is only one of these formal differences, set the checklist
-result to `equivalent` and explain the equivalence in `value_comparison`.
-
-### Hard Deviation Confirmations
-
-Use `deviation` when the analogue exists but the contract materially changes or
-omits:
-
-- a fixed fee, penalty, cap, rate, formula, currency, payment base, VAT/tax
-  treatment, withholding route, or settlement source;
-- a deadline for payment, document return, terminal return, installation,
-  correction, notice, acceptance, claim response, or post-termination
-  settlement;
-- a named legal channel or evidentiary route when the matrix makes that channel
-  material and the contract replaces it with a weaker or unproven route;
-- the protected party, obligated party, or party entitled to a remedy;
-- a Bank unilateral right: deduction, direct debit, suspension, refusal,
-  termination, non-reimbursement, investigation, document request, or set-off;
-- a merchant/customer duty that protects the Bank from card-system, fraud,
-  terminal, data, document, or payment risk;
-- a liability trigger, exception, penalty amount, cap, or statutory formula
-  compared with the Bank standard.
-
-Before final `aligned`, challenge every non-identical value in
-`value_comparison`. If no equivalence reason can be stated, the row is
-`deviation`.
-
-### Module Absence Sweep
-
-When the contract excludes or does not contain a product module, channel, or
-service that appears in the matrix, do not stop at one broad missing finding.
-For each operative matrix proposition in that module, decide whether it has an
-independent Bank-standard requirement. If yes, add it to `unmatched_matrix`.
-
-Do not add structural headings solely to satisfy this sweep. Add operative
-requirements: duties, rights, triggers, deadlines, amounts, procedures,
-liability, scope, or consequences.
-
 ## Workflow
 
 1. Read the full matrix and full contract.
@@ -304,47 +225,45 @@ liability, scope, or consequences.
 5. For each material matrix proposition, perform candidate recall before
    deciding absence:
    - direct clause with the same legal object;
-   - supporting clause that materially sets scope, procedure, amount,
-     deadline, liability, or consequence;
-   - detail clause;
+   - parent or framework clause;
+   - child or detail clause;
    - appendix, table, tariff, form, or definition;
    - payment, procedure, liability, notice, termination, or survival companion;
    - clause referenced by `clause`, `section`, `appendix`, `rules`, or similar
      cross-reference language.
-6. Apply the applicability and legal analogue threshold:
+6. Apply parent/child recall:
+   - if a child/detail clause is found, check the parent clause;
+   - if a parent/framework clause is found, check its children;
+   - if a clause points to an appendix or another section, check that referenced
+     locator when it sets scope, deadline, amount, procedure, liability, or
+     consequence.
+7. Apply the applicability and legal analogue threshold:
    - reject weak-context candidates before creating a link;
    - if every candidate is weak-context only, add the matrix item to
      `unmatched_matrix` with the rejected candidates and reasons;
    - if the matrix item is outside the contract's product, channel, terminal, or
      legal regime and no operative analogue exists, use `missing_in_contract`.
-7. Build relationship groups by legal meaning:
+8. Build relationship groups by legal meaning:
    - link all matrix ids and contract ids that form one legal package;
-   - include appendix, table, definition, cross-reference, and other supporting
+   - include parent, child, appendix, table, definition, and cross-reference
      locators only when they materially affect the legal result;
    - ignore numbering similarity unless the legal proposition also matches.
-8. For each linked group, decide whether the contract preserves the bank
+9. For each linked group, decide whether the contract preserves the bank
    standard:
    - `aligned`: no material legal gap remains after reading the package;
    - `deviation`: at least one material gap remains.
-9. Build `atomic_links` from the relationship groups. For each exact
+10. Build `atomic_links` from the relationship groups. For each exact
    `matrix_id` + `contract_id` pair that has a legal coverage relation:
    - add one atomic row;
    - state what that exact contract clause covers;
    - state `coverage_role` and `analogue_strength`;
    - include `element_checklist`;
-   - include `value_comparison` for every non-identical value, deadline,
-     amount, party, channel, procedure, formula, cap, or trigger that affects
-     the status;
    - use the pair relationship that follows from that exact clause's legal
      contribution; do not borrow coverage from unrelated clauses, but do not
-     automatically downgrade a supporting appendix, procedure, or referenced
-     clause when it is a necessary part of an aligned package and has no changed
-     material element;
+     automatically downgrade parent, child, or appendix clauses when they are a
+     necessary part of an aligned package and have no changed material element;
    - do not create a Cartesian product from grouped ids. Add only real legal
      pairs.
-10. Run the module absence sweep for product, channel, or service modules that
-    are absent from the contract. Add every uncovered operative requirement to
-    `unmatched_matrix`.
 11. Add every uncovered matrix item to `unmatched_matrix`.
 12. Run a contract-only review over the full `contract_inventory`. Each material
    contract item must be classified as:
@@ -389,9 +308,9 @@ liability, scope, or consequences.
   material element checklist.
 - `No Cross-Clause Status Lifting`: do not mark a weak or unrelated clause
   `aligned` merely because another clause in the package is strong. Also do not
-  mark a necessary supporting appendix, procedure, or referenced clause
-  `deviation` merely because it covers only its own part of an otherwise aligned
-  package. A pair needs a named material difference for `deviation`.
+  mark a necessary parent, child, appendix, or procedure clause `deviation`
+  merely because it covers only its own part of an otherwise aligned package.
+  A pair needs a named material difference for `deviation`.
 - `Deviation Rule`: changed deadline, amount, formula, party, trigger, scope,
   procedure, liability, Bank right, merchant obligation, exception, or
   consequence is a deviation.
@@ -404,12 +323,6 @@ liability, scope, or consequences.
 - `No Formal Deviation`: do not mark deviation for a label, heading, appendix
   title, placeholder, chosen allowed option, or mandatory-law structure when the
   legal result for the Bank is preserved.
-- `Value Comparison Rule`: non-identical deadlines, amounts, formulas, caps,
-  parties, named channels, procedures, and triggers must be listed in
-  `value_comparison`. If the result is `equivalent`, give a concrete legal
-  reason. If no reason exists, use `deviation`.
-- `Module Absence Rule`: absent product/service modules must be decomposed into
-  operative missing requirements, not collapsed into a single broad finding.
 - `Named Gap Required`: every `deviation` must identify the changed legal
   element. If the gap cannot be named, re-check whether the package is actually
   `aligned`.
@@ -459,14 +372,6 @@ Before finishing, verify:
   `relationship`, `coverage`, `coverage_role`, `analogue_strength`,
   `element_checklist`, and pair-level discrepancies when relationship is
   `deviation`;
-- every non-identical deadline, amount, formula, cap, party, named channel,
-  procedure, or trigger that affects status appears in `value_comparison` with
-  `result` and, for `equivalent`, a concrete equivalence reason;
-- no `deviation` is based only on formal labels, selected allowed options,
-  procurement terminology, placeholders, or mandatory-law routing when the same
-  Bank legal result is preserved;
-- absent product, channel, and service modules have been swept for operative
-  matrix requirements and those requirements appear in `unmatched_matrix`;
 - no `atomic_links` row has `analogue_strength = weak_context`;
 - every material contract inventory item appears in a link, in
   `unmatched_contract`, or is expressly classified as `not_material`;
