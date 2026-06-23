@@ -38,13 +38,22 @@ not part of the final JSON object.
       "link_index": 0,
       "legal_topic": "<short legal topic>",
       "analogue_strength": "strong|partial",
-      "coverage_role": "direct|parent|child|framework|procedure|liability|payment|appendix|context",
+      "coverage_role": "direct|supporting|framework|procedure|liability|payment|appendix|context",
       "coverage": "<what this exact contract clause contributes to this exact matrix item>",
       "element_checklist": [
         {
           "element": "party|legal_object|operative_right_or_duty|trigger|deadline|amount_formula_cap|procedure_channel|liability_remedy|scope_exceptions|consequence",
           "result": "same|equivalent|different|missing|not_applicable",
           "note": "<short evidence-based note>"
+        }
+      ],
+      "value_comparison": [
+        {
+          "element": "party|trigger|deadline|amount_formula_cap|procedure_channel|liability_remedy|scope_exceptions|consequence|other",
+          "matrix_value": "<Bank-standard value or legal position>",
+          "contract_value": "<contract value or legal position>",
+          "result": "same|equivalent|different|missing|not_applicable",
+          "equivalence_reason": "<required when result is equivalent and values differ>"
         }
       ],
       "status_reason": "<why this exact pair is aligned or deviation>",
@@ -114,8 +123,8 @@ not part of the final JSON object.
   locator in the legal package.
 - `atomic_links[].relationship`: evaluate the exact pair and its role. Do not
   borrow coverage from unrelated clauses. Do not automatically mark a necessary
-  parent, child, appendix, or procedure clause as `deviation` unless the pair
-  has a named material gap in `element_checklist`.
+  supporting appendix, procedure, framework, or referenced clause as
+  `deviation` unless the pair has a named material gap in `element_checklist`.
 - `atomic_links[].link_index`: zero-based index of the grouped `links` item that
   contains the pair. Use `null` only if the pair cannot be placed into a grouped
   link.
@@ -124,6 +133,13 @@ not part of the final JSON object.
 - `atomic_links[].element_checklist`: must include all material elements needed
   to justify the pair result. Use `different` or `missing` only for real legal
   gaps.
+- `atomic_links[].value_comparison`: required when the status depends on a
+  deadline, amount, formula, cap, party, named channel, document route,
+  procedure, trigger, liability amount, or consequence. Include every
+  non-identical material value that was considered.
+- `value_comparison[].equivalence_reason`: required when `result` is
+  `equivalent` and `matrix_value` differs from `contract_value`. The reason must
+  identify the legal mechanism that preserves the Bank's result.
 - If an atomic pair has `relationship = deviation`, at least one checklist item
   must be `different` or `missing`. If the discrepancy is an omitted sub-duty,
   omitted remedy, omitted trigger, omitted amount, or narrower scope, record
@@ -160,6 +176,13 @@ Each linked matrix-contract pair must also appear in `atomic_links`:
 - if the full legal result is achieved only by a package of several contract
   clauses, the grouped link may be `aligned`, while atomic pairs show each
   clause's role and checklist-supported relationship.
+
+Module absence coverage:
+
+- when the contract lacks a product, channel, or service module that appears in
+  the matrix, do not collapse the module into one broad note;
+- add every operative missing matrix requirement to `unmatched_matrix`;
+- do not add pure headings or subsection labels solely for coverage.
 
 Do not create links for weak context:
 
@@ -199,6 +222,13 @@ Do not output:
 - legal conclusions without source locators;
 - `deviation` without a named changed element;
 - `aligned` with an `element_checklist` item marked `different` or `missing`;
+- `aligned` where `value_comparison` shows a different value but gives no
+  concrete equivalence reason;
+- `deviation` based only on a label, placeholder, selected allowed option,
+  procurement terminology, or mandatory-law route when the Bank's legal result
+  is preserved;
+- one broad missing module row that hides operative missing requirements inside
+  a narrative;
 - grouped links without the corresponding `atomic_links` projection;
 - atomic pairs created only because ids are located in the same grouped package
   but have no direct legal coverage relation;
