@@ -214,3 +214,70 @@ Result:
 - do not link them;
 - the matrix item is `missing_in_contract` and the contract clause may be
   `extra_in_contract` if it has independent effect.
+
+## 15. Procurement Payment Mechanism Is A Deviation
+
+Matrix standard:
+- the Bank is paid or may settle, deduct, or reconcile under the bank-standard
+  mechanism.
+
+Contract position:
+- the same payment obligation is controlled by a public-contract mechanism,
+  budget payment, acceptance document, payment order, EIS act, or statutory
+  customer approval.
+
+Result:
+- create a legal link if the payment object is the same;
+- use `deviation` when the contract changes the deadline, payer action,
+  acceptance condition, deduction right, or enforceability of payment.
+
+## 16. Procurement Termination Procedure Is A Deviation
+
+Matrix standard:
+- a party has a termination or unilateral refusal right with defined conditions.
+
+Contract position:
+- public-contract wording gives a similar termination path but changes notice,
+  customer procedure, allowed grounds, effective date, or consequences.
+
+Result:
+- do not discard the clause as unrelated merely because it uses statutory
+  language;
+- link it as `deviation` when the same legal object is governed differently.
+
+## 17. Generic QR Or Terminal Capability Is Not A Bank Product Analogue
+
+Matrix standard:
+- a named QR, API, mobile payment, registration, or operational rule is
+  required.
+
+Contract position:
+- a terminal must display a QR code or support contactless/card payment.
+
+Result:
+- this is weak context unless it preserves the named product, channel, trigger,
+  procedure, and consequence;
+- put the matrix item in `unmatched_matrix` and record the generic clause as a
+  rejected candidate.
+
+## 18. Appendix Locator Must Be Real
+
+Contract position:
+- an appendix is mentioned in clause text, but the appendix subdivision is not
+  printed as a standalone locator in the source contract text.
+
+Result:
+- do not use the invented appendix subdivision as `contract_id`;
+- cite the nearest real clause or printed appendix locator and describe the
+  appendix content in `coverage`.
+
+## 19. Contract-Only Operative Child Clause
+
+Contract position:
+- a public-contract acceptance section has children for EIS signing, motivated
+  refusal, correction, payment hold, or customer rejection.
+
+Result:
+- report child clauses with independent legal effect as `extra_in_contract`;
+- omit headings and repeat-only children that add no right, duty, procedure,
+  remedy, or consequence.

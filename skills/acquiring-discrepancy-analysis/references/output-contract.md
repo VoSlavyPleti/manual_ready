@@ -95,6 +95,13 @@ not part of the final JSON object.
 - `contract_ids`: exact printed clause ids or real document locators from
   `inputs/contract.txt` and `/outputs/working/contract_inventory.json`; never
   use invented subparagraph labels.
+- `contract_ids`: the inventory is not authority by itself. A final contract
+  locator must also be visible in `inputs/contract.txt` as printed numbering,
+  printed appendix/table/form label, heading, definition label, or exact
+  unnumbered text.
+- `contract_ids`: if an appendix, form, table, or unnumbered paragraph cannot
+  pass that source-text test, cite the nearest real printed clause that
+  incorporates or describes it and put the appendix detail in `coverage`.
 - `contract_ids`: do not use internal aliases or translated labels such as
   `Appendix_1`. If an alias is useful in a working file, keep it out of the
   final artifact.
@@ -128,6 +135,8 @@ not part of the final JSON object.
   must be `different` or `missing`. If the discrepancy is an omitted sub-duty,
   omitted remedy, omitted trigger, omitted amount, or narrower scope, record
   that omission in the closest checklist element.
+- For each `different` or `missing` checklist item, write the note as compact
+  side-by-side evidence: `matrix: ...; contract: ...; gap: ...`.
 - If any checklist item is `different` or `missing`, the atomic pair cannot be
   `aligned`; change the pair to `deviation` and put the same gap in
   `discrepancies`.
@@ -168,6 +177,10 @@ Do not create links for weak context:
   `unmatched_matrix[].rejected_candidates`;
 - a weak candidate may explain why a matrix item is still missing, but it must
   not appear in `links` or `atomic_links`.
+- generic QR display, terminal capability, card acceptance, contactless payment,
+  inspection, request, or payment wording is weak context unless it preserves
+  the same named Bank product, channel, risk-control mechanism, trigger, and
+  legal consequence.
 
 Each material contract inventory item must be accounted for:
 
@@ -194,6 +207,8 @@ Do not output:
 - several competing final files;
 - arrays at the top level;
 - `contract_id` values with explanations in parentheses;
+- `contract_id` values that exist only because the agent added them to
+  `contract_inventory.json`;
 - normalized internal locators such as `Appendix_1` when the contract uses a
   printed locator in another form;
 - legal conclusions without source locators;

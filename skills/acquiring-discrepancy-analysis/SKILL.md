@@ -77,6 +77,13 @@ Contract locator discipline:
   the printed locator;
 - never cite a parenthetical locator unless the parenthetical text is printed in
   the contract.
+- the inventory cannot make a locator real. Before using an appendix, form,
+  table, or unnumbered paragraph as a final `contract_id`, verify that the same
+  locator text appears in `inputs/contract.txt`. If it does not, cite the
+  nearest real printed clause that incorporates or describes that text and put
+  the appendix/form detail in `coverage` or `contract_position`.
+- do not create final locators by subdividing a printed appendix, heading, or
+  parent clause unless that subdivision is printed in the contract text itself.
 
 ## Legal Comparison Principles
 
@@ -131,6 +138,15 @@ Full preservation is allowed when the difference is only formal:
 - mandatory law provides the same or stronger result and the contract does not
   waive or narrow it.
 
+Mandatory-law and procurement structures are not automatically formal. If
+Federal Law No. 44-FZ, public-system acceptance, customer approval, budget
+payment, statutory penalty, or unilateral customer termination governs the same
+legal object as the matrix but changes the Bank's right, payment path,
+acceptance condition, deadline, remedy, termination procedure, or control over
+performance, classify the true analogue as `deviation`. Use `aligned` only when
+the statutory structure preserves the same or stronger legal result for the
+Bank.
+
 ## Legal Analogue Threshold
 
 Create a link only after testing these elements:
@@ -172,6 +188,9 @@ Use `missing_in_contract` instead of `deviation` when the contract contains:
   formula, cap, exception, or remedy;
 - an appendix, form, table, heading, or framework clause that does not itself
   set the operative right, duty, amount, deadline, scope, or consequence.
+- a generic QR display, terminal capability, card acceptance, contactless
+  payment, inspection, or request clause but not the same named Bank product,
+  channel, risk-control mechanism, or operational consequence.
 
 ## Material Element Checklist
 
@@ -196,6 +215,9 @@ Rules:
   `not_applicable`.
 - `deviation` requires at least one material element to be `different` or
   `missing`, and the provision must first pass the legal analogue threshold.
+- each `different` or `missing` item must be evidenced in side-by-side form:
+  `matrix: ...; contract: ...; gap: ...`. Keep the text short, but make the
+  changed legal element explicit.
 - If any checklist item is `different` or `missing`, the relationship must be
   `deviation` and `discrepancies` must be non-empty. Do not write `aligned` with
   a checklist gap and then explain the gap only in `status_reason`.
@@ -243,6 +265,9 @@ Rules:
      `unmatched_matrix` with the rejected candidates and reasons;
    - if the matrix item is outside the contract's product, channel, terminal, or
      legal regime and no operative analogue exists, use `missing_in_contract`.
+   - if a mandatory-law or procurement clause regulates the same legal object
+     but changes the mechanism, treat it as a candidate analogue and evaluate
+     `deviation` rather than dropping it as unrelated.
 8. Build relationship groups by legal meaning:
    - link all matrix ids and contract ids that form one legal package;
    - include parent, child, appendix, table, definition, and cross-reference
@@ -281,6 +306,11 @@ Rules:
      mechanics;
    - unilateral customer termination or convenience exit rights;
    - reporting, act-signing, evidence, or document-exchange procedures.
+   When a parent section is material, sweep its operative child clauses. Report
+   child clauses that create their own right, duty, procedure, payment
+   condition, remedy, rejection right, correction duty, or termination effect.
+   Do not expand this into a heading inventory: omit headings and repeat-only
+   children that add no independent legal effect.
 14. Run the final QA checklist and write one JSON object to
    `/outputs/discrepancy_analysis.json`.
 
@@ -288,15 +318,20 @@ Rules:
 
 - Helper scripts are allowed for deterministic parsing, inventory creation,
   schema checks, coverage checks, merge, and summary counts.
+- In shell commands, use workspace-relative paths such as `outputs/working/...`.
+  Treat `/outputs/...` as a virtual artifact path for the agent file tools, not
+  as a portable shell path. Do not spend turns debugging path errors caused by
+  mixing these conventions.
 - Do not encode substantive legal conclusions as a giant hardcoded script or a
   table of hundreds of ids inside Python code. Put legal conclusions in JSON
   fragments and merge those fragments.
 - Do not create multiple competing full artifacts. Draft fragments belong under
   `/outputs/working/`; only the merged result goes to
   `/outputs/discrepancy_analysis.json`.
-- Use at most one QA correction cycle. If QA finds defects, fix concrete
-  defects once, re-run a targeted validation, then finish. Do not keep launching
-  new broad revalidation agents.
+- Use at most one inventory script, one merge script, and one QA script. Use at
+  most one QA correction cycle. If QA finds defects, fix concrete defects once,
+  re-run a targeted validation, then finish. Do not keep launching new broad
+  revalidation scripts or agents.
 
 ## Status Gates
 
@@ -314,6 +349,11 @@ Rules:
 - `Deviation Rule`: changed deadline, amount, formula, party, trigger, scope,
   procedure, liability, Bank right, merchant obligation, exception, or
   consequence is a deviation.
+- `Procurement Mechanism Rule`: 44-FZ, EIS, customer acceptance, budget payment,
+  statutory penalties, or public-contract termination can be a legal analogue
+  when it regulates the same obligation or remedy. Mark `deviation` if that
+  mechanism changes timing, payment, acceptance, control, remedy, termination,
+  or enforcement compared with the Bank standard.
 - `Missing Beats Weak Deviation`: a weak-context or merely thematic candidate
   is not a legal analogue. Reject it and use `missing_in_contract` rather than
   creating a false `deviation`.
@@ -379,6 +419,9 @@ Before finishing, verify:
 - every cited contract locator is present in `contract_inventory.json` and in
   `inputs/contract.txt` as printed numbering, heading, definition label,
   appendix/table label, or exact text;
+- every cited appendix or form locator passes the same test against
+  `inputs/contract.txt`; if not, replace it with the nearest real printed clause
+  and keep the appendix/form detail in evidence text;
 - no invented ids, internal aliases, translated appendix labels, parenthetical
   ids, corrected numbering, or external answer labels;
 - `aligned` links have no discrepancies;
