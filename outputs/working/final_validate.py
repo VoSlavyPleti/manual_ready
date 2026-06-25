@@ -1,95 +1,104 @@
-#!/usr/bin/env python3
-"""Final validation of discrepancy_analysis.json"""
 import json
 from collections import Counter
 
-import pathlib
-PROJECT = str(pathlib.Path(__file__).parent.parent)
-with open(PROJECT + '/discrepancy_analysis.json', 'r') as f:
-    art = json.load(f)
+with open('/outputs/discrepancy_analysis.json', 'r', encoding='utf-8-sig') as f:
+    data = json.load(f)
 
-print("Top-level keys:", list(art.keys()))
-print("Summary:", json.dumps(art['summary'], indent=2))
+print('=== FINAL VALIDATION ===')
+print()
 
-aligned = sum(1 for l in art['links'] if l['relationship'] == 'aligned')
-deviation = sum(1 for l in art['links'] if l['relationship'] == 'deviation')
-print(f"Actual aligned: {aligned}, deviation: {deviation}")
-print(f"Actual unmatched_matrix: {len(art['unmatched_matrix'])}")
-extra = sum(1 for u in art['unmatched_contract'] if u['status'] == 'extra_in_contract')
-not_mat = sum(1 for u in art['unmatched_contract'] if u['status'] == 'not_material')
-print(f"Actual extra_in_contract: {extra}, not_material: {not_mat}")
-print(f"Actual atomic_links: {len(art['atomic_links'])}")
+# 1. Schema
+required_keys = ['analysis_profile', 'links', 'atomic_links', 'unmatched_matrix', 'unmatched_contract', 'coverage_ledger', 'summary']
+missing = [k for k in required_keys if k not in data]
+print('Schema check:', 'PASS' if not missing else f'MISSING: {missing}')
 
-# Check for duplicate matrix ids
-mid_counts = Counter()
-for l in art['links']:
-    for mid in l['matrix_ids']:
-        mid_counts[mid] += 1
-for um in art['unmatched_matrix']:
-    mid_counts[um['matrix_id']] += 1
+# 2. Summary counts
+s = data['summary']
+actual_aligned = sum(1 for l in data['links'] if l['relationship'] == 'aligned')
+actual_deviation = sum(1 for l in data['links'] if l['relationship'] == 'deviation')
+actual_missing = len(data['unmatched_matrix'])
+actual_extra = len(data['unmatched_contract'])
+counts_ok = (s['aligned_count'] == actual_aligned and s['deviation_count'] == actual_deviation 
+             and s['missing_in_contract_count'] == actual_missing and s['extra_in_contract_count'] == actual_extra)
+print('Counts match:', 'PASS' if counts_ok else 'FAIL')
+print(f'  Summary: aligned={s["aligned_count"]}, deviation={s["deviation_count"]}, missing={s["missing_in_contract_count"]}, extra={s["extra_in_contract_count"]}')
+print(f'  Actual:  aligned={actual_aligned}, deviation={actual_deviation}, missing={actual_missing}, extra={actual_extra}')
 
-dupes = {k: v for k, v in mid_counts.items() if v > 1}
-if dupes:
-    print(f"DUPLICATE matrix ids: {dupes}")
-else:
-    print("No duplicate matrix ids - OK")
+# 3. Aligned links have empty discrepancies and risk=none
+aligned_issues = []
+for i, link in enumerate(data['links']):
+    if link['relationship'] == 'aligned':
+        if link.get('discrepancies') and len(link['discrepancies']) > 0:
+            aligned_issues.append(f'Link {i}: aligned has discrepancies')
+        if link.get('risk_level') != 'none':
+            aligned_issues.append(f'Link {i}: aligned has risk_level={link["risk_level"]}')
+print('Aligned consistency:', 'PASS' if not aligned_issues else f'FAIL: {aligned_issues}')
 
-# Check atomic_links fields
-missing_fields = []
-for al in art['atomic_links']:
-    for field in ['matrix_id', 'contract_id', 'relationship', 'coverage',
-                  'analogue_strength', 'coverage_role', 'element_checklist']:
-        if field not in al:
-            missing_fields.append((al.get('matrix_id', '?'), field))
-if missing_fields:
-    print(f"Missing fields in atomic_links: {missing_fields[:5]}")
-else:
-    print("All atomic_links have required fields - OK")
+# 4. Deviation links have discrepancies
+dev_issues = []
+for i, link in enumerate(data['links']):
+    if link['relationship'] == 'deviation':
+        if not link.get('discrepancies') or len(link['discrepancies']) == 0:
+            dev_issues.append(f'Link {i}: deviation has no discrepancies')
+        if link.get('risk_level') == 'none':
+            dev_issues.append(f'Link {i}: deviation has risk_level=none')
+print('Deviation consistency:', 'PASS' if not dev_issues else f'FAIL: {dev_issues}')
 
-# No weak_context
-weak = [al for al in art['atomic_links'] if al.get('analogue_strength') == 'weak_context']
-print(f"Weak context in atomic_links: {len(weak)}")
+# 5. Unmatched matrix items have required fields
+um_issues = []
+for item in data['unmatched_matrix']:
+    if not item.get('risk_level'):
+        um_issues.append(f'{item["matrix_id"]}: missing risk_level')
+    if not item.get('risk'):
+        um_issues.append(f'{item["matrix_id"]}: missing risk')
+    if item.get('status') != 'missing_in_contract':
+        um_issues.append(f'{item["matrix_id"]}: wrong status={item.get("status")}')
+print('Unmatched matrix:', 'PASS' if not um_issues else f'FAIL: {um_issues[:5]}...')
 
-# Deviation links have discrepancies
-dev_no_disc = [l for l in art['links'] if l['relationship'] == 'deviation' and len(l.get('discrepancies', [])) == 0]
-print(f"Deviation links without discrepancies: {len(dev_no_disc)}")
+# 6. Unmatched contract items have required fields
+uc_issues = []
+for item in data['unmatched_contract']:
+    if not item.get('risk_level'):
+        uc_issues.append(f'{item["contract_id"]}: missing risk_level')
+    if not item.get('risk'):
+        uc_issues.append(f'{item["contract_id"]}: missing risk')
+    if not item.get('materiality_reason'):
+        uc_issues.append(f'{item["contract_id"]}: missing materiality_reason')
+    if item.get('status') != 'extra_in_contract':
+        uc_issues.append(f'{item["contract_id"]}: wrong status')
+print('Unmatched contract:', 'PASS' if not uc_issues else f'FAIL: {uc_issues[:5]}...')
 
-# Aligned links have no discrepancies
-al_with_disc = [l for l in art['links'] if l['relationship'] == 'aligned' and len(l.get('discrepancies', [])) > 0]
-print(f"Aligned links with discrepancies: {len(al_with_disc)}")
+# 7. Atomic links have link_index references
+al_issues = []
+for i, al in enumerate(data['atomic_links']):
+    if al.get('link_index', -1) >= len(data['links']) or al.get('link_index', -1) < 0:
+        al_issues.append(f'Atomic {i}: invalid link_index {al.get("link_index")}')
+print('Atomic links:', 'PASS' if not al_issues else f'FAIL: {al_issues[:5]}...')
 
-# Unmatched matrix status
-bad_status = [um for um in art['unmatched_matrix'] if um.get('status') != 'missing_in_contract']
-print(f"Unmatched matrix with wrong status: {len(bad_status)}")
+# 8. Coverage ledger completeness
+cl_matrix_ids = set(r['matrix_id'] for r in data['coverage_ledger']['matrix'])
+with open('/inputs/matrix.json', 'r', encoding='utf-8-sig') as f:
+    matrix = json.load(f)
+all_matrix = set(item['number'] for item in matrix)
+missing_from_ledger = all_matrix - cl_matrix_ids
+print('Coverage ledger matrix coverage:', 'PASS' if not missing_from_ledger else f'FAIL: missing {missing_from_ledger}')
 
-# Check deviation atomic pairs have checklist gaps
-dev_atomic_ok = True
-for al in art['atomic_links']:
-    if al['relationship'] == 'deviation':
-        has_gap = any(e['result'] in ('different', 'missing') for e in al.get('element_checklist', []))
-        if not has_gap:
-            print(f"Deviation atomic pair without checklist gap: {al['matrix_id']} + {al['contract_id']}")
-            dev_atomic_ok = False
-if dev_atomic_ok:
-    print("All deviation atomic pairs have checklist gaps - OK")
+# 9. No out_of_scope in unmatched_matrix
+oos_in_um = []
+for item in data['unmatched_matrix']:
+    mid = item['matrix_id']
+    for c in data['coverage_ledger']['matrix']:
+        if c['matrix_id'] == mid and c['closure'] in ('out_of_scope', 'not_applicable'):
+            oos_in_um.append(mid)
+print('Out-of-scope in unmatched:', 'PASS' if not oos_in_um else f'FAIL: {oos_in_um}')
 
-# Check aligned atomic pairs have no gaps
-aligned_atomic_ok = True
-for al in art['atomic_links']:
-    if al['relationship'] == 'aligned':
-        has_gap = any(e['result'] in ('different', 'missing') for e in al.get('element_checklist', []))
-        if has_gap:
-            print(f"Aligned atomic pair with checklist gap: {al['matrix_id']} + {al['contract_id']}")
-            aligned_atomic_ok = False
-if aligned_atomic_ok:
-    print("All aligned atomic pairs have no checklist gaps - OK")
+# 10. Risk level distribution
+link_risks = Counter(l['risk_level'] for l in data['links'])
+um_risks = Counter(i['risk_level'] for i in data['unmatched_matrix'])
+uc_risks = Counter(i['risk_level'] for i in data['unmatched_contract'])
+print(f'Link risk levels: {dict(link_risks)}')
+print(f'Unmatched matrix risk levels: {dict(um_risks)}')
+print(f'Unmatched contract risk levels: {dict(uc_risks)}')
 
-# Verify summary counts match
-s = art['summary']
-assert s['aligned_count'] == aligned, f"aligned_count mismatch: {s['aligned_count']} vs {aligned}"
-assert s['deviation_count'] == deviation, f"deviation_count mismatch: {s['deviation_count']} vs {deviation}"
-assert s['missing_in_contract_count'] == len(art['unmatched_matrix']), "missing count mismatch"
-assert s['extra_in_contract_count'] == extra, f"extra count mismatch: {s['extra_in_contract_count']} vs {extra}"
-print("Summary counts match arrays - OK")
-
-print("\n=== VALIDATION COMPLETE ===")
+print()
+print('=== VALIDATION COMPLETE ===')

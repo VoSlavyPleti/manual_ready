@@ -257,10 +257,24 @@ def load_agent(artifact_path: Path) -> dict[str, Any]:
         for row in artifact.get("unmatched_contract", []) or []
         if isinstance(row, dict)
     ]
+    scope_excluded_matrix: set[str] = set()
+    coverage = artifact.get("coverage_ledger") or {}
+    if isinstance(coverage, dict):
+        for row in coverage.get("matrix", []) or []:
+            if not isinstance(row, dict):
+                continue
+            closure = str(row.get("closure") or "").strip()
+            reason = str(row.get("reason") or "").lower()
+            if closure in {"out_of_scope", "not_applicable"} or (
+                closure == "not_evaluable"
+                and any(token in reason for token in ("scope", "applic", "filter", "не примен"))
+            ):
+                scope_excluded_matrix.add(norm_id(row.get("matrix_id")))
     return {
         "atoms": atoms,
         "unmatched_matrix": unmatched_matrix,
         "unmatched_contract": unmatched_contract,
+        "scope_excluded_matrix": scope_excluded_matrix,
         "summary": artifact.get("summary", {}),
         "counts": {
             "links": len(artifact.get("links", []) or []),
@@ -268,6 +282,48 @@ def load_agent(artifact_path: Path) -> dict[str, Any]:
             "unmatched_matrix": len(artifact.get("unmatched_matrix", []) or []),
             "unmatched_contract": len(artifact.get("unmatched_contract", []) or []),
         },
+    }
+
+
+def exclude_out_of_scope_gold(
+    gold: dict[str, list[dict[str, Any]]],
+    scope_excluded: set[str],
+) -> tuple[dict[str, list[dict[str, Any]]], dict[str, Any]]:
+    if not scope_excluded:
+        return gold, {
+            "scope_excluded_count": 0,
+            "scope_excluded_matrix_ids": [],
+            "scope_removed_matrix_only_count": 0,
+            "scope_affected_linked_rows": 0,
+            "scope_dropped_linked_rows": 0,
+        }
+
+    linked: list[dict[str, Any]] = []
+    affected = 0
+    dropped = 0
+    for row in gold["linked"]:
+        kept_ids = {matrix_id for matrix_id in row["matrix_ids"] if matrix_id not in scope_excluded}
+        if kept_ids != set(row["matrix_ids"]):
+            affected += 1
+        if kept_ids:
+            new_row = dict(row)
+            new_row["matrix_ids"] = kept_ids
+            linked.append(new_row)
+        else:
+            dropped += 1
+
+    matrix_only = [row for row in gold["matrix_only"] if row["matrix_id"] not in scope_excluded]
+    removed_matrix_only = len(gold["matrix_only"]) - len(matrix_only)
+    return {
+        "linked": linked,
+        "matrix_only": matrix_only,
+        "contract_only": list(gold["contract_only"]),
+    }, {
+        "scope_excluded_count": len(scope_excluded),
+        "scope_excluded_matrix_ids": sorted(scope_excluded, key=lambda item: numeric_key(item) or (9999,)),
+        "scope_removed_matrix_only_count": removed_matrix_only,
+        "scope_affected_linked_rows": affected,
+        "scope_dropped_linked_rows": dropped,
     }
 
 
@@ -352,12 +408,22 @@ def evaluate_artifact(artifact_path: Path, gold_path: Path) -> dict[str, Any]:
     gold = load_gold(gold_path)
     clean, exclusions = clean_gold(gold)
     agent = load_agent(artifact_path)
+    raw_scope_gold, raw_scope_exclusions = exclude_out_of_scope_gold(
+        gold, agent.get("scope_excluded_matrix", set())
+    )
+    clean_scope_gold, clean_scope_exclusions = exclude_out_of_scope_gold(
+        clean, agent.get("scope_excluded_matrix", set())
+    )
     return {
-        "raw": evaluate_gold(gold, agent),
-        "clean": evaluate_gold(clean, agent),
+        "raw": evaluate_gold(raw_scope_gold, agent),
+        "clean": evaluate_gold(clean_scope_gold, agent),
         "agent_counts": agent["counts"],
         "artifact_summary": agent["summary"],
         "clean_exclusions": exclusions,
+        "scope_exclusions": {
+            "raw": raw_scope_exclusions,
+            "clean": clean_scope_exclusions,
+        },
     }
 
 

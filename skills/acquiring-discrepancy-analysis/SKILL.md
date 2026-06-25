@@ -1,439 +1,320 @@
 ---
 name: acquiring-discrepancy-analysis
-description: "Use this skill when comparing a bank acquiring standard matrix with a counterparty acquiring contract to find many-to-many legal correspondences, deviations, missing bank-standard requirements, and material extra contract terms."
+description: "Compare a bank acquiring standard matrix with a counterparty acquiring contract using bidirectional legal proposition coverage, group-level statuses, missing bank-standard requirements, and material contract-only terms."
 ---
 
 # Acquiring Discrepancy Analysis
 
-Use this skill for legal discrepancy analysis between a standard bank acquiring
-matrix and a counterparty acquiring contract.
+Use this skill to compare a Bank standard acquiring matrix with a counterparty
+acquiring contract. The matrix is the Bank standard. The contract is checked
+against that standard. The output is a many-to-many legal coverage graph plus a
+two-sheet review table generated from the JSON.
+
+Before finalization, read:
+
+- `references/output-contract.md` for artifact shape and field contracts.
+- `references/comparison-patterns.md` for calibration examples.
 
 ## Purpose
 
-Build a many-to-many legal comparison map:
+Find and explain:
 
-- which bank-standard requirements are preserved by the contract;
-- which contract terms deviate from the bank standard;
-- which matrix requirements are absent from the contract;
-- which material contract terms have no matrix analogue.
+- Bank-standard matrix requirements preserved by the contract;
+- true analogues that deviate from the Bank standard;
+- applicable matrix requirements absent from the contract;
+- legally meaningful contract terms with no matrix analogue.
+- matrix requirements that are out of scope for the current contract profile,
+  closed in the internal ledger without final risk reporting.
 
-The matrix is the Bank's standard. The contract is assessed against that
-standard. The documents are not equal sources of policy.
+The review is risk-oriented. Missing a real risk is worse than marking a
+borderline issue as `deviation`, but weak thematic matches must not be promoted
+into legal links.
 
-## Inputs
+## Inputs And Outputs
 
-- `inputs/matrix.json`: bank standard matrix. Use `number` as the matrix id.
-  Analyze `main_idea`, `topics`, and `enriched_text` as the legal requirement.
-- `inputs/contract.txt`: counterparty contract text. Use exact printed clause
-  ids when available. If a provision has no printed number, use the exact
-  heading, definition label, appendix/table row label, or nearest real locator
-  from the document; do not invent numbering.
-- `/outputs/discrepancy_analysis.json`: the only final output. Treat this as an
-  absolute virtual path rooted at the project workspace.
-- `/outputs/working/`: required working area for temporary batch fragments,
-  helper scripts, notes, checks, and intermediate files.
+Inputs:
 
-Before writing the final artifact, read `references/output-contract.md`.
-Use `references/comparison-patterns.md` when calibrating uncertain relationship
-or materiality calls.
+- `inputs/matrix.json`: Bank standard matrix. Use `number` as the matrix id.
+  Analyze `main_idea`, `topics`, `enriched_text`, obligation fields, and
+  applicability filters.
+- `inputs/contract.txt`: full counterparty contract text. Use printed clause
+  ids or real document locators visible in this file.
 
-## Required Working Artifacts
+Final outputs:
 
-Before comparing the documents, create these working files:
+- `/outputs/discrepancy_analysis.json`: source-of-truth machine artifact.
+- `/outputs/discrepancy_analysis.xlsx`: mechanical table export from JSON.
 
-- `/outputs/working/matrix_inventory.json`
-- `/outputs/working/contract_inventory.json`
-- optional compact batch fragments under `/outputs/working/`
+Working artifacts belong under `/outputs/working/`.
 
-Each inventory entry must contain:
+## Source Hierarchy
 
-- `id`: exact matrix `number` or exact contract locator as written;
-- `proposition`: short legal proposition;
-- `party`: party protected or bound by the proposition, if identifiable;
-- `right_or_obligation`: operative right, obligation, prohibition, permission,
-  or allocation of risk;
-- `object`: legal object affected by the proposition;
-- `trigger`: event or condition that activates the proposition, if present;
-- `material_terms`: deadline, amount, formula, procedure, liability, penalty,
-  cap, exception, or consequence, if present;
-- `applicability`: `in_scope`, `out_of_scope`, `conditional`, or `unknown`;
-- `applicability_reason`: product, channel, terminal, party role, legal regime,
-  or document scope reason for the applicability call;
-- `materiality`: `material`, `technical`, or `heading`.
+Use the source text as the legal authority:
 
-Do not start the many-to-many comparison until both inventories exist. The
-inventories are legal working tables, not final deliverables.
+1. Matrix `enriched_text`, `main_idea`, `topics`, and applicability fields.
+2. Contract clause text and real printed locators from `inputs/contract.txt`.
+3. Working ledgers as indexes and evidence aids.
 
-Keep inventories compact. Do not copy full clause text into inventory entries
-unless the text is needed to identify an unnumbered locator. The inventory is an
-index for coverage and ids, not the legal memo.
+Do not decide status from extracted fields alone. When a status depends on a
+deadline, amount, penalty, party, trigger, procedure, channel, scope, or
+consequence, re-read the source text.
 
-Contract locator discipline:
+## Required Artifacts And Contracts
 
-- final `contract_ids` must be exact printed locators from `inputs/contract.txt`;
-- do not use internal aliases such as `Appendix_1`, `app_1`, or translated
-  labels in the final artifact;
-- if a script needs aliases, store them in an `aliases` field, but keep `id` as
-  the printed locator;
-- never cite a parenthetical locator unless the parenthetical text is printed in
-  the contract.
-- the inventory cannot make a locator real. Before using an appendix, form,
-  table, or unnumbered paragraph as a final `contract_id`, verify that the same
-  locator text appears in `inputs/contract.txt`. If it does not, cite the
-  nearest real printed clause that incorporates or describes that text and put
-  the appendix/form detail in `coverage` or `contract_position`.
-- do not create final locators by subdividing a printed appendix, heading, or
-  parent clause unless that subdivision is printed in the contract text itself.
+Create the artifacts in this order. Each later step depends on the earlier
+artifact contract.
 
-## Legal Comparison Principles
+### 1. Source Preflight
 
-- Compare legal propositions, not numbering, order, or isolated words.
-- A proposition is material when it changes rights, duties, triggers, deadlines,
-  amounts, formulas, liability, procedures, scope, parties, exceptions, or
-  consequences.
-- The first question is applicability. A matrix requirement outside the
-  contract's product, channel, terminal type, party role, or legal regime is not
-  a weak `deviation`; it is normally `missing_in_contract` unless the contract
-  contains an operative analogue for that exact legal object.
-- One matrix requirement may be covered by several contract provisions.
-- One contract provision may cover several matrix requirements.
-- A package can be `aligned` even if no single clause covers the whole standard,
-  provided the linked clauses together preserve the legal result.
-- Grouped package result and atomic pair role are different. A grouped package
-  may be `aligned` because several clauses work together. An atomic row records
-  what one exact contract locator contributes to one matrix item; it must not
-  pretend that every locator in the package independently covers the whole
-  matrix item.
-- A package is `deviation` when there is an analogue but any material element is
-  changed, narrowed, weakened, omitted, or shifted against the Bank.
-- Any material difference from the Bank standard in deadline, amount, formula,
-  protected party, trigger, scope, procedure, liability, Bank right, merchant
-  obligation, exception, or consequence is a `deviation`.
-- A matrix requirement is `missing_in_contract` when no strong legal analogue
-  covers the same protected party, legal object, operative right or duty,
-  trigger or condition, and legal consequence.
-- Generic clauses about payment, notices, electronic documents, inspections,
-  confidentiality, compliance, or liability do not satisfy a specific Bank
-  standard unless they preserve the same protected party, legal object, trigger,
-  procedure, and consequence.
-- Weak thematic similarity is not enough for a link. If a clause is only from
-  the same broad area but does not pass the legal analogue threshold, keep the
-  matrix item in `unmatched_matrix` and record the rejected weak candidate
-  there.
-- Do not create a `deviation` link with empty `contract_ids`. If no useful
-  contract locator exists, the matrix item belongs in `unmatched_matrix`.
-- Do not force every matrix item into `links`. A real absence from the contract
-  is a required finding, not a failure to be hidden.
-- A contract provision is `extra_in_contract` when it has independent legal
-  effect and no matrix analogue.
-- Use `not_material` for administrative headings, recitals, party details,
-  definitions without operative effect, technical formatting, and service text
-  that creates no standalone legal risk.
+Check `inputs/contract.txt` before analysis:
 
-Full preservation is allowed when the difference is only formal:
+- real clause numbering is present;
+- deep clause numbers are not visibly collapsed or shifted;
+- repeated locators have enough context to distinguish source rows;
+- text is readable and not corrupted by encoding.
 
-- blank placeholders or fields intended to be filled later;
-- one selected option from alternatives allowed by the standard;
-- different document label or appendix title with the same legal effect;
-- mandatory law provides the same or stronger result and the contract does not
-  waive or narrow it.
+If the contract text is not usable, stop and write
+`/outputs/working/source_preflight_error.json`. Do not run legal analysis on
+invalid text.
 
-Mandatory-law and procurement structures are not automatically formal. If
-Federal Law No. 44-FZ, public-system acceptance, customer approval, budget
-payment, statutory penalty, or unilateral customer termination governs the same
-legal object as the matrix but changes the Bank's right, payment path,
-acceptance condition, deadline, remedy, termination procedure, or control over
-performance, classify the true analogue as `deviation`. Use `aligned` only when
-the statutory structure preserves the same or stronger legal result for the
-Bank.
+### 2. Clause Index
 
-## Legal Analogue Threshold
+Create `/outputs/working/clause_index.json`.
 
-Create a link only after testing these elements:
+It is a source map only. It must include:
 
-- `protected_party`: who receives the right, protection, payment, remedy, or
-  procedural advantage;
-- `bound_party`: who bears the duty, restriction, liability, or burden;
-- `legal_object`: what transactions, terminal, channel, data, service, payment,
-  document, breach, or relationship the provision regulates;
-- `operative_act`: the actual right, duty, prohibition, permission, remedy, or
-  allocation of risk;
-- `trigger`: the event or condition that activates the provision;
-- `consequence`: payment, refusal, deduction, suspension, termination, evidence
-  effect, penalty, liability, approval, rejection, or other legal result.
+- every matrix `number`;
+- every contract clause, operative parent, definition, appendix/table row, and
+  unnumbered operative provision;
+- source text or source locator for each row;
+- context for duplicate printed contract ids.
 
-Classify the analogue strength before linking:
+Do not use `clause_index` to decide legal status. It only proves source
+coverage and valid ids. Never overwrite it with a batch subset.
 
-- `strong`: same legal object and same operative legal result, with only
-  details left to compare;
-- `partial`: same legal object and operative area, but one material element is
-  narrower, weaker, changed, or incomplete;
-- `weak_context`: same broad topic only, adjacent procedure, background,
-  framework, appendix, or generic right without the same operative result.
+### 3. Legal Proposition Ledger
 
-Only `strong` and `partial` analogues may appear in `links` and
-`atomic_links`. `weak_context` candidates must be rejected into
-`unmatched_matrix[].rejected_candidates` or used only as explanatory context.
-This is the main guard against false `deviation` findings.
+Create `/outputs/working/legal_propositions.json`.
 
-Use `missing_in_contract` instead of `deviation` when the contract contains:
+This is the mandatory legal evidence ledger. It must contain `matrix` and
+`contract` arrays. Every evaluable proposition should include:
 
-- generic payment text but not the Bank-standard settlement, deduction, fee,
-  holdback, or reconciliation mechanism;
-- generic notice or document exchange but not the named channel, evidentiary
-  effect, deadline, or delivery procedure required by the matrix;
-- generic inspection, acceptance, or request rights but not the same fraud,
-  issuer verification, profile, terminal, or payment-system control;
-- generic liability but not the specific trigger, protected party, amount,
-  formula, cap, exception, or remedy;
-- an appendix, form, table, heading, or framework clause that does not itself
-  set the operative right, duty, amount, deadline, scope, or consequence.
-- a generic QR display, terminal capability, card acceptance, contactless
-  payment, inspection, or request clause but not the same named Bank product,
-  channel, risk-control mechanism, or operational consequence.
+- `id`: matrix number or printed contract locator;
+- `source_text`: text used for legal comparison;
+- `source_excerpt`: short quote supporting the normalized proposition;
+- `type`: `operative`, `definition`, `heading`, `parent_framework`,
+  `appendix`, `table`, or `technical`;
+- `materiality`: `evaluable`, `not_material`, `heading`, or `needs_source_review`;
+- `protected_party`, `bound_party`;
+- `right_or_obligation`;
+- `legal_object`;
+- `trigger`;
+- `deadline`;
+- `amount_formula_cap`;
+- `procedure_channel`;
+- `liability_remedy`;
+- `scope_options`;
+- `consequence`;
+- `applicability_filters` where available.
 
-## Material Element Checklist
+If a legally meaningful row cannot be normalized, mark it
+`needs_source_review` and explain the missing element. It is not fully
+processed until the source text has been reviewed. Do not proceed to final
+matching with unresolved source-review rows that could affect status.
 
-For every linked group and every atomic pair, check the material elements below.
-Use these fixed results: `same`, `equivalent`, `different`, `missing`,
-`not_applicable`.
+The ledger is an evidence table, not a substitute for the source. Matching may
+use it to find candidates. Status must still be confirmed against source text.
 
-- `party`
-- `legal_object`
-- `operative_right_or_duty`
-- `trigger`
-- `deadline`
-- `amount_formula_cap`
-- `procedure_channel`
-- `liability_remedy`
-- `scope_exceptions`
-- `consequence`
+Run the mechanical check before matching:
 
-Rules:
+```bash
+python skills/acquiring-discrepancy-analysis/scripts/validate_working_artifacts.py --matrix inputs/matrix.json --contract inputs/contract.txt --working outputs/working
+```
 
-- `aligned` requires every material element to be `same`, `equivalent`, or
-  `not_applicable`.
-- `deviation` requires at least one material element to be `different` or
-  `missing`, and the provision must first pass the legal analogue threshold.
-- each `different` or `missing` item must be evidenced in side-by-side form:
-  `matrix: ...; contract: ...; gap: ...`. Keep the text short, but make the
-  changed legal element explicit.
-- If any checklist item is `different` or `missing`, the relationship must be
-  `deviation` and `discrepancies` must be non-empty. Do not write `aligned` with
-  a checklist gap and then explain the gap only in `status_reason`.
-- If `discrepancies`, `status_reason`, or `coverage` says an element is absent,
-  incomplete, weaker, narrower, or changed, the same element must be marked
-  `missing` or `different` in `element_checklist`.
-- Never return a `deviation` pair whose checklist contains only `same`,
-  `equivalent`, and `not_applicable`.
-- If no material element can be named as `different` or `missing`, do not use
-  `deviation`.
-- Do not mark `deviation` because of document title, appendix label, placeholder
-  text, selected allowed option, or mandatory-law structure when the Bank's
-  legal result is preserved.
+Fix invalid working artifacts before delegating comparison work.
 
-## Workflow
+### 4. Contract Product Profile
 
-1. Read the full matrix and full contract.
-2. Build `/outputs/working/matrix_inventory.json`. Include every matrix item and
-   classify each as `material`, `technical`, or `heading`.
-3. Build `/outputs/working/contract_inventory.json`. Include every printed
-   clause, operative heading, definition with legal effect, appendix/table row,
-   and unnumbered provision that may affect rights or duties.
-4. Split material matrix ids into 3-5 batches and use `task` for substantive
-   batch analysis when the harness provides it. The orchestrator may prepare
-   inventories and merge results, but should not perform the full legal review
-   alone.
-5. For each material matrix proposition, perform candidate recall before
-   deciding absence:
-   - direct clause with the same legal object;
-   - parent or framework clause;
-   - child or detail clause;
-   - appendix, table, tariff, form, or definition;
-   - payment, procedure, liability, notice, termination, or survival companion;
-   - clause referenced by `clause`, `section`, `appendix`, `rules`, or similar
-     cross-reference language.
-6. Apply parent/child recall:
-   - if a child/detail clause is found, check the parent clause;
-   - if a parent/framework clause is found, check its children;
-   - if a clause points to an appendix or another section, check that referenced
-     locator when it sets scope, deadline, amount, procedure, liability, or
-     consequence.
-7. Apply the applicability and legal analogue threshold:
-   - reject weak-context candidates before creating a link;
-   - if every candidate is weak-context only, add the matrix item to
-     `unmatched_matrix` with the rejected candidates and reasons;
-   - if the matrix item is outside the contract's product, channel, terminal, or
-     legal regime and no operative analogue exists, use `missing_in_contract`.
-   - if a mandatory-law or procurement clause regulates the same legal object
-     but changes the mechanism, treat it as a candidate analogue and evaluate
-     `deviation` rather than dropping it as unrelated.
-8. Build relationship groups by legal meaning:
-   - link all matrix ids and contract ids that form one legal package;
-   - include parent, child, appendix, table, definition, and cross-reference
-     locators only when they materially affect the legal result;
-   - ignore numbering similarity unless the legal proposition also matches.
-9. For each linked group, decide whether the contract preserves the bank
-   standard:
-   - `aligned`: no material legal gap remains after reading the package;
-   - `deviation`: at least one material gap remains.
-10. Build `atomic_links` from the relationship groups. For each exact
-   `matrix_id` + `contract_id` pair that has a legal coverage relation:
-   - add one atomic row;
-   - state what that exact contract clause covers;
-   - state `coverage_role` and `analogue_strength`;
-   - include `element_checklist`;
-   - use the pair relationship that follows from that exact clause's legal
-     contribution; do not borrow coverage from unrelated clauses, but do not
-     automatically downgrade parent, child, or appendix clauses when they are a
-     necessary part of an aligned package and have no changed material element;
-   - do not create a Cartesian product from grouped ids. Add only real legal
-     pairs.
-11. Add every uncovered matrix item to `unmatched_matrix`.
-12. Run a contract-only review over the full `contract_inventory`. Each material
-   contract item must be classified as:
-   - `linked` when it appears in a relationship group;
-   - `extra_in_contract` when it has independent legal effect and no matrix
-     analogue;
-   - `not_material` only when it creates no standalone legal risk.
-13. During contract-only review, deliberately check for:
-   - procurement and mandatory-law mechanics, including Federal Law No. 44-FZ;
-   - electronic acceptance, acceptance in state systems, or customer acceptance
-     procedures;
-   - customer rights to inspect, reject, demand correction, suspend, or control
-     performance;
-   - price source, maximum price, budget/payment source, or settlement
-     mechanics;
-   - unilateral customer termination or convenience exit rights;
-   - reporting, act-signing, evidence, or document-exchange procedures.
-   When a parent section is material, sweep its operative child clauses. Report
-   child clauses that create their own right, duty, procedure, payment
-   condition, remedy, rejection right, correction duty, or termination effect.
-   Do not expand this into a heading inventory: omit headings and repeat-only
-   children that add no independent legal effect.
-14. Run the final QA checklist and write one JSON object to
-   `/outputs/discrepancy_analysis.json`.
+Create `/outputs/working/contract_product_profile.json`.
 
-## Tool Use Discipline
+Extract from the contract:
 
-- Helper scripts are allowed for deterministic parsing, inventory creation,
-  schema checks, coverage checks, merge, and summary counts.
-- In shell commands, use workspace-relative paths such as `outputs/working/...`.
-  Treat `/outputs/...` as a virtual artifact path for the agent file tools, not
-  as a portable shell path. Do not spend turns debugging path errors caused by
-  mixing these conventions.
-- Do not encode substantive legal conclusions as a giant hardcoded script or a
-  table of hundreds of ids inside Python code. Put legal conclusions in JSON
-  fragments and merge those fragments.
-- Do not create multiple competing full artifacts. Draft fragments belong under
-  `/outputs/working/`; only the merged result goes to
-  `/outputs/discrepancy_analysis.json`.
-- Use at most one inventory script, one merge script, and one QA script. Use at
-  most one QA correction cycle. If QA finds defects, fix concrete defects once,
-  re-run a targeted validation, then finish. Do not keep launching new broad
-  revalidation scripts or agents.
+- product and payment channels;
+- lot/procurement type;
+- terminal/payment-device scope;
+- payment methods;
+- legal regime (`44_fz`, `223_fz`, `commercial`, `common`, or `unknown`).
 
-## Status Gates
+Apply matrix filters before status:
 
-- `Aligned Package Rule`: several contract clauses may jointly satisfy one Bank
-  standard when the package preserves every material element.
-- `Atomic Pair Rule`: every final legal pair must be represented as one
-  `atomic_links` row. Pair status is evaluated for the exact matrix item and
-  exact contract locator, with `coverage_role`, `analogue_strength`, and a
-  material element checklist.
-- `No Cross-Clause Status Lifting`: do not mark a weak or unrelated clause
-  `aligned` merely because another clause in the package is strong. Also do not
-  mark a necessary parent, child, appendix, or procedure clause `deviation`
-  merely because it covers only its own part of an otherwise aligned package.
-  A pair needs a named material difference for `deviation`.
-- `Deviation Rule`: changed deadline, amount, formula, party, trigger, scope,
-  procedure, liability, Bank right, merchant obligation, exception, or
-  consequence is a deviation.
-- `Procurement Mechanism Rule`: 44-FZ, EIS, customer acceptance, budget payment,
-  statutory penalties, or public-contract termination can be a legal analogue
-  when it regulates the same obligation or remedy. Mark `deviation` if that
-  mechanism changes timing, payment, acceptance, control, remedy, termination,
-  or enforcement compared with the Bank standard.
-- `Missing Beats Weak Deviation`: a weak-context or merely thematic candidate
-  is not a legal analogue. Reject it and use `missing_in_contract` rather than
-  creating a false `deviation`.
-- `Generic Is Not Specific`: a generic clause is not enough for a named Bank
-  channel, fraud mechanism, card-system duty, terminal fee, electronic document
-  procedure, special liability trigger, or specific Bank remedy.
-- `No Formal Deviation`: do not mark deviation for a label, heading, appendix
-  title, placeholder, chosen allowed option, or mandatory-law structure when the
-  legal result for the Bank is preserved.
-- `Named Gap Required`: every `deviation` must identify the changed legal
-  element. If the gap cannot be named, re-check whether the package is actually
-  `aligned`.
-- `Contract-Only Materiality Gate`: `not_material` is limited to headings,
-  recitals, signatures, blank forms, administrative details, and definitions
-  without operative effect. Acceptance, public-system procedure, customer
-  control, rejection, correction, withholding, payment, termination, reporting,
-  evidence, liability, and mandatory-law mechanics are normally
-  `extra_in_contract` when they have no matrix analogue.
+- `common` applies to every contract.
+- A filtered matrix item applies only when the profile matches
+  `only_for_product`, `only_for_lot`, `only_for_terminal`, or `payment_method`.
+- Mandatory applicable missing = high risk.
+- Out-of-scope / non-applicable matrix items are not final risks. Close them in
+  `coverage_ledger.matrix` as `out_of_scope` or `not_applicable` with a short
+  profile-based reason. Do not put them in final `unmatched_matrix`.
+- Optional applicable missing = low or conditional risk.
+- Slash-separated alternatives are options unless the matrix says all options
+  are mandatory.
+- Placeholder or blank in an applicable material term = low-risk `deviation`.
 
-## File Discipline
+## Analogue Threshold
 
-- Write the final result only to `/outputs/discrepancy_analysis.json`.
-- Use `/outputs/working/` for intermediate artifacts, helper scripts,
-  validation notes, batch files, and calculations.
-- Treat files under `/outputs/working/` as working material, not final output.
-- The final answer must be assembled into `/outputs/discrepancy_analysis.json`.
-- Keep working files compact and purpose-specific. Prefer several small JSON
-  fragments over one very large generated script.
+Create a final link only when the contract proposition is a true legal analogue
+of the matrix proposition. Test:
 
-## Output Shape
+- same or equivalent protected party;
+- same or equivalent bound party;
+- same legal object;
+- same operative right, duty, prohibition, permission, remedy, or allocation of
+  risk;
+- material trigger, scope, procedure, and consequence are the same or legally
+  equivalent.
 
-The output is graph-like, not a matrix-only list:
+Reject weak thematic candidates. A clause about the same broad topic is not a
+legal analogue when it governs a different object, party, trigger, procedure,
+or consequence.
 
-- `links`: many-to-many legal relationship groups.
-- `atomic_links`: exact `matrix_id` + `contract_id` legal pairs projected from
-  the grouped links for row-level verification.
-- `unmatched_matrix`: bank-standard requirements absent from the contract.
-- `unmatched_contract`: contract terms without a matrix analogue.
-- `summary`: exact counts derived from the arrays.
+## Bidirectional Matching
 
-Each `deviation` must name the legal gap and explain why it matters for the
-Bank. Do not use vague risk text such as "may be risky" without identifying the
-changed legal element.
+Perform both directions.
+
+Matrix to contract:
+
+- for each applicable evaluable matrix proposition, retrieve all contract
+  clauses that collectively cover the Bank-standard requirement;
+- include parent, child, appendix, payment, procedure, liability, and framework
+  clauses only when they provide material coverage or legally cure a gap.
+- if a child clause is selected, check whether its parent carries operative
+  legal meaning for the same topic; if a parent is selected, check whether its
+  children contain the material elements;
+- for payment, acceptance, liability, termination, and document-exchange
+  requirements, keep the legal package together: operative clause, basis,
+  deadline, procedure, remedy, consequence, and any incorporated appendix/table
+  row that changes coverage;
+- a framework or legal-compliance clause may be a standalone analogue only when
+  it carries the same legal object or allocates the same risk, duty, or remedy.
+
+Contract to matrix:
+
+- for each evaluable contract proposition, find the matrix analogue group;
+- if none exists and the term has independent legal effect, classify it as
+  `extra_in_contract`;
+- if it is non-operative, close it as `not_material` only in the ledger.
+
+Group related ids into many-to-many `links`. One matrix id may need several
+contract clauses. One contract clause may cover several matrix ids.
+
+## Group-Level Status
+
+Assign status to the group, not to each atomic pair.
+
+- `aligned`: the contract package preserves the matrix legal result.
+- `deviation`: a true analogue exists, but any material element is changed,
+  narrowed, weakened, omitted, shifted, or blank.
+- `missing_in_contract`: no true contract analogue exists for an applicable
+  matrix requirement.
+- `extra_in_contract`: a legally meaningful contract proposition has no matrix
+  analogue.
+- `not_material`: internal ledger closure only; exclude from final report.
+- `out_of_scope` / `not_applicable`: internal matrix closure only; exclude from
+  final report because the requirement does not apply to the current product,
+  lot, terminal, payment method, or legal regime.
+
+Material elements include party, legal object, operative act, trigger,
+deadline, amount, formula, cap, penalty, scope, procedure, channel, liability,
+remedy, exception, Bank right, merchant duty, and consequence.
+
+Hard terms must be compared directly:
+
+- same material deadline/amount/procedure in the same legal obligation can be
+  `aligned`;
+- changed value or missing value is `deviation`;
+- a hard term from another clause counts only when that clause expressly
+  governs the same obligation or is explicitly incorporated;
+- a neighboring date, amount, or procedure for another legal object cannot cure
+  the gap.
+
+Do not downgrade for formal differences alone: heading, title, appendix label,
+permitted option selection, equivalent mandatory-law mechanism, or wording
+style.
+
+Do not downgrade for low-risk notes when the legal result is preserved. If the
+reason says the difference is merely terminological, beneficial to the Bank,
+already incorporated through another clause, or caused only by a mandatory
+44-FZ/EIS mechanism that preserves the Bank's practical right, keep `aligned`.
+
+44-FZ/EIS procedure is not a deviation by itself. It becomes `deviation` only
+when it materially worsens or changes a Bank-standard term: payment timing,
+acceptance control, withholding right, penalty/cap, termination power, protected
+party, evidence channel, or enforceability.
+
+Liability, penalty, cap, and remedy provisions must be reviewed as a group.
+Before marking a liability group `aligned`, check the amount, formula, cap,
+trigger, protected party, excluded delay/non-delay buckets, and claim procedure
+across the whole package.
+
+## Risk Calibration
+
+Use `risk_level` consistently:
+
+- `none`: only for `aligned`;
+- `low`: optional applicable missing, placeholder, formal but legally manageable
+  gap;
+- `medium`: material deviation that can affect performance, evidence, payment,
+  control, liability, or enforceability;
+- `high`: mandatory missing, changed protected party, major payment/remedy
+  change, important Bank right omitted, or broad contract-only risk.
+
+Every `deviation`, `missing_in_contract`, and `extra_in_contract` must include
+a short evidence-based reason. Use concise quotes rather than long excerpts.
 
 ## Final QA
 
-Before finishing, verify:
+Before writing final artifacts:
 
-- `/outputs/working/matrix_inventory.json` and
-  `/outputs/working/contract_inventory.json` exist and were used;
-- every matrix `number` appears in exactly one of `links[].matrix_ids` or
-  `unmatched_matrix[].matrix_id`;
-- every real legal matrix-contract pair from grouped `links` appears in
-  `atomic_links`, and every `atomic_links` row points back to a grouped link;
-- every `atomic_links` row has one real matrix id, one real contract locator,
-  `relationship`, `coverage`, `coverage_role`, `analogue_strength`,
-  `element_checklist`, and pair-level discrepancies when relationship is
-  `deviation`;
-- no `atomic_links` row has `analogue_strength = weak_context`;
-- every material contract inventory item appears in a link, in
-  `unmatched_contract`, or is expressly classified as `not_material`;
-- no link has an empty `contract_ids` array;
-- every cited contract locator is present in `contract_inventory.json` and in
-  `inputs/contract.txt` as printed numbering, heading, definition label,
-  appendix/table label, or exact text;
-- every cited appendix or form locator passes the same test against
-  `inputs/contract.txt`; if not, replace it with the nearest real printed clause
-  and keep the appendix/form detail in evidence text;
-- no invented ids, internal aliases, translated appendix labels, parenthetical
-  ids, corrected numbering, or external answer labels;
-- `aligned` links have no discrepancies;
-- `deviation` links have at least one discrepancy with `type`, `description`,
-  and `risk`;
-- `missing_in_contract` items describe the absent bank-standard requirement and
-  the risk of omission, and include rejected weak candidates when any were
-  considered;
-- every `unmatched_matrix` item uses the field `status:
-  "missing_in_contract"`. Do not use `reason`, `classification`, or
-  `relationship` instead of `status`;
-- `extra_in_contract` items describe the extra contract term and its risk;
-- `not_material` is used only for non-operative or no-risk contract-only text
-  and includes a materiality reason;
-- `summary` counts equal the arrays.
+- verify `clause_index` covers all source ids;
+- verify `legal_proposition_ledger` has no unresolved
+  `needs_source_review` rows that can affect final status;
+- verify every matrix id is closed as `linked`, `missing_in_contract`,
+  `out_of_scope`, `not_applicable`, or source-based `not_evaluable` in
+  `coverage_ledger`;
+- verify every applicable evaluable matrix id is linked or in
+  `unmatched_matrix`;
+- verify out-of-scope / non-applicable matrix ids are not in final
+  `unmatched_matrix`;
+- verify every material contract id is closed as linked or extra;
+- verify `coverage_ledger` is derived from final `links`,
+  `unmatched_matrix`, and `unmatched_contract`;
+- verify every final id is visible in source text;
+- verify `aligned` has no material discrepancy;
+- verify every `deviation` has a named legal gap and evidence;
+- verify weak candidates are not in final `links`;
+- verify non-material contract rows are absent from final `unmatched_contract`;
+- verify summary counts equal final arrays.
+
+## Output Discipline
+
+Follow `references/output-contract.md`.
+
+The final JSON must contain:
+
+- `analysis_profile`
+- `links`
+- `atomic_links`
+- `unmatched_matrix`
+- `unmatched_contract`
+- `coverage_ledger`
+- `summary`
+
+`links` carry group-level legal findings. `atomic_links` are traceability
+projections only and must inherit the group relationship. Do not assign
+separate final pair-level statuses.
+
+## Tools And Scripts
+
+Use helper scripts for mechanical work: source extraction, indexing,
+normalization checks, batch completeness, coverage validation, JSON schema
+checks, and Excel export. Do not put legal mapping or status decisions into
+hardcoded scripts.

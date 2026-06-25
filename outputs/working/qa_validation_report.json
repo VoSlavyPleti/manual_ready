@@ -1,63 +1,234 @@
 {
-  "qa_result": "PASS_WITH_WARNINGS",
-  "errors": [],
-  "warnings": [
+  "validation_result": "FAILED",
+  "error_count": 8,
+  "warning_count": 22,
+  "errors": [
     {
-      "category": "contract_locator_format",
-      "severity": "medium",
-      "count": 25,
-      "description": "Composite contract locators (e.g., '7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.1') are used in links and atomic_links instead of bare printed sub-clause numbers (e.g., '0.1'). The SKILL.md requires exact printed locators from contract.txt. The bare '0.1' IS the printed locator; the composite form adds the section heading for disambiguation but is not verbatim from the contract. The contract_inventory uses bare locators, creating a mismatch.",
-      "affected_ids": [
-        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.1", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.2",
-        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.3", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.4",
-        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.5", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.6",
-        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.7", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.8",
-        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.9", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.10",
-        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.11", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.12",
-        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.13", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.14",
-        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.15", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.16",
-        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.17",
-        "7. ФОРС-МАЖОРНЫЕ ОБСТОЯТЕЛЬСТВА, п. 0.1",
-        "7. ФОРС-МАЖОРНЫЕ ОБСТОЯТЕЛЬСТВА, п. 0.2",
-        "8. УРЕГУЛИРОВАНИЕ СПОРОВ, п. 0.1",
-        "8. УРЕГУЛИРОВАНИЕ СПОРОВ, п. 0.2",
-        "8. УРЕГУЛИРОВАНИЕ СПОРОВ, п. 0.3",
-        "10. ПРОЧИЕ УСЛОВИЯ, п. 0.9",
-        "10. ПРОЧИЕ УСЛОВИЯ, п. 0.11",
-        "10. ПРОЧИЕ УСЛОВИЯ, п. 0.13"
-      ],
-      "recommendation": "Either (a) update contract_inventory to include composite locators as aliases, or (b) change links/atomic_links to use bare printed locators and add a 'contract_section' field for disambiguation. The composite form is functionally clear but violates the strict 'exact printed locator' rule."
+      "id": "E01",
+      "severity": "error",
+      "rule": "invented_locator",
+      "detail": "contract_id '354340' in coverage_ledger.contract is a postal code from an address (line 279 of contract.txt), not a clause locator. Must be removed from coverage_ledger.",
+      "location": "coverage_ledger.contract[contract_id=354340]"
     },
     {
-      "category": "contract_inventory_coverage",
-      "severity": "low",
-      "count": 15,
-      "description": "Material contract inventory items (bare '0.X' sub-clauses) are not directly referenced in links or unmatched_contract. They are covered via composite locators in links. This is a consequence of the locator format mismatch described above.",
-      "affected_ids": ["0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.9", "0.10", "0.11", "0.13", "0.14", "0.15", "0.16"],
-      "recommendation": "Resolved automatically if the locator format issue is fixed."
+      "id": "E02",
+      "severity": "error",
+      "rule": "generic_risk_text",
+      "detail": "6 unmatched_matrix items have generic placeholder risk text: 'No confirmed contract analogue was present in completed fragments.' This indicates incomplete legal analysis. Affected: 2.6.1.1, 2.6.3.1, 4.2.22, 5.1.3, 5.2.9, 6.20.",
+      "location": "unmatched_matrix items with generic risk"
+    },
+    {
+      "id": "E03",
+      "severity": "error",
+      "rule": "mandatory_missing_low_risk_unjustified",
+      "detail": "16 mandatory missing_in_contract items have risk_level=low without clear justification that the missing requirement is genuinely low-risk. Per skill: 'Missing mandatory applicable requirements should normally be high risk.' Affected: 2.6.2.1, 2.6.2.2, 2.6.3.2, 4.2.8, 5.1.4, 6.7, 6.8, 6.10, 6.11, 6.13, 6.14, 6.16, 6.17, 7.14, 7.17, 10.3.",
+      "location": "unmatched_matrix items"
+    },
+    {
+      "id": "E04",
+      "severity": "error",
+      "rule": "missing_matrix_ids_in_coverage_ledger",
+      "detail": "coverage_ledger.matrix has 169 entries but the source matrix has 169 ids. All 169 are present. However, the validate_coverage_ledger script reports final_matrix_ids=143 vs ledger_matrix_ids=169, suggesting 26 matrix ids appear only in the ledger but not in links/unmatched_matrix. This needs reconciliation.",
+      "location": "coverage_ledger.matrix"
+    },
+    {
+      "id": "E05",
+      "severity": "error",
+      "rule": "contract_id_not_in_source",
+      "detail": "contract_id '9.2.1' appears in coverage_ledger.contract but is only found in the appendix (technical specification) at line 359, not as a numbered clause in the main contract body. Verify this is a valid printed locator per the clause_index.",
+      "location": "coverage_ledger.contract[contract_id=9.2.1]"
+    },
+    {
+      "id": "E06",
+      "severity": "error",
+      "rule": "section_heading_as_contract_id",
+      "detail": "contract_id '10' in coverage_ledger.contract refers to section heading '10. ПОРЯДОК РАЗРЕШЕНИЯ СПОРОВ'. While it is a valid locator, it is a heading (not an operative clause) and is correctly closed as not_material. However, bare section numbers like '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13' are all present as not_material. This is acceptable but should be verified against clause_index.",
+      "location": "coverage_ledger.contract bare section numbers"
+    },
+    {
+      "id": "E07",
+      "severity": "error",
+      "rule": "deviation_with_low_risk_questionable",
+      "detail": "Link for matrix 5.1.10 (Проверка Предприятия) is marked deviation with risk_level=low. The discrepancy is that the contract focuses on technical state rather than fraud detection. Given that fraud detection is a core Bank control right, this may warrant medium risk.",
+      "location": "links[link_index=58]"
+    },
+    {
+      "id": "E08",
+      "severity": "error",
+      "rule": "deviation_11.12_risk_assessment",
+      "detail": "Link for matrix 11.12 (Уведомления считаются направленными надлежаще) is marked deviation with risk_level=low. The discrepancy narrows notification channels from all 2.3 methods to only written/registered/personal. This removes electronic channels for dispute notices, which could be medium risk.",
+      "location": "links[link_index=96]"
     }
   ],
-  "validation_summary": {
-    "links_count": 144,
-    "atomic_links_count": 144,
-    "unmatched_matrix_count": 12,
-    "unmatched_contract_count": 10,
-    "aligned_actual": 118,
-    "deviation_actual": 26,
-    "missing_in_contract_actual": 12,
-    "extra_in_contract_actual": 3,
-    "not_material_actual": 7,
-    "summary_counts_match": true,
-    "matrix_coverage_complete": true,
-    "atomic_links_structure_valid": true,
-    "no_weak_context_in_atomic": true,
-    "deviation_checklist_rule_valid": true,
-    "aligned_checklist_rule_valid": true,
-    "no_empty_contract_ids": true,
-    "unmatched_matrix_status_valid": true,
-    "deviation_discrepancies_valid": true,
-    "aligned_no_discrepancies_valid": true,
-    "no_invented_ids": true,
-    "no_parenthetical_ids": true
+  "warnings": [
+    {
+      "id": "W01",
+      "severity": "warning",
+      "rule": "mandatory_missing_low_risk",
+      "detail": "16 mandatory missing items have risk_level=low. While some may be justified (e.g., 44-FZ mechanisms replace the missing term), others lack clear justification. Review each for correct risk calibration.",
+      "location": "unmatched_matrix"
+    },
+    {
+      "id": "W02",
+      "severity": "warning",
+      "rule": "generic_risk_text",
+      "detail": "6 unmatched_matrix items use generic placeholder risk text suggesting incomplete analysis.",
+      "location": "unmatched_matrix"
+    },
+    {
+      "id": "W03",
+      "severity": "warning",
+      "rule": "duplicate_contract_ids_without_context",
+      "detail": "Working artifact validation found 12 duplicate contract_ids without context differentiation. Verify these are handled correctly in the final JSON.",
+      "location": "clause_index"
+    },
+    {
+      "id": "W04",
+      "severity": "warning",
+      "rule": "weak_evaluable_rows",
+      "detail": "Working artifact validation found 186 weak evaluable rows in legal_propositions. Some may need source review before final status.",
+      "location": "legal_propositions"
+    },
+    {
+      "id": "W05",
+      "severity": "warning",
+      "rule": "summary_counts_consistency",
+      "detail": "Summary counts (aligned=79, deviation=19, missing=45, extra=27) match actual array lengths. Total links=98, atomic_links=113. Coverage ledger has 169 matrix + 198 contract entries. All counts are internally consistent.",
+      "location": "summary"
+    },
+    {
+      "id": "W06",
+      "severity": "warning",
+      "rule": "out_of_scope_not_in_unmatched",
+      "detail": "Verified: 25 out_of_scope/not_applicable matrix ids are correctly excluded from unmatched_matrix. Good.",
+      "location": "unmatched_matrix vs coverage_ledger"
+    },
+    {
+      "id": "W07",
+      "severity": "warning",
+      "rule": "not_material_not_in_unmatched_contract",
+      "detail": "Verified: not_material contract ids are correctly excluded from unmatched_contract. Good.",
+      "location": "unmatched_contract vs coverage_ledger"
+    },
+    {
+      "id": "W08",
+      "severity": "warning",
+      "rule": "atomic_links_structure",
+      "detail": "All 113 atomic_links have required fields (matrix_id, contract_id, relationship, link_index, coverage_role, coverage). Atomic rows inherit group relationship. No pair-level final statuses invented. Good.",
+      "location": "atomic_links"
+    },
+    {
+      "id": "W09",
+      "severity": "warning",
+      "rule": "aligned_no_discrepancies",
+      "detail": "All aligned links have empty discrepancies and risk_level=none. Good.",
+      "location": "links[aligned]"
+    },
+    {
+      "id": "W10",
+      "severity": "warning",
+      "rule": "deviation_has_discrepancies",
+      "detail": "All deviation links have at least one discrepancy with type, description, and risk. Good.",
+      "location": "links[deviation]"
+    },
+    {
+      "id": "W11",
+      "severity": "warning",
+      "rule": "coverage_ledger_derived",
+      "detail": "Coverage ledger matrix entries reference link_indices that correspond to actual links. Contract entries reference link_indices correctly. Good.",
+      "location": "coverage_ledger"
+    },
+    {
+      "id": "W12",
+      "severity": "warning",
+      "rule": "finalizer_note",
+      "detail": "analysis_profile.finalizer indicates 'json_only_structural_normalization' with note that 'Mechanical finalizer preserved agent findings and closed missing rows where fragments were incomplete.' This suggests some rows may have been auto-closed without full legal analysis.",
+      "location": "analysis_profile.finalizer"
+    },
+    {
+      "id": "W13",
+      "severity": "warning",
+      "rule": "contract_id_10_bare_section",
+      "detail": "Bare section numbers (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13) appear as contract_ids in coverage_ledger. These are section headings, correctly closed as not_material. Verify they are in clause_index.",
+      "location": "coverage_ledger.contract"
+    },
+    {
+      "id": "W14",
+      "severity": "warning",
+      "rule": "matrix_2.6.1.1_applicability",
+      "detail": "Matrix 2.6.1.1 (QR on Smart terminals) has filter only_for_terminal=smart and payment_method=qr. Contract profile includes smart terminals and QR. It is correctly applicable and in unmatched_matrix. However, risk text is generic.",
+      "location": "unmatched_matrix[2.6.1.1]"
+    },
+    {
+      "id": "W15",
+      "severity": "warning",
+      "rule": "matrix_4.2.22_applicability",
+      "detail": "Matrix 4.2.22 (SberPayQR/Плати QR) has payment_method filters. Contract has QR but not SberPay/Плати QR specifically. Risk text is generic. Verify applicability.",
+      "location": "unmatched_matrix[4.2.22]"
+    },
+    {
+      "id": "W16",
+      "severity": "warning",
+      "rule": "matrix_5.1.3_applicability",
+      "detail": "Matrix 5.1.3 (direct debit from account) is mandatory. Risk text is generic. This is a significant Bank right - verify analysis.",
+      "location": "unmatched_matrix[5.1.3]"
+    },
+    {
+      "id": "W17",
+      "severity": "warning",
+      "rule": "matrix_5.2.9_applicability",
+      "detail": "Matrix 5.2.9 (QR-code partner provision) is optional with payment_method=qr. Risk text is generic. Verify analysis.",
+      "location": "unmatched_matrix[5.2.9]"
+    },
+    {
+      "id": "W18",
+      "severity": "warning",
+      "rule": "matrix_6.20_applicability",
+      "detail": "Matrix 6.20 risk text is generic. Verify analysis.",
+      "location": "unmatched_matrix[6.20]"
+    },
+    {
+      "id": "W19",
+      "severity": "warning",
+      "rule": "matrix_2.6.3.1_applicability",
+      "detail": "Matrix 2.6.3.1 (QR on Electronic terminals with Bank as Vendor) has filter only_for_terminal=pos and payment_method=qr. Contract has POS terminals and QR. Correctly applicable. Risk text is generic.",
+      "location": "unmatched_matrix[2.6.3.1]"
+    },
+    {
+      "id": "W20",
+      "severity": "warning",
+      "rule": "section_6_items_missing",
+      "detail": "Multiple section 6 matrix items (6.7, 6.8, 6.10, 6.11, 6.13, 6.14, 6.16, 6.17) are marked missing_in_contract with low risk and brief justifications. Section 6 covers payment/calculation details. Review whether these are genuinely low-risk omissions.",
+      "location": "unmatched_matrix section 6 items"
+    },
+    {
+      "id": "W21",
+      "severity": "warning",
+      "rule": "extra_in_contract_all_low_risk",
+      "detail": "All 27 extra_in_contract items have risk_level=low. While many are standard 44-FZ boilerplate, some (e.g., 5.3.4 - unilateral refusal right for Customer, 5.4.3 - Customer's unilateral termination) grant significant rights to the counterparty. Review risk calibration.",
+      "location": "unmatched_contract"
+    },
+    {
+      "id": "W22",
+      "severity": "warning",
+      "rule": "contract_id_354340_postal_code",
+      "detail": "contract_id '354340' is a postal code (г. Сочи, Адлерский район), not a clause locator. It appears in coverage_ledger.contract as not_material. Should be removed.",
+      "location": "coverage_ledger.contract[contract_id=354340]"
+    }
+  ],
+  "summary": {
+    "overall": "FAILED",
+    "critical_errors": 3,
+    "high_errors": 5,
+    "warnings": 22,
+    "structural_valid": true,
+    "counts_consistent": true,
+    "main_issues": [
+      "1. Invented/non-clause locator '354340' (postal code) in coverage_ledger",
+      "2. 6 unmatched_matrix items have generic placeholder risk text indicating incomplete legal analysis",
+      "3. 16 mandatory missing items have risk_level=low without clear justification per skill rules",
+      "4. Finalizer note indicates mechanical closure of incomplete fragments",
+      "5. Some deviation risk levels may be miscalibrated (5.1.10, 11.12)"
+    ]
   }
 }

@@ -1,283 +1,272 @@
 # Comparison Patterns
 
-These examples calibrate legal judgment. Do not copy ids, facts, or wording into
-the final artifact unless they are present in the actual inputs.
+These are universal calibration patterns. They are not answers for a specific
+document.
 
-## 1. One Matrix Item Covered By Several Contract Clauses
+## 1. Good Legal Proposition Ledger Row
 
-Matrix standard:
-- settlement occurs after reconciliation;
-- refunds and chargebacks may be deducted;
-- settlement currency is fixed.
+Source clause gives the Bank a right to refuse service registration without
+explaining reasons.
 
-Contract position:
-- reconciliation is in an operations clause;
-- deductions are in a Bank-rights clause;
-- currency is in a payment clause.
+Good ledger row:
 
-Result:
-- one grouped `links` item may include all relevant contract locators;
-- `aligned` if the package preserves every material element;
-- each `atomic_links` row states the exact role of the locator and uses an
-  element checklist.
+- `source_text` preserves the clause text;
+- `source_excerpt` quotes the refusal right;
+- `protected_party = Bank`;
+- `bound_party = merchant/counterparty`;
+- `right_or_obligation = Bank refusal right`;
+- `legal_object = service/outlet registration`;
+- `consequence = registration may be refused`.
 
-## 2. One Contract Clause Covers Several Matrix Requirements
+Result: evaluable. It can participate in matching and status analysis.
 
-Matrix standard:
-- the merchant must follow payment-system rules;
-- the merchant must prevent fraud;
-- the merchant must provide documents on request.
+## 2. Bad Ledger Row
 
-Contract position:
-- one compliance clause imposes all three duties with the same protected party,
-  object, triggers, and consequences.
+Source clause contains a payment deadline, but the ledger says only
+`payment terms`.
 
-Result:
-- one contract locator may link to several matrix ids;
-- the link is valid only because the operative duties are actually preserved,
-  not because the clause is broadly worded.
+Result: incomplete. Mark `needs_source_review` or repair the ledger before
+status. A missing extracted deadline must not make the final analysis forget
+the deadline in source text.
 
-## 3. Weak Topic Match Is Missing, Not Deviation
+## 3. True Analogue
 
-Matrix standard:
-- the Bank has a specific right to deduct a named fee from settlement amounts
-  after a defined trigger.
+Matrix gives the Bank a specific right to deduct a fee after a defined trigger.
+Contract gives the same party the same deduction right for the same trigger and
+object.
 
-Contract position:
-- the contract contains a general payment clause but does not give the same
-  deduction right, trigger, or settlement mechanism.
+Result: link the provisions and compare details for `aligned` or `deviation`.
 
-Result:
-- do not create `deviation`;
-- put the matrix item in `unmatched_matrix`;
-- record the payment clause in `rejected_candidates` as weak context.
+## 4. Weak Thematic Candidate
 
-## 4. Generic Notice Does Not Cover Named Bank Channel
+Matrix gives the Bank a specific deduction right. Contract has only a general
+payment clause.
 
-Matrix standard:
-- legally significant notices must be delivered through a named Bank channel
-  and have evidentiary force.
+Result: no final link. Record the payment clause as rejected weak context if it
+was considered.
 
-Contract position:
-- a generic written-notice clause allows email or paper notices but does not
-  address the named channel or evidentiary force.
+## 5. One Matrix Requirement Covered By Several Clauses
 
-Result:
-- `deviation` only if it governs the same legal notice process but changes the
-  channel, deadline, or evidence effect;
-- `missing_in_contract` if it is only a broad notice clause.
+Matrix requires a duty, a deadline, a procedure, and a consequence. Contract
+splits those elements across parent, operative, procedure, and liability
+clauses that all govern the same obligation.
 
-## 5. Generic Liability Does Not Cover Specific Remedy
+Result: one group link with several `contract_ids`. `aligned` is allowed if the
+package preserves all material elements.
 
-Matrix standard:
-- a fixed penalty applies for a specific breach, protected party, trigger,
-  calculation method, and cap or no-cap position.
+## 6. One Contract Clause Covers Several Matrix Requirements
 
-Contract position:
-- the contract has only general damages or statutory liability.
+One contract clause contains duties for payment, documents, acceptance, and
+liability. Several matrix requirements describe those elements separately.
 
-Result:
-- use `missing_in_contract` when the special remedy is absent;
-- use `deviation` only when a true analogue exists but amount, trigger, cap,
-  exception, or protected party differs.
+Result: one group can contain one contract id and several matrix ids when the
+legal object and effect are genuinely shared.
 
-## 6. Changed Deadline, Amount, Formula, Or Party Is Deviation
+## 7. Mandatory Missing
 
-Matrix standard:
-- notice is due within one business day;
-- penalty is a fixed amount;
-- the Bank is the protected party.
+Matrix item is mandatory and applicable to the contract profile. No true
+contract analogue exists.
 
-Contract position:
-- notice is due within five business days;
-- penalty is lower, capped, conditional, or absent;
-- another party receives the protection.
+Result: `missing_in_contract` with high risk.
 
-Result:
-- `relationship = deviation`;
-- checklist marks `deadline`, `amount_formula_cap`, `party`, or
-  `liability_remedy` as `different`;
-- discrepancy explains the lost Bank protection.
+## 8. Out Of Scope Matrix Requirement
 
-## 7. Formal Label Difference Is Not Deviation
+Matrix item is filtered to a product, lot, terminal, payment method, or legal
+regime not used by the contract.
 
-Matrix standard:
-- an appendix, act, form, or channel has a specific label.
+Result: close it in `coverage_ledger.matrix` as `out_of_scope` or
+`not_applicable` with the profile reason. Do not put it in final
+`unmatched_matrix`, and do not force a weak link.
 
-Contract position:
-- the same legal content appears under a different title.
+## 9. Optional Applicable Missing
 
-Result:
-- `aligned` if rights, duties, evidentiary effect, deadlines, and consequences
-  are preserved;
-- naming alone is not a legal gap.
+Matrix item is optional but applicable to the selected product/profile. No true
+contract analogue exists.
 
-## 8. Mandatory Law Can Preserve The Result
+Result: `missing_in_contract` with low or conditional risk.
 
-Matrix standard:
-- the Bank requires a protection that mandatory law already provides.
+## 10. Slash Options
 
-Contract position:
-- the contract uses the statutory structure and does not waive, narrow, or shift
-  the Bank's protection.
+Matrix lists `cards / QR / mobile pay / smart terminal` as alternatives.
+Contract selects `cards / QR`, and the profile confirms only those services are
+in scope.
 
-Result:
-- `aligned` if the legal result is at least as strong for the Bank;
-- `deviation` if the contract narrows the statutory protection or adds a
-  material burden.
+Result: `aligned` for scope. Absence of unselected alternatives is not a
+deviation.
 
-## 9. Mandatory-Law Procedure As Extra Contract Term
+## 11. Placeholder In Applicable Term
 
-Contract position:
-- the contract adds procurement, public-system acceptance, customer-control, or
-  mandatory-law procedures that create independent rights or duties for the
-  customer.
+Matrix or contract requires a filled penalty, fee, account, deadline, appendix,
+or system name. The applicable field is blank.
 
-Matrix standard:
-- the matrix does not contain an analogue for that customer-side procedure.
+Result: `deviation`, usually low risk unless the blank blocks enforcement.
 
-Result:
-- `unmatched_contract`;
-- status `extra_in_contract`;
-- risk explains delay, customer leverage, payment control, termination risk, or
-  procedural burden for the Bank.
+## 12. Same Deadline
 
-## 10. Material Contract-Only Clause
+Matrix requires a document within 3 business days. Contract imposes the same
+3-business-day deadline on the same duty.
 
-Contract position:
-- the customer may inspect performance, reject results, withhold payment, demand
-  corrections, suspend performance, or terminate for convenience.
+Result: deadline element is covered.
 
-Matrix standard:
-- no matrix requirement creates the same customer-side right.
+## 13. Changed Or Missing Deadline
 
-Result:
-- `unmatched_contract`;
-- status `extra_in_contract`;
-- `materiality_reason` explains the independent legal effect.
+Matrix requires 3 business days. Contract says 5 business days, uses another
+period, or states the duty without a deadline.
 
-## 11. Technical Contract-Only Clause Is Not Material
+Result: `deviation`; discrepancy type `deadline`.
 
-Contract position:
-- heading, signature block, blank requisites table, descriptive recital, or
-  definition without operative effect.
+## 14. Borrowed Hard Term Does Not Cure Gap
 
-Result:
-- omit it if unnecessary, or include as `not_material`;
-- `materiality_reason` states that it creates no standalone right, duty,
-  procedure, economic term, liability, or consequence.
+Contract clause A covers the same duty but lacks the matrix deadline. Clause B
+has the same number of days but governs a different request or procedure and is
+not incorporated into clause A.
 
-## 12. Parent And Child Locator Recall
+Result: clause B cannot make clause A aligned. Record a deadline deviation.
 
-Matrix standard:
-- the Bank may demand penalties for late performance;
-- amount and calculation trigger are material.
+## 15. Changed Amount, Formula, Cap, Or Penalty
 
-Contract position:
-- a parent clause grants the penalty right;
-- child clauses set amount, trigger, exceptions, and cap.
+Matrix requires a fixed penalty, no cap, full damages, or a specific formula.
+Contract lowers the amount, adds a cap, changes the base, or requires an extra
+demand.
 
-Result:
-- include both parent and child locators when both have legal effect;
-- do not cite only the child if the parent contains the operative right;
-- do not cite only the parent if the child contains the amount, trigger, or cap.
+Result: `deviation`; discrepancy type `amount` or `liability`.
 
-## 13. Grouped Package And Atomic Rows
+## 16. Party Inversion
 
-Matrix standard:
-- one requirement needs a parent right, an operative duty, and a formula.
+Matrix protects the Bank or imposes a duty on the counterparty. Contract gives
+the analogous right to the customer or shifts the burden to the Bank.
 
-Contract position:
-- several clauses jointly preserve the complete result.
+Result: `deviation` if it is an analogue; `extra_in_contract` if it creates a
+new independent right.
 
-Grouped result:
-- one `links` item may be `aligned`.
+## 17. Procurement Mechanism As Analogue
 
-Atomic result:
-- create one row for each real matrix-contract pair;
-- each row has `coverage_role`, `analogue_strength`, `element_checklist`, and
-  `status_reason`;
-- do not mark a necessary package clause as `deviation` merely because it covers
-  only its role. `deviation` needs a named material gap.
+Public-contract acceptance, EIS signing, budget payment, statutory penalties,
+or unilateral termination regulates the same legal object as the matrix.
 
-## 14. Same Broad Topic But Different Legal Object
+Result: link it. Use `aligned` if the Bank standard is preserved or stronger.
+Do not mark `deviation` merely because the mechanism is 44-FZ/EIS.
 
-Matrix standard:
-- the Bank can reject a merchant terminal registration for risk reasons.
+## 18. Procurement Mechanism With Material Deviation
 
-Contract position:
-- the customer can reject service acceptance after delivery.
+Public-contract mechanics regulate the same legal object, but the contract
+changes a material element: longer payment deadline, weaker withholding right,
+different acceptance consequence, penalty cap, lost termination power, or
+changed protected party.
 
-Result:
-- both clauses involve rejection, but the legal object and protected party
-  differ;
-- do not link them;
-- the matrix item is `missing_in_contract` and the contract clause may be
-  `extra_in_contract` if it has independent effect.
+Result: grouped `deviation` with the specific changed element.
 
-## 15. Procurement Payment Mechanism Is A Deviation
+## 19. Procurement Mechanism As Extra
 
-Matrix standard:
-- the Bank is paid or may settle, deduct, or reconcile under the bank-standard
-  mechanism.
+Contract gives the customer an independent inspection, rejection, correction,
+withholding, reporting, or convenience termination right with no matrix
+analogue.
 
-Contract position:
-- the same payment obligation is controlled by a public-contract mechanism,
-  budget payment, acceptance document, payment order, EIS act, or statutory
-  customer approval.
+Result: `extra_in_contract` with materiality reason and risk.
 
-Result:
-- create a legal link if the payment object is the same;
-- use `deviation` when the contract changes the deadline, payer action,
-  acceptance condition, deduction right, or enforceability of payment.
+## 20. Formal Label Difference
 
-## 16. Procurement Termination Procedure Is A Deviation
+The same legal content appears under another appendix title, report label, or
+document name.
 
-Matrix standard:
-- a party has a termination or unilateral refusal right with defined conditions.
+Result: `aligned` if rights, duties, timing, evidence, and consequences are
+preserved.
 
-Contract position:
-- public-contract wording gives a similar termination path but changes notice,
-  customer procedure, allowed grounds, effective date, or consequences.
+## 21. Low-Risk Note Does Not Force Deviation
 
-Result:
-- do not discard the clause as unrelated merely because it uses statutory
-  language;
-- link it as `deviation` when the same legal object is governed differently.
+The contract uses another label for the same channel, another party label for
+the same legal role, or adds language beneficial to the Bank. The legal result,
+timing, enforceability, and protected party are preserved.
 
-## 17. Generic QR Or Terminal Capability Is Not A Bank Product Analogue
+Result: `aligned`. The note can appear in `status_reason`, but it is not a
+discrepancy.
 
-Matrix standard:
-- a named QR, API, mobile payment, registration, or operational rule is
-  required.
+## 22. Named Channel Or Legal Force Missing
 
-Contract position:
-- a terminal must display a QR code or support contactless/card payment.
+Matrix requires a named EDI/email/site/channel or legal-force effect. Contract
+has a generic document exchange clause and omits the named element.
 
-Result:
-- this is weak context unless it preserves the named product, channel, trigger,
-  procedure, and consequence;
-- put the matrix item in `unmatched_matrix` and record the generic clause as a
-  rejected candidate.
+Result: `deviation` when it is the same exchange mechanism with a missing
+material element. If it is only broad-topic context, use `missing_in_contract`.
 
-## 18. Appendix Locator Must Be Real
+## 23. Generic Product Capability
 
-Contract position:
-- an appendix is mentioned in clause text, but the appendix subdivision is not
-  printed as a standalone locator in the source contract text.
+Contract says a terminal can display QR or accept cards. Matrix requires a
+named Bank product or product-specific procedure.
 
-Result:
-- do not use the invented appendix subdivision as `contract_id`;
-- cite the nearest real clause or printed appendix locator and describe the
-  appendix content in `coverage`.
+Result: apply the product profile first. Generic capability is not enough for a
+named product obligation.
 
-## 19. Contract-Only Operative Child Clause
+## 24. Parent And Child Package Retention
 
-Contract position:
-- a public-contract acceptance section has children for EIS signing, motivated
-  refusal, correction, payment hold, or customer rejection.
+Parent clause states the operative right or duty. Child clauses enumerate
+events, exceptions, deadlines, or remedies. Either parent or child alone would
+be incomplete.
 
-Result:
-- report child clauses with independent legal effect as `extra_in_contract`;
-- omit headings and repeat-only children that add no right, duty, procedure,
-  remedy, or consequence.
+Result: final group includes the material parent and children. Do not drop the
+parent only because children contain more detail, and do not drop children when
+they carry the hard term.
+
+## 25. Framework Clause As Analogue
+
+Contract clause requires compliance with applicable law, payment-system rules,
+contract specifications, or incorporated operating procedures. A matrix row
+uses that same framework as the legal object or risk-allocation rule.
+
+Result: include the framework clause as a legal analogue. Do not use it to
+inflate unrelated rows where it is only background context.
+
+## 26. Liability Group Review
+
+Matrix separates delay penalties, non-delay fines, caps, exceptions, claim
+procedure, and damages. Contract distributes the same topics across several
+clauses.
+
+Result: compare the liability package as a group. Before `aligned`, verify
+amounts, formulas, caps, triggers, protected party, and excluded buckets.
+
+## 27. Definition Without Legal Effect
+
+Definition has no analogue in the matrix and creates no standalone right, duty,
+risk, amount, procedure, liability, or consequence.
+
+Result: `not_material` in the working ledger only.
+
+## 28. Definition With Legal Effect
+
+Definition expands a key term so that it changes scope, liability, covered
+transactions, parties, or remedies.
+
+Result: evaluable. Link it if it modifies a matrix analogue; otherwise classify
+as `extra_in_contract`.
+
+## 29. Contract-Only Material Clause
+
+Contract adds maximum price, budget source, customer control, acceptance,
+withholding, unilateral refusal, penalty cap, reporting, anti-corruption,
+confidentiality, audit, data, or evidence procedure with no matrix analogue.
+
+Result: `extra_in_contract`.
+
+## 30. Duplicate Gap Propagation
+
+One payment deadline gap affects a payment package with parent and child
+clauses.
+
+Result: record one grouped `deviation`. Do not duplicate the same gap across
+unrelated companion clauses.
+
+## 31. Non-Informative Parent
+
+A parent row merely names a section and all legal effect is in children.
+
+Result: close as non-evaluable or `not_material` in the ledger. Do not report
+it as a final risk.
+
+## 32. Group-Level Status
+
+A group contains several matrix ids and several contract ids. One status
+applies to the group as a whole.
+
+Result: do not assign separate final statuses per pair. `atomic_links` are only
+traceability rows and inherit the group relationship.
