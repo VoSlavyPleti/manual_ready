@@ -14,9 +14,11 @@ def main():
     warnings = []
 
     # Load data
-    artifact = load_json('/outputs/working/merged_artifact.json')
-    matrix_inv = load_json('/outputs/working/matrix_inventory.json')
-    contract_inv = load_json('/outputs/working/contract_inventory.json')
+    import os
+    base = os.path.dirname(os.path.abspath(__file__))
+    artifact = load_json(os.path.join(base, 'merged_artifact.json'))
+    matrix_inv = load_json(os.path.join(base, 'matrix_inventory.json'))
+    contract_inv = load_json(os.path.join(base, 'contract_inventory.json'))
 
     links = artifact.get('links', [])
     atomic_links = artifact.get('atomic_links', [])
@@ -360,7 +362,7 @@ def main():
     print(f"  extra_in_contract (actual): {extra_count}")
 
     # Write errors to file
-    with open('/outputs/working/qa_errors.json', 'w') as f:
+    with open(os.path.join(base, 'qa_errors.json'), 'w') as f:
         json.dump({'errors': errors, 'warnings': warnings}, f, indent=2, ensure_ascii=False)
 
     return len(errors)

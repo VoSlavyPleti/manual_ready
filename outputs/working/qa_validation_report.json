@@ -1,0 +1,63 @@
+{
+  "qa_result": "PASS_WITH_WARNINGS",
+  "errors": [],
+  "warnings": [
+    {
+      "category": "contract_locator_format",
+      "severity": "medium",
+      "count": 25,
+      "description": "Composite contract locators (e.g., '7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.1') are used in links and atomic_links instead of bare printed sub-clause numbers (e.g., '0.1'). The SKILL.md requires exact printed locators from contract.txt. The bare '0.1' IS the printed locator; the composite form adds the section heading for disambiguation but is not verbatim from the contract. The contract_inventory uses bare locators, creating a mismatch.",
+      "affected_ids": [
+        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.1", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.2",
+        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.3", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.4",
+        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.5", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.6",
+        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.7", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.8",
+        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.9", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.10",
+        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.11", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.12",
+        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.13", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.14",
+        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.15", "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.16",
+        "7. ОТВЕТСТВЕННОСТЬ сторон, п. 0.17",
+        "7. ФОРС-МАЖОРНЫЕ ОБСТОЯТЕЛЬСТВА, п. 0.1",
+        "7. ФОРС-МАЖОРНЫЕ ОБСТОЯТЕЛЬСТВА, п. 0.2",
+        "8. УРЕГУЛИРОВАНИЕ СПОРОВ, п. 0.1",
+        "8. УРЕГУЛИРОВАНИЕ СПОРОВ, п. 0.2",
+        "8. УРЕГУЛИРОВАНИЕ СПОРОВ, п. 0.3",
+        "10. ПРОЧИЕ УСЛОВИЯ, п. 0.9",
+        "10. ПРОЧИЕ УСЛОВИЯ, п. 0.11",
+        "10. ПРОЧИЕ УСЛОВИЯ, п. 0.13"
+      ],
+      "recommendation": "Either (a) update contract_inventory to include composite locators as aliases, or (b) change links/atomic_links to use bare printed locators and add a 'contract_section' field for disambiguation. The composite form is functionally clear but violates the strict 'exact printed locator' rule."
+    },
+    {
+      "category": "contract_inventory_coverage",
+      "severity": "low",
+      "count": 15,
+      "description": "Material contract inventory items (bare '0.X' sub-clauses) are not directly referenced in links or unmatched_contract. They are covered via composite locators in links. This is a consequence of the locator format mismatch described above.",
+      "affected_ids": ["0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.9", "0.10", "0.11", "0.13", "0.14", "0.15", "0.16"],
+      "recommendation": "Resolved automatically if the locator format issue is fixed."
+    }
+  ],
+  "validation_summary": {
+    "links_count": 144,
+    "atomic_links_count": 144,
+    "unmatched_matrix_count": 12,
+    "unmatched_contract_count": 10,
+    "aligned_actual": 118,
+    "deviation_actual": 26,
+    "missing_in_contract_actual": 12,
+    "extra_in_contract_actual": 3,
+    "not_material_actual": 7,
+    "summary_counts_match": true,
+    "matrix_coverage_complete": true,
+    "atomic_links_structure_valid": true,
+    "no_weak_context_in_atomic": true,
+    "deviation_checklist_rule_valid": true,
+    "aligned_checklist_rule_valid": true,
+    "no_empty_contract_ids": true,
+    "unmatched_matrix_status_valid": true,
+    "deviation_discrepancies_valid": true,
+    "aligned_no_discrepancies_valid": true,
+    "no_invented_ids": true,
+    "no_parenthetical_ids": true
+  }
+}
