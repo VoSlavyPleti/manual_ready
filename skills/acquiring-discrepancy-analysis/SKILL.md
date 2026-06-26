@@ -26,18 +26,23 @@ Reference loading:
 
 1. Preflight `inputs/contract.txt`; stop with a source error artifact if the
    text is not legally usable.
-2. Build `clause_index.json` as the complete source map.
-3. Build and validate `legal_propositions.json`; do not start matching until
+2. Use `inputs/matrix_legal_propositions.json` as the reusable normalized
+   Bank-standard matrix ledger.
+3. Build `contract_legal_propositions.json` from the contract in one
+   document-aware pass: extract each real clause/locator and fill the legal
+   proposition fields immediately.
+4. Derive compatibility artifacts `clause_index.json` and
+   `legal_propositions.json`; do not start matching until
    `working_artifact_validation.json` is valid.
-4. Build the contract product profile and close out-of-scope matrix rows only
+5. Build the contract product profile and close out-of-scope matrix rows only
    in the internal ledger.
-5. Read `references/matching-rules.md`; compare both directions: matrix
+6. Read `references/matching-rules.md`; compare both directions: matrix
    requirements to contract package, and material contract terms back to matrix
    analogues.
-6. Read `references/status-rules.md`; assign group-level `aligned`,
+7. Read `references/status-rules.md`; assign group-level `aligned`,
    `deviation`, `missing_in_contract`, or `extra_in_contract` based on source
    text.
-7. Run Final QA, then write one final JSON and the mechanical XLSX export.
+8. Run Final QA, then write one final JSON and the mechanical XLSX export.
 
 ## Purpose
 
@@ -61,6 +66,11 @@ Inputs:
 - `inputs/matrix.json`: Bank standard matrix. Use `number` as the matrix id.
   Analyze `main_idea`, `topics`, `enriched_text`, obligation fields, and
   applicability filters.
+- `inputs/matrix_legal_propositions.json`: reusable normalized matrix ledger
+  curated from `inputs/matrix.json`. Use it for matrix-side recall and status
+  evidence. It is a prepared input, not a per-run working artifact. If it is
+  absent or its ids/source text do not match `inputs/matrix.json`, stop with a
+  source setup error instead of rebuilding it during the contract run.
 - `inputs/contract.txt`: full counterparty contract text. Use printed clause
   ids or real document locators visible in this file.
 
@@ -88,8 +98,10 @@ but source text controls the legal conclusion.
 
 Create the artifacts in this order. Each later step depends on the earlier
 artifact contract. The purpose is to prevent legal facts from being lost
-between stages: `clause_index` proves source coverage, `legal_propositions`
-preserves legal meaning, and `coverage_ledger` proves final closure.
+between stages: `matrix_legal_propositions` preserves the stable Bank
+standard, `contract_legal_propositions` preserves contract legal meaning,
+compatibility artifacts expose valid locators, and `coverage_ledger` proves
+final closure.
 
 ### 1. Source Preflight
 
@@ -104,50 +116,119 @@ If the contract text is not usable, stop and write
 `/outputs/working/source_preflight_error.json`. Do not run legal analysis on
 invalid text.
 
-### 2. Clause Index
+### 2. Matrix Ledger Preflight
 
-Create `/outputs/working/clause_index.json`.
+Use `inputs/matrix_legal_propositions.json` as the matrix-side legal evidence
+ledger. It is curated before the run because the Bank matrix is stable across
+runs.
 
-It is a source map only. It must include:
+Before contract analysis:
+
+- confirm it contains every `number` from `inputs/matrix.json`;
+- confirm each row has `source_ref.matrix_id`, concise `bank_standard`,
+  `matching_cues`, `legal_atoms`, `status_check_elements`, and hard-term
+  fields where relevant;
+- treat `legal_atoms` as the matrix-side atomic requirement list. When
+  `status_check_elements` contains atom ids, resolve them against
+  `legal_atoms`; do not expect the same text to be duplicated in both fields;
+- do not spend run time re-normalizing matrix rows;
+- if the curated file is missing, stale, or invalid, stop with a setup error
+  and do not begin contract analysis.
+
+The matrix ledger is an input optimization, not a new source of truth. It must
+stay compact and must not duplicate full `enriched_text`. If a status depends
+on a matrix hard term, use `source_ref.matrix_id` to verify it against
+`inputs/matrix.json`.
+
+### 3. Contract Legal Proposition Extraction
+
+Create `/outputs/working/contract_legal_propositions.json`.
+
+This is the primary contract working artifact. Extract the contract as a
+document, not as a universal numbering-regex result. For each real clause,
+subclause, appendix item, table row, or unnumbered operative provision, create
+one row and fill the legal fields immediately.
+
+Every row should include:
+
+- `id`: printed contract locator or nearest real source locator visible in the
+  contract;
+- `source_text` and concise `source_excerpt`;
+- `source_locator`, `line_start`, `line_end`, and section/context when useful;
+- `type`: `operative`, `definition`, `heading`, `parent_framework`,
+  `appendix`, `table`, or `technical`;
+- `materiality`: `evaluable`, `not_material`, `heading`, or
+  `needs_source_review`;
+- `final_allowed`: true only when the locator can appear as a final
+  `contract_id`;
+- `evidence_only`: true when the row can support evidence but is not a final
+  locator;
+- the legal proposition fields: `protected_party`, `bound_party`,
+  `right_or_obligation`, `legal_object`, `trigger`, `deadline`,
+  `amount_formula_cap`, `procedure_channel`, `liability_remedy`,
+  `scope_options`, `consequence`.
+
+The agent may use helper scripts to create a seed, but the seed is not
+authoritative. Review and repair the ledger against `inputs/contract.txt`
+before matching. Do not proceed while a legally meaningful row remains
+`needs_source_review`.
+
+If one row's `source_text` contains another visible operative locator, split
+or repair the ledger before matching. A merged row can hide a payment deadline,
+termination right, price term, or other hard term and will make the later
+legal comparison unreliable.
+
+Amounts, postal indexes, account numbers, table row ordinals, page artifacts,
+requisites, signatures, and form fields are not contract ids by themselves. If
+they are legally relevant, attach them to the nearest real source locator and
+cite them in evidence fields.
+
+See examples: `Contract Proposition Extraction Is One Pass`, `Amount Or Code
+Is Evidence, Not A Contract Id`.
+
+Duplicate printed ids are allowed only when their context makes the source row
+unambiguous. If two visible rows use the same printed locator in different
+appendices/tables, preserve context in `source_locator` / section fields rather
+than inventing semantic ids.
+
+### 4. Compatibility Artifacts
+
+Create:
+
+- `/outputs/working/clause_index.json`;
+- `/outputs/working/legal_propositions.json`.
+
+These are compatibility artifacts derived from the matrix and contract legal
+ledgers. They should not introduce new ids or legal propositions.
+
+`clause_index.json` is a source map only. Build its contract side from
+`contract_legal_propositions.json`; build its matrix side from
+`inputs/matrix.json` / `inputs/matrix_legal_propositions.json`.
+
+It must include:
 
 - every matrix `number`;
-- every contract clause, operative parent, definition, appendix/table row, and
-  unnumbered operative provision;
+- every contract row from `contract_legal_propositions.json`;
+- every numbered or named appendix/table item that contains an operative term
+  such as price, fee, currency, deadline, payment method, service scope,
+  acceptance condition, liability, or consequence;
 - source text or source locator for each row;
 - context for duplicate printed contract ids.
 
 Do not use `clause_index` to decide legal status. It only proves source
 coverage and valid ids. Never overwrite it with a batch subset.
+`legal_propositions.json` is the combined evidence ledger:
 
-### 3. Legal Proposition Ledger
+- `matrix` is copied from compact `inputs/matrix_legal_propositions.json`;
+- `contract` is copied from the repaired
+  `/outputs/working/contract_legal_propositions.json`.
 
-Create `/outputs/working/legal_propositions.json`.
+After repairing `contract_legal_propositions.json`, derive these compatibility
+artifacts mechanically:
 
-This is the mandatory legal evidence ledger. It must contain `matrix` and
-`contract` arrays. Every evaluable proposition should include:
-
-- `id`: matrix number or printed contract locator;
-- `source_text`: text used for legal comparison;
-- `source_excerpt`: short quote supporting the normalized proposition;
-- `type`: `operative`, `definition`, `heading`, `parent_framework`,
-  `appendix`, `table`, or `technical`;
-- `materiality`: `evaluable`, `not_material`, `heading`, or `needs_source_review`;
-- `protected_party`, `bound_party`;
-- `right_or_obligation`;
-- `legal_object`;
-- `trigger`;
-- `deadline`;
-- `amount_formula_cap`;
-- `procedure_channel`;
-- `liability_remedy`;
-- `scope_options`;
-- `consequence`;
-- `applicability_filters` where available.
-
-If a legally meaningful row cannot be normalized, mark it
-`needs_source_review` and explain the missing element. It is not fully
-processed until the source text has been reviewed. Do not proceed to matching
-with unresolved source-review rows that could affect status.
+```bash
+python skills/acquiring-discrepancy-analysis/scripts/derive_working_artifacts.py --matrix inputs/matrix.json --matrix-legal inputs/matrix_legal_propositions.json --contract-ledger outputs/working/contract_legal_propositions.json --working outputs/working --json-out outputs/working/derive_working_artifacts_report.json
+```
 
 The ledger is an evidence table, not a substitute for the source. Matching may
 use it to find candidates. Status must still be confirmed against source text
@@ -173,11 +254,11 @@ validator. Do not defer incomplete legal proposition rows to Final QA.
 
 The validator checks source-map completeness, matrix id coverage, contract row
 coverage, legal proposition row counts, unresolved `needs_source_review`, empty
-source text, and weak evaluable rows. `"valid": true` means the working
+source text, suspicious locators, and weak evaluable rows. `"valid": true` means the working
 artifacts are complete enough to begin legal matching; it does not mean the
 legal conclusions are correct.
 
-### 4. Contract Product Profile
+### 5. Contract Product Profile
 
 Create `/outputs/working/contract_product_profile.json`.
 
@@ -268,6 +349,9 @@ Blocking checks; repair before final JSON:
 - verify out-of-scope / non-applicable matrix ids are not in final
   `unmatched_matrix`;
 - verify every material contract id is closed as linked or extra;
+- verify `coverage_ledger.contract` closes every contract id from
+  `legal_propositions.contract` as `linked`, `extra_in_contract`, or
+  `not_material`;
 - verify `coverage_ledger` is derived from final `links`,
   `unmatched_matrix`, and `unmatched_contract`;
 - verify every final id is visible in source text;
@@ -275,6 +359,9 @@ Blocking checks; repair before final JSON:
 - verify every `deviation` has a named legal gap and evidence;
 - verify weak candidates are not in final `links`;
 - verify non-material contract rows are absent from final `unmatched_contract`;
+- verify every final `unmatched_matrix` item has `matrix_id`, `requirement`,
+  `status`, `risk_level`, and `risk`; `reason` is not a substitute for
+  `requirement`;
 - verify summary counts equal final arrays.
 
 Advisory cleanup; fix when practical, but do not rewrite legal conclusions
@@ -307,3 +394,11 @@ path or environment issue, repair the command/path and rerun it. If a required
 validator is genuinely unavailable, do not skip the gate: perform the same
 mechanical checks manually, write the expected validation report under
 `/outputs/working/`, and state that the fallback was used.
+
+Useful mechanical scripts:
+
+- `bootstrap_source_artifacts.py`: creates seed working artifacts; seed
+  contract rows still require agent review.
+- `derive_working_artifacts.py`: derives `clause_index.json` and
+  `legal_propositions.json` from the repaired contract ledger.
+- `validate_working_artifacts.py`: stage gate before matching.

@@ -337,3 +337,371 @@ a gap, but neighboring children preserve their own legal result.
 Result: include the root with the relevant child when it is needed for context,
 but keep separate child-level legal results separate. Do not downgrade all
 siblings because one sibling has a deviation.
+
+## 39. Missing Belongs In Unmatched Matrix
+
+Matrix requirement is applicable and evaluable. The contract has only weak
+topic candidates, not a true analogue.
+
+Result: do not create a `link` with `relationship = missing_in_contract`.
+Record the requirement in `unmatched_matrix` and include the weak candidates
+only as rejected candidates with reasons.
+
+## 40. Canonical Locator For Unnumbered Appendix Detail
+
+An appendix table contains an operative fee, currency, product, or payment
+method, but the specific row has no printed sub-number. The nearest printed
+source locator is the appendix or table item that contains the row.
+
+Result: use the nearest printed locator as `contract_id`. Put the exact row
+detail in `contract_evidence` or `coverage`. Do not invent ids such as
+`appendix_fee_row`, translated labels, or semantic suffixes.
+
+## 41. Payment Procedure Siblings Keep Separate Status
+
+One contract payment section contains an acceptance document, a payment
+trigger, a payment deadline, a currency rule, and a service-fee rule. Matrix
+requirements split these into separate rows.
+
+Result: link each legal result separately unless the matrix row itself
+requires the whole payment package. A deadline gap in one payment row should
+not make the acceptance-document row or currency row `deviation`.
+
+## 42. Contract-Only Pass Cannot Be Empty
+
+After matrix matching, several material contract clauses remain: customer
+inspection, rejection, withholding, unilateral refusal, statutory reporting, or
+mandatory-law control. They do not have true matrix analogues.
+
+Result: final `unmatched_contract` cannot be empty merely because matrix-side
+coverage was completed. Report material rows as `extra_in_contract`; close only
+headings, signatures, requisites, blank forms, duplicates, or non-operative
+definitions as `not_material`.
+
+## 43. Document Or Evidence Deadline Is A Hard Term
+
+Matrix requires a party to provide transaction documents, confirmations,
+responses, reports, or evidence within a specified period. Contract contains
+the same duty but omits the period, changes it, or gives a period for another
+unincorporated procedure.
+
+Result: true analogue exists, but status is `deviation` with a deadline gap.
+
+## 44. Operative Root Must Travel With Detail Clause
+
+Contract child clauses list grounds, exceptions, events, or remedies. A root
+clause directly before them grants the right or imposes the duty that makes the
+list legally operative.
+
+Result: when a child is linked, review the root. Include the root in the final
+contract package if it carries the same legal object. Do not include a root
+that is only a section heading.
+
+## 45. Service Compliance Warranty As Analogue
+
+Contract clause states that services must comply with applicable law or
+contractual requirements. Matrix contains a warranty, legal-compliance,
+payment-system-rules, or incorporated-documents requirement for the same
+services or transactions.
+
+Result: this can be a true analogue or companion framework clause. Compare
+scope and protected party. Do not use it as a universal substitute for
+unrelated duties.
+
+## 46. Public Payment Route Can Preserve Payment Result
+
+Matrix requires payment for Bank services or settlement services. Contract
+uses public-procurement acceptance, official payment documents, and budget
+payment instead of a commercial tariff-deduction route, but the counterparty
+still owes payment for the same service after the same performance/acceptance
+trigger.
+
+Result: link the payment/acceptance package. Use `aligned` when economic
+obligation, trigger, evidence, and enforceability are preserved. Use
+`deviation` only for a changed deadline, amount, party, trigger, withholding
+right, or other hard term.
+
+## 47. Liability Root And Directional Children
+
+Contract liability section has a general right to claim penalties, then
+separate child clauses for customer delay, Bank delay, customer non-delay
+breach, and Bank non-delay breach.
+
+Result: link the root plus the relevant directional child. Do not treat one
+direction as covering the opposite direction. Compare formula, cap, trigger,
+protected party, and exception for each directional liability result.
+
+## 48. Numbered Appendix Row Is A Final Locator
+
+Appendix contains a visible numbered item or table row with a currency, fee,
+payment method, service price, deadline, or other operative term.
+
+Result: index and use that visible appendix item as a final contract locator
+when it covers a matrix element. If the row has no visible sub-locator, use the
+nearest printed appendix/table locator and put the exact row detail in
+evidence. Do not invent semantic ids.
+
+## 49. Term And Survival Package
+
+Matrix requires contract term, early end by price exhaustion, and survival of
+liability after expiry. Contract has one clause for service period/price
+exhaustion and another clause for termination or post-termination settlements.
+
+Result: review the term package before declaring a miss. Link the clauses that
+cover term, price-exhaustion trigger, and survival/consequences. Status is
+`aligned` only if each material element is preserved.
+
+## 50. Final Missing Row Must Name Requirement
+
+Matrix requirement is applicable and has no true contract analogue.
+
+Result: final `unmatched_matrix` row must contain `matrix_id`, `requirement`,
+`status = missing_in_contract`, `risk_level`, and `risk`. A `reason` field may
+explain the conclusion, but it does not replace the missing requirement text.
+
+## 51. Contract Proposition Extraction Is One Pass
+
+Contract text has a clause with a printed locator, a duty, a deadline, and a
+payment consequence.
+
+Bad result: first create only a locator row, then lose the deadline during
+later legal normalization.
+
+Good result: create one `contract_legal_propositions` row with the same
+printed locator, full `source_text`, deadline, duty, legal object, parties, and
+consequence. Derive `clause_index` and `legal_propositions.contract` from that
+row.
+
+Result: matching and status use the same source-backed proposition; no hard
+term is lost between extraction stages.
+
+## 52. Amount Or Code Is Evidence, Not A Contract Id
+
+Contract text contains a standalone line with a contract price, postal index,
+bank account, table ordinal, or numerical value.
+
+Bad result: create a contract id such as `900000`, `354340`, or `1` only
+because the line starts with digits.
+
+Good result: attach the amount or code to the nearest real clause, appendix
+item, or table locator. Use the amount as `amount_formula_cap` or
+`source_evidence`, not as `contract_id`.
+
+Result: the value can affect `aligned` / `deviation`, but it cannot become a
+final locator.
+
+## 53. Pattern: Embedded Locator Must Be Split Before Matching
+
+Situation:
+A contract proposition row contains one printed locator at the beginning, then
+another visible operative locator later in the same `source_text`.
+
+Wrong outcome:
+Use the merged row for matching and let the second locator disappear as an
+independent candidate.
+
+Correct outcome:
+Repair `contract_legal_propositions` before matching. Each operative locator
+gets its own source-backed row, unless the second marker is only a cross
+reference and not the start of a clause.
+
+Why:
+Merged source rows hide payment deadlines, term clauses, termination rights,
+or service-fee terms. Matching and status cannot be stable if the locator
+itself is missing from the legal proposition ledger.
+
+Decision rule:
+If a row's text contains another visible locator followed by operative text,
+stage validation should fail and the ledger must be split or repaired.
+
+Source:
+Current seed-eval / latest run.
+
+## 54. Pattern: Document Exchange Root Travels With Channel
+
+Situation:
+A root clause gives the parties a choice among several document-exchange
+channels. Child clauses name individual channels.
+
+Wrong outcome:
+Link only the child channel clauses and miss the root, or treat the root as a
+heading.
+
+Correct outcome:
+If the matrix requirement concerns the availability, choice, or legal effect
+of the exchange mechanism, include the root as an operative analogue. Link the
+child only for the channel-specific requirement it actually covers.
+
+Why:
+The root clause can carry the legal permission to choose a channel. Children
+usually define implementation details.
+
+Decision rule:
+Root travels with channel only when it grants the exchange right, channel
+choice, legal-force rule, or default procedure. A pure section title does not
+travel.
+
+Source:
+Current seed-eval / latest run.
+
+## 55. Pattern: Term And Price-Exhaustion Package
+
+Situation:
+The matrix term row requires start/end date, early end by exhaustion of the
+contract price, and survival of responsibility. The contract splits those
+elements across service-period, price-cap, and termination clauses.
+
+Wrong outcome:
+Miss the analogue because no single contract clause contains the whole term
+package.
+
+Correct outcome:
+Recall the package: service period, price-exhaustion or maximum-price clause,
+termination/settlement clause, and survival clause if present. Then classify
+`aligned` or `deviation` by the combined legal result.
+
+Why:
+Term, price exhaustion, and post-expiry consequences often live in different
+places but regulate one duration result.
+
+Decision rule:
+Do not mark a term matrix row missing until these package elements have been
+checked across the contract.
+
+Source:
+Current seed-eval / latest run.
+
+## 56. Pattern: Public Acceptance Direction Matters
+
+Situation:
+A public-procurement contract has several EIS acceptance clauses: provider
+creates the document, customer signs or refuses, expert review is possible,
+and payment follows acceptance.
+
+Wrong outcome:
+Use every EIS substep as a broad analogue for any matrix payment or acceptance
+row, or hide independent EIS rights as `not_material`.
+
+Correct outcome:
+Match by direction and legal object. A provider-created acceptance document
+can support a payment-trigger analysis; a customer sign/refuse clause can map
+to an acceptance/refusal requirement; expert review, correction, or control
+substeps are contract-only extras when no matrix analogue exists.
+
+Why:
+EIS mechanics are related but not interchangeable. Provider evidence,
+customer acceptance, payment timing, and control rights are separate legal
+effects.
+
+Decision rule:
+Ask who must act, what act is required, and what consequence follows. Link
+only the same direction; report independent customer-control effects as
+`extra_in_contract`.
+
+Source:
+Current seed-eval / latest run.
+
+## 57. Pattern: Confirmation Duty Without Deadline
+
+Situation:
+Matrix requires a party to provide confirmation, evidence, transaction
+information, or personal-data transfer grounds within a defined period.
+Contract contains the same confirmation duty but does not state that period.
+
+Wrong outcome:
+Mark `aligned` because the duty itself exists.
+
+Correct outcome:
+Link the analogue but use `deviation` for the missing hard-term deadline,
+unless another expressly incorporated clause supplies the same period for that
+exact duty.
+
+Why:
+The response period is part of the Bank's control and evidence right. A duty
+without the required timing is weaker.
+
+Decision rule:
+For evidence/confirmation duties, always reread source text for the period and
+trigger before `aligned`.
+
+Source:
+Current seed-eval / latest run.
+
+## 58. Pattern: Technical Permission Without Extra Notice Gap
+
+Situation:
+Matrix permits a technical action such as remote software update without
+changing operation order and explains that no separate notice is needed.
+Contract permits the same technical action and does not impose a notice duty.
+
+Wrong outcome:
+Use `deviation` merely because the contract omits the explanatory phrase
+about no prior notice.
+
+Correct outcome:
+Use `aligned` if the same technical permission, object, trigger, and practical
+effect are preserved.
+
+Why:
+Absence of an explanatory negative phrase is not a legal gap when the contract
+does not create the opposite obligation.
+
+Decision rule:
+Treat missing explanatory wording as formal unless the contract actually adds
+a notice requirement, narrows the permission, changes the trigger, or weakens
+the consequence.
+
+Source:
+Current seed-eval / latest run.
+
+## 59. Pattern: Force Majeure Equivalent List
+
+Situation:
+Matrix and contract both release a party from liability for extraordinary
+unavoidable events, but their illustrative event lists differ.
+
+Wrong outcome:
+Use `deviation` only because one list contains fewer examples or different
+wording.
+
+Correct outcome:
+Use `aligned` when the same legal effect is preserved: force majeure prevents
+performance, liability is released for the affected obligation, and the
+contract does not materially narrow the protected party or consequence.
+
+Why:
+The legal test and consequence matter more than the exact illustrative list.
+
+Decision rule:
+Downgrade only for a narrower legal threshold, changed protected party,
+missing notice/proof duty when the matrix makes it material, or changed
+consequence.
+
+Source:
+Current seed-eval / latest run.
+
+## 60. Pattern: Appendix Fee Row Must Be Preserved
+
+Situation:
+An appendix or specification row contains a fee, rate, price unit, currency,
+or product-specific economic term.
+
+Wrong outcome:
+Use the appendix heading as evidence only and lose the operative row as a
+candidate.
+
+Correct outcome:
+Index the visible appendix row as an evaluable source locator. If the row has
+no separate printed id, use the nearest visible appendix/table locator and put
+the exact fee row in evidence.
+
+Why:
+Commercial fee terms often live in appendices. Missing them lowers mapping
+recall and can create false missing or false extra results.
+
+Decision rule:
+Appendix economic rows are final locators when they carry the operative price,
+fee, currency, payment method, or service scope.
+
+Source:
+Current seed-eval / latest run.

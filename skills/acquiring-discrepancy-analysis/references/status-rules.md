@@ -35,7 +35,19 @@ An applicable blank or placeholder remains `deviation`, normally low risk. Do
 not create an exception for administrative-looking placeholders when the field
 is part of an applicable matrix or contract requirement.
 
-See examples: `Changed Or Missing Deadline`, `Borrowed Hard Term Does Not Cure Gap`, `Placeholder In Applicable Term`.
+For document, evidence, reporting, confirmation, chargeback, request-response,
+and transaction-information duties, the response or performance deadline is a
+hard term. Before marking such a group `aligned`, re-read the source text for
+the exact period and trigger. If the analogue has the same duty but omits,
+changes, or moves the deadline to another unincorporated procedure, use
+`deviation`.
+
+When the source text says the same confirmation/evidence duty but lacks the
+matrix response period, do not infer the matrix period from similarity of
+topic. The duty is linked, but the status is `deviation` unless another
+incorporated clause supplies the period for that exact duty.
+
+See examples: `Changed Or Missing Deadline`, `Borrowed Hard Term Does Not Cure Gap`, `Placeholder In Applicable Term`, `Document Or Evidence Deadline Is A Hard Term`.
 
 ## Functional Equivalence
 
@@ -48,9 +60,26 @@ difference is merely terminological, beneficial to the Bank, already
 incorporated through another clause, or caused only by a mandatory-law
 mechanism that preserves the Bank's practical right, keep `aligned`.
 
+For public-procurement contracts, an EIS acceptance route, budget-payment
+route, statutory document form, or customer-side payment act is not a
+deviation by itself. Treat it as `aligned` when it preserves the same economic
+obligation, payment trigger, evidence of performance, protected party, and
+enforceability. Use `deviation` only when the procurement mechanism changes a
+material hard term or weakens the Bank-standard legal result.
+
+For technical-operation permissions, do not require the contract to repeat
+every negative or explanatory phrase from the matrix. If the contract grants
+the same permission for the same technical action and does not add a notice
+duty, restriction, changed trigger, or weaker consequence, keep `aligned`.
+
+For force-majeure and comparable standard risk-allocation clauses, compare the
+legal effect, not the exact list of examples. A different illustrative list is
+not a deviation when the clause still covers extraordinary unavoidable events,
+releases liability for the same period, and preserves the same consequence.
+
 Functional equivalence cannot override a missing or changed hard term.
 
-See examples: `Formal Label Difference`, `Low-Risk Note Does Not Force Deviation`, `Slash Options`.
+See examples: `Formal Label Difference`, `Low-Risk Note Does Not Force Deviation`, `Slash Options`, `Technical Permission Without Extra Notice Gap`, `Force Majeure Equivalent List`.
 
 ## 44-FZ And Mandatory-Law Calibration
 
@@ -67,6 +96,11 @@ their legal effect:
   has independent legal effect;
 - if it is only a heading, formality, or procedural scaffold, close it as
   `not_material` in the ledger.
+
+Do not mark a payment, acceptance, document, or termination group as
+`deviation` merely because the contract uses the statutory route required for
+the contract type. First identify the matrix legal object, then compare the
+actual legal result.
 
 See examples: `Procurement Mechanism As Analogue`, `Procurement Mechanism With Material Deviation`, `Mandatory-Law Extra`.
 
@@ -93,6 +127,11 @@ damages, and remedy survival across the package.
 General fault-based liability does not close a special Bank exemption, special
 penalty, or special cap rule unless it preserves the same protected party and
 legal consequence.
+
+When liability is split into root rights and child formulas, keep the direction
+of liability separate. A clause about customer delay, Bank delay, customer
+non-delay breach, and Bank non-delay breach may sit in one section but can map
+to different matrix requirements and different statuses.
 
 See examples: `Liability Group Review`, `Changed Amount, Formula, Cap, Or Penalty`.
 

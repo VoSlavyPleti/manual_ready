@@ -8,16 +8,21 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from pathlib import Path
 
 
-CLAUSE_RE = re.compile(r"(?m)^\s*(\d+(?:\.\d+)*)\.?\s*(?=\S)")
 BROKEN_RE = re.compile(r"(?m)^\s*0(?:\.0|\.\d+)+\.?\s*(?=\S)")
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from bootstrap_source_artifacts import contract_items as parsed_contract_items  # noqa: E402
 
 
 def validate_contract_text(path: Path) -> dict:
     text = path.read_text(encoding="utf-8-sig")
-    ids = [match.group(1).rstrip(".") for match in CLAUSE_RE.finditer(text)]
+    ids = [str(row["id"]).strip() for row in parsed_contract_items(path)]
     broken = [match.group(0).strip().split()[0].rstrip(".") for match in BROKEN_RE.finditer(text)]
     duplicate_ids = sorted({item for item in ids if ids.count(item) > 1})
     top_level = sorted({item.split(".")[0] for item in ids if item.split(".")[0].isdigit()})
