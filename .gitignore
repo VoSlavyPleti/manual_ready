@@ -2,3 +2,9 @@
 /inputs*
 /runs**
 /ALL_DATA*
+/workspace*
+/tools*
+/tmp*
+/run_logs*
+/outputs**
+/output*

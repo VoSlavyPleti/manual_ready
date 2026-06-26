@@ -99,7 +99,9 @@ deviation.
 Matrix or contract requires a filled penalty, fee, account, deadline, appendix,
 or system name. The applicable field is blank.
 
-Result: `deviation`, usually low risk unless the blank blocks enforcement.
+Result: `deviation`, low risk in most cases. Raise to medium when the blank
+prevents identification of a named system, channel, counterparty, account,
+amount, deadline, or procedure needed for enforcement or performance.
 
 ## 12. Same Deadline
 
@@ -270,3 +272,68 @@ applies to the group as a whole.
 
 Result: do not assign separate final statuses per pair. `atomic_links` are only
 traceability rows and inherit the group relationship.
+
+## 33. Mandatory-Law Extra
+
+Contract clause exists because mandatory procurement law requires a public
+contract procedure: acceptance in an official system, statutory reporting,
+customer-side control, statutory payment mechanics, or mandatory termination
+procedure. The matrix has no true analogue because the Bank standard does not
+regulate that public-law mechanism.
+
+Result: if the clause has independent legal effect, classify it as
+`extra_in_contract` with low risk and explain that it is mandatory-law
+specific. If it is only a heading or formality, close it as `not_material` in
+the ledger.
+
+## 34. Structural Duplicate Contract Clause
+
+Two contract clauses regulate the same legal object, the same parties, the same
+right or duty, the same trigger, and the same consequence. The second clause
+does not add a new amount, deadline, scope, exception, remedy, or procedure.
+
+Result: use the primary clause for the legal link. Close the duplicate in the
+ledger as `not_material` or duplicate-of-primary with a short reason. Do not
+invent a different matrix analogue just to make the duplicate distinct.
+
+## 35. Matrix Heading Row
+
+Matrix row only names a section, subsection, product block, responsibility
+block, payment block, or document-exchange block. It contains no independent
+right, duty, procedure, limit, remedy, or consequence beyond child rows.
+
+Result: close as `not_evaluable` in `coverage_ledger.matrix`. Do not include it
+in final `unmatched_matrix`.
+
+## 36. Appendix Operative Term
+
+Appendix, specification, tariff table, technical assignment, or schedule row
+contains an operative legal term: currency, fee, term, deadline, product scope,
+payment method, acceptance condition, service scope, or liability consequence.
+
+Result: index it as an evaluable contract row with a real source locator and
+use it as a final `contract_id` if it covers a matrix element. Appendix
+headings without operative content remain evidence/context only.
+
+## 37. Bank Right Displaced By Mandatory Law
+
+Matrix gives the Bank a unilateral right such as refusal, suspension,
+withholding, termination, verification, or operational control. The public
+contract omits or narrows that right because mandatory law restricts
+unilateral powers of the contractor or reallocates the mechanism through
+statutory procedures.
+
+Result: use `missing_in_contract` if no true analogue exists, or `deviation` if
+a narrower statutory substitute exists. Risk is usually medium when statutory
+mechanisms partly compensate the Bank, and high when the omitted Bank right has
+no practical substitute.
+
+## 38. One Child Deviation Does Not Spread To Siblings
+
+Root clause states a general operative rule. Child clauses enumerate separate
+channels, grounds, products, duties, exceptions, or consequences. One child has
+a gap, but neighboring children preserve their own legal result.
+
+Result: include the root with the relevant child when it is needed for context,
+but keep separate child-level legal results separate. Do not downgrade all
+siblings because one sibling has a deviation.

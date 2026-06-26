@@ -67,8 +67,16 @@ final legal status.
 }
 ```
 
-Rows marked `needs_source_review` are not complete. Resolve them before final
-status if they can affect a link, missing item, or contract-only finding.
+Rows marked `needs_source_review` are not complete. Resolve them before
+substantive matching if they can affect a link, missing item, or contract-only
+finding.
+
+After creating or repairing `legal_propositions.json`, run
+`validate_working_artifacts.py` and write
+`/outputs/working/working_artifact_validation.json`. The validation report must
+be valid before substantive matching begins. If it is invalid, repair the
+working artifact first; do not wait until final JSON QA to discover incomplete
+legal proposition rows.
 
 ## Final JSON Shape
 
@@ -190,6 +198,9 @@ status if they can affect a link, missing item, or contract-only finding.
   not a risk for the current product, lot, terminal, payment method, or legal
   regime. They stay in `coverage_ledger.matrix` only and do not appear in
   final `unmatched_matrix`.
+- `not_evaluable` matrix closures mean the row is a heading, non-operative
+  parent, or source row without an independent legal proposition. They stay in
+  `coverage_ledger.matrix` only and do not appear in final `unmatched_matrix`.
 - `unmatched_contract` contains only legally significant `extra_in_contract`
   rows. Non-material rows stay in `coverage_ledger.contract`.
 - `relationship = aligned` requires empty `discrepancies`, `risk_level = none`,
@@ -200,6 +211,9 @@ status if they can affect a link, missing item, or contract-only finding.
 - Missing mandatory applicable requirements should normally be `high` risk.
   Missing optional applicable requirements should normally be `low` or
   conditional risk.
+- Mandatory-law public-procurement extras with independent legal effect can be
+  `low` risk when they do not materially worsen the Bank position. They still
+  require a non-empty `risk` and `materiality_reason`.
 - All final ids must be visible in source files. Do not use corrected,
   inferred, translated, parenthetical, or internal ids.
 - Weak candidates do not appear in final `links`; use
@@ -253,6 +267,7 @@ Do not output:
 - `deviation` for unselected slash alternatives;
 - `deviation` for heading/title/label changes alone;
 - final `unmatched_contract` rows for definitions without legal effect;
+- final `unmatched_matrix` rows for matrix headings or non-operative parents;
 - final `unmatched_matrix` rows for out-of-scope or not-applicable matrix
   requirements;
 - final ids that exist only in helper scripts or working ledgers;

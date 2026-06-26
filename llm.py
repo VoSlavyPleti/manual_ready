@@ -8,7 +8,7 @@ DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "")
 DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "")
 DEEPSEEK_BASE_URL = os.getenv("DEEPSEEK_BASE_URL", "")
 
-def get_llm(max_completion_tokens: int = 50000):
+def get_llm(max_completion_tokens: int = 150000):
 
     return ChatOpenAI(
         model=DEEPSEEK_MODEL,
@@ -20,7 +20,7 @@ def get_llm(max_completion_tokens: int = 50000):
         max_completion_tokens=max_completion_tokens,
         extra_body={
             "thinking": {"type": "disabled"},
-            "max_tokens": 50000
+            "max_tokens": 150000
             }
     )
 
