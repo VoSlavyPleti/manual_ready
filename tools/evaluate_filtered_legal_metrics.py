@@ -156,9 +156,35 @@ def load_gold(doc: str, gold_path: Path) -> dict[str, list[dict[str, Any]]]:
     return clean_gold({"linked": linked, "matrix_only": matrix_only, "contract_only": contract_only})
 
 
+def load_matrix_source_ids(matrix_path: Path | None) -> set[str] | None:
+    if not matrix_path or not matrix_path.exists():
+        return None
+    data = json.loads(matrix_path.read_text(encoding="utf-8-sig"))
+    rows: Any
+    if isinstance(data, list):
+        rows = data
+    elif isinstance(data, dict):
+        rows = data.get("items") or data.get("matrix") or data.get("data") or data.values()
+    else:
+        rows = []
+    ids = set()
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        matrix_id = norm_id(row.get("number") or row.get("matrix_id") or row.get("id"))
+        if matrix_id:
+            ids.add(matrix_id)
+    return ids
+
+
 def clean_gold(gold: dict[str, list[dict[str, Any]]]) -> dict[str, list[dict[str, Any]]]:
     matrix_ids = [row["matrix_id"] for row in gold["matrix_only"]]
     contract_ids = [row["contract_id"] for row in gold["contract_only"]]
+    linked_matrix_ids = {
+        matrix_id
+        for row in gold["linked"]
+        for matrix_id in row.get("matrix_ids", [])
+    }
 
     excluded_matrix = {
         mid
@@ -169,14 +195,78 @@ def clean_gold(gold: dict[str, list[dict[str, Any]]]) -> dict[str, list[dict[str
         cid for cid in contract_ids if any(other != cid and is_prefix(cid, other) for other in contract_ids)
     }
 
+    cleaned_matrix_only = [
+        row
+        for row in gold["matrix_only"]
+        if row["matrix_id"] not in excluded_matrix and row["matrix_id"] not in linked_matrix_ids
+    ]
+    deduped_matrix_only = list({row["matrix_id"]: row for row in cleaned_matrix_only}.values())
+
+    cleaned_contract_only = [
+        row for row in gold["contract_only"] if row["contract_id"] not in excluded_contract
+    ]
+    deduped_contract_only = list({row["contract_id"]: row for row in cleaned_contract_only}.values())
+
     return {
         "linked": [
             row
             for row in gold["linked"]
             if not looks_non_legal_description(row.get("description", ""))
         ],
-        "matrix_only": [row for row in gold["matrix_only"] if row["matrix_id"] not in excluded_matrix],
-        "contract_only": [row for row in gold["contract_only"] if row["contract_id"] not in excluded_contract],
+        "matrix_only": deduped_matrix_only,
+        "contract_only": deduped_contract_only,
+    }
+
+
+def filter_gold_to_matrix_source(
+    gold: dict[str, list[dict[str, Any]]],
+    source_matrix_ids: set[str] | None,
+) -> tuple[dict[str, list[dict[str, Any]]], dict[str, Any]]:
+    if not source_matrix_ids:
+        return gold, {
+            "source_matrix_id_count": 0,
+            "source_removed_matrix_only_count": 0,
+            "source_affected_linked_rows": 0,
+            "source_dropped_linked_rows": 0,
+            "source_removed_matrix_ids": [],
+        }
+
+    linked: list[dict[str, Any]] = []
+    affected = 0
+    dropped = 0
+    removed_ids: set[str] = set()
+    for row in gold["linked"]:
+        kept_ids = [matrix_id for matrix_id in row["matrix_ids"] if matrix_id in source_matrix_ids]
+        removed = set(row["matrix_ids"]) - set(kept_ids)
+        removed_ids.update(removed)
+        if removed:
+            affected += 1
+        if kept_ids:
+            new_row = dict(row)
+            new_row["matrix_ids"] = kept_ids
+            linked.append(new_row)
+        else:
+            dropped += 1
+
+    matrix_only = []
+    removed_matrix_only = 0
+    for row in gold["matrix_only"]:
+        if row["matrix_id"] in source_matrix_ids:
+            matrix_only.append(row)
+        else:
+            removed_matrix_only += 1
+            removed_ids.add(row["matrix_id"])
+
+    return {
+        "linked": linked,
+        "matrix_only": matrix_only,
+        "contract_only": list(gold["contract_only"]),
+    }, {
+        "source_matrix_id_count": len(source_matrix_ids),
+        "source_removed_matrix_only_count": removed_matrix_only,
+        "source_affected_linked_rows": affected,
+        "source_dropped_linked_rows": dropped,
+        "source_removed_matrix_ids": sorted(removed_ids, key=lambda item: numeric_key(item) or (9999,)),
     }
 
 
@@ -372,7 +462,9 @@ def evaluate_with_scope_exclusion(
     gold: dict[str, list[dict[str, Any]]],
     agent: dict[str, Any],
     include_out_of_scope: bool = False,
+    source_matrix_ids: set[str] | None = None,
 ) -> dict[str, Any]:
+    gold, source_meta = filter_gold_to_matrix_source(gold, source_matrix_ids)
     if include_out_of_scope:
         result = evaluate(gold, agent)
         result["scope_exclusions"] = {
@@ -382,12 +474,14 @@ def evaluate_with_scope_exclusion(
             "scope_affected_linked_rows": 0,
             "scope_dropped_linked_rows": 0,
         }
+        result["source_universe_exclusions"] = source_meta
         return result
     filtered_gold, scope_meta = exclude_out_of_scope_gold(
         gold, agent.get("scope_excluded_matrix", set())
     )
     result = evaluate(filtered_gold, agent)
     result["scope_exclusions"] = scope_meta
+    result["source_universe_exclusions"] = source_meta
     return result
 
 
@@ -396,6 +490,7 @@ def main() -> None:
     parser.add_argument("--doc", required=True, choices=sorted(DOC_CONFIGS))
     parser.add_argument("--gold", type=Path, required=True)
     parser.add_argument("--artifact", type=Path, required=True)
+    parser.add_argument("--matrix-source", type=Path, default=Path("inputs/matrix.json"))
     parser.add_argument("--json-out", type=Path)
     parser.add_argument(
         "--include-out-of-scope",
@@ -408,6 +503,7 @@ def main() -> None:
         load_gold(args.doc, args.gold),
         load_agent(args.artifact),
         include_out_of_scope=args.include_out_of_scope,
+        source_matrix_ids=load_matrix_source_ids(args.matrix_source),
     )
     payload = json.dumps(result, ensure_ascii=False, indent=2)
     if args.json_out:

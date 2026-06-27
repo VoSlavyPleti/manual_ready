@@ -1,138 +1,42 @@
-Ниже README-ready блок.
+# Single-Agent Acquiring Contract Review
 
-```mermaid
-flowchart TD
-    U["User / runner"] --> M["main.py"]
+This project runs one reasoning-mode DeepAgents analyst against:
 
-    M --> C["clean_run_outputs()
-    clears outputs/ and stray discrepancy_analysis.json"]
+- `inputs/matrix.json` — the Bank standard matrix.
+- `inputs/contract.txt` — the counterparty acquiring contract.
 
-    C --> A["Deep Agent: orchestrator"]
+The agent uses only the compact skill in:
 
-    A --> S["Load skill:
-    skills/acquiring-discrepancy-analysis/SKILL.md
-    + references/output-contract.md
-    + references/comparison-patterns.md"]
+- `skills/acquiring-single-agent-review/SKILL.md`
+- `skills/acquiring-single-agent-review/references/calibration-examples.md`
 
-    A --> I["Build working inventories"]
-    I --> MI["/outputs/working/matrix_inventory.json"]
-    I --> CI["/outputs/working/contract_inventory.json"]
+The final machine-readable artifact is written to:
 
-    MI --> BATCH_SPLIT["Split material matrix ids into 3-5 batches"]
-    CI --> BATCH_SPLIT
+- `outputs/discrepancy_analysis.json`
 
-    BATCH_SPLIT --> B1["Subagent:
-    matrix-comparison-batch
-    batch 1"]
-    BATCH_SPLIT --> B2["Subagent:
-    matrix-comparison-batch
-    batch 2"]
-    BATCH_SPLIT --> B3["Subagent:
-    matrix-comparison-batch
-    batch N"]
+## Run
 
-    B1 --> BF1["/outputs/working/batch_1_fragment.json"]
-    B2 --> BF2["/outputs/working/batch_2_fragment.json"]
-    B3 --> BF3["/outputs/working/batch_N_fragment.json"]
-
-    MI --> CE["Subagent:
-    contract-extra-review"]
-    CI --> CE
-    CE --> CF["/outputs/working/contract_only_findings.json"]
-
-    BF1 --> MERGE["Orchestrator merge"]
-    BF2 --> MERGE
-    BF3 --> MERGE
-    CF --> MERGE
-
-    MERGE --> DRAFT["Draft merged artifact:
-    links
-    atomic_links
-    unmatched_matrix
-    unmatched_contract
-    summary"]
-
-    DRAFT --> QA["Subagent:
-    discrepancy-qa"]
-
-    QA --> QA_REPORT["QA error list:
-    schema, ids, coverage,
-    empty contract_ids,
-    atomic_links,
-    summary counts"]
-
-    QA_REPORT --> FIX["Orchestrator correction pass"]
-    DRAFT --> FIX
-
-    FIX --> FINAL["/outputs/discrepancy_analysis.json"]
-
-    FINAL --> V["main.py verify_discrepancy_artifact()"]
-
-    V --> OK["Validated final artifact"]
-    V --> ERR["RuntimeError if schema / ids / coverage invalid"]
+```powershell
+.venv\Scripts\python.exe single_agent.py
 ```
 
-```mermaid
-sequenceDiagram
-    participant Runner as Runner / main.py
-    participant O as Orchestrator
-    participant Skill as acquiring-discrepancy-analysis skill
-    participant MB as matrix-comparison-batch subagents
-    participant CE as contract-extra-review subagent
-    participant QA as discrepancy-qa subagent
-    participant FS as outputs filesystem
-    participant Val as verify_discrepancy_artifact
+`single_agent.py` runs from the project root. The project now contains only the
+single-agent harness and one compact skill; old multi-agent skills, subagent
+prompts, validators, and staged working artifacts have been removed.
 
-    Runner->>FS: Clear outputs/ and output/
-    Runner->>O: Start Deep Agent with USER_PROMPT
-    O->>Skill: Read legal methodology and references
-    O->>FS: Create /outputs/working/
+## Output Semantics
 
-    O->>FS: Write matrix_inventory.json
-    O->>FS: Write contract_inventory.json
+The matrix is the Bank standard. The contract is checked against that standard.
 
-    O->>MB: Assign matrix id batches
-    MB->>Skill: Apply legal analogue and status rules
-    MB->>FS: Write batch fragments with links, atomic_links, unmatched_matrix
+Statuses:
 
-    O->>CE: Review full contract inventory for contract-only terms
-    CE->>Skill: Apply contract-only materiality rules
-    CE->>FS: Write contract_only_findings.json
+- `aligned`: the contract preserves the Bank-standard legal result.
+- `deviation`: a true analogue exists, but a material legal element differs.
+- `missing_in_contract`: an applicable matrix requirement is absent.
+- `extra_in_contract`: a material contract term has no matrix analogue.
+- `out_of_scope` / `not_applicable`: a matrix requirement does not apply to the
+  current contract profile.
 
-    O->>FS: Read batch fragments and contract-only findings
-    O->>O: Merge graph artifact
-
-    O->>QA: Validate merged artifact
-    QA->>FS: Return QA findings / error list
-
-    O->>O: Apply final structural corrections
-    O->>FS: Write /outputs/discrepancy_analysis.json
-
-    Runner->>Val: Validate final artifact
-    Val->>FS: Check real ids, schema, coverage, summary, atomic links
-    Val-->>Runner: Success or RuntimeError
-```
-
-**Subagents**
-
-| Subagent | Role | Input | Output |
-|---|---|---|---|
-| `matrix-comparison-batch` | Сопоставляет assigned matrix ids с договором many-to-many | `matrix_inventory.json`, `contract_inventory.json`, skill refs, batch ids | `links`, `atomic_links`, `unmatched_matrix` для своего batch |
-| `contract-extra-review` | Ищет существенные пункты договора без аналога в матрице | полный `contract_inventory.json` + `matrix_inventory.json` | `unmatched_contract`: `extra_in_contract` или `not_material` |
-| `discrepancy-qa` | Проверяет структуру, покрытие, ids и юридическую консистентность artifact | merged draft artifact / fragments | список ошибок; не переписывает юридический анализ |
-
-**Final Artifact**
-
-```text
-/outputs/discrepancy_analysis.json
-```
-
-Содержит:
-
-```text
-links              grouped many-to-many legal relationships
-atomic_links       row-level matrix_id + contract_id pairs
-unmatched_matrix   bank-standard requirements missing in contract
-unmatched_contract contract terms without matrix analogue
-summary            derived counts
-```
+The comparison is many-to-many: one contract clause can correspond to several
+matrix requirements, and several contract clauses can collectively cover one
+matrix requirement.

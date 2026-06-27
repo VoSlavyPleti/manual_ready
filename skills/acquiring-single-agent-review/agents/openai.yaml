@@ -1,0 +1,4 @@
+interface:
+  display_name: "Acquiring Single Agent Review"
+  short_description: "Lean acquiring matrix contract review"
+  default_prompt: "Use $acquiring-single-agent-review to compare the acquiring contract against the Bank matrix."

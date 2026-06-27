@@ -8,3 +8,6 @@
 /run_logs*
 /outputs**
 /output*
+/runtime_single_agent_workspace*
+__pycache__/
+*.pyc
